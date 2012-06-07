@@ -11,9 +11,14 @@ split_to_slides <- function(md_file){
 	if (!any(grepl('^<?!SLIDE', doc))){
 		doc = add_slide_separator(doc)
 	}
-	
+
 	begin  <- grep("^<?!SLIDE(.*)>?", doc) 
 	end    <- c(begin[-1] - 1, length(doc))
+        inv <- which(diff(begin) == 1)
+        if (length(inv) > 0) {
+          begin <- begin[-c(inv, inv+1)]
+          end <- end[-c(inv, inv+1)]
+        }
 	slides <- mapply(function(i, j) doc[i:j], begin, end)
 }
 
