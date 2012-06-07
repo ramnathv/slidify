@@ -1,0 +1,83 @@
+/*Put your custom css styles here. This file gets loaded the last*/
+
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans+Caption);
+
+
+/* Slide Classes from Showoff */
+/*.bullets > ul {
+  list-style: none;
+  font-size: 3em;
+  padding-left: 0px;
+}
+.bullets > ul > li {
+    text-align: center;
+    padding: 25px;
+}
+.smbullets > ul {
+    font-size: 2.5em;
+}
+.smbullets > ul > li {
+    text-align: center;
+    padding: 10px;
+}
+*//* Slide Classes from Showoff */
+
+section.slide p{
+   text-align:justify;
+   font-size: 20px;
+   line-height: 24px;
+}
+
+article.smaller q, div.author{
+   font-size: 32px;
+   line-height: 38px;
+}
+
+section p, li, li.incremental
+article p, li, li.build{
+  font-family: 'PT Sans', sans-serif;
+  color: black;
+  font-size: 24px;
+  line-height: 30px;
+  text-align:justify;
+}
+
+h1 {
+  color: #26547c;
+  /*line-height: 40px;*/
+}
+
+h3 {
+  font-family: 'PT Sans Caption', sans-serif;
+  font-size: 40px;
+  color: #a32638;
+}
+
+pre {
+  font-family: 'Consolas', 'Ubuntu Mono', sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+code {
+  /*  color: #9E0508; burgundy*/
+  font-family: Consolas, Monaco, 'Ubuntu Mono', sans-serif;
+  color: #26547c;
+  font-weight: bolder;
+}
+
+.rimage.left {
+  text-align: left;
+}
+.rimage.right {
+  text-align: right;
+}
+.rimage.center {
+  text-align: center;
+}
+
+
+
+

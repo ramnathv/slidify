@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<title>Shower Presentation Template</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1274, user-scalable=no">
+	<!-- LOAD STYLE SHEETS -->
+	<link rel="stylesheet" href="{{lib_path}}/shower/themes/ribbon/styles/style.css">
+	<link rel="stylesheet" href="{{lib_path}}/{{highlighter}}/styles/{{histyle}}.css">  
+  {{> user_css}}
+  
+	<!--
+		To apply styles to the certain slides
+		use slide ID to get needed elements
+		-->
+	<style>
+		#Cover h2 {
+			color:#FFF;
+			text-align:center;
+			font-size:70px;
+			}
+		#FitToWidth h2,
+		#FitToHeight h2 {
+			color:#FFF;
+			text-align:center;
+			}
+	</style> 
+</head>
+<body class="list">
+  {{#slides}}
+  <div class="slide{{#classes}} {{classes}}{{/classes}}" id = "{{id}}"><div>
+    <section>
+      {{{content}}}
+    </section>
+  </div></div>
+  {{/slides}}
+  <div class="progress"><div></div></div>
+	<script src="{{lib_path}}/shower/scripts/script.js"></script>
+	{{> mathjax}}
+	{{> highlight_js}}
+	{{> user_js}}
+	<!-- Copyright © 2010–2012 Vadim Makeev — pepelsbey.net -->
+	<!-- Photos by John Carey — fiftyfootshadows.net -->
+</body>
+</html>

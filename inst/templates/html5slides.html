@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+	<!--
+	Google HTML5 slide template
+
+Authors: Luke Mah?? (code)
+Marcin Wichary (code and design)
+
+Dominic Mazzoni (browser compatibility)
+Charles Chen (ChromeVox support)
+
+URL: http://code.google.com/p/html5slides/
+	-->
+	
+<html>
+<head>
+	<title>Presentation</title>
+	<meta charset='utf-8'>
+	
+	<!-- LOAD STYLE SHEETS -->
+	<link rel="stylesheet" href="{{lib_path}}/html5slides/styles.css">
+	<link rel="stylesheet" href="{{lib_path}}/{{highlighter}}/styles/{{histyle}}.css">
+  {{> user_css}}	
+  
+</head>
+<body style='display: none'>
+	<section class='slides {{layout}} {{template}}'>
+    {{#slides}}
+	  <article class = "{{classes}}" id = "{{id}}"> 
+      {{{content}}}
+    </article>
+    {{/slides}}  
+  </section>
+</body>
+  <!-- LOAD JAVASCRIPTS  -->
+	<script src='{{lib_path}}/html5slides/slides.js'></script>
+	{{> mathjax}}
+	{{> highlight_js}}
+	{{> user_js}}
+	
+</html>

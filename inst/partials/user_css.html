@@ -1,0 +1,12 @@
+<!-- LOAD CUSTOM CSS -->
+{{^embed}}
+{{#user_css}}
+<link rel="stylesheet" href="{{.}}">
+{{/user_css}}
+{{/embed}}
+{{#embed}}
+<style type="text/css">
+{{{ user_css }}}
+</style>
+{{/embed}}
+

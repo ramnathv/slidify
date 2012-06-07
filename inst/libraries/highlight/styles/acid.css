@@ -1,0 +1,69 @@
+.background{
+  color: #eeeeee ;
+}
+.number{
+  color: #800080 ;
+}
+.functioncall{
+  font-weight: 'bolder' ;
+  color: #0080c0 ;
+}
+.string{
+  color: #a68500 ;
+}
+.keyword{
+  font-weight: bolder ;
+  color: #bb7977;
+}
+.argument{
+  color: #000000 ;
+}
+.comment{
+  color: #ff8000 ;
+}
+.roxygencomment{
+  color: #ff8000;
+}
+.formalargs{
+  color: #000000;
+}
+.eqformalargs{
+  color: #000000;
+}
+.assignement{
+  color: #000000;
+}
+.package{
+  font-weight: bolder;
+  color: #8080c0;
+}
+.slot{
+  font-style:italic;
+  color: #000000;
+}
+.symbol{
+  color: #ff0080 ;
+}
+.prompt{
+  color: #000000 ;
+}
+
+pre {
+  background: #eeeeee;
+  font-family: "Consolas", Monaco, monospace;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+ -webkit-border-radius:10px;
+ -moz-border-radius:10px;
+  border-radius:10px;
+  overflow: hidden;
+  margin: 15px 0;
+  padding: 10px 10px;
+}
+
+code {
+  font-family: Consolas, monospace;
+  color: #B22222; /*firebrick*/
+  font-size: 95%;
+}
