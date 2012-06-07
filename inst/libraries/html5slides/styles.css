@@ -103,13 +103,13 @@ body {
 }
 
 .slides.template-default > article:not(.nobackground):not(.biglogo) {
-  background: url(images/slidify-logo-small.png) 765px 650px no-repeat;   
+/*  background: url(images/slidify-logo-small.png) 765px 650px no-repeat;   */
   background-color: white;  
 } 
 
 .slides.template-io2011 > article:not(.nobackground):not(.biglogo) {
-  background: url(images/colorbar.png) 0 600px repeat-x,
-              url(images/googleio-logo.png) 640px 625px no-repeat;
+  /*background: url(images/colorbar.png) 0 600px repeat-x,
+                url(images/googleio-logo.png) 640px 625px no-repeat;*/
 
   background-size: 100%, 225px;  
 
