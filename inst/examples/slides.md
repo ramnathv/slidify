@@ -62,60 +62,81 @@ The guiding philosophy of `slidify` is to completely separate writing of content
 
 This package is not available on `CRAN` as yet. A development version can be installed from `github` using the `devtools` package. 
 
-<div class="chunk"><div class="rcode"><div class="source"><pre class="knitr"><span class="functioncall">library</span><span class="keyword">(</span><span class="symbol">devtools</span><span class="keyword">)</span>
-<span class="functioncall">install_github</span><span class="keyword">(</span><span class="string">'slidify'</span><span class="keyword">,</span> <span class="string">'ramnathv'</span><span class="keyword">)</span>
-</pre></div></div></div>
+
+
+```r
+library(devtools)
+install_github("slidify", "ramnathv")
+```
+
+
 
 
 In addition to `slidify`, you would also need to install development versions of `knitr`, `whisker` and `markdown`.
 
-<div class="chunk"><div class="rcode"><div class="source"><pre class="knitr"><span class="functioncall">install_github</span><span class="keyword">(</span><span class="string">'knitr'</span><span class="keyword">,</span> <span class="string">'yihui'</span><span class="keyword">)</span>
-<span class="functioncall">install_github</span><span class="keyword">(</span><span class="string">'whisker'</span><span class="keyword">,</span> <span class="string">'edwindj'</span><span class="keyword">)</span>
-<span class="functioncall">install_github</span><span class="keyword">(</span><span class="string">'markdown'</span><span class="keyword">,</span> <span class="string">'rstudio'</span><span class="keyword">)</span>
-</pre></div></div></div>
+
+
+```r
+install_github("knitr", "yihui")
+install_github("whisker", "edwindj")
+install_github("markdown", "rstudio")
+```
+
+
 
  
----
+--- 
 
-    
-### Motivation ###
-
-
----
 
 ### Usage ###
 
 `slidify` is designed to make it very easy for a HTML novice to generate a crisp, visually appealing `HTML5` slide deck. You can do it in just three steps!
 
-..ul: build
-
-* Write your source file in [R Markdown](http://goo.gl/KKdaf)
+* Write your [source](slides.Rmd) file in [R Markdown](http://goo.gl/KKdaf)
 * Separate your slides using a horizontal rule `---`
-* Run `slidify("slides.Rmd")` to generate your slide deck.
+* Run `slidify("slides.Rmd")` to generate your [slide deck](slides.html).
 
 ---
 
-### Framework ###
+# Customizing Your Presentation #
+
+---
+
+### Options ###
+
+`slidify` aims to provide a high degree of customization for the more advanced users. You can access the options currently available by typing `slidifyOptions()` at the command line. The main options are
+
+     framework       : slide generation framework to use
+     theme           : theme to use for styling slide content
+     transition      : theme to use for slide transitions
+     highlighter     : tool to use for syntax highlighting
+     histyle         : style to use for syntax highlighting
+     copy_libraries  : should library files be copied to slide directory
+     lib_path        : path to libraries (framework, highlighter)
+     layout          : slide layout to use
+     template        : slide template to use
+     mathjax         : should mathjax be used
+     embed           : should local files be embedded
+     
+The next few slides provide a more detailed overview of each of these options and what values they can take.
+
+---
+
+### framework ###
 
 `slidify` allows you to render your slides using several HTML5 slide frameworks. Currently supported frameworks are:
 
-* [deck.js][1]
-* [dzslides][2]
-* [html5slides][3]
-* [shower][4]
-* [slidy][5]
+* [deck.js](http://imakewebthings.com/deck.js/)
+* [dzslides](http://paulrouget.com/dzslides/)
+* [html5slides](http://html5slides.googlecode.com/)
+* [shower](http://pepelsbey.github.com/shower/en.htm)
+* [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#(1))
 
 Extending `slidify` to accommodate other frameworks is pretty straightforward. The plan is to support more frameworks over time.
 
-[1]: http://imakewebthings.com/deck.js/
-[2]: http://paulrouget.com/dzslides/
-[3]: http://html5slides.googlecode.com/
-[4]: http://pepelsbey.github.com/shower/en.htm
-[5]: http://www.w3.org/Talks/Tools/Slidy2/Overview.html#(1)
-
 ---
 
-### Theme ###
+### theme ###
 
 The `theme` option lets you style your slides. Currently, this option is available only for `deck.js` which allows the following themes
 
@@ -127,7 +148,7 @@ Themes are just `css` files. So it is easy to extend this option to the other fr
 
 ---
 
-### Transition ###
+### transition ###
 
 The `transition` option allows you to define the transition between slides. Currently, this option is available only for `deck.js` which allows the following transitions
 
@@ -140,38 +161,37 @@ Please consult [deck.js](http://goo.gl/UFthM) documentation for more information
 
 ---
 
-### Highlighter ###
+### highlighter ###
 
 `slidify` is designed to be modular and syntax highlighting is one module. Currently two options are supported
 
-* `js` 
-* `R`
+* `highlight.js` 
+* `highlight`
 
-The `js` option does client side highlighting using the javascript library [highlight.js][5], while the `R` option generates a static page, highlighted using the R package [highlight][6]. 
+The `highlight.js` option does client side highlighting using the javascript library [highlight.js](http://softwaremaniacs.org/soft/highlight/en/), while the `highlight` option generates a static page, highlighted using the R package [highlight](http://goo.gl/uy8Ww). 
 
-You will notice that the quality of highlighting for `R` code is better when done with the `R` package, rather than `highlight.js`.
+You will notice that the quality of highlighting for `R` code is better when done with the `R` package, rather than `highlight.js`. 
 
+It would be straightforward to add other `javascript` based syntax highlighters like `google.prettify`, `shJS` etc.
 
-[5]: http://softwaremaniacs.org/soft/highlight/en/
-[6]: http://goo.gl/uy8Ww
 
 ---
 
-### Highlight Style ###
+### histyle ###
 
 `slidify` allows you complete control over how you want to style your source code using `css`. The styles currently supported depend on the `highlighter` chosen.
 
-* `js` see documentation for [highlight.js](http://goo.gl/uEJj)
-* `R`  type `knit_theme[['get']]()` to see available styles
+* `highlight.js` :  see its [documentation](http://goo.gl/uEJj). 
+* `highlight` : type `knit_theme[['get']]()` to see available styles
 
 
 In order to use the `R` option, you need to include the line `opts_knit$set(out.format = 'html')` inside your `.Rmd` file. This is required to fool `knitr` into highlighting source code. Specifying it outside the document does not work as `knitr` resets it to `md` as soon as it sees the `.Rmd` extension.
 
 ---
 
-### Math ###
+### mathjax ###
 
-This option allows you to write math in your presentations. `slidify` automatically adds a link to the `js` files from Mathjax CDN. Here are Maxwell's Equations from the Mathjax website.
+Setting `mathjax` to true allows you to write math in your presentations. `slidify` automatically adds a link to the required `js` files from Mathjax CDN. 
 
 $$latex
 \begin{aligned}
@@ -258,9 +278,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 6. [Interactive Slides with R, googleVis and knitR](http://goo.gl/cVS9W)
 7. [knitr, Slideshows and Dropbox](http://goo.gl/ZTSD7)
 
---- smaller
+--- smaller fill
 
-<div class="chunk"><div class="rcode"><div class="output"><pre class="knitr">$framework
+
+
+```
+$framework
 [1] "html5slides"
 
 $highlighter
@@ -293,7 +316,9 @@ $mathjax
 $embed
 [1] FALSE
 
-</pre></div></div></div>
+```
+
+
 
 
 
