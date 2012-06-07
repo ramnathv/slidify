@@ -18,7 +18,6 @@ Imports:
 License: MIT
 URL: http://ramnathv.github.com/slidify/
 BugReports: https://github.com/ramnathv/slidify/issues
-         
 Collate:
     'utils.R'
     'process-slides.R'
