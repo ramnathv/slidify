@@ -1,0 +1,26 @@
+Package: slidify
+Type: Package
+Title: Generate reproducible html5 slides from R markdown
+Version: 0.1
+Date: 2012-06-06
+Authors@R: c(person("Ramnath", "Vaidyanathan", email =
+    "ramnath.vaidya@gmail.com", role = "aut"))
+Author: Ramnath Vaidyanathan
+Maintainer: Ramnath Vaidyanathan <ramnath.vaidya@gmail.com>
+Description: This package provides a tool to generate html5 slides from R Markdown files. It supports multiple html5 slide frameworks.
+Depends:
+    R (>= 2.15.0)
+Imports:
+    knitr,
+    markdown,
+    whisker,
+    plyr
+License: MIT
+URL: http://ramnathv.github.com/slidify/
+BugReports: https://github.com/ramnathv/slidify/issues
+         
+Collate:
+    'utils.R'
+    'process-slides.R'
+    'slidify-helpers.R'
+    'slidify.R'
