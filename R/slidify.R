@@ -20,6 +20,10 @@ slidify <- function(source, destination, options = slidifyOptions()){
   }
   
 	# KNIT SOURCE FILE AND PARSE SLIDES
+	if (deck$highlighter == 'highlight'){
+	  render_html()
+	}
+  
   md_file  <- knit(source)
   slides   <- llply(split_to_slides(md_file), parse_slide)
   
@@ -31,7 +35,7 @@ slidify <- function(source, destination, options = slidifyOptions()){
 	if (deck$embed){
 	  deck$user_css = get_contents(deck$user_css)
 	}
-  
+	
   # GET PARTIALS AND TEMPLATES
 	partials <- get_partials()
 	template <- get_template(deck$framework)
