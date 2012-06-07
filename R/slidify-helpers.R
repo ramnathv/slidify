@@ -67,5 +67,9 @@ get_contents <- function(files){
 remove_hidden_slides <- function(slides){
 	slide_classes = lapply(slides, function(x) x$classes)
 	hidden_slides = grep('hidden', slide_classes)
-	return(slides[-hidden_slides])
+	if (length(hidden_slides) > 0){
+	  slides[-hidden_slides]
+	} else {
+	  slides
+	}
 }
