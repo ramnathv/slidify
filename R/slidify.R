@@ -44,6 +44,9 @@ slidify <- function(source, destination, options = slidifyOptions()){
 	  destination = gsub("\\.Rmd", "\\.html", source)
 	}
 	writeLines(whisker.render(template, deck, partials = partials), destination)
+	if (deck$embed){
+	  embed_images(destination, destination)
+	}
 }
 
 

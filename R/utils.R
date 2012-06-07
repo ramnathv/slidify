@@ -1,4 +1,4 @@
-encode_images <- function(html_in, html_out){
+embed_images <- function(html_in, html_out){
   html <- paste(readLines(html_in), collapse = "\n")
   html <- markdown:::.b64EncodeImages(html)
   writeLines(html, html_out)
