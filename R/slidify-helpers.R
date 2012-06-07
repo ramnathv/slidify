@@ -61,3 +61,11 @@ get_contents <- function(files){
   contents = llply(files, readLines)
   capture.output(do.call('cat', contents))
 }
+
+#' Remove hidden slides marked with the class "hidden"
+#' Thanks to Kohske
+remove_hidden_slides <- function(slides){
+	slide_classes = lapply(slides, function(x) x$classes)
+	hidden_slides = grep('hidden', slide_classes)
+	return(slides[-hidden_slides])
+}
