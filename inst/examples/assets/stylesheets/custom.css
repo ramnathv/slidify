@@ -4,6 +4,17 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono);
 @import url(http://fonts.googleapis.com/css?family=PT+Sans+Caption);
 
+.slides.template-default > article:not(.nobackground):not(.biglogo) {
+  background: url(../media/slidify-logo-small.png) 765px 650px no-repeat;   
+  background-color: white;  
+}
+
+.slides.layout-widescreen > article:not(.nobackground):not(.biglogo),
+.slides.layout-faux-widescreen > article:not(.nobackground):not(.biglogo) {
+  background: url(../media/slidify-logo-small.png) 960px 650px no-repeat;   
+  background-color: white;  
+}
+
 
 /* Slide Classes from Showoff */
 /*.bullets > ul {
