@@ -63,7 +63,9 @@ get_contents <- function(files){
 }
 
 #' Remove hidden slides marked with the class "hidden"
-#' Thanks to Kohske
+#'
+#' @keywords internal
+#  Thanks to Kohske
 remove_hidden_slides <- function(slides){
 	slide_classes = lapply(slides, function(x) x$classes)
 	hidden_slides = grep('hidden', slide_classes)
@@ -72,4 +74,14 @@ remove_hidden_slides <- function(slides){
 	} else {
 	  slides
 	}
+}
+
+#' Add slide numbers to the slides
+#'
+#' @keywords internal
+add_slide_numbers <- function(slides){
+  for (i in seq_along(slides)){
+    slides[[i]]['num'] <- i
+  }
+  return(slides)
 }
