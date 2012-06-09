@@ -33,20 +33,6 @@ add_slide_separator <- function(doc){
   return(doc)
 }
 
-#' Parse slide into its constituent elements
-#' 
-#' This function takes a slide as input and extracts its constitutent elements   #' returning them as a list. Contents are rendered as HTML.
-#'
-#' @param slide 
-#' @importFrom markdown renderMarkdown
-#' @keywords internal
-parse_slide <- function(slide){
-	content <- renderMarkdown(text = paste(slide[-1], collapse = "\n"))
-	attribs <- get_slide_attribs(slide[1])
-	content <- update_classes(content, attribs$classes)
-	modifyList(attribs, list(content = content, 
-		 classes = paste(attribs$classes, collapse = " ")))
-}
 
 #' Extract slide attributes from header
 #'
@@ -88,5 +74,40 @@ update_classes <- function(content, classes){
 	}
 	return(content)
 }
+
+#' Get slide variables from slide
+get_slide_vars <- function(slide){
+	content <- renderMarkdown(text = paste(slide[-1], collapse = "\n"))
+	hpat <- '(?<header><h(?<level>[0-9])>(?<title>.*)</h[0-9]>)\n+'
+	vars <- re.capture(hpat, content)$name
+	vars$content = sub(vars$header, "", content)
+	return(vars)
+}
+
+#' Parse slide into its constituent elements
+#' 
+#' This function takes a slide as input and extracts its 
+#' constitutent elements returning them as a list. 
+#' Contents are rendered as HTML.
+#'
+#' @param slide 
+#' @importFrom markdown renderMarkdown
+#' @keywords internal
+parse_slide <- function(slide){
+	attribs <- get_slide_attribs(slide[1])
+	vars    <- get_slide_vars(slide[-1])
+	vars$id <- attribs$id
+	vars$classes <- paste(attribs$classes, collapse = " ")
+	return(vars)
+}
+
+# parse_slide <- function(slide){
+#   content <- renderMarkdown(text = paste(slide[-1], collapse = "\n"))
+#   attribs <- get_slide_attribs(slide[1])
+#   content <- update_classes(content, attribs$classes)
+#   modifyList(attribs, list(content = content, 
+#      classes = paste(attribs$classes, collapse = " ")))
+# }
+
 
 
