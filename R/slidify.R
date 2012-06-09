@@ -19,11 +19,13 @@ slidify <- function(source, destination, options = slidifyOptions()){
     deck$lib_path <- 'libraries'
   }
   
-	# KNIT SOURCE FILE AND PARSE SLIDES
 	if (deck$highlighter == 'highlight'){
 	  render_html()
+	} else {
+	  render_markdown(strict = TRUE)
 	}
   
+  # KNIT SOURCE FILE AND PARSE SLIDES
   md_file  <- knit(source)
   slides   <- llply(doc_to_slides(md_file), parse_slide)
   slides   <- remove_hidden_slides(slides)
