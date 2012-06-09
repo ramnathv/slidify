@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>{{title}}</title>
+    <!-- Styles -->
+    
+    <link href="{{lib_path}}/landslide/themes/{{theme}}/css/print.css" 
+       rel="stylesheet" media="print" >
+    <link href="{{lib_path}}/landslide/themes/{{theme}}/css/screen.css" 
+       rel="stylesheet" media="screen, projection" >
+    {{> user_css }}
+    <link href = "{{lib_path}}/{{highlighter}}/styles/{{histyle}}.css"
+       rel="stylesheet">
+       
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" 
+      src ="{{lib_path}}/landslide/themes/{{theme}}/js/slides.js">
+    </script>
+    
+    <!-- /Javascripts -->
+</head>    
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+    {{#slides}}
+      <div class="slide-wrapper">
+        <div class="slide{{#classes}} {{.}}{{/classes}}">
+          <div class="inner">
+            <header>{{{ header }}}</header>
+            {{#content}}
+            <section>
+              {{{ . }}}
+            </section>
+            {{/content}}
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            {{#p_notes}}
+            <section>
+              {{{ . }}}
+            </section>
+            {{/p_notes}}
+          </div>
+          <footer>
+            {{#source}}
+            <aside class="source">
+              Source: <a href="{{ source }}">{{ source }}</a>
+            </aside>
+            {{/source}}
+            <aside class="page_number">
+              {{ number }}/{{ num_slides }}
+            </aside>
+          </footer>
+        </div>
+      </div>
+    {{/slides}}
+    </div>
+  </div>
+  
+  {{> landslide_help }}
+</body>
+  <script>main()</script>
+  {{> mathjax}}
+  {{> highlight_js}}
+</html>
