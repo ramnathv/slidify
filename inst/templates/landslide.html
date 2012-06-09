@@ -78,13 +78,27 @@
             </aside>
             {{/source}}
             <aside class="page_number">
-              {{ number }}/{{ num_slides }}
+              {{ num }} / {{ num_slides }}
             </aside>
           </footer>
         </div>
       </div>
     {{/slides}}
     </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+     <h2>Table of Contents</h2>
+     <table>
+       <caption>Table of Contents</caption>
+
+       {{#slides}}
+       <tr id="toc-row-{{ num }}" {{#sub}}class = "sub" {{/sub}}>
+         <th><a href="#slide{{ num }}">{{{ title }}}</a></th>
+         <td><a href="#slide{{ num }}">{{ num }}</a></td>
+       </tr>
+       {{/slides}}
+     </table>
   </div>
   
   {{> landslide_help }}
