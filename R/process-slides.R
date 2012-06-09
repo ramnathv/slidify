@@ -1,10 +1,10 @@
-#' Split a markdown file into slides
+#' Split a markdown document into slides
 #' 
 #' Slides are separated by lines that start with the keyword !SLIDE followed by #' optional slide classes.
 #' @param md_file path to markdown file containing the slides
 #' @return list of slides
 #' @keywords internal
-split_to_slides <- function(md_file){
+doc_to_slides <- function(md_file){
 	doc <- readLines(md_file)
 	
 	# if there are no !SLIDE markers, add explicity separatorsy

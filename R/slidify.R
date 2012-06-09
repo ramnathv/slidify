@@ -25,7 +25,7 @@ slidify <- function(source, destination, options = slidifyOptions()){
 	}
   
   md_file  <- knit(source)
-  slides   <- llply(split_to_slides(md_file), parse_slide)
+  slides   <- llply(doc_to_slides(md_file), parse_slide)
   slides   <- remove_hidden_slides(slides)
   
   deck <- modifyList(deck, get_user_files())
