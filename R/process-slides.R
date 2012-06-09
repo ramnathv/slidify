@@ -94,9 +94,11 @@ get_slide_vars <- function(slide){
 #' @importFrom markdown renderMarkdown
 #' @keywords internal
 parse_slide <- function(slide){
-	attribs <- get_slide_attribs(slide[1])
-	vars    <- get_slide_vars(slide[-1])
-	vars$id <- attribs$id
+	attribs  <- get_slide_attribs(slide[1])
+	vars     <- get_slide_vars(slide[-1])
+	vars$sub <- ifelse(vars$level == 1, FALSE, TRUE)
+	vars$id  <- attribs$id
+	vars$num <- ""
 	vars$classes <- paste(attribs$classes, collapse = " ")
 	return(vars)
 }
@@ -108,6 +110,7 @@ parse_slide <- function(slide){
 #   modifyList(attribs, list(content = content, 
 #      classes = paste(attribs$classes, collapse = " ")))
 # }
+
 
 
 
