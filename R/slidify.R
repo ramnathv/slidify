@@ -29,6 +29,9 @@ slidify <- function(source, destination, options = slidifyOptions()){
   md_file  <- knit(source)
   slides   <- llply(doc_to_slides(md_file), parse_slide)
   slides   <- remove_hidden_slides(slides)
+  slides   <- add_slide_numbers(slides)
+  
+  deck$num_slides <- length(slides)
   
   deck <- modifyList(deck, get_user_files())
   deck <- modifyList(deck, list(slides = slides))
@@ -49,6 +52,7 @@ slidify <- function(source, destination, options = slidifyOptions()){
 	if (deck$embed){
 	  embed_images(destination, destination)
 	}
+	return(invisible(deck))
 }
 
 
