@@ -30,7 +30,10 @@
   {{#slides}}
   <div class="slide{{#classes}} {{classes}}{{/classes}}" id = "{{id}}"><div>
     <section>
-      {{{content}}}
+      {{#header}}
+      <header><h2>{{{ title }}}</h2></header>
+      {{/header}}
+      {{{ content }}}
     </section>
   </div></div>
   {{/slides}}
