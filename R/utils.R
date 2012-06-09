@@ -40,3 +40,18 @@ add_theme <- function(theme){
   file.copy(css_file, theme_file)
   cat(whisker.render(template), file = theme_file, append = TRUE)
 }
+
+# TODO: Add attribtion
+re.capture = function(pattern, string, ...) {
+  rex = list(src = string, names  = list(),
+    result = regexpr(pattern, string, perl = TRUE, ...))
+  
+  for (.name in attr(rex$result, 'capture.name')) {
+    rex$names[[.name]] = substr(rex$src, 
+      attr(rex$result, 'capture.start')[,.name], 
+      attr(rex$result, 'capture.start')[,.name]
+      + attr(rex$result, 'capture.length')[,.name]
+      - 1)
+   }
+  return(rex)
+}
