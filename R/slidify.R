@@ -25,11 +25,12 @@ slidify <- function(source, destination, options = slidifyOptions()){
 	  render_markdown(strict = TRUE)
 	}
   
-  # KNIT SOURCE FILE AND PARSE SLIDES
-  md_file  <- knit(source)
+  # KNIT SOURCE FILE AND PARSE SLIDES  
+  md_file  <- knit(source)                              
   slides   <- llply(doc_to_slides(md_file), parse_slide)
-  slides   <- remove_hidden_slides(slides)
+  slides   <- remove_hidden_slides(slides)           
   slides   <- add_slide_numbers(slides)
+  slides   <- add_raw_rmd(slides, source)
   
   deck$num_slides <- length(slides)
   
