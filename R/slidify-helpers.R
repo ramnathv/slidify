@@ -85,3 +85,14 @@ add_slide_numbers <- function(slides){
   }
   return(slides)
 }
+
+#' Add raw R markdown source to slide vars
+#
+# TODO: Remove preceding newlines to optimize display of source code.
+add_raw_rmd <- function(slides, source){
+  raw_rmd <- doc_to_slides(source)
+  for (i in seq_along(slides)){
+    slides[[i]]['raw'] <- paste(raw_rmd[[i]][-1], collapse = "\n")
+  }
+  return(slides)
+}
