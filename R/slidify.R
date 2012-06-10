@@ -41,6 +41,7 @@ slidify <- function(source, destination, options = slidifyOptions()){
 	  
 	if (deck$embed){
 	  deck$user_css = get_contents(deck$user_css)
+	  deck$lib_path = 'http://slidify.googlecode.com/git/inst/libraries'
 	}
 	
   # GET PARTIALS AND TEMPLATES
