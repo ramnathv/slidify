@@ -44,6 +44,11 @@ slidify <- function(source, destination, options = slidifyOptions()){
 	  deck$lib_path = 'http://slidify.googlecode.com/git/inst/libraries'
 	}
 	
+	# if no title has been specified, use the first slide as title
+	if (is.null(deck$title)){
+	  deck$title = deck$slides[[1]]$title
+	}
+	
   # GET PARTIALS AND TEMPLATES
 	partials <- get_partials()
 	template <- get_template(deck$framework)

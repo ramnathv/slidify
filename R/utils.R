@@ -19,7 +19,7 @@ slidifyOptions <- function(){
     transition = 'horizontal-slide', histyle = 'acid', copy_libraries = FALSE, 
     lib_path = system.file('libraries', package = 'slidify'), 
     layout = 'layout-regular', template = 'template-default', mathjax = TRUE,
-    embed = FALSE)
+    embed = FALSE, title = NULL)
 }
 
 
