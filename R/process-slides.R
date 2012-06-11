@@ -81,8 +81,11 @@ get_slide_vars <- function(slide){
 	content <- renderMarkdown(text = raw_md)
 	hpat <- '(?<header><h(?<level>[0-9])>(?<title>.*)</h[0-9]>)\n+'
 	vars <- re.capture(hpat, content)$name
-  if (nchar(vars$header) > 0) vars$content <- sub(vars$header, "", content, fixed = TRUE)
-  else vars$content <- content
+  if (nchar(vars$header) > 0) {
+    vars$content <- sub(vars$header, "", content, fixed = TRUE)
+  } else {
+    vars$content <- content
+  }
 	return(vars)
 }
 
