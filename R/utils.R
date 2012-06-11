@@ -42,7 +42,7 @@ add_theme <- function(theme){
 }
 
 # TODO: Add attribtion
-re.capture = function(pattern, string, ...) {
+re.capture <- function(pattern, string, ...) {
   rex = list(src = string, names  = list(),
     result = regexpr(pattern, string, perl = TRUE, ...))
   
