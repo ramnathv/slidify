@@ -1,9 +1,17 @@
+#' Embed local images using base64
+#'
+#' @keywords internal
+#' @param html_in path to input html file
+#' @param html_out path to output html file
+#' @return 
 embed_images <- function(html_in, html_out){
   html <- paste(readLines(html_in), collapse = "\n")
   html <- markdown:::.b64EncodeImages(html)
   writeLines(html, html_out)
 }
 
+#' Make a random string id
+#' 
 # @TODO: Add attribution to original author.
 make_id <- function(n = 1, length = 4){
 	randomString <- c(1:n)            
@@ -14,6 +22,9 @@ make_id <- function(n = 1, length = 4){
 	return(randomString)
 }
 
+#' Set default options for slidify
+#'
+#  @TODO: Figure out a better mechanism for specifying defaults
 slidifyOptions <- function(){
   list(framework = 'html5slides', highlighter = 'highlight', theme = 'web-2.0', 
     transition = 'horizontal-slide', histyle = 'acid', copy_libraries = FALSE, 
