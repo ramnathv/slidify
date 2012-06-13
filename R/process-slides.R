@@ -1,13 +1,13 @@
 #' Split a markdown document into slides
 #' 
-#' Slides are separated by lines that start with the keyword !SLIDE followed by #' optional slide classes.
+#' Slides are separated by lines that start with --- followed by optional slide classes
 #' @param md_file path to markdown file containing the slides
 #' @return list of slides
 #' @keywords internal
 doc_to_slides <- function(md_file){
 	doc <- readLines(md_file)
 	
-	# if there are no !SLIDE markers, add explicity separatorsy
+	# if there are no !SLIDE markers, add explicity separators
 	if (!any(grepl('^<?!SLIDE', doc))){
 		doc = add_slide_separator(doc)
 	}
@@ -15,6 +15,21 @@ doc_to_slides <- function(md_file){
 	begin  <- grep("^<?!SLIDE(.*)>?", doc) 
 	end    <- c(begin[-1] - 1, length(doc))
 	slides <- mapply(function(i, j) doc[i:j], begin, end)
+}
+
+doc_to_slides2 <- function(md_file){
+  spat <- "^(?<sep><?(?<comm>!--)?\\s?---\\s?(?<attribs>.*)>?$)"
+  doc  <- readLines(md_file)
+  if (!any(grepl(spat, doc))){
+    doc = add_slide_separator2(doc)
+  }
+  begin  <- grep(spat, doc)
+  end    <- c(begin[-1] - 1, length(doc))
+  slides <- mapply(function(i, j) doc[i:j], begin, end) 
+}
+
+add_slide_separator2 <- function(doc){
+  
 }
 
 #' Add !SLIDE separator to presentations using standard markdown
