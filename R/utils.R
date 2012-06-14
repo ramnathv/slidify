@@ -66,3 +66,29 @@ re.capture <- function(pattern, string, ...) {
    }
   return(rex)
 }
+
+
+#' Merge two lists by name
+#'
+#' This is a method that merges the contents of one list with another by 
+#' adding the named elements in the second that are not in the first. 
+#' In other words, the first list is the target template, and the second 
+#' one adds ay extra elements that it has
+#'
+#' @param x the list to which elements will be added
+#' @param y the list from which elements will be added to x, if they are not 
+#'    already there by name
+#'
+#' @keywords internal
+merge_list <- function (x, y, ...) 
+{
+    if (length(x) == 0) 
+        return(y)
+    if (length(y) == 0) 
+        return(x)
+    i = match(names(y), names(x))
+    i = is.na(i)
+    if (any(i)) 
+        x[names(y)[which(i)]] = y[which(i)]
+    x
+}
