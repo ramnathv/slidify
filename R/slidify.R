@@ -10,8 +10,8 @@ slidify2 <- function(config_file){
 #' @import knitr 
 #' @import whisker
 #' @importFrom plyr llply
-slidify <- function(source, destination, options = slidifyOptions()){
-	deck <- as.list(options)
+slidify <- function(source, destination, options = NULL){
+	deck <- get_deck_options(options)
   # CREATE SKELETON AND COPY LIBRARIES IF COPY_LIBRARIES IS TRUE
   create_skeleton()
   if (deck$copy_libraries){
@@ -64,8 +64,20 @@ slidify <- function(source, destination, options = slidifyOptions()){
 }
 
 
-
-
+#' Function to get configuration for slide generation
+get_deck_options <- function(options){
+  deck <- slidifyDefaults()
+  if (!is.null(options)){
+    if (is.list(options)){
+      deck <- modifyList(deck, options)
+    } else if(file.exists(options)){
+      deck <- modifyList(deck, yaml::yaml.load_file(options))
+    } else if(file.exists('slidify.yml')){
+      deck <- modifyList(deck, yaml::yaml.load_file('slidify.yml'))
+    }
+  }
+  return(deck)
+}
 
 
 
