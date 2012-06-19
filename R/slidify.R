@@ -23,6 +23,7 @@ slidify <- function(source, destination, options = slidifyOptions()){
 	  render_html()
 	} else {
 	  render_markdown(strict = TRUE)
+	  knit_hooks$set(plot = knitr:::hook_plot_html)
 	}
   
   # KNIT SOURCE FILE AND PARSE SLIDES  
