@@ -1,3 +1,4 @@
+export(rmd2beamer)
 export(slidify)
 export(slidifyOptions)
 import(knitr)
