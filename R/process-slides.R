@@ -28,9 +28,6 @@ doc_to_slides2 <- function(md_file){
   slides <- mapply(function(i, j) doc[i:j], begin, end) 
 }
 
-add_slide_separator2 <- function(doc){
-  
-}
 
 #' Add !SLIDE separator to presentations using standard markdown
 #'
@@ -73,13 +70,11 @@ update_p_classes <- function(content){
 	gsub("<p>\\.(.*?) ", "<p class = '\\1'>", content)
 }
 
-# #' Update <p> classes by adding the class specifier.
-# update_p_classes <- function(content){
-#   gsub("<p>\\.(.*?) ", "<p class = '\\1'>", content)
-# }
-
+#' Update build classes for ul
 update_ul_classes <- function(content){
-	gsub("<ul>", "<ul class = 'build'>", content)
+	content = gsub('<blockquote>\n*<ul>', '<ul class = "build">', content)
+	content = gsub('</ul>\n*</blockquote>', "</ul>", content)
+	return(content)
 }
 
 update_classes <- function(content, classes){
@@ -101,6 +96,7 @@ get_slide_vars <- function(slide){
   } else {
     vars$content <- content
   }
+  vars$content <- update_ul_classes(vars$content)
 	return(vars)
 }
 
