@@ -14,5 +14,5 @@ rmd2beamer <- function(source, ...){
 	knit_hooks$set(plot = knitr:::hook_plot_tex)
 	opts_chunk$set(dev = 'pdf')
 	out <- knit(source)
-	pandoc(out, ...)
+	pandoc(out, to = 'beamer', output = gsub("md", 'pdf', out), ...)
 }
