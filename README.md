@@ -10,7 +10,7 @@ The guiding philosophy of `slidify` is to completely separate writing of content
 
 This package is not available on `CRAN` as yet. A development version can be installed from `github` using the `devtools` package. 
 
-```{r eval = F}
+```R
 library(devtools)
 install_github('slidify', 'ramnathv')
 ```
