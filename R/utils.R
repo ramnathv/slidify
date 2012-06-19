@@ -25,7 +25,7 @@ make_id <- function(n = 1, length = 4){
 #' Set default options for slidify
 #'
 #  @TODO: Figure out a better mechanism for specifying defaults
-slidifyOptions <- function(){
+slidifyDefaults <- function(){
   list(framework = 'html5slides', highlighter = 'highlight', theme = 'web-2.0', 
     transition = 'horizontal-slide', histyle = 'acid', copy_libraries = FALSE, 
     lib_path = system.file('libraries', package = 'slidify'), 

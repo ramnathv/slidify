@@ -1,6 +1,6 @@
 export(rmd2beamer)
 export(slidify)
-export(slidifyOptions)
+export(slidifyDefaults)
 import(knitr)
 import(markdown)
 import(plyr)
