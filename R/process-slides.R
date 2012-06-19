@@ -77,6 +77,14 @@ update_ul_classes <- function(content){
 	return(content)
 }
 
+update_ol_classes <- function(content){
+	content = gsub('<blockquote>\n*<ol>', '<ol class = "build">', content)
+	content = gsub('</ol>\n*</blockquote>', "</ol>", content)
+	return(content)
+}
+
+
+
 update_classes <- function(content, classes){
 	content <- update_p_classes(content)
 	if ('build' %in% classes){
@@ -97,6 +105,7 @@ get_slide_vars <- function(slide){
     vars$content <- content
   }
   vars$content <- update_ul_classes(vars$content)
+  vars$content <- update_ol_classes(vars$content)
 	return(vars)
 }
 
