@@ -22,4 +22,7 @@ Collate:
     'utils.R'
     'process-slides.R'
     'slidify-helpers.R'
+    'pandoc-beamer.R'
     'slidify.R'
+    
+  
