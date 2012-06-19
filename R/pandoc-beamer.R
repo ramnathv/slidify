@@ -9,7 +9,7 @@ pandoc <- function(...){
 }
 
 #' Function to render Rmd file as beamer pdf using pandoc
-rmd_to_beamer <- function(source, ...){
+rmd2beamer <- function(source, ...){
 	render_markdown()
 	knit_hooks$set(plot = knitr:::hook_plot_tex)
 	opts_chunk$set(dev = 'pdf')
