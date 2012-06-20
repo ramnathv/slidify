@@ -47,6 +47,9 @@ install_github('markdown', 'rstudio')
 * [html5slides][3]
 * [shower][4]
 * [slidy][5]
+* [landslide][6]
+* [slideous][7]
+* [html5rocks][8]
 
 Extending `slidify` to accommodate other frameworks is pretty straightforward. The plan is to support more frameworks over time.
 
@@ -54,7 +57,10 @@ Extending `slidify` to accommodate other frameworks is pretty straightforward. T
 [2]: http://paulrouget.com/dzslides/
 [3]: http://html5slides.googlecode.com/
 [4]: http://pepelsbey.github.com/shower/en.htm
-[5]: http://www.w3.org/Talks/Tools/Slidy2/Overview.html#(1)
+[5]: http://www.w3.org/Talks/Tools/Slidy2/Overview.html
+[6]: https://github.com/adamzap/landslide
+[7]: http://goessner.net/articles/slideous/slideous.html
+[8]: http://slides.html5rocks.com/#landing-slide
 
 ---
 
