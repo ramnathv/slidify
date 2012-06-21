@@ -86,6 +86,16 @@ add_slide_numbers <- function(slides){
   return(slides)
 }
 
+#' Add ids for slides with no defaults
+add_missing_id <- function(slides){
+  for (i in seq_along(slides)){
+    if (slides[[i]]['id'] == ''){
+      slides[[i]]['id'] = sprintf("slide-%s", i)
+    }
+  }
+  return(slides)
+}
+
 #' Add raw R markdown source to slide vars
 #
 # TODO: Remove preceding newlines to optimize display of source code.

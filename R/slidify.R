@@ -31,6 +31,7 @@ slidify <- function(source, destination, options = NULL){
   slides   <- llply(doc_to_slides(md_file), parse_slide)
   slides   <- remove_hidden_slides(slides)           
   slides   <- add_slide_numbers(slides)
+  slides   <- add_missing_id(slides)
   slides   <- add_raw_rmd(slides, source)
   
   deck$num_slides <- length(slides)

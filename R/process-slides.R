@@ -50,15 +50,15 @@ add_slide_separator <- function(doc){
 #'
 get_slide_attribs <- function(header){
 	attribs <- strsplit(sub("^<?!SLIDE\\s*(.*)>?", "\\1", header), "\\s+")[[1]]
-	id = NULL; classes = NULL
+	id = ""; classes = NULL
 	if (length(attribs) > 0){
 	  classes <- grep('^[^#]', attribs, value = TRUE)
 	  id      <- gsub("#", "", grep('^#', attribs, value = TRUE))
 	}
 	# if no id is specified, generate a random id
-	if (length(id) == 0) {
-		id = make_id()
-	}
+	# if (length(id) == 0) {
+	#    id = make_id()
+	#  }
 	list(classes = classes, id = id)
 }
 
