@@ -53,7 +53,12 @@ get_slide_attribs <- function(header){
 	id = ""; classes = NULL
 	if (length(attribs) > 0){
 	  classes <- grep('^[^#]', attribs, value = TRUE)
-	  id      <- gsub("#", "", grep('^#', attribs, value = TRUE))
+	  id <- grep('^#', attribs, value = TRUE)
+	  if (length(id) > 0){
+	    id <- gsub("#", "", id)
+	  } else {
+	    id <- ""
+	  }
 	}
 	# if no id is specified, generate a random id
 	# if (length(id) == 0) {
