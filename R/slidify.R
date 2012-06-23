@@ -38,8 +38,8 @@ slidify <- function(source, destination, options = NULL){
   
   deck <- modifyList(deck, get_user_files())
   deck <- modifyList(deck, list(slides = slides))
-  deck <- modifyList(deck, 
-	  list(highlight_js = (deck$highlighter == 'highlight.js')))
+  deck$highlight_js = (deck$highlighter == 'highlight.js')
+  deck$google_prettify = (deck$highlighter == 'google_prettify')
 	  
 	if (deck$embed){
 	  deck$user_css = get_contents(deck$user_css)
