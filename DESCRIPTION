@@ -13,8 +13,7 @@ Depends:
 Imports:
     knitr,
     markdown,
-    whisker,
-    plyr
+    whisker
 License: MIT
 URL: http://ramnathv.github.com/slidify/
 BugReports: https://github.com/ramnathv/slidify/issues
