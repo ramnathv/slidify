@@ -12,7 +12,7 @@ get_template <- function(framework){
 #' @keywords internal
 get_partials <- function(){
 	pfiles  <- dir(system.file('partials', package = 'slidify'), full = T)
-	partials <- llply(pfiles, readLines)
+	partials <- lapply(pfiles, readLines)
 	names(partials) <-  sub(".html", "",  basename(pfiles))
 	return(partials)
 }
@@ -58,7 +58,7 @@ copy_libraries <- function(framework, highlighter, histyle){
 }
 
 get_contents <- function(files){
-  contents = llply(files, readLines)
+  contents = lapply(files, readLines)
   capture.output(do.call('cat', contents))
 }
 
