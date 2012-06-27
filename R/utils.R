@@ -25,10 +25,15 @@ make_id <- function(n = 1, length = 4){
 #' Set default options for slidify
 #'
 #  @TODO: Figure out a better mechanism for specifying defaults
-slidifyDefaults <- function(){
-  list(framework = 'html5slides', highlighter = 'highlight', theme = 'layout-regular template-regular', histyle = 'acid', copy_libraries = FALSE, 
-    lib_path = system.file('libraries', package = 'slidify'), mathjax = TRUE,
-    embed = FALSE, title = NULL)
+slidifyDefaults <- function(){list(
+  framework      = 'html5slides', 
+  theme          = 'layout-regular template-regular', 
+  highlighter    = 'highlight.js',  
+  histyle        = 'github', 
+  copy_libraries = FALSE, 
+  lib_path = system.file('libraries', package = 'slidify'), mathjax = TRUE,
+  embed = FALSE, 
+  title = NULL)
 }
 
 
