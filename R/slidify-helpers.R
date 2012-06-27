@@ -36,6 +36,7 @@ get_user_files <- function(){
 #' |---media
 #' |- libraries
 #' |- slides.Rmd
+# TODO: could have a scaffolds directory which can just be copied.
 create_skeleton <- function(){
   dir.create('assets', showWarnings = F)
   dir.create(file.path('assets', 'stylesheets'), showWarnings = F)
@@ -106,3 +107,6 @@ add_raw_rmd <- function(slides, source){
   }
   return(slides)
 }
+
+# REFACTORING IDEA
+# There is a design pattern in all of the add_*_* functions.
