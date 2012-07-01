@@ -101,7 +101,8 @@ update_classes <- function(content, classes){
 #' Get slide variables from slide
 get_slide_vars <- function(slide){
   raw_md  <- paste(slide, collapse = "\n")
-	content <- renderMarkdown(text = raw_md)
+	content <- renderMarkdown(text = raw_md, 
+	  renderer.options = markdownExtensions())
 	hpat <- '(?<header><h(?<level>[0-9])>(?<title>.*)</h[0-9]>)\n+'
 	vars <- re.capture(hpat, content)$name
   if (nchar(vars$header) > 0) {
