@@ -148,8 +148,8 @@ All the heavy lifting is actually done by three awesome R packages. `slidify` is
  Package | Author
  ------- | ------ 
  [knitr](http://github.com/yihui/knitr) | Yihui Xie 
- [markdown](http://github.com/rstudio/knitr)
- [whisker](http://github.com/edwindj/whisker)
+ [markdown](http://github.com/rstudio/knitr) | Jeffrey Horner
+ [whisker](http://github.com/edwindj/whisker) | Edwin de Jonge
 
 ---
 
