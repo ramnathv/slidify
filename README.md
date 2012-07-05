@@ -173,7 +173,7 @@ All the heavy lifting is actually done by three awesome R packages. `slidify` is
 ### Syntax Highlighters ###
 
 
-Syntax highlighting is powered by open source highlighters. I would like to than the authors of these tools.
+Syntax highlighting is powered by open source highlighters. I would like to thank the authors of these tools.
 
   Highighter | Author  | License
  --------- | ------- | -------
