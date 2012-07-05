@@ -93,17 +93,17 @@ You can add slide classes and id by appending them to the slide separator.
 
 Use the options `framework` and `theme` to style your deck using your favorite presentation framework. Currently supported frameworks and themes are listed below. Extending `slidify` to accommodate other frameworks is pretty straightforward and the plan is to support more over time.
 
- framework | theme
- --------- | --------------------
- [html5slides](http://html5slides.googlecode.com/) | layout-default template-default
- [html5rocks]() |
- [deck.js](http://imakewebthings.com/deck.js/)     | web2.0, swiss, neon
- [dzslides](http://paulrouget.com/dzslides/)       | 
- [landslide](https://github.com/adamzap/landslide) | default, tango, clean
- [shower](http://pepelsbey.github.com/shower/en.htm) | ribbon
- [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#) |
- [slideous]() |
- [beamer]() | 
+
+     framework                                                    | theme
+     ------------------------------------------------------------ | --------------------
+     [html5slides](http://html5slides.googlecode.com/)            | layout-default template-default
+     [html5rocks]()                                               |
+     [deck.js](http://imakewebthings.com/deck.js/)                | web2.0, swiss, neon
+     [dzslides](http://paulrouget.com/dzslides/)                  | 
+     [landslide](https://github.com/adamzap/landslide)            | default, tango, clean
+     [shower](http://pepelsbey.github.com/shower/en.htm)          | ribbon
+     [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#) |
+
 
 ---
 
