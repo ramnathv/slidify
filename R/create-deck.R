@@ -10,7 +10,7 @@ create_deck <- function(deck_dir, git = F){
 	dir.create(file.path(assets, 'stylesheets'), showWarnings = F)
 	dir.create(file.path(assets, 'scripts'), showWarnings = F)
 	dir.create(file.path(assets, 'media'), showWarnings = F)
-	file.create(file.path(deck_dir, 'slides.Rmd'))
+	file.create(file.path(deck_dir, 'index.Rmd'))
 	if (git) init_repo()
 }
 
