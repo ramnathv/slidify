@@ -143,11 +143,13 @@ Development is underway to provide support for publishing to
 
 ### R Packages ###
 
-All the heavy lifting is actually done by three awesome R packages. `slidify` is merely a wrapper around them. 
+All the heavy lifting is actually done by three awesome R packages. `slidify` is merely a wrapper around them.
 
-* Yihui Xie (knitr)
-* RStudio (markdown)
-* Edwin de Jonge (whisker)
+ Package | Author
+ ------- | ------ 
+ [knitr](http://github.com/yihui/knitr) | Yihui Xie 
+ [markdown](http://github.com/rstudio/knitr)
+ [whisker](http://github.com/edwindj/whisker)
 
 ---
 
