@@ -124,7 +124,7 @@ Use the options `highlighter` and `histyle` to control syntax highlighting of so
 
 `slidify` is designed to make the entire process from writing your slides to publishing them online easy. You can publish your deck on `RPubs` using two lines of code.
 
-```
+```R
 slidify('slides.Rmd', options = list(embed = TRUE))
 rpubsUpload('My First Presentation', 'slides.html')
 ```
