@@ -6,7 +6,7 @@ The guiding philosophy of `slidify` is to completely separate writing of content
 
 ---
 
-### Installation ###
+### Installing Slidify ###
 
 This package is not available on `CRAN` as yet. A development version can be installed from `github` using the `devtools` package. 
 
@@ -25,100 +25,180 @@ install_github('markdown', 'rstudio')
  
 ---
 
-### Usage ###
+### Creating Your First Deck ###
 
-`slidify` is designed to make it very easy for a HTML novice to generate a crisp, visually appealing `HTML5` slide deck. You can do it in just three steps!
+`slidify` is designed to make it very easy for a HTML novice to generate a crisp, visually appealing `HTML5` slide deck. Just write your presentation using [R Markdown](http://goo.gl/KKdaf), separating your slides by a horizontal rule `---` and run `slidify`.
 
-..ul: build
 
-* Write your source file in [R Markdown](http://goo.gl/KKdaf)
-* Separate your slides using a horizontal rule `---`
-* Run `slidify("slides.Rmd")` to generate your slide deck.
+```markdown
+  ---
+  
+  # My First Slidify Deck
+  by Ramnath Vaidyanathan
+  
+  ---
+  
+  ### Slide 1
+  
+  This is an unordered list 
+  
+  - Point 1
+  - Point 2
+  - Point 3
+  - Point 4
+  
+  ---
+```
+
+---
+
+### Adding Slide Classes ###
+
+You can add slide classes and id by appending them to the slide separator. 
+
+```R
+  --- fill #montreal
+  
+  ### Montreal by Night Time
+  
+  ![monteral](http://goo.gl/cF6W2)
+  
+  
+  --- middle
+  
+  Slidify is Awesome
+  
+```
+
+---
+
+### Customize Your Presentation ###
+
+`slidify` is designed to be modular and provides a high degree of customization for the more advanced users.
+
+ Option         | Description
+ -------------- | ------------
+ framework      | slide generation framework to use
+ theme          | theme to use for styling slide content
+ highlighter    | tool to use for syntax highlighting
+ histyle        | style to use for syntax highlighting
+ copy_libraries | copy library files to slide directory?
+ lib_path       | path to libraries 
+ mathjax        | use mathjax ?
+ embed          | embed local images ?
+ 
+---
+
+### Styling your Slides! ###
+
+Use the options `framework` and `theme` to style your deck using your favorite presentation framework. Currently supported frameworks and themes are listed below. Extending `slidify` to accommodate other frameworks is pretty straightforward and the plan is to support more over time.
+
+ framework | theme
+ --------- | --------------------
+ [html5slides](http://html5slides.googlecode.com/) | layout-default template-default
+ [html5rocks]() |
+ [deck.js](http://imakewebthings.com/deck.js/)     | web2.0, swiss, neon
+ [dzslides](http://paulrouget.com/dzslides/)       | 
+ [landslide](https://github.com/adamzap/landslide) | default, tango, clean
+ [shower](http://pepelsbey.github.com/shower/en.htm) | ribbon
+ [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#) |
+ [slideous]() |
+ [beamer]() | 
+
+---
+
+### Highlighting Source Code ###
+
+Use the options `highlighter` and `histyle` to control syntax highlighting of source code.
+
+ highlighter     | histyle
+ --------------  | ------------
+ highlight       | see `knit_theme$get()`
+ highlight.js    | see http://goo.gl/uEJj
+ google_prettify | see http://goo.gl/yUikj
 
 
 ---
 
-### Framework ###
+### Publishing Your Deck ###
 
-`slidify` allows you to render your slides using several HTML5 slide frameworks. Currently supported frameworks are:
+`slidify` is designed to make the entire process from writing your slides to publishing them online easy. You can publish your deck on `RPubs` using two lines of code.
 
-* [deck.js][1]
-* [dzslides][2]
-* [html5slides][3]
-* [shower][4]
-* [slidy][5]
-* [landslide][6]
-* [slideous][7]
-* [html5rocks][8]
+```
+slidify('slides.Rmd', options = list(embed = TRUE))
+rpubsUpload('My First Presentation', 'slides.html')
+```
 
-Extending `slidify` to accommodate other frameworks is pretty straightforward. The plan is to support more frameworks over time.
+Development is underway to provide support for publishing to 
 
-[1]: http://imakewebthings.com/deck.js/
-[2]: http://paulrouget.com/dzslides/
-[3]: http://html5slides.googlecode.com/
-[4]: http://pepelsbey.github.com/shower/en.htm
-[5]: http://www.w3.org/Talks/Tools/Slidy2/Overview.html
-[6]: https://github.com/adamzap/landslide
-[7]: http://goessner.net/articles/slideous/slideous.html
-[8]: http://slides.html5rocks.com/#landing-slide
+ * Github Pages
+ * Dropbox
+ * Amazon S3
 
 ---
 
-### Theme ###
+---
 
-The `theme` option lets you style your slides. Currently, this option is available only for `deck.js` which allows the following themes
-
-* web-2.0
-* swiss
-* neon
-
-Themes are just `css` files. So it is easy to extend this option to the other frameworks if you can write css. 
+# Credits #
 
 ---
 
-### Transition ###
+### R Packages ###
 
-The `transition` option allows you to define the transition between slides. Currently, this option is available only for `deck.js` which allows the following transitions
+All the heavy lifting is actually done by three awesome R packages. `slidify` is merely a wrapper around them. 
 
-* horizontal-slide [default]
-* vertical-slide
-* fade
-
-Please consult [deck.js](http://goo.gl/UFthM) documentation for more information on `themes` and `transitions`
-
+* Yihui Xie (knitr)
+* RStudio (markdown)
+* Edwin de Jonge (whisker)
 
 ---
 
-### Highlighter ###
+### HTML5 Slide Frameworks ###
 
-`slidify` is designed to be modular and syntax highlighting is one module. Currently two options are supported
+`slidify` builds on HTML5 slide frameworks created by several individuals and organizations. I would like to acknowledge their work and efforts.
 
-* `js` 
-* `R`
-
-The `js` option does client side highlighting using the javascript library [highlight.js][5], while the `R` option generates a static page, highlighted using the R package [highlight][6]. 
-
-You will notice that the quality of highlighting for `R` code is better when done with the `R` package, rather than `highlight.js`.
-
-
-[5]: http://softwaremaniacs.org/soft/highlight/en/
-[6]: http://goo.gl/uy8Ww
-
----
-
-### Highlight Style ###
-
-`slidify` allows you complete control over how you want to style your source code using `css`. The styles currently supported depend on the `highlighter` chosen.
-
-* `js` see documentation for [highlight.js](http://goo.gl/uEJj)
-* `R`  type `knit_theme[['get']]()` to see available styles
-
-
-In order to use the `R` option, you need to include the line `opts_knit$set(out.format = 'html')` inside your `.Rmd` file. This is required to fool `knitr` into highlighting source code. Specifying it outside the document does not work as `knitr` resets it to `md` as soon as it sees the `.Rmd` extension.
+ Framework | Author  | License
+ --------- | ------- | -------
+ [HTML5Slides](http://code.google.com/p/html5slides/) | Luke Mah, Marcin Wichary | Apache
+ [deck.js](https://github.com/imakewebthings/deck.js) | Caleb Troughton |  MIT/GPL
+ [dzslides](https://github.com/paulrouget/dzslides) | Paul Roget | DWTFYW
+ [html5rocks](http://slides.html5rocks.com/) | Google | Apache
+ [Landslide](https://github.com/adamzap/landslide)| Adam Zapletal| Apache
+ [Shower](https://github.com/pepelsbey/shower) | Vadim Makeev | MIT
+ [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#) | Dave Ragett  | MIT
+ [slideous]() | Stefan Goessner | LGPL
 
 ---
 
-## License ##
+### Syntax Highlighters ###
+
+
+Syntax highlighting is powered by open source highlighters. I would like to than the authors of these tools.
+
+  Highighter | Author  | License
+ --------- | ------- | -------
+ [highlight.js](https://github.com/isagalaev/highlight.js) | Software Maniacs | MIT
+ [Google Prettify](http://code.google.com/p/google-code-prettify/)| Google| Apache
+ [highlight](http://cran.r-project.org/web/packages/highlight/index.html)| Romain Francois | GPL
+
+---
+
+### Markdown-HTML5 Converters ###
+
+I have extensively borrowed ideas and features from HTML5 slide converters written in other languages. I would like to acknowledge contributions of these authors.
+
+ Language | Framework 
+ -------- | -----------
+ Ruby     | [showoff](http://github.com/schacon/showoff)   
+ Ruby     | [slideshow](https://github.com/geraldb/slideshow)  
+ Ruby     | [keydown](https://github.com/infews/keydown)   
+ Python   | [hieroglyph](https://github.com/nyergler/hieroglyph)  
+ Python   | [landslide](https://github.com/adamzap/landslide) 
+ Haskell  | [pandoc](https://github.com/jgm/pandoc)
+
+---
+
+### License ###
 
 `slidify` is made available under the MIT License
 
@@ -132,31 +212,6 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
----
 
-# References #
-
----
-
-### HTML5 Slides and R ###
-
-
-1. [An Introduction to R](http://goo.gl/L79xW)
-2. [How to Make HTML Slides with knitr](http://goo.gl/7C907)
-3. [Fancy HTML5 Slides with knitr and Pandoc](http://goo.gl/Uqnq3)
-4. [Visualize World Bank Data](http://goo.gl/QlTA4)
-5. [Interactive Presentations with deck.js](http://goo.gl/kdhBO)
-
----
-
-### R Markdown and knitr ###
-
-1. [Interactive Reports in R with knitr and RStudio](http://goo.gl/oTeV5)
-2. [Getting Started with R Markdown, knitr and RStudio](http://goo.gl/ALjtQ)
-3. [Dynamic Content RStudio, Markdown and Marked](http://goo.gl/84D5E)
-4. [Using Markdown with RStudio](http://goo.gl/KKdaf)
-5. [Example Reproducible Report using R Markdown](http://goo.gl/ZQF1u)
-6. [Interactive Slides with R, googleVis and knitR](http://goo.gl/cVS9W)
-7. [knitr, Slideshows and Dropbox](http://goo.gl/ZTSD7)
 
 
