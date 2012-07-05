@@ -1,4 +1,4 @@
-### Overview ###
+# Overview #
 
 The objective of `slidify` is to make it easy to create reproducible HTML5 presentations from `.Rmd` files. 
 
@@ -72,7 +72,7 @@ You can add slide classes and id by appending them to the slide separator.
 
 ---
 
-### Customize Your Presentation ###
+## Customizing Your Presentation ##
 
 `slidify` is designed to be modular and provides a high degree of customization for the more advanced users.
 
@@ -91,7 +91,7 @@ You can add slide classes and id by appending them to the slide separator.
 
 ### Styling your Slides! ###
 
-Use the options `framework` and `theme` to style your deck using your favorite presentation framework. Currently supported frameworks and themes are listed below. Extending `slidify` to accommodate other frameworks is pretty straightforward and the plan is to support more over time.
+Use the options `framework` and `theme` to style your deck using your favorite presentation framework.
 
 
      framework                                                    | theme
@@ -104,6 +104,7 @@ Use the options `framework` and `theme` to style your deck using your favorite p
      [shower](http://pepelsbey.github.com/shower/en.htm)          | ribbon
      [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#) |
 
+Files in `assets/stylesheets` and `assets/scripts` are automatically included in the compiled deck, giving you additional styling options.
 
 ---
 
