@@ -19,6 +19,7 @@ URL: http://ramnathv.github.com/slidify/
 BugReports: https://github.com/ramnathv/slidify/issues
 Collate:
     'utils.R'
+    'create-deck.R'
     'process-slides.R'
     'slidify-helpers.R'
     'pandoc-beamer.R'
