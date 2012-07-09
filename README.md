@@ -15,7 +15,7 @@ library(devtools)
 install_github('slidify', 'ramnathv')
 ```
 
-In addition to `slidify`, you would also need to install development versions of `knitr`, `whisker` and `markdown`.
+In addition to `slidify`, you would also need to install development versions of [`knitr`](http://github.com/yihui/knitr), [`whisker`](http://github.com/edwindj/whisker) and [`markdown`](http://github.com/rstudio/knitr).
 
 ```R
 install_github('knitr', 'yihui')
@@ -108,33 +108,28 @@ You can add slide classes and id by appending them to the slide separator.
 
 `slidify` is designed to be modular and provides a high degree of customization for the more advanced users.
 
- Option         | Description
- -------------- | ------------
- framework      | slide generation framework to use
- theme          | theme to use for styling slide content
- highlighter    | tool to use for syntax highlighting
- histyle        | style to use for syntax highlighting
- copy_libraries | copy library files to slide directory?
- lib_path       | path to libraries 
- mathjax        | use mathjax ?
- embed          | embed local images ?
+    framework      : slide generation framework to use
+    theme          : theme to use for styling slide content
+    highlighter    : tool to use for syntax highlighting
+    histyle        : style to use for syntax highlighting
+    copy_libraries : copy library files to slide directory?
+    lib_path       : path to libraries 
+    mathjax        : use mathjax ?
+    embed          : embed local images ?
  
 ---
 
 ### Styling your Slides! ###
 
-Use the options `framework` and `theme` to style your deck using your favorite presentation framework.
+Use the options `framework` and `theme` to style your deck using your favorite presentation framework. The slide generation frameworks currently supported are
 
-
-     framework                                                    | theme
-     ------------------------------------------------------------ | --------------------
-     [html5slides](http://html5slides.googlecode.com/)            | layout-default template-default
-     [html5rocks]()                                               |
-     [deck.js](http://imakewebthings.com/deck.js/)                | web2.0, swiss, neon
-     [dzslides](http://paulrouget.com/dzslides/)                  | 
-     [landslide](https://github.com/adamzap/landslide)            | default, tango, clean
-     [shower](http://pepelsbey.github.com/shower/en.htm)          | ribbon
-     [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#) |
+- [html5slides](http://html5slides.googlecode.com/)
+- [html5rocks]()
+- [deck.js](http://imakewebthings.com/deck.js/)
+- [dzslides](http://paulrouget.com/dzslides/)
+- [landslide](https://github.com/adamzap/landslide)
+- [shower](http://pepelsbey.github.com/shower/en.htm)
+- [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#)
 
 Files in `assets/stylesheets` and `assets/scripts` are automatically included in the compiled deck, giving you additional styling options.
 
@@ -142,14 +137,11 @@ Files in `assets/stylesheets` and `assets/scripts` are automatically included in
 
 ### Highlighting Source Code ###
 
-Use the options `highlighter` and `histyle` to control syntax highlighting of source code.
+Use the options `highlighter` and `histyle` to control syntax highlighting of source code. The option `highlighter` accepts three values 
 
- highlighter     | histyle
- --------------  | ------------
- highlight       | see `knit_theme$get()`
- highlight.js    | see http://goo.gl/uEJj
- google_prettify | see http://goo.gl/yUikj
-
+- `highlight`
+- `highlight.js` 
+- `google_prettify`
 
 ---
 
@@ -168,24 +160,6 @@ Development is underway to provide support for publishing to
  * Dropbox
  * Amazon S3
 
----
-
-# Credits #
-
----
-
-### R Packages ###
-
-All the heavy lifting is actually done by three awesome R packages [knitr](http://github.com/yihui/knitr), [markdown](http://github.com/rstudio/knitr) and [whisker](http://github.com/edwindj/whisker). I would like to thank the authors of these packages. 
-
-`slidify` builds on HTML5 slide frameworks created by several individuals and organizations. I would like to thank the authors of
- [HTML5Slides](http://code.google.com/p/html5slides/), [deck.js](https://github.com/imakewebthings/deck.js), [dzslides](https://github.com/paulrouget/dzslides) [html5rocks](http://slides.html5rocks.com/),[Landslide](https://github.com/adamzap/landslide), [Shower](https://github.com/pepelsbey/shower), [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#) and [slideous]() 
-
-Syntax highlighting is powered by open source highlighters. I would like to thank the authors of these tools [highlight.js](https://github.com/isagalaev/highlight.js), [Google Prettify](http://code.google.com/p/google-code-prettify/) and [highlight](http://cran.r-project.org/web/packages/highlight/index.html)| 
-
-### Markdown-HTML5 Converters ###
-
-I have extensively borrowed ideas and features from HTML5 slide converters written in other languages. I would like to acknowledge contributions of the authors of [showoff](http://github.com/schacon/showoff), [slideshow](https://github.com/geraldb/slideshow), [keydown](https://github.com/infews/keydown), [hieroglyph](https://github.com/nyergler/hieroglyph), [landslide](https://github.com/adamzap/landslide) and [pandoc](https://github.com/jgm/pandoc)
 
 ---
 
@@ -202,4 +176,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+### Credits
+
+
+`slidify` builds on HTML5 slide frameworks and syntax highlighters created by several individuals and organizations. I would like to thank the authors of these packages.
+
+
+I have borrowed ideas and features from HTML5 slide converters written in other languages. I would like to acknowledge contributions of the authors of [showoff](http://github.com/schacon/showoff), [slideshow](https://github.com/geraldb/slideshow), [keydown](https://github.com/infews/keydown), [hieroglyph](https://github.com/nyergler/hieroglyph), [landslide](https://github.com/adamzap/landslide) and [pandoc](https://github.com/jgm/pandoc)
 
