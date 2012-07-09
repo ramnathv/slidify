@@ -17,7 +17,7 @@ install_github('slidify', 'ramnathv')
 
 In addition to `slidify`, you would also need to install development versions of `knitr`, `whisker` and `markdown`.
 
-```{r eval = F}
+```R
 install_github('knitr', 'yihui')
 install_github('whisker', 'edwindj')
 install_github('markdown', 'rstudio')
@@ -176,64 +176,22 @@ Development is underway to provide support for publishing to
 
 ### R Packages ###
 
-All the heavy lifting is actually done by three awesome R packages. `slidify` is merely a wrapper around them.
+All the heavy lifting is actually done by three awesome R packages [knitr](http://github.com/yihui/knitr), [markdown](http://github.com/rstudio/knitr) and [whisker](http://github.com/edwindj/whisker). I would like to thank the authors of these packages. 
 
- Package | Author
- ------- | ------ 
- [knitr](http://github.com/yihui/knitr) | Yihui Xie 
- [markdown](http://github.com/rstudio/knitr) | Jeffrey Horner
- [whisker](http://github.com/edwindj/whisker) | Edwin de Jonge
+`slidify` builds on HTML5 slide frameworks created by several individuals and organizations. I would like to thank the authors of
+ [HTML5Slides](http://code.google.com/p/html5slides/), [deck.js](https://github.com/imakewebthings/deck.js), [dzslides](https://github.com/paulrouget/dzslides) [html5rocks](http://slides.html5rocks.com/),[Landslide](https://github.com/adamzap/landslide), [Shower](https://github.com/pepelsbey/shower), [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#) and [slideous]() 
 
----
-
-### HTML5 Slide Frameworks ###
-
-`slidify` builds on HTML5 slide frameworks created by several individuals and organizations. I would like to acknowledge their work and efforts.
-
- Framework | Author  | License
- --------- | ------- | -------
- [HTML5Slides](http://code.google.com/p/html5slides/) | Luke Mah, Marcin Wichary | Apache
- [deck.js](https://github.com/imakewebthings/deck.js) | Caleb Troughton |  MIT/GPL
- [dzslides](https://github.com/paulrouget/dzslides) | Paul Roget | DWTFYW
- [html5rocks](http://slides.html5rocks.com/) | Google | Apache
- [Landslide](https://github.com/adamzap/landslide)| Adam Zapletal| Apache
- [Shower](https://github.com/pepelsbey/shower) | Vadim Makeev | MIT
- [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#) | Dave Ragett  | MIT
- [slideous]() | Stefan Goessner | LGPL
-
----
-
-### Syntax Highlighters ###
-
-
-Syntax highlighting is powered by open source highlighters. I would like to thank the authors of these tools.
-
-  Highighter | Author  | License
- --------- | ------- | -------
- [highlight.js](https://github.com/isagalaev/highlight.js) | Software Maniacs | MIT
- [Google Prettify](http://code.google.com/p/google-code-prettify/)| Google| Apache
- [highlight](http://cran.r-project.org/web/packages/highlight/index.html)| Romain Francois | GPL
-
----
+Syntax highlighting is powered by open source highlighters. I would like to thank the authors of these tools [highlight.js](https://github.com/isagalaev/highlight.js), [Google Prettify](http://code.google.com/p/google-code-prettify/) and [highlight](http://cran.r-project.org/web/packages/highlight/index.html)| 
 
 ### Markdown-HTML5 Converters ###
 
-I have extensively borrowed ideas and features from HTML5 slide converters written in other languages. I would like to acknowledge contributions of these authors.
-
- Language | Framework 
- -------- | -----------
- Ruby     | [showoff](http://github.com/schacon/showoff)   
- Ruby     | [slideshow](https://github.com/geraldb/slideshow)  
- Ruby     | [keydown](https://github.com/infews/keydown)   
- Python   | [hieroglyph](https://github.com/nyergler/hieroglyph)  
- Python   | [landslide](https://github.com/adamzap/landslide) 
- Haskell  | [pandoc](https://github.com/jgm/pandoc)
+I have extensively borrowed ideas and features from HTML5 slide converters written in other languages. I would like to acknowledge contributions of the authors of [showoff](http://github.com/schacon/showoff), [slideshow](https://github.com/geraldb/slideshow), [keydown](https://github.com/infews/keydown), [hieroglyph](https://github.com/nyergler/hieroglyph), [landslide](https://github.com/adamzap/landslide) and [pandoc](https://github.com/jgm/pandoc)
 
 ---
 
 ### License ###
 
-`slidify` is made available under the MIT License
+`slidify` is made available under the MIT License. All the `js` and `css` files are licensed under the terms specified by the respective vendor packages.
 
 **MIT License**
 
