@@ -1,12 +1,10 @@
 # Overview #
 
-Slidify is a tool that makes it easy to create, customize and publish, reproducible HTML5 slide decks from [`R Markdown`](http://goo.gl/KKdaf).
+Slidify is a tool that makes it easy to create, customize and publish, reproducible HTML5 slide decks from [`R Markdown`](http://goo.gl/KKdaf). 
+
+It is designed to make it very easy for a HTML novice to generate a crisp, visually appealing `HTML5` slide deck, while at the same time giving advanced users several options to customize their presentation.
 
 The guiding philosophy of `slidify` is to completely separate writing of content from its rendering, so that content can be written once in `R Markdown`, and rendered as an `HTML5` presentation using any of the `HTML5` slide frameworks supported.
-
----
-
-## Create ##
 
 ---
 
@@ -27,7 +25,11 @@ install_github('whisker', 'edwindj')
 install_github('markdown', 'rstudio')
 ```
 
-`slidify` is designed to make it very easy for a HTML novice to generate a crisp, visually appealing `HTML5` slide deck. 
+---
+
+## Create ##
+
+---
 
 ### Initialize Deck ###
 
@@ -46,10 +48,11 @@ This will create a skeleton for your presentation
         scripts
       index.Rmd
 
+---
 
 ### Write Deck ###
 
-Write your presentation using [R Markdown](http://goo.gl/KKdaf), separating your slides by a horizontal rule `---`.
+Write your presentation using [R Markdown](http://goo.gl/KKdaf), using a horizontal rule `---` to separate your slides.
 
 
 ```markdown
@@ -86,7 +89,7 @@ slidify('index.Rmd')
 
 ## Customize ##
 
-`slidify` is designed to be modular and provides a high degree of customization for the more advanced user.
+`slidify` is designed to be modular and provides a high degree of customization for the more advanced user. It supports the following options, which can be passed to `slidify` either as a named list or as a `yaml` file.
 
 ```text
 framework      : slide generation framework to use
