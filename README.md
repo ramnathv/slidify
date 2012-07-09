@@ -6,7 +6,11 @@ The guiding philosophy of `slidify` is to completely separate writing of content
 
 ---
 
-### Installing Slidify ###
+## Create ##
+
+---
+
+### Install Slidify ###
 
 This package is not available on `CRAN` as yet. A development version can be installed from `github` using the `devtools` package. 
 
@@ -22,11 +26,6 @@ install_github('knitr', 'yihui')
 install_github('whisker', 'edwindj')
 install_github('markdown', 'rstudio')
 ```
- 
----
-
-## Create ##
-
 
 `slidify` is designed to make it very easy for a HTML novice to generate a crisp, visually appealing `HTML5` slide deck. 
 
