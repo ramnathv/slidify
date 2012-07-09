@@ -1,6 +1,6 @@
 # Overview #
 
-The objective of `slidify` is to make it easy to create reproducible HTML5 presentations from `.Rmd` files. 
+Slidify is a tool that makes it easy to create, customize and publish, reproducible HTML5 slide decks from [`R Markdown`](http://goo.gl/KKdaf).
 
 The guiding philosophy of `slidify` is to completely separate writing of content from its rendering, so that content can be written once in `R Markdown`, and rendered as an `HTML5` presentation using any of the `HTML5` slide frameworks supported.
 
@@ -25,7 +25,8 @@ install_github('markdown', 'rstudio')
  
 ---
 
-### Creating Your First Deck ###
+## Create ##
+
 
 `slidify` is designed to make it very easy for a HTML novice to generate a crisp, visually appealing `HTML5` slide deck. 
 
@@ -84,6 +85,21 @@ slidify('index.Rmd')
 
 ---
 
+## Customize ##
+
+`slidify` is designed to be modular and provides a high degree of customization for the more advanced user.
+
+```text
+framework      : slide generation framework to use
+theme          : theme to use for styling slide content
+highlighter    : tool to use for syntax highlighting
+histyle        : style to use for syntax highlighting
+copy_libraries : copy library files to slide directory?
+lib_path       : path to libraries 
+mathjax        : use mathjax ?
+embed          : embed local images ?
+```
+
 ### Adding Slide Classes ###
 
 You can add slide classes and id by appending them to the slide separator. 
@@ -104,34 +120,9 @@ You can add slide classes and id by appending them to the slide separator.
 
 ---
 
-## Customizing Your Presentation ##
+### Using Alternate Frameworks ###
 
-`slidify` is designed to be modular and provides a high degree of customization for the more advanced users.
-
-```text
-framework      : slide generation framework to use
-theme          : theme to use for styling slide content
-highlighter    : tool to use for syntax highlighting
-histyle        : style to use for syntax highlighting
-copy_libraries : copy library files to slide directory?
-lib_path       : path to libraries 
-mathjax        : use mathjax ?
-embed          : embed local images ?
-```
- 
----
-
-### Styling your Slides! ###
-
-Use the options `framework` and `theme` to style your deck using your favorite presentation framework. The slide generation frameworks currently supported are
-
-- [html5slides](http://html5slides.googlecode.com/)
-- [html5rocks]()
-- [deck.js](http://imakewebthings.com/deck.js/)
-- [dzslides](http://paulrouget.com/dzslides/)
-- [landslide](https://github.com/adamzap/landslide)
-- [shower](http://pepelsbey.github.com/shower/en.htm)
-- [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#)
+Use the options `framework` and `theme` to style your deck using your favorite presentation framework. The slide generation frameworks currently supported are [html5slides](http://html5slides.googlecode.com/), [html5rocks](), [deck.js](http://imakewebthings.com/deck.js/), [dzslides](http://paulrouget.com/dzslides/), [landslide](https://github.com/adamzap/landslide), [shower](http://pepelsbey.github.com/shower/en.htm), [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#)
 
 Files in `assets/stylesheets` and `assets/scripts` are automatically included in the compiled deck, giving you additional styling options.
 
@@ -139,15 +130,12 @@ Files in `assets/stylesheets` and `assets/scripts` are automatically included in
 
 ### Highlighting Source Code ###
 
-Use the options `highlighter` and `histyle` to control syntax highlighting of source code. The option `highlighter` accepts three values 
-
-- `highlight`
-- `highlight.js` 
-- `google_prettify`
+Use the options `highlighter` and `histyle` to control syntax highlighting of source code. The highlighters currently supported are `highlight`, `highlight.js` and `google_prettify`
 
 ---
 
-### Publishing Your Deck ###
+## Publish ##
+
 
 `slidify` is designed to make the entire process from writing your slides to publishing them online easy. You can publish your deck on `RPubs` using two lines of code.
 
@@ -156,12 +144,7 @@ slidify('slides.Rmd', options = list(embed = TRUE))
 rpubsUpload('My First Presentation', 'slides.html')
 ```
 
-Development is underway to provide support for publishing to 
-
- * Github Pages
- * Dropbox
- * Amazon S3
-
+Development is underway to provide support for publishing to Github Pages, Dropbox and Amazon S3
 
 ---
 
