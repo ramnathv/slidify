@@ -108,14 +108,16 @@ You can add slide classes and id by appending them to the slide separator.
 
 `slidify` is designed to be modular and provides a high degree of customization for the more advanced users.
 
-    framework      : slide generation framework to use
-    theme          : theme to use for styling slide content
-    highlighter    : tool to use for syntax highlighting
-    histyle        : style to use for syntax highlighting
-    copy_libraries : copy library files to slide directory?
-    lib_path       : path to libraries 
-    mathjax        : use mathjax ?
-    embed          : embed local images ?
+```text
+framework      : slide generation framework to use
+theme          : theme to use for styling slide content
+highlighter    : tool to use for syntax highlighting
+histyle        : style to use for syntax highlighting
+copy_libraries : copy library files to slide directory?
+lib_path       : path to libraries 
+mathjax        : use mathjax ?
+embed          : embed local images ?
+```
  
 ---
 
