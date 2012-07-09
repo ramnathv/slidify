@@ -30,7 +30,7 @@ install_github('markdown', 'rstudio')
 
 `slidify` is designed to make it very easy for a HTML novice to generate a crisp, visually appealing `HTML5` slide deck. 
 
-#### Initialize Deck ####
+### Initialize Deck ###
 
 You can initialize a slide directory using the function `create_deck`, and initialize a git repository by passing the option `git = TRUE`. 
 
@@ -48,7 +48,7 @@ This will create a skeleton for your presentation
       index.Rmd
 
 
-#### Write Deck ####
+### Write Deck ###
 
 Write your presentation using [R Markdown](http://goo.gl/KKdaf), separating your slides by a horizontal rule `---`.
 
@@ -75,7 +75,7 @@ Write your presentation using [R Markdown](http://goo.gl/KKdaf), separating your
 
 ---
 
-#### Run Slidify ####
+### Run Slidify ###
 
 Generate your presentation by running the function `slidify` and passing along any options to it.
 
