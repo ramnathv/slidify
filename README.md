@@ -100,7 +100,7 @@ mathjax        : use mathjax ?
 embed          : embed local images ?
 ```
 
-### Adding Slide Classes ###
+### Add Slide Classes ###
 
 You can add slide classes and id by appending them to the slide separator. 
 
@@ -120,7 +120,7 @@ You can add slide classes and id by appending them to the slide separator.
 
 ---
 
-### Using Alternate Frameworks ###
+### Use Alternate Frameworks ###
 
 Use the options `framework` and `theme` to style your deck using your favorite presentation framework. The slide generation frameworks currently supported are [html5slides](http://html5slides.googlecode.com/), [html5rocks](), [deck.js](http://imakewebthings.com/deck.js/), [dzslides](http://paulrouget.com/dzslides/), [landslide](https://github.com/adamzap/landslide), [shower](http://pepelsbey.github.com/shower/en.htm), [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#)
 
@@ -128,7 +128,7 @@ Files in `assets/stylesheets` and `assets/scripts` are automatically included in
 
 ---
 
-### Highlighting Source Code ###
+### Highlight Source Code ###
 
 Use the options `highlighter` and `histyle` to control syntax highlighting of source code. The highlighters currently supported are `highlight`, `highlight.js` and `google_prettify`
 
@@ -148,7 +148,7 @@ Development is underway to provide support for publishing to Github Pages, Dropb
 
 ---
 
-### License ###
+## License ##
 
 `slidify` is made available under the MIT License. All the `js` and `css` files are licensed under the terms specified by the respective vendor packages.
 
@@ -164,8 +164,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ---
 
-### Credits
-
+## Credits ##
 
 `slidify` builds on HTML5 slide frameworks and syntax highlighters created by several individuals and organizations. I would like to thank the authors of these packages.
 
