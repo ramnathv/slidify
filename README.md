@@ -79,7 +79,7 @@ Write your presentation in [R Markdown](http://goo.gl/KKdaf), using a blank line
 
 ### Run Slidify ###
 
-Generate your presentation by running the function `slidify` and passing along any options to it.
+Generate your presentation by running `slidify` 
 
 ```R
 slidify('index.Rmd')
@@ -89,7 +89,7 @@ slidify('index.Rmd')
 
 ## Customize ##
 
-Slidify is designed to be modular and provides a high degree of customization for the more advanced user. It supports the following options, which can be passed to `slidify` either as a named list or as a `yaml` file.
+Slidify is designed to be modular and provides a high degree of customization for the more advanced user. You can access the defaults using `slidifyDefaults()`. It is possible to override options by passing it to `slidify` as a named list or as a `yaml` file.
 
 ```text
 framework      : slide generation framework to use
