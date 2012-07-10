@@ -33,7 +33,7 @@ install_github('markdown', 'rstudio')
 
 ### Initialize Deck ###
 
-You can initialize a slide directory using the function `create_deck`, and initialize a git repository by passing the option `git = TRUE`. 
+You can initialize a slide deck using `create_deck()`. If you have `git` installed, you can passing the option `git = TRUE` to automatically initialize a git repository, which will come in handy for publishing to `gh-pages`. 
 
 ```R
 create_deck('mydeck', git = TRUE)
