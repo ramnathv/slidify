@@ -110,9 +110,20 @@ get_slide_vars <- function(slide){
   } else {
     vars$content <- content
   }
+  blocks <- content_to_blocks(vars$content)
+  vars   <- modifyList(vars, blocks)
   vars$content <- update_ul_classes(vars$content)
   vars$content <- update_ol_classes(vars$content)
 	return(vars)
+}
+
+#' Splits HTML content into blocks based on a regex pattern
+content_to_blocks <- function(content){
+  blocks <- strsplit(content, "<p>\\*{3}\\s*")[[1]]
+  bpat   <- "^([[:alpha:]]+)</p>\n*(.*)$"
+  bnames <- ifelse(grepl(bpat, blocks), gsub(bpat, "\\1", blocks), 'content')
+  bcont  <- gsub(bpat, "\\2", blocks)
+  setNames(as.list(bcont), bnames)
 }
 
 #' Parse slide into its constituent elements
