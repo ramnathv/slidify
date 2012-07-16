@@ -21,13 +21,14 @@ URL: http://code.google.com/p/html5slides/
   <meta name="generator" content="slidify" />
 	
 	<!-- LOAD STYLE SHEETS -->
-	<link rel="stylesheet" href="{{lib_path}}/html5slides/styles.css">
+	<link rel="stylesheet" href="{{lib_path}}/html5slides/{{theme}}/styles.css">
+	<link rel="stylesheet" href="{{lib_path}}/html5slides/{{theme}}/uulm.css">
 	<link rel="stylesheet" href="{{lib_path}}/{{highlighter}}/styles/{{histyle}}.css">
   {{> user_css}}	
   
 </head>
 <body style='display: none'>
-	<section class='slides {{theme}}'>
+	<section class='slides layout-{{layout}} template-{{template}}'>
     {{#slides}}
 	  <article class = "{{classes}}" id = "{{id}}"> 
 	    {{{ header }}}
@@ -37,7 +38,7 @@ URL: http://code.google.com/p/html5slides/
   </section>
 </body>
   <!-- LOAD JAVASCRIPTS  -->
-	<script src='{{lib_path}}/html5slides/slides.js'></script>
+	<script src='{{lib_path}}/html5slides/{{theme}}/slides.js'></script>
 	{{> mathjax}}
 	{{> highlight_js}}
 	{{> google_prettify}}
