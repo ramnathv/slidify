@@ -37,11 +37,15 @@ get_user_files <- function(){
 #' |- libraries
 #' |- slides.Rmd
 # TODO: could have a scaffolds directory which can just be copied.
-create_skeleton <- function(){
+create_skeleton <- function(framework){
   dir.create('assets', showWarnings = F)
   dir.create(file.path('assets', 'stylesheets'), showWarnings = F)
   dir.create(file.path('assets', 'scripts'), showWarnings = F)
   dir.create(file.path('assets', 'media'), showWarnings = F)
+  dir.create(file.path('assets', 'templates'), showWarnings = F)
+  tpl_files <- list.files(pattern = '*.tpl', full = TRUE, 
+    system.file('libraries', framework, package = 'slidify'))
+  file.copy(tpl_files, file.path('assets', 'templates'), overwrite = TRUE)
 }
 
 #' Copy libraries to slide directory
@@ -88,9 +92,17 @@ add_slide_numbers <- function(slides){
 }
 
 #' Add ids for slides with no defaults
+# add_missing_id <- function(slides){
+#   for (i in seq_along(slides)){
+#     if (slides[[i]]['id'] == ''){
+#       slides[[i]]['id'] = sprintf("slide-%s", i)
+#     }
+#   }
+#   return(slides)
+# }
 add_missing_id <- function(slides){
   for (i in seq_along(slides)){
-    if (slides[[i]]['id'] == ''){
+    if (length(slides[[i]]$id) == 0){
       slides[[i]]['id'] = sprintf("slide-%s", i)
     }
   }
@@ -101,7 +113,7 @@ add_missing_id <- function(slides){
 #
 # TODO: Remove preceding newlines to optimize display of source code.
 add_raw_rmd <- function(slides, source){
-  raw_rmd <- doc_to_slides(source)
+  raw_rmd <- doc2slides(source)
   for (i in seq_along(slides)){
     slides[[i]]['raw'] <- paste(raw_rmd[[i]][-1], collapse = "\n")
   }
