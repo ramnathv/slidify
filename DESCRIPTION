@@ -1,7 +1,7 @@
 Package: slidify
 Type: Package
 Title: Generate reproducible html5 slides from R markdown
-Version: 0.1.6
+Version: 0.2
 Date: 2012-06-06
 Authors@R: c(person("Ramnath", "Vaidyanathan", email =
     "ramnath.vaidya@gmail.com", role = "aut"))
