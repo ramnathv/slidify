@@ -13,7 +13,7 @@ slidify2 <- function(config_file){
 slidify <- function(source, destination, options = NULL){
 	deck <- get_deck_options(options)
   # CREATE SKELETON AND COPY LIBRARIES IF COPY_LIBRARIES IS TRUE
-  create_skeleton()
+  create_skeleton(deck$framework)
   if (deck$copy_libraries){
     with(deck, copy_libraries(framework, highlighter, histyle))
     deck$lib_path <- 'libraries'
@@ -31,11 +31,12 @@ slidify <- function(source, destination, options = NULL){
   
   # KNIT SOURCE FILE AND PARSE SLIDES  
   md_file  <- knit(source)                              
-  slides   <- lapply(doc_to_slides(md_file), parse_slide)
+  slides   <- lapply(doc2slides(md_file), parse_slide)
   slides   <- remove_hidden_slides(slides)           
   slides   <- add_slide_numbers(slides)
   slides   <- add_missing_id(slides)
   slides   <- add_raw_rmd(slides, source)
+  slides   <- lapply(slides, render_slide)
   
   deck$num_slides <- length(slides)
   
@@ -56,7 +57,8 @@ slidify <- function(source, destination, options = NULL){
 	
   # GET PARTIALS AND TEMPLATES
 	partials <- get_partials()
-	template <- get_template(deck$framework)
+  # template <- get_template(deck$framework)
+  template <- readLines(file.path('assets', 'templates', 'deck.tpl'))
 	html_file <- if (missing(destination)) {
 	  destination = gsub("\\.Rmd", "\\.html", source)
 	}
