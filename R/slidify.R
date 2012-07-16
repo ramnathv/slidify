@@ -21,6 +21,9 @@ slidify <- function(source, destination, options = NULL){
   
 	if (deck$highlighter == 'highlight'){
 	  render_html()
+	  pat_md()
+	  opts_knit$set(out.format = 'html')
+	  opts_chunk$set(highlight = TRUE)
 	} else {
 	  render_markdown(strict = TRUE)
 	  knit_hooks$set(plot = knitr:::hook_plot_html)
