@@ -10,18 +10,6 @@ embed_images <- function(html_in, html_out){
   writeLines(html, html_out)
 }
 
-#' Make a random string id
-#' 
-# @TODO: Add attribution to original author.
-make_id <- function(n = 1, length = 4){
-  randomString <- c(1:n)            
-  for (i in 1:n){
-    randomString[i] <- paste(sample(c(0:9, letters, LETTERS),
-     length, replace=TRUE), collapse="")
-  }
-  return(randomString)
-}
-
 #' Set default options for slidify
 #'
 #  @TODO: Figure out a better mechanism for specifying defaults

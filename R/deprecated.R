@@ -43,3 +43,16 @@ get_slide_attribs_old <- function(header){
   #  }
   list(classes = classes, id = id)
 }
+
+#' Make a random string id
+#' 
+# @TODO: Add attribution to original author.
+make_id <- function(n = 1, length = 4){
+  randomString <- c(1:n)            
+  for (i in 1:n){
+    randomString[i] <- paste(sample(c(0:9, letters, LETTERS),
+     length, replace=TRUE), collapse="")
+  }
+  return(randomString)
+}
+
