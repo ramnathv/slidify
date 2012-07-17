@@ -23,6 +23,10 @@ Collate:
     'process-slides.R'
     'slidify-helpers.R'
     'pandoc-beamer.R'
+    'update-classes.R'
+    'xxx-slide.R'
+    'get-xxx.R'
     'slidify.R'
+    'deprecated.R'
     
   
