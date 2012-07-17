@@ -14,12 +14,12 @@ embed_images <- function(html_in, html_out){
 #' 
 # @TODO: Add attribution to original author.
 make_id <- function(n = 1, length = 4){
-	randomString <- c(1:n)            
-	for (i in 1:n){
-		randomString[i] <- paste(sample(c(0:9, letters, LETTERS),
-		 length, replace=TRUE), collapse="")
-	}
-	return(randomString)
+  randomString <- c(1:n)            
+  for (i in 1:n){
+    randomString[i] <- paste(sample(c(0:9, letters, LETTERS),
+     length, replace=TRUE), collapse="")
+  }
+  return(randomString)
 }
 
 #' Set default options for slidify
@@ -37,7 +37,6 @@ slidifyDefaults <- function(){list(
   embed = FALSE, 
   title = NULL)
 }
-
 
 # .onLoad <- function(libname, pkgname){
 #   if (is.null(getOption('slidify.options'))){
