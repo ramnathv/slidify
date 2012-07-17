@@ -29,7 +29,7 @@ URL: https://code.google.com/p/io-2012-slides
 <slides class="layout-widescreen">
 
 <slide class="title-slide segue nobackground">
-  <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+  <aside class="gdbar"><img src="../assets/media/icon.png"></aside>
   <hgroup class="auto-fadein">
     <h1>{{ title }}</h1>
     <p>{{ author }}</p>
