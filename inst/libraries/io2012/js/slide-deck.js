@@ -79,7 +79,7 @@ SlideDeck.prototype.onDomLoaded_ = function(e) {
     this.container.classList.remove('layout-widescreen');
   }
 
-  // this.loadConfig_(SLIDE_CONFIG);
+  this.loadConfig_(SLIDE_CONFIG);
   this.addEventListeners_();
   this.updateSlides_();
 
