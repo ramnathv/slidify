@@ -41,6 +41,15 @@ extract_slide_attribs <- function(header){
   list(classes = classes, id = id, tpl = tpl)
 }
 
+extract_slide_attribs <- function(header){
+  attribs <- strsplit(gsub("^---\\s*", "", header), " ")[[1]]
+  classes = gsub('(^[[:punct:]].*$)', '', attribs)
+  classes = paste(classes[classes != ""], collapse = " ")
+  id  = gsub('^#(.*)$', "\\1", grep('#', attribs, value = T))
+  tpl = gsub('^&(.*)$', "\\1", grep('&', attribs, value = T))
+  list(classes = classes, id = id, tpl = tpl)
+}
+
 #' Extract slide variables from slide
 #'
 #' title, header, content, level, sub
