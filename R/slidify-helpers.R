@@ -16,7 +16,7 @@ create_skeleton <- function(framework){
   dir.create(file.path('assets', 'templates'), showWarnings = F)
   tpl_files <- list.files(pattern = '*.tpl', full = TRUE, 
     system.file('libraries', framework, package = 'slidify'))
-  file.copy(tpl_files, file.path('assets', 'templates'), overwrite = TRUE)
+  file.copy(tpl_files, file.path('assets', 'templates'), overwrite = FALSE)
 }
 
 #' Copy libraries to slide directory
