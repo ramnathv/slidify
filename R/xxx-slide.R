@@ -1,5 +1,6 @@
-#' Render contents of a slide based on specified template
+#' Render contents of a slide based on template
 #' 
+#' @keywords internal
 render_slide <- function(slide){
   if (length(slide$tpl) == 0){
     slide$tpl <- 'slide'
@@ -15,13 +16,13 @@ render_slide <- function(slide){
 #' @keywords internal
 #  Thanks to Kohske
 remove_hidden_slides <- function(slides){
-	slide_classes = lapply(slides, function(x) x$classes)
-	hidden_slides = grep('hidden', slide_classes)
-	if (length(hidden_slides) > 0){
-	  slides[-hidden_slides]
-	} else {
-	  slides
-	}
+  slide_classes = lapply(slides, function(x) x$classes)
+  hidden_slides = grep('hidden', slide_classes)
+  if (length(hidden_slides) > 0){
+    slides[-hidden_slides]
+  } else {
+    slides
+  }
 }
 
 #' Add slide numbers to the slides
