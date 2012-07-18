@@ -91,7 +91,7 @@ add_slide_separator <- function(doc){
 #' Split HTML content into blocks based on a regex pattern
 content_to_blocks <- function(content){
   blocks <- strsplit(content, "<p>\\*{3}\\s*")[[1]]
-  bpat   <- "^([[:alpha:]]+)</p>\n*(.*)$"
+  bpat   <- "^([[:alpha:]]+)\\s*</p>\n*(.*)$"
   bnames <- ifelse(grepl(bpat, blocks), gsub(bpat, "\\1", blocks), 'content')
   bcont  <- gsub(bpat, "\\2", blocks)
   setNames(as.list(bcont), bnames)
