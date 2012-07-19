@@ -5,7 +5,8 @@
 #' @return list of slides
 #' @keywords internal
 doc2slides <- function(md_file){
-  spat <- "^(?<sep><?(?<comm>!--)?\\s?---\\s?(?<attribs>.*)>?$)"
+  # spat <- "^(?<sep><?(?<comm>!--)?\\s?---\\s?(?<attribs>.*)>?$)"
+  spat <- "^---(?<attribs>.*)$"
   doc  <- readLines(md_file)
   begin  <- grep(spat, doc, perl = TRUE)
   end    <- c(begin[-1] - 1, length(doc))
