@@ -10,7 +10,7 @@ doc2slides <- function(md_file){
   doc  <- readLines(md_file)
   begin  <- grep(spat, doc, perl = TRUE)
   end    <- c(begin[-1] - 1, length(doc))
-  slides <- mapply(function(i, j) doc[i:j], begin, end) 
+  slides <- mapply(function(i, j) doc[i:j], begin, end, SIMPLIFY = FALSE) 
 }
 
 #' Parse slide into its constituent elements
@@ -57,6 +57,9 @@ extract_slide_attribs <- function(header){
 #' @keywords internal
 extract_slide_vars <- function(slide){
   raw_md  <- paste(slide, collapse = "\n")
+  if (grepl('^\\s*\n*$', raw_md)) {
+    return(list(header = NULL, content = NULL, sub = NULL, num = ""))
+  }
   content <- renderMarkdown(text = raw_md, 
     renderer.options = markdownExtensions())
   hpat <- '(?<header><h(?<level>[0-9])>(?<title>.*)</h[0-9]>)\n+'
