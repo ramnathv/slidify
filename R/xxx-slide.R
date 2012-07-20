@@ -27,9 +27,8 @@ get_layout <- function(lname){
 render_slide <- function(slide){
   if (length(slide$tpl) == 0){
     slide$tpl <- 'slide'
-  }
-  tpl_file <- file.path('assets', 'templates', sprintf('%s.tpl', slide$tpl))
-  tpl <- readLines(tpl_file)
+  } 
+  tpl <- get_layout(slide$tpl)
   slide$slide <- whisker.render(tpl, slide)
   return(slide)
 }
