@@ -11,7 +11,12 @@ create_deck <- function(deck_dir, git = F){
   dir.create(file.path(assets, 'scripts'), showWarnings = F)
   dir.create(file.path(assets, 'media'), showWarnings = F)
   file.create(file.path(deck_dir, 'index.Rmd'))
-  if (git) init_repo()
+  if (git) {
+    cwd <- getwd()
+    setwd(deck_dir)
+    init_repo()
+    on.exit(setwd(cwd))
+  }
 }
 
 #' Initializes a Git Repo in a Directory
