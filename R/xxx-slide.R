@@ -1,3 +1,26 @@
+#' Get contents of a layout file
+#'
+#' Returns the contents as-is, if the layout does not inherit from a parent.
+#' If it inherits from a parent, then the {{{ content }}} portion of the parent
+#' layout is replaced by the contents of the layout file and the resulting
+#' layout is returned. This is useful for template inheritance.
+#'
+#'
+get_layout <- function(lname){
+  tpath <- file.path('assets', 'templates', sprintf('%s.tpl', lname))
+  tpl  <- read_file(tpath)
+  mpat <- "^---\nlayout: ([[:alpha:]]+)\n---\n(.*)$"
+  has_parent <- grepl(mpat, tpl)
+  if (has_parent){
+    main  <- gsub(mpat, '\\1', tpl)
+    mpath <- file.path('assets', 'templates', sprintf('%s.tpl', main))
+    main  <- read_file(mpath)
+    content <- gsub(mpat, "\\2", tpl)
+    tpl <- sub("{{{ content }}}", content, main, fixed = TRUE)
+  }
+  return(tpl)
+}
+
 #' Render contents of a slide based on template
 #' 
 #' @keywords internal
