@@ -84,3 +84,10 @@ merge_list <- function (x, y, ...)
         x[names(y)[which(i)]] = y[which(i)]
     x
 }
+
+#' Read contents of a text file into a single string
+#'
+#' @keywords internal
+read_file <- function(file){
+  paste(readLines(file), collapse = '\n')
+}
