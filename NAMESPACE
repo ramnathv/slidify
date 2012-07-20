@@ -1,3 +1,4 @@
+export(create_deck)
 export(rmd2beamer)
 export(slidify)
 export(slidifyDefaults)
