@@ -17,7 +17,7 @@ library(devtools)
 install_github('slidify', 'ramnathv')
 ```
 
-In addition to `slidify`, you would also need to install development versions of [`knitr`](http://github.com/yihui/knitr), [`whisker`](http://github.com/edwindj/whisker) and [`markdown`](http://github.com/rstudio/knitr).
+In addition to `slidify`, you would also need to install development versions of [`knitr`](http://github.com/yihui/knitr), [`whisker`](http://github.com/edwindj/whisker) and [`markdown`](http://github.com/rstudio/markdown).
 
 ```R
 install_github('knitr', 'yihui')
