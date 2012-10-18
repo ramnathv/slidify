@@ -2,7 +2,7 @@ Package: slidify
 Type: Package
 Title: Generate reproducible html5 slides from R markdown
 Version: 0.3.0
-Date: 2012-06-06
+Date: 2012-10-18
 Author: Ramnath Vaidyanathan <ramnath.vaidya@gmail.com>
 Maintainer: Ramnath Vaidyanathan <ramnath.vaidya@gmail.com>
 Description: This package provides a tool to generate reproducible html5 slides from R Markdown files. It supports multiple html5 slide frameworks.
