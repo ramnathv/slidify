@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    {{> head }}
+    {{{ stylesheets }}}
+  </head>
+  <body>
+    <!-- statusbar -->
+    {{> statusbar }}
+
+    <!-- slides -->
+    <div class="slide">
+      <h1>First Slide</h1>
+    </div>
+    <div class="slide">
+      <h1>Content</h1>
+      <ul id="toc" class="incremental"><li></li></ul>
+    </div>
+    {{# slides }}
+      {{{ rendered }}}
+    {{/ slides }}
+    <!-- more slides -->
+  </body>
+  {{> javascripts }}
+</html>
+

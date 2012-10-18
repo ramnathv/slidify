@@ -1,0 +1,10 @@
+<!-- Google Prettify -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint {{# config.linenums }}linenums{{/config.linenums}}";
+  }
+  prettyPrint();
+</script>
+<!-- End Google Prettify -->
