@@ -1,0 +1,8 @@
+export(create_deck)
+export(slidify)
+export(minify_css)
+import(knitr)
+import(markdown)
+import(stringr)
+import(whisker)
+import(yaml)
