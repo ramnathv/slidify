@@ -1,0 +1,10 @@
+---
+framework: io2012
+theme: default
+highlighter: highlight.js
+hitheme: hemisu-light
+widgets: [mathjax, bootstrap]
+url:
+  lib: libraries
+  assets: assets
+---

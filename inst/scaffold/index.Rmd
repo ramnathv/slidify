@@ -1,0 +1,9 @@
+---
+title    : Title 
+substitle: Subtitle
+author   : Author
+job      : job
+widgets  : [mathjax]
+---
+
+<!-- Use get_metadata() to get full list of metadata tags that can be used -->
