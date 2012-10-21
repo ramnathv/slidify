@@ -62,6 +62,7 @@ read_file <- function(doc){
 #' Capture patterns matched by regular expression
 #'
 #' @keywords internal
+#  TODO: Add reference to blog from which this was copied
 re_capture <- function(pattern, string, ...) {
   rex = list(src = string, names  = list(),
     result = regexpr(pattern, string, perl = TRUE, ...))
@@ -80,6 +81,11 @@ re_capture <- function(pattern, string, ...) {
 #' 
 #' @import markdown
 #' @keywords internal
+#  TODO: Use config file to override markdown options
+#  EXAMPLE:
+#  markdown:
+#    hardwrap: true
+#  BUG: renderer.options are incorrectly specified.
 md2html <- function(md){
   renderMarkdown(text = md, renderer.options = markdownExtensions())
 }
@@ -89,7 +95,7 @@ md2html <- function(md){
 #' This is a method that merges the contents of one list with another by 
 #' adding the named elements in the second that are not in the first. 
 #' In other words, the first list is the target template, and the second 
-#' one adds ay extra elements that it has
+#' one adds any extra elements that it has
 #'
 #' @param x the list to which elements will be added
 #' @param y the list from which elements will be added to x, if they are not 
