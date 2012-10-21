@@ -1,0 +1,49 @@
+<!-- <div class="slide-wrapper"> -->
+ <div class="slide {{class}}" id="{{id}}">
+ 
+  <div class="inner">
+    <header>
+      {{{ header }}}
+    </header>
+    
+    {{#content}}
+    <section>
+      {{{ content }}}
+    </section>
+    {{/content}}
+    
+  </div><!-- inner -->
+  
+  {{# pnotes }}
+  <div class="presenter_notes">
+    <section>
+      {{{ pnotes }}}
+    </section>
+  </div>
+  {{/ pnotes }}<!-- presener notes -->
+  
+  <div class="modal hide" id="source-{{ num }}" style='display:none'>
+    <div class="modal-body">
+      <pre><code>
+        {{ raw }}
+      </code></pre>
+    </div>
+    <div class="modal-footer">
+      <a class="btn" data-dismiss="modal" href="#">Close</a> 
+      <a class="btn btn-primary" href="#">Save changes</a>
+    </div>
+  </div><!-- source -->
+  
+  <footer>
+    <aside class="source">
+      <a class="btn" data-toggle="modal" href="#source-{{ num }}">
+        View Source
+      </a>
+    </aside>
+    <aside class="page_number">
+      {{ num }} / {{ num_slides }}
+    </aside>
+  </footer><!-- footer -->
+  
+ </div>
+<!-- </div> -->
