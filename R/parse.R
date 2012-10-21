@@ -17,11 +17,13 @@ parse_slide <- function(slide){
 #' @keywords internal
 # TODO: Refactor this function so that it is more elegant.
 # TODO: One limitation is that key/values cannot contain any spaces.
+# TODO: Rename tpl to layout to maintain consistency.
 parse_meta <- function(meta){
   x <- strsplit(meta, ' ')[[1]]
   x <- sub('^#', 'id:', x)
   x <- sub('&', 'tpl:', x, fixed = T)
   x <- sub('^\\.', 'class:', x)
+  x <- sub('^=', 'name:', x)
   y <- str_split_fixed(x[grep(":", x)], ":", 2)
   y1 = y[,1]; y2 = y[,2]
   meta  = as.list(y2[y1 != 'class'])
