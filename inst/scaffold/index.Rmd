@@ -7,3 +7,14 @@ widgets  : [mathjax]
 ---
 
 <!-- Use get_metadata() to get full list of metadata tags that can be used -->
+
+## Slide 1
+
+This is slide 1
+
+--- .class1 #id1
+
+## Slide 2
+
+Use the slide separator line to specify slide metadata
+
