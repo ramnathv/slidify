@@ -5,7 +5,7 @@ create_deck <- function(deckdir, git = F){
   if (file.exists(deckdir)){
   	return('Directory already exists. Please choose a different name.')
   }
-  scaffold = system.file('scaffold', package = 'slidify2')
+  scaffold = system.file('scaffold', package = 'slidify')
   system(sprintf('cp -r %s %s', scaffold, deckdir))
   if (git == T){
     init_repo()
