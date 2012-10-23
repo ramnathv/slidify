@@ -8,6 +8,16 @@ knit_deck <- function(deck){
   return(invisible(deck))
 }
 
+#' Read YAML configuration file
+#' @keywords internal
+get_config <- function(cfile = 'config.yml'){
+	config = slidifyDefaults()
+	if (file.exists(cfile)){
+		config = modifyList(config, yaml::yaml.load_file(cfile))
+	}
+	return(config)
+}
+
 #' Split document into metadata and slides
 #' 
 #' @param doc path to source file
@@ -16,7 +26,7 @@ knit_deck <- function(deck){
 to_deck <- function(doc){
   txt = str_split_fixed(read_file(doc), '\n---', 2)
   meta = yaml.load(gsub("^---\n+", '', txt[1]))
-  deck = modifyList(slidifyDefaults(), c(meta, slides = txt[2]))
+  deck = modifyList(get_config(), c(meta, slides = txt[2]))
   if (deck$copy_libraries){
   	opts$url[['lib']] <- 'libraries'
   }
