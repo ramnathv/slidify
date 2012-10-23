@@ -41,3 +41,10 @@ get_layouts <- function(paths){
   }
   layouts
 }
+
+#' Get default slide layout for a framework
+get_slide_layout <- function(framework){
+	l_file = system.file('libraries', 'frameworks', framework, 'layouts', 
+											 'slide.html', package = 'slidify')
+	cat(slidify:::read_file(l_file))
+}
