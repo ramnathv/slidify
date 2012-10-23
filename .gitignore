@@ -6,3 +6,6 @@
 .DS_Store
 .cache
 examples/
+makefile
+inst/scaffold/index.html
+inst/scaffold/index.md
