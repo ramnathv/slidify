@@ -6,11 +6,14 @@ job      : job
 widgets  : [mathjax]
 ---
 
-<!-- Use get_metadata() to get full list of metadata tags that can be used -->
-
 ## Slide 1
 
 This is slide 1
+
+```
+library(ggplot2)
+qplot(wt, mpg, data = mtcars)
+```
 
 --- .class1 #id1
 
