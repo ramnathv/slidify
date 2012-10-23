@@ -1,4 +1,4 @@
-#' Initialize a slide deck as a git repository
+#' Initialize a slide deck
 #' 
 create_deck <- function(deckdir, git = F){
   message('Creating slide directory at ', deckdir, '...')
