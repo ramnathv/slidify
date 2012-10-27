@@ -8,7 +8,14 @@ knit_deck <- function(deck){
   return(invisible(deck))
 }
 
-#' Read YAML configuration file
+#' Get configuration
+#' 
+#' A config.yml file in the root directory of the slide deck can be used to 
+#' override slidify defaults. YAML front matter in the Rmd file overrides
+#' everything.
+#' 
+#' @param cfile path to config file
+#' @return list of config options
 #' @keywords internal
 get_config <- function(cfile = 'config.yml'){
 	config = slidifyDefaults()
