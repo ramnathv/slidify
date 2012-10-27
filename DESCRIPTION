@@ -27,6 +27,7 @@ Collate:
     'layouts.R'
     'parse.R'
     'process.R'
+    'publish.R'
     'render.R'
     'slidify.R'
     'update.R'
