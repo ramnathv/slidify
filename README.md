@@ -36,7 +36,8 @@ slidify('index.Rmd')
 
 ### Publish ###
 
-
+- Github
+- RPubs
 
 ---
 
