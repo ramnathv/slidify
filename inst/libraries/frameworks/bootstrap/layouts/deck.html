@@ -4,7 +4,8 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
-    {{> head }}     
+    {{> head }}
+    {{{ stylesheets }}}
   </head>
   <body>
    <!--[if lt IE 7]>
@@ -23,6 +24,7 @@
             {{{ rendered }}} 
           {{/ slides }}
         </div>
+        {{{ footer }}}
     </body>
     {{> scripts }}
     {{> javascripts }}
