@@ -13,14 +13,16 @@ body {
 {{# cdn }}
 <link rel="stylesheet"
   href="http://netdna.bootstrapcdn.com/bootswatch/2.1.0/{{theme}}/bootstrap.no-icons.min.css" >
-<link  rel="stylesheet" 
-  href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
 {{/ cdn }}
 {{^ cdn }}
-<link rel="stylesheet" href="{{url.framework}}/css/bootstrap.min.css">
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-responsive.no-icons.min.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="{{url.framework}}/css/bootstrap.min.css"> -->
 {{/ cdn }}
+<link  rel="stylesheet" 
+  href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
 <link rel="stylesheet" href="{{url.framework}}/css/bootstrap-responsive.min.css">
 
 <link rel="stylesheet" href="{{url.framework}}/css/main.css">
 <link rel="stylesheet" href="{{url.highlighters}}/{{highlighter}}/css/{{hitheme}}.css" />
 <script src="{{url.framework}}/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+
