@@ -35,7 +35,7 @@ to_deck <- function(doc){
   meta = yaml.load(gsub("^---\n+", '', txt[1]))
   deck = modifyList(get_config(), c(meta, slides = txt[2]))
   if (deck$copy_libraries){
-  	opts$url[['lib']] <- 'libraries'
+  	deck$url[['lib']] <- 'libraries'
   }
   return(deck)
 }
