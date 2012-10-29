@@ -7,7 +7,7 @@ slidifyDefaults <- function(){list(
 	theme       = "", 
 	highlighter = 'highlight.js',  
 	hitheme     = 'tomorrow',
-	copy_libraries = FALSE
+	copy_libraries = TRUE
 )}
 
 #' Function to get deck options
