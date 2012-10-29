@@ -1,6 +1,5 @@
 # use this configuration file to override defaults
-framework   : landslide
-theme       : light
+framework   : io2012
 highlighter : highlight.js
 hitheme     : github
-widgets     : [mathjax, bootstrap]
+widgets     : []
