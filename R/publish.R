@@ -1,7 +1,9 @@
 #' Publish a slide deck to github
 publish_deck <- function(user, repo){
+	message('Publishing deck to ', user, '/', repo)
 	system('git add .')
-	system('git commit -a -m')	
+	system('git commit -a -m "publishing deck"')
+	system(sprintf('git push git@github.com:%s/%s gh-pages', user, repo))
 }
 
 #' Generate slide deck and publish to rPubs
