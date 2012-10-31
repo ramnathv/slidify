@@ -1,14 +1,39 @@
-#' Publish a slide deck to github
-publish_deck <- function(user, repo){
+#' Publish slide deck
+#' 
+#' @param host 
+publish_deck <- function(..., host = 'github'){
+	publish <- switch(host, github = publish_github, dropbox = publish_dropbox)
+	publish(...)
+}
+
+#' Publish slide deck to Github
+#' 
+#' @param user github username
+#' @param repo github reponame
+publish_github <- function(user, repo){
 	message('Publishing deck to ', user, '/', repo)
 	system('git add .')
 	system('git commit -a -m "publishing deck"')
 	system(sprintf('git push git@github.com:%s/%s gh-pages', user, repo))
+	link = sprintf('http://%s.github.com/%s', user, repo)
+	message('You can now view your slide deck at ', link)
 }
 
-#' Generate slide deck and publish to rPubs
+#' Publish slide deck to rPubs
 publish_rpubs <- function(html_file){
 	html_file %|% embed_images  
+}
+
+#' Publish slide deck to Dropbox
+publish_dropbox <- function(dirname){
+	if (missing(dirname)){
+		dirname = basename(getwd())
+	}
+	drop_dir = file.path('~/Dropbox/Public', dirname)
+	message('Creating slide directory at ', drop_dir)
+	dir.create(drop_dir)
+	message('Copying files to ', drop_dir)
+	file.copy(".", drop_dir, overwrite = F, recursive = TRUE)
 }
 
 switch_lib_url <- function(html_file){
