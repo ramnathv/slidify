@@ -1,6 +1,7 @@
 #' Publish slide deck
 #' 
 #' @param host 
+#  TODO: Pick missing parameters from config.yml
 publish_deck <- function(..., host = 'github'){
 	publish <- switch(host, 
 		 github = publish_github, 
