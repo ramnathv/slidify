@@ -2,7 +2,11 @@
 #' 
 #' @param host 
 publish_deck <- function(..., host = 'github'){
-	publish <- switch(host, github = publish_github, dropbox = publish_dropbox)
+	publish <- switch(host, 
+		 github = publish_github, 
+		dropbox = publish_dropbox,
+			rpubs = publish_rpubs
+	)
 	publish(...)
 }
 
@@ -19,11 +23,6 @@ publish_github <- function(user, repo){
 	message('You can now view your slide deck at ', link)
 }
 
-#' Publish slide deck to rPubs
-publish_rpubs <- function(html_file){
-	html_file %|% embed_images  
-}
-
 #' Publish slide deck to Dropbox
 publish_dropbox <- function(dirname){
 	if (missing(dirname)){
@@ -36,9 +35,33 @@ publish_dropbox <- function(dirname){
 	file.copy(".", drop_dir, overwrite = F, recursive = TRUE)
 }
 
-switch_lib_url <- function(html_file){
-	gurl = 'http://slidify.googlecode.com/git/inst/libraries'
+#' Publish slide deck to rPubs
+publish_rpubs <- function(title, html_file = 'index.html'){
+	html = html_file %|% embed_images %|% enable_cdn
+	html_out = tempfile(fileext = '.html')
+	writeLines(html, html_out)
+	rpubsUpload(title, html_out)
 }
+
+#' Embed local images using base64
+#'
+#' @keywords internal
+#' @param html_in path to input html file
+#' @param html_out path to output html file
+#' @return 
+embed_images <- function(html_in){
+	html <- paste(readLines(html_in, warn = F), collapse = "\n")
+	html <- markdown:::.b64EncodeImages(html)
+	return(html)
+}
+
+#' Enable library files to be served from CDN
+enable_cdn <- function(html){
+	cdn  = 'http://slidify.googlecode.com/git/inst/libraries/'
+	html = gsub("libraries/", cdn, html, fixed = TRUE)
+}
+
+# ==== EXPERIMENTAL FUNCTIONS ====
 
 get_x <- function(){
 	cat('Enter a value of x: ')
