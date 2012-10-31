@@ -1,0 +1,77 @@
+div.zoomed {
+  zoom: 50%;
+  -moz-transform: scale(0.5);
+  -moz-transform-origin: 0 0;
+}
+
+#preso { margin-top: 20px; }
+
+#main h2 { 
+  text-align: left;
+  font-size: 1.5em;
+}
+
+#timerSection {
+  padding: 15px 10px;
+  border-top: 1px solid #555;
+  border-bottom: 1px solid #555;
+}
+#progress {
+  padding: 10px;
+}
+#slideSource {
+  padding: 10px;
+  background: #ccc;
+}
+
+#preview {
+  min-height: 430px;
+  background: #777;
+}
+
+#links {
+  background: #fff;
+  padding: 10px;
+  text-align: right;
+}
+#links a { color: #000; }
+
+#slidemenu {
+  background: #fff;
+  padding: 10px;
+}
+#slidemenu ul li {
+  padding: 5px;
+}
+
+#sidebar { background: #ddd; }
+
+#notes { 
+  background: #ff9;
+  font-size: 1.5em;
+  min-height: 150px;
+  padding: 20px;
+}
+
+.menu {
+  height: 350px;
+  max-height: 350px;
+  overflow:auto;
+}
+
+.menu a {
+  display: block;
+  color: #000;
+}
+.menu > ul > li > ul {
+  padding-left: 20px;
+}
+.menu > ul > li > a {
+  padding: 10px;
+  background: #eee;
+}
+
+.tBlue   { background: #79d; }
+.tGreen  { background: #9d9; }
+.tRed    { background: #d99; }
+.tYellow { background: #dd9; }
