@@ -1,15 +1,3 @@
-#' Embed local images using base64
-#'
-#' @keywords internal
-#' @param html_in path to input html file
-#' @param html_out path to output html file
-#' @return 
-embed_images <- function(html_in, html_out){
-	html <- paste(readLines(html_in, warn = F), collapse = "\n")
-	html <- markdown:::.b64EncodeImages(html)
-	writeLines(html, html_out)
-}
-
 #' Zip vectors into a single list
 #' 
 #' zip_vectors(name = c('John', 'Jane'), age = c(20, 30))
