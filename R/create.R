@@ -5,7 +5,7 @@ create_deck <- function(deckdir){
   if (file.exists(deckdir)){
   	return('Directory already exists. Please choose a different name.')
   }
-  scaffold = system.file('scaffold', package = 'slidify')
+  scaffold = system.file('skeleton', package = 'slidify')
   system(sprintf('cp -r %s %s', scaffold, deckdir))
   message('Finished creating slide directory...')
   message('Switching to slide directory...')
