@@ -41,7 +41,8 @@ publish_rpubs <- function(title, html_file = 'index.html'){
 	html = html_file %|% embed_images %|% enable_cdn
 	html_out = tempfile(fileext = '.html')
 	writeLines(html, html_out)
-	rpubsUpload(title, html_out)
+	url = rpubsUpload(title, html_out)$continueUrl
+	browseURL(url)
 }
 
 #' Embed local images using base64
