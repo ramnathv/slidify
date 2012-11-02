@@ -24,6 +24,7 @@ publish_github <- function(user, repo){
 	system(sprintf('git push git@github.com:%s/%s gh-pages', user, repo))
 	link = sprintf('http://%s.github.com/%s', user, repo)
 	message('You can now view your slide deck at ', link)
+	browseURL(link)
 }
 
 #' Publish slide deck to Dropbox
