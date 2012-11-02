@@ -1,6 +1,7 @@
 #' Publish slide deck
 #' 
 #' @param host 
+#' @export
 #  TODO: Pick missing parameters from config.yml
 publish_deck <- function(..., host = 'github'){
 	publish <- switch(host, 
@@ -15,6 +16,7 @@ publish_deck <- function(..., host = 'github'){
 #' 
 #' @param user github username
 #' @param repo github reponame
+#' @export
 publish_github <- function(user, repo){
 	message('Publishing deck to ', user, '/', repo)
 	system('git add .')
@@ -25,6 +27,9 @@ publish_github <- function(user, repo){
 }
 
 #' Publish slide deck to Dropbox
+#' 
+#' @param dirname name of directory to publish to; defaults to slide directory
+#' @export
 publish_dropbox <- function(dirname){
 	if (missing(dirname)){
 		dirname = basename(getwd())
@@ -37,6 +42,10 @@ publish_dropbox <- function(dirname){
 }
 
 #' Publish slide deck to rPubs
+#' 
+#' @param title title of the presentation
+#' @param html_file path to html file to publish; defaults to index.html
+#' @export
 publish_rpubs <- function(title, html_file = 'index.html'){
 	html = html_file %|% embed_images %|% enable_cdn
 	html_out = tempfile(fileext = '.html')

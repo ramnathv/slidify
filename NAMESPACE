@@ -1,5 +1,8 @@
 export(create_deck)
 export(publish_deck)
+export(publish_github)
+export(publish_rpubs)
+export(publish_dropbox)
 export(slidify)
 export(minify_css)
 import(knitr)
