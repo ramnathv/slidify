@@ -10,7 +10,7 @@ widgets  : [mathjax]
 
 Use an empty line followed by three dashes to separate slides!
 
---- .class #id &layout
+--- .class #id 
 
 ## Slide 2
 
