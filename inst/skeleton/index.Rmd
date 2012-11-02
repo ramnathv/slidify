@@ -2,22 +2,18 @@
 title    : Title 
 substitle: Subtitle
 author   : Author
-job      : job
+job      : Job
 widgets  : [mathjax]
 ---
 
 ## Slide 1
 
-This is slide 1
+Use an empty line followed by three dashes to separate slides!
 
-```
-library(ggplot2)
-qplot(wt, mpg, data = mtcars)
-```
-
---- .class1 #id1
+--- .class #id &layout
 
 ## Slide 2
 
-Use the slide separator line to specify slide metadata
+
+
 
