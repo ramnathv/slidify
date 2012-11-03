@@ -1,9 +1,9 @@
-#' Create a slide directory
+#' Author a slide deck
 #' 
 #' This function creates a slide directory, initializes it as a git repo and
 #' opens index.Rmd for users to edit.
 #' @export
-create <- function(deckdir){
+author <- function(deckdir){
   message('Creating slide directory at ', deckdir, '...')
   if (file.exists(deckdir)){
   	return('Directory already exists. Please choose a different name.')
