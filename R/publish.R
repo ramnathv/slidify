@@ -3,14 +3,13 @@
 #' @param host 
 #' @export
 #  TODO: Pick missing parameters from config.yml
-#  TODO: Think about simplifying name to publish
-publish_deck <- function(..., host = 'github'){
-	publish <- switch(host, 
+publish <- function(..., host = 'github'){
+	publish_deck <- switch(host, 
 		 github = publish_github, 
 		dropbox = publish_dropbox,
 			rpubs = publish_rpubs
 	)
-	publish(...)
+	publish_deck(...)
 }
 
 #' Publish slide deck to Github
