@@ -18,6 +18,7 @@ publish_deck <- function(..., host = 'github'){
 #' @param user github username
 #' @param repo github reponame
 #' @export
+#' TODO: modify link to point to *.html if slide is not named index.Rmd
 publish_github <- function(user, repo){
 	# check if git repo exists, else initialize new repo with gh-pages
 	if (!file.exists('.git')){
