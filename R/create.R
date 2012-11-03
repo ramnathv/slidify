@@ -24,4 +24,6 @@ init_repo <- function(){
 	system("git commit --allow-empty -m 'Initial Commit'")
 	message("Checking out gh-pages branch...")
 	system('git checkout -b gh-pages')
+	message('Adding .nojekyll to repo')
+	file.create('nojekyll')
 }
