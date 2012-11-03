@@ -24,7 +24,6 @@ Collate:
     'copy.R'
     'create.R'
     'defaults.R'
-    'init.R'
     'layouts.R'
     'package.R'
     'parse.R'
