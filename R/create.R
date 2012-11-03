@@ -1,6 +1,6 @@
 #' Initialize a slide deck
 #' 
-create_deck <- function(deckdir){
+create <- function(deckdir){
   message('Creating slide directory at ', deckdir, '...')
   if (file.exists(deckdir)){
   	return('Directory already exists. Please choose a different name.')
