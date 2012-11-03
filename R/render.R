@@ -17,3 +17,10 @@ render_deck <- function(deck, layouts){
   whisker.render(layouts[[main]], deck, partials = layouts)
 }
 
+#' Parse deck into metdata and slide elements
+parse_deck <- function(inputFile){
+	deck = inputFile %|% to_deck 
+	deck$slides = deck$slides %|% split_slides %|% parse_slides  
+	deck$slides = deck$slides %|% add_slide_numbers %|% add_missing_id
+	return(deck)
+}
