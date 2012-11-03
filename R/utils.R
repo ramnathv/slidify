@@ -7,6 +7,7 @@ zip_vectors <- function(...){
 }
 
 #' Stolen from Hadley's HOF package
+#' 
 pluck <- function (element){
   function(x) x[[element]]
 }
@@ -35,21 +36,18 @@ minify_css <- function(css_file){
 }
 
 #' Binary operator useful for function composition
-#'
+#' @keywords internal
 `%|%` <- function(x, f){
 	f(x)
 }
 
 #' Binary operator useful from hadley's staticdocs package
+#' 
+#' @keywords internal
 "%||%" <- function(a, b) {
   if (!is.null(a)) a else b
 }
 
-#'
-#  from hadley's httr package
-"%||%" <- function(a, b) {
-  if (!is.null(a)) a else b
-}
 
 #' Read a text file into a single string
 #' 
