@@ -34,7 +34,7 @@ parse_meta <- function(meta){
 
 #' Parse slide body into list
 #'
-#' @body slide contents without the metadata header
+#' @param body slide contents without the metadata header
 #' @keywords internal
 parse_body <- function(body){
   html = ifelse(body != '', md2html(body), '')
