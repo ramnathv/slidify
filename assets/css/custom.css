@@ -1,0 +1,110 @@
+@import url(http://fonts.googleapis.com/css?family=Architects+Daughter); 
+@import url(http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two);
+@import url(http://fonts.googleapis.com/css?family=Crimson+Text);
+@import url(http://fonts.googleapis.com/css?family=Dosis);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700);
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:600);
+
+body {
+	background: url(../img/fabric_plaid.png) ;
+	color: #807c79;
+	font-family: "Source Sans Pro"
+	font-size: 14px;
+	line-height: 1.6em;
+}
+
+h1, h2, h3 {
+	font-family: "Source Sans Pro";
+	font-weight: 700;
+}
+
+pre, code {
+	font-family: "Source Code Pro", "Menlo", "monotype";
+	font-size: 13px;
+}
+
+/*
+p {
+	font-family: "Crimson Text";
+	font-size: 18px;
+	line-height: 1.4em;
+	text-align: justify;
+}
+
+.container {
+	width: 940px;
+}
+*/
+
+.hero-unit {
+	padding-bottom: 10px;
+	padding-top: 5px;
+	background: #F1F6D8;
+}
+.hero-unit h1, 
+.hero-unit p {
+	font-family: "Architects Daughter", sanserif;
+}
+
+.hero-unit h1 {
+	font-size: 6em;
+	line-height: 1.5em;
+	color: #144C55;
+}
+
+/* CSS Copied from FontAwesome */
+#social-buttons {
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.features p {text-align: justify}
+
+/*
+code, pre {
+	border: 0px;
+	background: white;
+	font-size: 13px;
+}
+
+pre code {
+	padding: 1em;
+}
+*/
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+	padding-top: 15px;
+  height: 40px;
+  /* font-family: 'Source Sans Pro'; */
+}
+#footer {
+  background-color: #f5f5f5;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+

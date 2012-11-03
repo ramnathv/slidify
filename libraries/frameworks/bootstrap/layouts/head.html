@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/png" href="favicon.ico">
+<style>
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+</style>
+{{# cdn }}
+<link rel="stylesheet"
+  href="http://netdna.bootstrapcdn.com/bootswatch/2.1.0/{{theme}}/bootstrap.no-icons.min.css" >
+{{/ cdn }}
+{{^ cdn }}
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-responsive.no-icons.min.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="{{url.framework}}/css/bootstrap.min.css"> -->
+{{/ cdn }}
+<link  rel="stylesheet" 
+  href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
+<link rel="stylesheet" href="{{url.framework}}/css/bootstrap-responsive.min.css">
+
+<link rel="stylesheet" href="{{url.framework}}/css/main.css">
+<link rel="stylesheet" href="{{url.highlighters}}/{{highlighter}}/css/{{hitheme}}.css" />
+<script src="{{url.framework}}/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+

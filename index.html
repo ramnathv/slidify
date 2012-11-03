@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Slidify</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <style>
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    </style>
+    
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-responsive.no-icons.min.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="libraries/frameworks/bootstrap/css/bootstrap.min.css"> -->
+<link  rel="stylesheet" 
+      href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
+    <link rel="stylesheet" href="libraries/frameworks/bootstrap/css/bootstrap-responsive.min.css">
+    
+    <link rel="stylesheet" href="libraries/frameworks/bootstrap/css/main.css">
+    <link rel="stylesheet" href="libraries/highlighters/prettify/css/twitter-bootstrap.css" />
+    <script src="libraries/frameworks/bootstrap/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+        <link rel="stylesheet" href = "assets/css/custom.css">
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-36046354-1']);
+      _gaq.push(['_setDomainName', 'slidify.org']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+      </head>
+  <body>
+   <!--[if lt IE 7]>
+     <p class="chromeframe">You are using an outdated browser. 
+       <a href="http://browsehappy.com/">Upgrade your browser today</a> or 
+       <a href="http://www.google.com/chromeframe/?redirect=true"> 
+         install Google Chrome Frame
+       </a> to better experience this site.
+    </p>
+   <![endif]-->
+   <!-- Ref: http://twitter.github.com/bootstrap/examples/hero.html -->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="#">
+                      <!-- <img src='assets/img/slidify_logo.png' width='100px' /> -->
+                      Slidify
+                    </a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="">
+                      <a href="index.html" >
+                        <i class="icon-home"> </i>
+                        Home
+                        
+                      </a>
+                    </li>
+                    <li class="">
+                      <a href="start.html" >
+                        <i class="icon-signin"> </i>
+                        Start
+                        
+                      </a>
+                    </li>
+                    <li class="">
+                      <a href="about.html" >
+                        <i class="icon-pencil"> </i>
+                        Author
+                        
+                      </a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="style.html" class="dropdown-toggle"
+                        data-toggle="dropdown">
+                        <i class="icon-hand-right"> </i>
+                        Style
+                        <b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                      	  <li>
+                      	    <a href="../examples/deck.js">
+                      	     <i class="icon-hand-right"> </i>
+                      	     deck.js
+                      	    </a>
+                      	  </li>
+                      	  <li>
+                      	    <a href="../examples/shower">
+                      	     <i class="icon-hand-right"> </i>
+                      	     shower
+                      	    </a>
+                      	  </li>
+                      </ul>
+                    </li>
+                    <li class="">
+                      <a href="customize.html" >
+                        <i class="icon-gift"> </i>
+                        Customize
+                        
+                      </a>
+                    </li>
+                    <li class="">
+                      <a href="extend.html" >
+                        <i class="icon-cogs"> </i>
+                        Extend
+                        
+                      </a>
+                    </li>
+                    <li class="">
+                      <a href="publish.html" >
+                        <i class="icon-github"> </i>
+                        Publish
+                        
+                      </a>
+                    </li>
+                </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        
+                <div class="container">
+          <div class='span10 offset1'>
+            <div class="hero-unit">
+  <h1>Slidify<sup>$\alpha$</sup></h1>
+  <p>Create stunning presentations from markdown</p>
+
+<p><a class="btn btn-primary btn-large" href='start.html'>
+ Get Started &raquo;
+</a></p>
+
+  <br/><br/>
+</div>
+<section id="social-buttons">
+  <span class="watch">
+   <iframe src="http://ghbtns.com/github-btn.html?user=ramnathv&repo=slidify&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
+  </span>
+  <span class="fork">
+    <iframe src="http://ghbtns.com/github-btn.html?user=ramnathv&repo=slidify&type=fork&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
+  </span>
+  <span class="follow">
+    <iframe src="http://ghbtns.com/github-btn.html?user=ramnathv&repo=slidify&type=follow&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="250px" height="30px"></iframe>
+  </span>
+</section>
+ 
+            <div class="row-fluid features" id="slide-2">
+  <div class="span4">
+    <h3><i class="icon-pencil icon-large"></i> Author</h3>
+
+<p>Write your slides in <a href="http://www.rstudio.com/ide/docs/r_markdown">RMarkdown</a>, a format that combines the core syntax of <a href="http://daringfireball.net/projects/markdown/">Markdown</a> with embedded code chunks that are executed.</p>
+
+<p><a class="btn" href="http://www.rstudio.com/ide/docs/r_markdown">Learn More &raquo;</a></p>
+
+
+  </div>
+  <div class="span4">
+    <h3><i class="icon-hand-right icon-large"></i> Style</h3>
+
+<p>Turn your slides into a stunning HTML5 presentation using any of the more than ten slide generation frameworks supported.</p>
+
+<p><a class="btn" href="style.html">Learn More &raquo;</a></p>
+
+
+  </div>
+  <div class="span4">
+    <h3><i class="icon-gift icon-large"></i> Customize</h3>
+
+<p>Add slide classes and css to customize your presentation. Use layouts to achieve more complex designs. </p>
+
+<p><a class="btn" href="customize.html">Learn More &raquo;</a></p>
+
+  </div>
+</div> 
+            <div class="row-fluid features" id="slide-3">
+  <div class="span4">
+    <h3><i class='icon-cogs icon-large'></i> Extend</h3>
+
+<p>Add more functionality to your presentation using widgets. 
+Slidify uses a modular design which encourages a plug and play infrastructure.</p>
+
+<p><a class="btn" href="extend.html">Learn More &raquo;</a></p>
+
+
+  </div>
+  <div class="span4">
+    <h3><i class='icon-github icon-large'></i> Publish</h3>
+
+<p>Share your presentation on <a href="http://github.com">Github</a>, <a href="http://www.dropbox.com">Dropbox</a> or <a href="http://www.rpubs.com">Rpubs</a> in minutes. Slidify has it all covered from creation to publication.</p>
+
+<p><a class="btn" href="publish.html">Learn More &raquo;</a></p>
+
+
+  </div>
+  <div class="span4">
+    <h3><i class='icon-check icon-large'></i> Get Started</h3>
+
+<p>Write a short slide deck and publish it to <a href="http://www.rpubs.com">Rpubs</a> with a few clicks using <a href="http://www.rstudio.com">RStudio</a>, or to <a href="http://www.github.com">Github</a> with a single line of code.</p>
+
+<p><a class="btn" href="start.html">Learn More &raquo;</a></p>
+
+  </div>
+</div> 
+            
+<p><a onmouseover="UE.Popin.preload();" href="#" onclick="UE.Popin.show(); return false;"></a></p>
+ 
+          </div>
+        </div>
+        <div id='footer'>
+          <div class='container'>
+            <div class='span10 offset1'>
+        <p>Built by <a href="http://github.com/ramnathv/slidify">Slidify</a>. Styled with <a href="http://twitter.github.com/bootstrap">Bootstrap</a>. Hosted on <a href="http://www.github.com">GitHub</a>. Icons from <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts">Google</a>. Inspired by <a href='http://www.ruhoh.com'>Ruhoh</a></p> 
+            </div>
+          </div>
+        </div>    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="libraries/frameworks/bootstrap/js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+    <script src="libraries/frameworks/bootstrap/js/vendor/bootstrap.min.js"></script>
+    
+    <script src="libraries/frameworks/bootstrap/js/plugins.js"></script>
+    <script src="libraries/frameworks/bootstrap/js/main.js"></script>
+        <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'slidify'; 
+    // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); 
+        dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || 
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script type='text/javascript'>
+
+var _ues = {
+host:'slidify.userecho.com',
+forum:'15507',
+lang:'en',
+tab_corner_radius:5,
+tab_font_size:20,
+tab_image_hash:'ZmVlZGJhY2s%3D',
+tab_alignment:'left',
+tab_text_color:'#FFFFFF',
+tab_bg_color:'#57A957',
+tab_hover_color:'#F45C5c'
+};
+
+(function() {
+    var _ue = document.createElement('script'); _ue.type = 'text/javascript'; _ue.async = true;
+    _ue.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.userecho.com/js/widget-1.4.gz.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(_ue, s);
+  })();
+
+</script>
+<!-- Google Prettify -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script src='libraries/highlighters/prettify/js/lang-r.js'></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint  linenums ";
+  }
+  prettyPrint();
+</script>
+<!-- End Google Prettify -->
+    <script src='assets/js/snippets.js'></script>
+</html>

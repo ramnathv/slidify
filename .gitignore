@@ -1,0 +1,5 @@
+.Rhistory
+*.md
+*.Rmd
+config.yml
+makefile

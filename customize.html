@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Slidify</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <style>
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    </style>
+    
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-responsive.no-icons.min.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="libraries/frameworks/bootstrap/css/bootstrap.min.css"> -->
+<link  rel="stylesheet" 
+      href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
+    <link rel="stylesheet" href="libraries/frameworks/bootstrap/css/bootstrap-responsive.min.css">
+    
+    <link rel="stylesheet" href="libraries/frameworks/bootstrap/css/main.css">
+    <link rel="stylesheet" href="libraries/highlighters/prettify/css/twitter-bootstrap.css" />
+    <script src="libraries/frameworks/bootstrap/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+        <link rel="stylesheet" href = "assets/css/custom.css">
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-36046354-1']);
+      _gaq.push(['_setDomainName', 'slidify.org']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+      </head>
+  <body>
+   <!--[if lt IE 7]>
+     <p class="chromeframe">You are using an outdated browser. 
+       <a href="http://browsehappy.com/">Upgrade your browser today</a> or 
+       <a href="http://www.google.com/chromeframe/?redirect=true"> 
+         install Google Chrome Frame
+       </a> to better experience this site.
+    </p>
+   <![endif]-->
+   <!-- Ref: http://twitter.github.com/bootstrap/examples/hero.html -->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="#">
+                      <!-- <img src='assets/img/slidify_logo.png' width='100px' /> -->
+                      Slidify
+                    </a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="">
+                      <a href="index.html" >
+                        <i class="icon-home"> </i>
+                        Home
+                        
+                      </a>
+                    </li>
+                    <li class="">
+                      <a href="start.html" >
+                        <i class="icon-signin"> </i>
+                        Start
+                        
+                      </a>
+                    </li>
+                    <li class="">
+                      <a href="about.html" >
+                        <i class="icon-pencil"> </i>
+                        Author
+                        
+                      </a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="style.html" class="dropdown-toggle"
+                        data-toggle="dropdown">
+                        <i class="icon-hand-right"> </i>
+                        Style
+                        <b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                      	  <li>
+                      	    <a href="../examples/deck.js">
+                      	     <i class="icon-hand-right"> </i>
+                      	     deck.js
+                      	    </a>
+                      	  </li>
+                      	  <li>
+                      	    <a href="../examples/shower">
+                      	     <i class="icon-hand-right"> </i>
+                      	     shower
+                      	    </a>
+                      	  </li>
+                      </ul>
+                    </li>
+                    <li class="active">
+                      <a href="customize.html" >
+                        <i class="icon-gift"> </i>
+                        Customize
+                        
+                      </a>
+                    </li>
+                    <li class="">
+                      <a href="extend.html" >
+                        <i class="icon-cogs"> </i>
+                        Extend
+                        
+                      </a>
+                    </li>
+                    <li class="">
+                      <a href="publish.html" >
+                        <i class="icon-github"> </i>
+                        Publish
+                        
+                      </a>
+                    </li>
+                </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        
+                <div class="container">
+          <div class='span10 offset1'>
+            <h1>Customize</h1>
+<p>A layout is a mustache template that specifies the markup to be used while rendering a slide deck. Layouts allow a clean separation of content from design, thereby allowing the same markdown document to be rendered using multiple HTML5 frameworks. The best way to understand layouts is to follow a slide through slidify</p>
+
+<h3>Slide</h3>
+
+<p>Consider a simple text slide shown below. </p>
+
+<pre><code>--- .class1 #id1 bg:yellow
+
+## Slide Title
+
+Slide Contents
+</code></pre>
+
+<h3>Parsed Slide</h3>
+
+<p>Slidify parses this slide into metadata and content elements.</p>
+
+<pre><code>$id
+[1] &quot;id1&quot;
+
+$bg
+[1] &quot;yellow&quot;
+
+$class
+[1] &quot;class1&quot;
+
+$header
+[1] &quot;&lt;h2&gt;Slide Title&lt;/h2&gt;&quot;
+
+$content
+[1] &quot;&lt;p&gt;Slide Contents&lt;/p&gt;\n&quot;
+</code></pre>
+
+<h3>Layout</h3>
+
+<p>The default slide layout used by the <code>io2012</code> framework is shown below. Note that the mustache template has placeholders for the metadata and content elements returned by the parser.</p>
+
+<pre><code>&lt;!-- default slide template for the framework io2012 --&gt;
+&lt;slide class=&quot;{{ class }}&quot; id=&quot;{{ id }}&quot; style=&quot;background:{{bg}};&quot;&gt;
+  &lt;hgroup&gt;
+    {{{ header }}}
+  &lt;/hgroup&gt;
+  &lt;article&gt;
+    {{{ content }}}
+  &lt;/article&gt;
+&lt;/slide&gt;
+</code></pre>
+
+<h3>Rendered Slide</h3>
+
+<p>Slidify uses <code>whisker</code> to render the final html by passing the parsed data to the layout file.</p>
+
+<pre><code>&lt;slide class=&quot;class1&quot; id=&quot;id&quot; style=&quot;background:yellow;&quot;&gt;
+  &lt;hgroup&gt;
+    &lt;h2&gt;Slide Title&lt;/h2&gt;
+  &lt;/hgroup&gt;
+  &lt;article&gt;
+    &lt;p&gt;Slide Contents&lt;/p&gt;\n 
+  &lt;/article&gt;
+&lt;/slide&gt;
+</code></pre>
+
+<h2>Customizing Layouts</h2>
+
+<p>Sometimes it takes more than CSS to achieve a certain layout and style for your slide. For example, suppose you want a slide with a two column layout and a red horizontal rule after the title. Here is how you can do it using layouts in Slidify. Any layout saved in the <code>assets/layouts</code> folder is automatically read by Slidify</p>
+
+<h3>Define Layout</h3>
+
+<pre><code>&lt;slide class=&quot;{{ class }}&quot; id=&quot;{{ id }}&quot;&gt;
+  &lt;hgroup&gt;
+    {{{ header }}}
+  &lt;/hgroup&gt;
+  &lt;article&gt;
+    &lt;hr noshade size=4 color=&#39;red&#39;&gt;  
+    {{{ content }}}  
+    &lt;div class=&#39;left&#39; style=&#39;float:left;width:48%&#39;&gt;
+     {{{ left }}}
+    &lt;/div&gt;    
+    &lt;div class=&#39;right&#39; style=&#39;float:right;width:48%&#39;&gt;
+     {{{ right }}}
+    &lt;/div&gt;
+  &lt;/article&gt;
+&lt;/slide&gt;
+</code></pre>
+
+<h3>Write Slide</h3>
+
+<p>The <code>header</code> and <code>content</code> elements in the template are automatically included in the results of the parser. However, the elements <code>left</code> and <code>right</code> are blocks that need to be specified explicitly in your slide. You can define any portion of your slide as a named block by using an empty line and three stars <code>***</code> followed by the block name.</p>
+
+<pre><code>## Two Column Layout   
+This slide has two columns
+
+*** left
+
+- point 1
+- point 2
+- point 3
+
+*** right
+
+- point 1
+- point 2
+- point 3
+</code></pre>
+
+<h2>More Uses</h2>
+
+<p>Layouts can be used to simplify slide design considerably and keep things DRY. Slidify ships with layouts for the six slide types that Google Docs or Powerpoint provides.</p>
+
+<ul>
+<li>title-only</li>
+<li>title-and-body</li>
+<li>title-and-two-cols</li>
+<li>title</li>
+<li>caption</li>
+<li>blank</li>
+</ul>
+
+<h2>Layout Inheritance</h2>
+
+<p>Consider the following use-case. Suppose you want to add a footer to all slides including a logo. An obvious way to do it is to rewrite the default slide template, adding the footer after <code>{{{ content }}}</code>, and saving it as <code>slide.html</code> in the <code>assets/layouts</code> folder. Note that user define layouts override system layouts of the same name.</p>
+
+<pre><code>&lt;slide class=&quot;{{ class }}&quot; id=&quot;{{ id }}&quot;&gt;
+  &lt;hgroup&gt;
+    {{{ header }}}
+  &lt;/hgroup&gt;
+  &lt;article&gt;
+    {{{ content }}}  
+    &lt;footer class = &#39;logo&#39;&gt;
+      &lt;img src = &#39;path/to/logo&#39;&gt;&lt;/img&gt;
+    &lt;/footer&gt;
+  &lt;/article&gt;
+&lt;/slide&gt;
+</code></pre>
+
+<p>There are two reasons this is not efficient. One, it is not DRY and repeats code unnecessarily. Two, when the default layout is modified, you need to manually modify the custom layout to ensure that layouts are in sync. This could happen when you decide to use a different HTML5 slide framework, which has a different markup for slides. This is where layout inheritance comes to play. </p>
+
+<p>Note that while defining your custom slide layout, you are essentially replacing the <code>{{{ content }}}</code> placeholder in the slide layout by <code>{{{ content }}}</code> + footer. Slidify provides a mechanism, where layouts can inherit from a parent layout, thereby simplifying the template considerably and keeping thing DRY. </p>
+
+<p>The modified layout for this use-case using inheritance is shown below. The YAML front matter indicates that this template inherits from <code>slide</code>, which is the default slide layout. The body of the layout is used to replace <code>{{{ content }}}</code> in the parent layout, thereby achieving what we wanted.</p>
+
+<pre><code>---
+layout: slide
+---
+{{{ content }}}
+&lt;footer class = &#39;logo&#39;&gt;
+  &lt;img src = &#39;path/to/logo&#39;&gt;&lt;/img&gt;
+&lt;/footer&gt;
+</code></pre>
+
+<h2>Layouts with Parameters</h2>
+
+<p>Slidify layouts can accept arbitrary parameters which expands its power. Let us return to the case of two column layouts. Suppose you want slides with different column widths. We can achieve this by rewriting the two column layout using parameters, and then passing them on to the layout using slide level metadata. Here are the steps</p>
+
+<p><strong>Layout</strong></p>
+
+<p>Note that the placeholders <code>w1</code> and <code>w2</code> are parameters that control the width of the two columns, and are provided by the slide.</p>
+
+<pre><code>---
+layout: slide
+---
+{{{ content }}}  
+&lt;div class=&#39;left&#39; style=&#39;float:left;width:{{{ w1 }}}&#39;&gt;
+ {{{ left }}}
+&lt;/div&gt;    
+&lt;div class=&#39;right&#39; style=&#39;float:right;width:{{{ w2 }}}&#39;&gt;
+ {{{ right }}}
+&lt;/div&gt;
+</code></pre>
+
+<p><strong>Slide</strong></p>
+
+<p>You can include arbitrary metadata for any slide using <code>key:value</code> pairs.</p>
+
+<pre><code>--- &amp;twocol w1:40% w2:60%
+### Two Column Layout   
+This slide has two columns
+
+*** left
+
+- point 1
+- point 2
+- point 3
+
+*** right
+
+- point 1
+- point 2
+- point 3
+</code></pre>
+
+<blockquote>
+<p>Note. Slide level metadata are specified as <code>key:value</code> pairs. Commonly specified metadata like <code>id</code>, <code>class</code> and <code>layout</code> can also be identified by prefixing with punctuation marks <code>#</code>, <code>.</code> and <code>&amp;</code> respectively. Spaces can be used ONLY to separate key:value pairs and not within a pair. This is a limitation of the metadata parser and will be relaxed in future versions of slidify</p>
+</blockquote>
+
+<p><strong>Miscellaneous Uses</strong></p>
+
+<p>The possibilities are endless. For example, if you are teaching a class on statistics, you might have slides that follow a specific pattern like </p>
+
+<ol>
+<li>Start with the definition</li>
+<li>Explain its meaning</li>
+<li>Provide an example</li>
+</ol>
+
+<p>It is easy to encode such design patterns within a <code>slidify</code> template, which makes it easy to write complex slides in no time.</p>
+ 
+          </div>
+        </div>
+        <div id='footer'>
+          <div class='container'>
+            <div class='span10 offset1'>
+        <p>Built by <a href="http://github.com/ramnathv/slidify">Slidify</a>. Styled with <a href="http://twitter.github.com/bootstrap">Bootstrap</a>. Hosted on <a href="http://www.github.com">GitHub</a>. Icons from <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts">Google</a>. Inspired by <a href='http://www.ruhoh.com'>Ruhoh</a></p> 
+            </div>
+          </div>
+        </div>    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="libraries/frameworks/bootstrap/js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+    <script src="libraries/frameworks/bootstrap/js/vendor/bootstrap.min.js"></script>
+    
+    <script src="libraries/frameworks/bootstrap/js/plugins.js"></script>
+    <script src="libraries/frameworks/bootstrap/js/main.js"></script>
+        <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script>
+    var disqus_developer = 1;
+    var disqus_shortname = 'slidify'; 
+    // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); 
+        dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || 
+         document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script type='text/javascript'>
+
+var _ues = {
+host:'slidify.userecho.com',
+forum:'15507',
+lang:'en',
+tab_corner_radius:5,
+tab_font_size:20,
+tab_image_hash:'ZmVlZGJhY2s%3D',
+tab_alignment:'left',
+tab_text_color:'#FFFFFF',
+tab_bg_color:'#57A957',
+tab_hover_color:'#F45C5c'
+};
+
+(function() {
+    var _ue = document.createElement('script'); _ue.type = 'text/javascript'; _ue.async = true;
+    _ue.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.userecho.com/js/widget-1.4.gz.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(_ue, s);
+  })();
+
+</script>
+<!-- Google Prettify -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js"></script>
+<script src='libraries/highlighters/prettify/js/lang-r.js'></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint  linenums ";
+  }
+  prettyPrint();
+</script>
+<!-- End Google Prettify -->
+    <script src='assets/js/snippets.js'></script>
+</html>
