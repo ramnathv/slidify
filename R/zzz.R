@@ -2,6 +2,6 @@
 	options(rstudio.markdownToHTML = 
 		function(inputFile, outputFile) {      
 		  require(slidify)
-			slidifyRpubs(inputFile, outputFile)
+			slidify(inputFile, outputFile, knit_deck = FALSE)
 	})
 }
