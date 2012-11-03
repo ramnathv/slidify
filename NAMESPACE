@@ -1,5 +1,5 @@
-export(create_deck)
-export(publish_deck)
+export(create)
+export(publish)
 export(publish_github)
 export(publish_rpubs)
 export(publish_dropbox)
