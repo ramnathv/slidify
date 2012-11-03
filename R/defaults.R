@@ -8,7 +8,8 @@ slidifyDefaults <- function(){list(
 	highlighter = 'highlight.js',  
 	hitheme     = 'tomorrow',
 	copy_libraries = TRUE,
-	mode = 'standalone'
+	mode = 'standalone',
+	widgets = list()
 )}
 
 #' Function to get deck options
