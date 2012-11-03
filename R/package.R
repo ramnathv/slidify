@@ -1,11 +1,8 @@
 #' Create stunning presentations from R Markdown
 #' 
-#' Slidify is an R package to create, customize and publish HTML5 slide decks
-#' from R Markdown. 
-#' This is an alternative tool to Sweave with more flexible design and new
-#' features like cache and fine control of graphics. It is not limited to LaTeX
-#' and is ready to be customized to process other file formats. See the package
-#' website in the references for more information and examples.
+#' Slidify is an R package to create, customize and publish HTML5 slide decks 
+#' from R Markdown. See the package website in the references for more
+#' information and examples.
 #' @docType package
 #' @name slidify-package
 #' @aliases slidify
