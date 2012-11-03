@@ -1,79 +1,33 @@
-slidify <- function(inputFile, outputFile, knit_deck = T){
-	# knit input file if knit_deck is TRUE
-  if (knit_deck){
-    inputFile = inputFile %|% knit
-  }
-  
-  deck = inputFile %|% parse_deck
-  
-  if (deck$copy_libraries){
-  	with(deck, copy_libraries(framework, highlighter, widgets))
-  	deck$url[['lib']] <- 'libraries'
-  }
-  
-  # add layouts, urls and stylesheets from frameworks, widgets and assets
-  deck = deck %|% add_urls %|% add_stylesheets
-  layouts = get_layouts(deck$url$layouts)
-  layouts = modifyList(layouts, list(javascripts = get_javascripts(deck)))
-  if (missing(outputFile)){
-    outputFile = gsub("*.[R]?md$", '.html', inputFile)
-  }
-  cat(render_deck(deck, layouts), file = outputFile)
-  return(outputFile)
-}
-
-parse_deck <- function(inputFile){
-	
-	# split deck into metadata and slides
-	deck = inputFile %|% to_deck 
-	
-	# split slides, parse into elements and add slide numbers and ids
-	deck$slides = deck$slides %|% split_slides %|% parse_slides 
-	deck$slides = deck$slides %|% add_slide_numbers %|% add_missing_id
-	
-	return(deck)
-}
-
-slidifyRpubs <- function(inputFile, outputFile){
+#' Convert an Rmd document into HTML5 using a framework
+slidify <- function(inputFile, outputFile, knit_deck = TRUE){
+	if (knit_deck == TRUE){
+		inputFile = inputFile %|% knit
+	}
 	deck = inputFile %|% parse_deck
-		
+	
+	if (deck$mode == 'selfcontained'){
+		with(deck, copy_libraries(framework, highlighter, widgets))
+		deck$url[['lib']] <- 'libraries'
+	}
+	
 	# add layouts, urls and stylesheets from frameworks, widgets and assets
 	deck = deck %|% add_urls %|% add_stylesheets
 	layouts = get_layouts(deck$url$layouts)
 	layouts = modifyList(layouts, list(javascripts = get_javascripts(deck)))
+	
 	if (missing(outputFile)){
 		outputFile = gsub("*.[R]?md$", '.html', inputFile)
 	}
 	
-	deck$url[['lib']] = 'http://slidify.googlecode.com/git/inst/libraries'
-	deck = deck %|% add_urls 
-	tfile = tempfile(pattern = '.html')
-	cat(render_deck(deck, layouts), file = tfile)
-	cat(tfile %|% embed_images, file = outputFile)
+	if (deck$mode == 'standalone'){
+		deck$url[['lib']] = 'http://slidify.googlecode.com/git/inst/libraries'
+		deck = deck %|% add_urls 
+		tfile = tempfile(pattern = '.html')
+		cat(render_deck(deck, layouts), file = tfile)
+		cat(tfile %|% embed_images, file = outputFile)
+	} else {
+		cat(render_deck(deck, layouts), file = outputFile)
+	}
+
 	return(outputFile)
-} 
-
-doc_to_deck <- function(inputFile, knit_deck){
-	# knit input file if knit_deck is TRUE
-	if (knit_deck){
-		inputFile = inputFile %|% knit
-	}
-	
-	# split deck into metadata and slides, copying libraries if indicated
-	deck = inputFile %|% to_deck 
-	if (deck$copy_libraries){
-		with(deck, copy_libraries(framework, highlighter, widgets))
-	}
-	
-	# split slides, parse into elements and add slide numbers and ids
-	deck$slides = deck$slides %|% split_slides %|% parse_slides 
-	deck$slides = deck$slides %|% add_slide_numbers %|% add_missing_id
-	
-	# add layouts, urls and stylesheets from frameworks, widgets and assets
-	deck = deck %|% add_urls %|% add_stylesheets
-	layouts = get_layouts(deck$url$layouts)
-	layouts = modifyList(layouts, list(javascripts = get_javascripts(deck)))
-	save(deck, layouts, file = gsub("*.[R]?md$", '.RData', inputFile))
 }
-
-  
