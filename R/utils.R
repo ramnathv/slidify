@@ -31,6 +31,7 @@ minify_css <- function(css_file){
 	min_css_file = gsub('.css', '.min.css', css_file)
 	cmd = 'java -jar %s %s -o %s' 
 	system(sprintf(cmd, yui, css_file, min_css_file))
+	return(min_css_file)
 }
 
 #' Binary operator useful for function composition
