@@ -1,8 +1,8 @@
-\name{create}
-\alias{create}
-\title{Create a slide directory}
+\name{author}
+\alias{author}
+\title{Author a slide deck}
 \usage{
-  create(deckdir)
+  author(deckdir)
 }
 \description{
   This function creates a slide directory, initializes it

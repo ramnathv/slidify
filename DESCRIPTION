@@ -21,8 +21,8 @@ BugReports: https://github.com/ramnathv/slidify/issues
 Collate:
     'add.R'
     'assets.R'
+    'author.R'
     'copy.R'
-    'create.R'
     'defaults.R'
     'layouts.R'
     'package.R'
@@ -35,3 +35,4 @@ Collate:
     'urls.R'
     'utils.R'
     'zzz.R'
+  
