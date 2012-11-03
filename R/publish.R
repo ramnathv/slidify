@@ -19,6 +19,12 @@ publish <- function(..., host = 'github'){
 #' @export
 #' TODO: modify link to point to *.html if slide is not named index.Rmd
 publish_github <- function(user, repo){
+	if (!file.exists('libraries')){
+		message('Please set mode to selfcontained and run Slidify')
+		message('This would place library files in the slide folder')
+		message('making it self-contained')
+		invisible(return(FALSE))
+	}
 	# check if git repo exists, else initialize new repo with gh-pages
 	if (!file.exists('.git')){
 		init_repo()
@@ -65,7 +71,6 @@ publish_rpubs <- function(title, html_file = 'index.html'){
 #' @keywords internal
 #' @param html_in path to input html file
 #' @param html_out path to output html file
-#' @return 
 embed_images <- function(html_in){
 	html <- paste(readLines(html_in, warn = F), collapse = "\n")
 	html <- markdown:::.b64EncodeImages(html)
