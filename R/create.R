@@ -31,5 +31,5 @@ init_repo <- function(){
 	message("Checking out gh-pages branch...")
 	system('git checkout -b gh-pages')
 	message('Adding .nojekyll to repo')
-	file.create('nojekyll')
+	file.create('.nojekyll')
 }
