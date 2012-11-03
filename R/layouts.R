@@ -33,7 +33,7 @@ expand_layouts <- function(layouts){
 
 #' Get layouts from list of paths provided
 #'
-#' @paths list of paths to directories containing layout files
+#' @param paths list of paths to directories containing layout files
 get_layouts <- function(paths){
   layouts = Reduce('modifyList', lapply(paths, read_layouts))
   for (i in 1:3) {
