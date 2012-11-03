@@ -1,6 +1,25 @@
+#' Embed local images using base64
+#'
+#' @keywords internal
+#' @param html_in path to input html file
+#' @param html_out path to output html file
+embed_images <- function(html_in){
+	html <- paste(readLines(html_in, warn = F), collapse = "\n")
+	html <- markdown:::.b64EncodeImages(html)
+	return(html)
+}
+
+#' Enable library files to be served from CDN
+#' 
+#' @noRd
+enable_cdn <- function(html){
+	cdn  = 'http://slidify.googlecode.com/git/inst/libraries/'
+	html = gsub("libraries/", cdn, html, fixed = TRUE)
+}
+
 #' Zip vectors into a single list
 #' 
-#' zip_vectors(name = c('John', 'Jane'), age = c(20, 30))
+#' @noRd
 zip_vectors <- function(...){
   x = list(...)
   lapply(seq_along(x[[1]]), function(i) lapply(x, pluck(i)))
@@ -8,6 +27,8 @@ zip_vectors <- function(...){
 
 #' Stolen from Hadley's HOF package
 #' 
+#' @keywords internal
+#' @noRd
 pluck <- function (element){
   function(x) x[[element]]
 }
@@ -15,6 +36,7 @@ pluck <- function (element){
 #' Combine stylesheets in a directory
 #' 
 #' @param css_dir directory containing stylesheets
+#' @noRd
 combine_css <- function(css_dir){
 	css_files = dir(css_dir, pattern = '*.css', full = T)
 	out_file = file.path(css_dir, 'user.css')
@@ -26,6 +48,7 @@ combine_css <- function(css_dir){
 #' Minify stylesheet using YUI Compressor
 #' 
 #' @param css_file path to css file
+#' @noRd
 minify_css <- function(css_file){
 	yui = system.file('libraries', 'utilities', 'yuicompressor-2.4.7.jar', 
 		package = 'slidify2')
@@ -36,7 +59,9 @@ minify_css <- function(css_file){
 }
 
 #' Binary operator useful for function composition
+#' 
 #' @keywords internal
+#' @noRd
 `%|%` <- function(x, f){
 	f(x)
 }
@@ -44,6 +69,7 @@ minify_css <- function(css_file){
 #' Binary operator useful from hadley's staticdocs package
 #' 
 #' @keywords internal
+#' @noRd
 "%||%" <- function(a, b) {
   if (!is.null(a)) a else b
 }
@@ -54,6 +80,7 @@ minify_css <- function(css_file){
 #' @param doc path to text document
 #' @return string with document contents
 #' @keywords internal
+#' @noRd
 read_file <- function(doc){
 	paste(readLines(doc), collapse = '\n')
 }
@@ -61,7 +88,7 @@ read_file <- function(doc){
 #' Capture patterns matched by regular expression
 #'
 #' @keywords internal
-#  TODO: Add reference to blog from which this was copied
+#' @noRd
 re_capture <- function(pattern, string, ...) {
   rex = list(src = string, names  = list(),
     result = regexpr(pattern, string, perl = TRUE, ...))
@@ -80,11 +107,7 @@ re_capture <- function(pattern, string, ...) {
 #' 
 #' @import markdown
 #' @keywords internal
-#  TODO: Use config file to override markdown options
-#  EXAMPLE:
-#  markdown:
-#    hardwrap: true
-#  BUG: renderer.options are incorrectly specified.
+#' @noRd
 md2html <- function(md){
   renderMarkdown(text = md, renderer.options = markdownExtensions())
 }
@@ -100,6 +123,7 @@ md2html <- function(md){
 #' @param y the list from which elements will be added to x, if they are not 
 #'    already there by name
 #' @keywords internal
+#' @noRd
 merge_list <- function (x, y, ...){
   if (length(x) == 0) 
     return(y)
@@ -115,6 +139,7 @@ merge_list <- function (x, y, ...){
 #' Filter blanks 
 #' 
 #' @keywords internal
+#' @noRd
 filter_blank <- function(x){
 	Filter(function(y) y != '', x)
 }
