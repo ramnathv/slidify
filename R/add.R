@@ -1,6 +1,7 @@
 #' Add slide numbers to the slides
 #'
 #' @keywords internal
+#' @noRd
 add_slide_numbers <- function(slides){
 	for (i in seq_along(slides)){
 		slides[[i]]['num'] <- i
@@ -11,6 +12,7 @@ add_slide_numbers <- function(slides){
 #' Add ids for slides with no defaults
 #'
 #' @keywords internal
+#' @noRd
 add_missing_id <- function(slides){
 	for (i in seq_along(slides)){
 		if (length(slides[[i]]$id) == 0){
@@ -21,8 +23,9 @@ add_missing_id <- function(slides){
 }
 
 #' Add raw R markdown source to slide vars
-#
-# TODO: Remove preceding newlines to optimize display of source code.
+#' 
+#' @noRd
+#  Remove preceding newlines to optimize display of source code.
 add_raw_rmd <- function(slides, source){
 	raw_rmd <- doc2slides(source)
 	for (i in seq_along(slides)){

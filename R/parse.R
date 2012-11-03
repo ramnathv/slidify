@@ -1,5 +1,7 @@
 #' Parse slide into metadata and body
 #'
+#' @keywords internal
+#' @noRd
 parse_slide <- function(slide){
   slide = str_split_fixed(slide, '\n', 2)
   slide = setNames(as.list(slide), c('meta', 'body'))
@@ -15,9 +17,10 @@ parse_slide <- function(slide){
 #' Slide classes, id and layouts can also be defined using prefixes
 #' class = ., id = #, layouts = &
 #' @keywords internal
-# TODO: Refactor this function so that it is more elegant.
-# TODO: One limitation is that key/values cannot contain any spaces.
-# TODO: Rename tpl to layout to maintain consistency.
+#' @noRd
+# 1. Refactor this function so that it is more elegant.
+# 2. One limitation is that key/values cannot contain any spaces.
+# 3. Rename tpl to layout to maintain consistency.
 parse_meta <- function(meta){
   x <- strsplit(meta, ' ')[[1]]
   x <- sub('^#', 'id:', x)
@@ -36,6 +39,7 @@ parse_meta <- function(meta){
 #'
 #' @param body slide contents without the metadata header
 #' @keywords internal
+#' @noRd
 parse_body <- function(body){
   html = ifelse(body != '', md2html(body), '')
   pat = '^(<h([0-9])>([^\n]*)</h[0-9]>)?\n*(.*)$'
@@ -57,6 +61,7 @@ parse_body <- function(body){
 #' @param content slide content 
 #' @return list of named content blocks
 #' @keywords internal
+#' @noRd
 parse_content <- function(content){
   blocks <- strsplit(content, "<p>\\*{3}\\s*")[[1]]
   bpat   <- "^([a-zA-Z0-9]+)\\s*</p>\n*(.*)$"

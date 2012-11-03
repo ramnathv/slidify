@@ -1,4 +1,10 @@
 #' Convert an Rmd document into HTML5 using a framework
+#' 
+#' @param inputFile path to input Rmd document
+#' @param outputFile path to output html document; default uses inputFile
+#' @param knit_deck should the input file be knit?; default is TRUE
+#' @return path to outputFile
+#' @export
 slidify <- function(inputFile, outputFile, knit_deck = TRUE){
 	if (knit_deck == TRUE){
 		inputFile = inputFile %|% knit

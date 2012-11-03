@@ -1,6 +1,7 @@
 #' Knit deck to markdown
 #'
 #' @keywords internal
+#' @noRd
 knit_deck <- function(deck){
   render_markdown(strict = TRUE)
   knit_hooks$set(plot = knitr:::hook_plot_html)
@@ -17,6 +18,7 @@ knit_deck <- function(deck){
 #' @param cfile path to config file
 #' @return list of config options
 #' @keywords internal
+#' @noRd
 get_config <- function(cfile = 'config.yml'){
 	config = slidifyDefaults()
 	if (file.exists(cfile)){
@@ -30,6 +32,7 @@ get_config <- function(cfile = 'config.yml'){
 #' @param doc path to source file
 #' @return list with metadata and slides
 #' @keywords internal
+#' @noRd
 to_deck <- function(doc){
   txt = str_split_fixed(read_file(doc), '\n---', 2)
   meta = yaml.load(gsub("^---\n+", '', txt[1]))
@@ -46,6 +49,7 @@ to_deck <- function(doc){
 #' An empty new line SHOULD precede the three horizontal dashes, otherwise
 #' it will not be treated as a slide separator
 #' @keywords internal
+#' @noRd
 split_slides <- function(slides, pat = '\n\n---'){
   str_split(slides, pattern = pat)[[1]]
 }
@@ -53,12 +57,16 @@ split_slides <- function(slides, pat = '\n\n---'){
 #' Parse slides into constitutent elements
 #'
 #' @keywords internal
+#' @noRd
 parse_slides <- function(slides){
   lapply(slides, parse_slide)
 }
 
 #' Get the rmd source for each slide
-#' TODO: Still repeats code and is hence not DRY
+#' 
+#' @keywords internal
+#' @noRd
+#  Still repeats code and is hence not DRY
 get_slide_rmd <- function(doc){
   paste('---', (doc %|% to_deck)$slides %|% split_slides)
 }

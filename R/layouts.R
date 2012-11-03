@@ -3,6 +3,7 @@
 #' @param path path to directory containing layout files
 #' @return named list of layouts
 #' @keywords internal
+#' @noRd
 read_layouts <- function(path){
   files = dir(path, pattern = '*.html', full = T)
   setNames(
@@ -16,6 +17,7 @@ read_layouts <- function(path){
 #' @param layouts layout to be expanded
 #' @return named list of expanded layouts
 #' @keywords internal
+#' @noRd
 expand_layouts <- function(layouts){
   #' Expand a child layout 
   expand_layout <- function(layout){
@@ -34,6 +36,8 @@ expand_layouts <- function(layouts){
 #' Get layouts from list of paths provided
 #'
 #' @param paths list of paths to directories containing layout files
+#' @keywords internal
+#' @noRd
 get_layouts <- function(paths){
   layouts = Reduce('modifyList', lapply(paths, read_layouts))
   for (i in 1:3) {

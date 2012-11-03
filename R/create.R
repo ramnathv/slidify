@@ -1,5 +1,8 @@
-#' Initialize a slide deck
+#' Create a slide directory
 #' 
+#' This function creates a slide directory, initializes it as a git repo and
+#' opens index.Rmd for users to edit.
+#' @export
 create <- function(deckdir){
   message('Creating slide directory at ', deckdir, '...')
   if (file.exists(deckdir)){
@@ -18,6 +21,9 @@ create <- function(deckdir){
 }
 
 #' Initialize a git repository, create and switch to gh-pages branch.
+#' 
+#' @keywords internal
+#' @noRd
 init_repo <- function(){
 	message('Initializing Git Repo')
 	system("git init")

@@ -1,4 +1,7 @@
 #' Copy directories recursively, creating a new directory if not already there
+#' 
+#' @keywords internal
+#' @noRd
 copy_dir <- function(from, to){
 	if (!(file.exists(to))){
 		dir.create(to, recursive = TRUE)
@@ -8,6 +11,9 @@ copy_dir <- function(from, to){
 }
 
 #' Copy libraries: framework, highlighter and widgets
+#' 
+#' @keywords internal
+#' @noRd
 copy_libraries <- function(framework, highlighter, widgets){
 	copy_dir(
 		from = system.file('libraries', 'frameworks', framework, package = 'slidify'),
