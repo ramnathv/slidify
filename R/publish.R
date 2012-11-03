@@ -3,6 +3,7 @@
 #' @param host 
 #' @export
 #  TODO: Pick missing parameters from config.yml
+#  TODO: Think about simplifying name to publish
 publish_deck <- function(..., host = 'github'){
 	publish <- switch(host, 
 		 github = publish_github, 
@@ -18,6 +19,10 @@ publish_deck <- function(..., host = 'github'){
 #' @param repo github reponame
 #' @export
 publish_github <- function(user, repo){
+	# check if git repo exists, else initialize new repo with gh-pages
+	if (!file.exists('.git')){
+		init_repo()
+	}
 	message('Publishing deck to ', user, '/', repo)
 	system('git add .')
 	system('git commit -a -m "publishing deck"')
