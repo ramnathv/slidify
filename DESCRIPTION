@@ -5,7 +5,8 @@ Version: 0.3.0
 Date: 2012-10-18
 Author: Ramnath Vaidyanathan <ramnath.vaidya@gmail.com>
 Maintainer: Ramnath Vaidyanathan <ramnath.vaidya@gmail.com>
-Description: This package provides a tool to generate reproducible html5 slides from R Markdown files. It supports multiple html5 slide frameworks.
+Description: This package provides a tool to generate reproducible html5 slides
+    from R Markdown files. It supports multiple html5 slide frameworks.
 Depends:
     R (>= 2.15.0)
 Imports:
@@ -25,6 +26,7 @@ Collate:
     'defaults.R'
     'init.R'
     'layouts.R'
+    'package.R'
     'parse.R'
     'process.R'
     'publish.R'
@@ -34,4 +36,3 @@ Collate:
     'urls.R'
     'utils.R'
     'zzz.R'
-    
