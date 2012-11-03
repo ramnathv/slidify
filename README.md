@@ -10,16 +10,16 @@ Slidify helps you create and publish beautiful HTML5 presentations from [RMarkdo
 Slidify is still under heavy development. You can install it from `github` using the `devtools` package.
 
 ```r
-devtools::install_github('slidify', 'ramnathv', ref='dev')
+devtools::install_github('slidify', 'ramnathv')
 ```
 
 ### Initialize ###
 
-You can initialize a presentation by running `create_deck`. This will create a scaffold for your presentation and open an Rmd file for you to edit. 
+You can initialize a presentation by running `create`. This will create a scaffold for your presentation and open an Rmd file for you to edit. 
 
 ```r
 library(slidify)
-create_deck('mydeck')
+create('mydeck')
 ```
 
 ### Author ###
@@ -36,8 +36,14 @@ slidify('index.Rmd')
 
 ### Publish ###
 
-- Github
-- RPubs
+```r
+# publish to github
+# create an empty repo on github. replace USER and REPO with your repo details
+publish(user = USER, repo = REPO) 
+
+# publish to rpubs
+publish(title = 'My Deck', 'index.html', host = 'rpubs')
+```
 
 ---
 
@@ -53,7 +59,6 @@ hitheme        : style to use for syntax highlighting
 copy_libraries : copy library files to slide directory?
 url            : paths to lib
 widgets        : widgets to include
-embed          : embed local images ?
 ```
 
 
