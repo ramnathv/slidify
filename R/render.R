@@ -14,6 +14,11 @@ render_deck <- function(deck, layouts){
   render_slides <- function(slides){
     lapply(slides, render_slide)
   }
+  #' Render stylesheets based on mode
+  render_stylesheets <- function(){
+  	tpl = '{{# css }}<link rel="stylesheet" href = "{{.}}">\n{{/ css}}'
+  	whisker.render(tpl)
+  }
   #' Render deck
   deck$slides = deck$slides %|% render_slides
   main = deck$layout %||% 'deck'
@@ -27,3 +32,5 @@ parse_deck <- function(inputFile){
 	deck$slides = deck$slides %|% add_slide_numbers %|% add_missing_id
 	return(deck)
 }
+
+
