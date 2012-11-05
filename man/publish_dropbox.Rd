@@ -11,4 +11,8 @@
 \description{
   Publish slide deck to Dropbox
 }
+\seealso{
+  Other publish: \code{\link{publish}},
+  \code{\link{publish_github}}
+}
 
