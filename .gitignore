@@ -3,3 +3,4 @@
 *.Rmd
 config.yml
 makefile
+.cache
