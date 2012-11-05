@@ -41,7 +41,9 @@ p {
 	padding-top: 5px;
 	background: #F1F6D8;
 }
-.hero-unit h1, 
+.hero-unit h1 {
+	font-family: "Architects Daughter", sansserif;
+} 
 .hero-unit p {
 	font-family: "Architects Daughter", sanserif;
 }
