@@ -3,7 +3,8 @@ title    : Title
 substitle: Subtitle
 author   : Author
 job      : Job
-widgets  : [mathjax]
+widgets  : []
+mode     : selfcontained
 ---
 
 ## Slide 1
