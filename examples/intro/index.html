@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slidify</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Slidify">
+  <meta name="author" content="Ramnath Vaidyanathan">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="../io2012/libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="../io2012/libraries/frameworks/io2012/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="../io2012/libraries/highlighters/highlight.js/css/solarized_light.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="../io2012/libraries/frameworks/io2012/js/slides" 
+    src="../io2012/libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+    <link rel="stylesheet" href = "../io2012/assets/css/lists.css">
+<link rel="stylesheet" href = "../io2012/assets/css/quotes.css">
+<link rel="stylesheet" href = "../io2012/assets/css/ribbons.css">
+<link rel="stylesheet" href = "../io2012/assets/css/tables.css">
+<link rel="stylesheet" href = "../io2012/assets/css/text.css">
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+    <!-- END LOGO SLIDE -->
+    
+
+    <!-- TITLE SLIDE -->
+    <!-- Should I move this to a Local Layout File? -->
+    <slide class="title-slide segue nobackground">
+      <hgroup class="auto-fadein">
+        <h1>Slidify</h1>
+        <h2>Reproducible HTML Slides from R Markdown</h2>
+        <p>Ramnath Vaidyanathan<br/>Assistant Professor, McGill University</p>
+      </hgroup>
+      <a href="https://github.com/ramnathv/slidify/zipball/gh-pages" class="example">
+        Download
+      </a>
+      
+      <footer class = 'source'>
+        <a href='http://creativecommons.org/licenses/by-sa/3.0/'>
+        <img width = '80px' src = 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png'>
+        </a>
+      </footer>
+    </slide>
+
+    <!-- SLIDES -->
+      <slide class="segue quote dark" id="slide-1" style="background:;">
+  <hgroup>
+    
+  </hgroup>
+  <article>
+    <p><q> Slidify is a tool that makes it easy to create, customize and publish, reproducible HTML5 slide decks using R Markdown.</q></p>
+
+<style>
+.dark q {
+  color: white;
+}
+</style>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Install Slidify</h2>
+  </hgroup>
+  <article>
+    <p>Slidify can be installed from <code>github</code> using Hadley&#39;s <code>devtools</code> package</p>
+
+<pre><code class="r">library(devtools)
+install_github(&#39;slidify&#39;, &#39;ramnathv&#39;)
+</code></pre>
+
+<p>If you are on Windows, you will need <code>gcc</code> and <code>RTools</code> to get <code>devtools</code> working.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="segue quote" id="slide-3" style="background:yellow;">
+  <hgroup>
+    
+  </hgroup>
+  <article>
+    <p><q> Slidify is a tool that makes it easy to <span class = 'red'>create</span>, customize and publish, reproducible HTML5 slide decks using R Markdown.</q></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Create Deck</h2>
+  </hgroup>
+  <article>
+    <p>You can initialize a slide deck using the <code>author</code> function</p>
+
+<pre><code class="r">library(slidify)
+author(&quot;mydeck&quot;)
+</code></pre>
+
+<p>This will do the following</p>
+
+<ol>
+<li>Create a new directory named <code>mydeck</code>.</li>
+<li>Copy necessary scaffolding for the presentation.</li>
+<li>If <code>git</code> is installed on the system
+
+<ul>
+<li>initialize a new git repo.</li>
+<li>checkout and switch to <code>gh-pages</code> branch</li>
+<li>add and commit all files to the repo</li>
+</ul></li>
+<li>Open <code>index.Rmd</code> for you to edit.</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Edit Slides</h2>
+  </hgroup>
+  <article>
+    <pre><code> ---
+ title    : Title 
+ substitle: Subtitle
+ author   : Author
+ job      : Job
+ widgets  : []
+ mode     : selfcontained
+ ---
+
+ ## Slide 1
+
+ Use an empty line followed by three dashes to separate slides!
+
+ --- .class #id 
+
+ ## Slide 2
+</code></pre>
+
+<ol>
+<li>Edit the metadata in the YAML front matter.</li>
+<li>Write your slides in R Markdown.</li>
+<li>Separate your slides by an empty blank line followed by three dashes.</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Add Slide Classes</h2>
+  </hgroup>
+  <article>
+    <p>Add slide classes and id by appending them to the slide separator</p>
+
+<pre><code> --- #montreal bg:url(http://goo.gl/cF6W2)
+
+ ## Montreal by Night Time
+
+ --- #dillinger
+
+ &lt;iframe src = &#39;http://dillinger.io&#39; height=&#39;600px&#39;&gt;&lt;/iframe&gt;
+
+ --- .middle 
+
+ Slidify is Awesome
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="montreal" style="background:url(http://goo.gl/cF6W2);">
+  <hgroup>
+    <h2>Montreal by Night Time</h2>
+  </hgroup>
+  <article>
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="dillinger" style="background:;">
+  <hgroup>
+    
+  </hgroup>
+  <article>
+    <iframe src = 'http://dillinger.io' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="middle" id="slide-9" style="background:;">
+  <hgroup>
+    
+  </hgroup>
+  <article>
+    <p>Slidify is Awesome</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="segue dark quote" id="slide-10" style="background:;">
+  <hgroup>
+    
+  </hgroup>
+  <article>
+    <p><q> Slidify is a tool that makes it easy to create, <span class = 'red'>customize</span> and publish, reproducible HTML5 slide decks using R Markdown.</q></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Customize</h2>
+  </hgroup>
+  <article>
+    <p>Slidify is designed to be modular and provide a high degree of customization for the more advanced users.</p>
+
+<table><thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>framework</td>
+<td>slide generation framework to use</td>
+</tr>
+<tr>
+<td>theme</td>
+<td>theme to use for styling slide content</td>
+</tr>
+<tr>
+<td>highlighter</td>
+<td>tool to use for syntax highlighting</td>
+</tr>
+<tr>
+<td>hitheme</td>
+<td>style to use for syntax highlighting</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>draft, standalone or selfcontained</td>
+</tr>
+<tr>
+<td>url</td>
+<td>path to assets and libraries</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Style your Deck</h2>
+  </hgroup>
+  <article>
+    <p>Use the options <code>framework</code> and <code>theme</code> to style your deck!</p>
+
+<table><thead>
+<tr>
+<th>framework</th>
+<th>theme</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="http://html5slides.googlecode.com/">html5slides</a></td>
+<td>default, uulm</td>
+</tr>
+<tr>
+<td><a href="">html5rocks</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://imakewebthings.com/deck.js/">deck.js</a></td>
+<td>web2.0, swiss, neon</td>
+</tr>
+<tr>
+<td><a href="http://paulrouget.com/dzslides/">dzslides</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/adamzap/landslide">landslide</a></td>
+<td>default, tango, clean</td>
+</tr>
+<tr>
+<td><a href="http://pepelsbey.github.com/shower/en.htm">shower</a></td>
+<td>ribbon</td>
+</tr>
+<tr>
+<td><a href="http://www.w3.org/Talks/Tools/Slidy2/Overview.html#">slidy</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="">slideous</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="">beamer</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://github.com/schacon/showoff">showoff</a></td>
+<td></td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+
+  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+<!-- Grab CDN jQuery, fall back to local if offline -->
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script>window.jQuery || document.write('<script src="../io2012/libraries/widgets/quiz/js/jquery-1.7.min.js"><\/script>')</script>
+<!-- Load Javascripts for Widgets -->
+<!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="../io2012/libraries/highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+</html>
