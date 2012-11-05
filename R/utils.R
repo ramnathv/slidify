@@ -3,6 +3,7 @@
 #' @keywords internal
 #' @param html_in path to input html file
 #' @param html_out path to output html file
+#' @noRd
 embed_images <- function(html_in){
 	html <- paste(readLines(html_in, warn = F), collapse = "\n")
 	html <- markdown:::.b64EncodeImages(html)
