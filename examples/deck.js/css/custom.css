@@ -1,0 +1,6 @@
+/* HACK: remove gap between code box and code background */
+/* TODO: resolve the issue correctly */
+.deck-container .slide pre code {
+	padding: 0.5em;
+	font-family: Consolas;
+}
