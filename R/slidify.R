@@ -25,15 +25,20 @@ slidify <- function(inputFile, outputFile, knit_deck = TRUE){
 		outputFile = gsub("*.[R]?md$", '.html', inputFile)
 	}
 	
+	cat(render_deck(deck, layouts), file = outputFile)
+	
 	if (deck$mode == 'standalone'){
-		deck$url[['lib']] = 'http://slidify.googlecode.com/git/inst/libraries'
-		deck = deck %|% add_urls 
-		tfile = tempfile(pattern = '.html')
-		cat(render_deck(deck, layouts), file = tfile)
-		cat(tfile %|% embed_images, file = outputFile)
-	} else {
-		cat(render_deck(deck, layouts), file = outputFile)
+		outputFile = make_standalone(deck, outputFile)
 	}
-
+	
 	return(outputFile)
+}
+
+make_standalone <- function(deck, html_in){
+	lib_url = paste0(deck$url$lib, '/')
+	lib_cdn = 'http://slidify.googlecode.com/git/inst/libraries/'
+	html = read_file(html_in) %|% markdown:::.b64EncodeImages
+	html = gsub(lib_url, lib_cdn, html)
+	cat(html, file = html_in)
+	return(html_in)
 }
