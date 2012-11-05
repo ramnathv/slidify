@@ -34,6 +34,15 @@ slidify <- function(inputFile, outputFile, knit_deck = TRUE){
 	return(outputFile)
 }
 
+#' Create a standalone version of an HTML File
+#' 
+#' It works by embedding all images, switching links to use Slidify's googlecode
+#' repository and inlining all user assets.
+#' 
+#' @param deck parsed deck
+#' @param html_in html file with library files linked locally
+#' @noRd
+#' @keywords internal
 make_standalone <- function(deck, html_in){
 	lib_url = paste0(deck$url$lib, '/')
 	lib_cdn = 'http://slidify.googlecode.com/git/inst/libraries/'
