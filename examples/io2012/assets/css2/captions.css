@@ -1,0 +1,54 @@
+/* Custom Stylesheet for Slidify */
+/* Defines Caption Positions */
+
+div.bottomLeft {
+  position:absolute;
+  margin-left:2%;
+  bottom: 60px;
+  left: 0px;
+  border-radius: 0px 10px 10px 0px;
+  -moz-border-radius: 0px 10px 10px 0px;
+}
+
+div.topLeft {
+  position:absolute;
+  margin-left:2%;
+  top: 60px;
+  left: 0px;
+  border-radius: 0px 10px 10px 0px;
+  -moz-border-radius: 0px 10px 10px 0px;
+}
+
+div.bottomRight {
+  bottom: 60px;
+  right: 0px;
+  border-radius: 10px 0px 0px 10px;
+  -moz-border-radius: 10px 0px 0px 10px;
+}
+
+div.topRight {
+  top: 60px;
+  right: 0px;
+  border-radius: 10px 0px 0px 10px;
+  -moz-border-radius: 10px 0px 0px 10px;
+}
+
+div.topWide {
+  top: 60px;
+  right: 0px;
+  left: 0px;
+  border-radius: 0;
+  -moz-border-radius: 0;
+}
+
+div.bottomWide {
+  position:absolute;
+  margin-left:2%;
+  bottom: 60px;
+  right: 0px;
+  left: 0px;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  position:absolute;
+  margin-left:2%;
+}

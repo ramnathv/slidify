@@ -1,0 +1,126 @@
+/*Put your custom css styles here. This file gets loaded the last*/
+/* Limit the number of fonts loaded */
+
+article.fill2 img{
+  width: 100%;
+}
+
+.copyright {
+  position: absolute;
+  left: 20px;
+  top: 670px;
+  padding-right: 175px;
+  font-size: 50%;
+  font-color: #eee;
+  letter-spacing: 0;  
+  line-height: 18px;
+}
+
+.middle p {
+  color: #930;
+  font-family: YanoneKaffeesatzBold;
+  font-size: 60px;
+  line-height: 60px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+  
+
+.redbox {
+  position: absolute; 
+  top: 165px; 
+  right: 220px; 
+  font-size: 100%; 
+  font-weight: bold; 
+  background: blue; 
+  color: yellow; 
+  line-height: 1.2; 
+  padding: 0.25em 0.5em; 
+  border-radius: 10px; 
+/*  border: 3px solid red; */
+  -webkit-transform:rotate(0deg);
+  -moz-transform:rotate(0deg);
+  text-align: center;
+}
+
+
+.slides.template-new > article.yellow{
+  background-color: #E9F7D7;  
+}
+
+.slides.template-new > article.mygreen {
+  background-color: #F3FFBA;
+  color: #384111;
+}
+
+.slides.template-new > article:not(.nobackground) {
+  background-color: #FFFFF9;
+}
+
+.slides.layout-default.template-default > article:not(.nobackground):not(.biglogo) {
+  background: url(../media/slidify-logo-small.png) 765px 650px no-repeat;   
+  background-color: white;  
+}
+
+.slides.layout-widescreen > article:not(.nobackground):not(.biglogo),
+.slides.layout-faux-widescreen > article:not(.nobackground):not(.biglogo) {
+  background: url(../media/slidify-logo-small.png) 960px 650px no-repeat;   
+  background-color: white;  
+}
+
+.slides.layout-widescreen.template-new > article:not(.nobackground):not(.biglogo){
+  background: none;
+  background-color: white;
+}
+
+.container {
+  width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  *zoom: 1;
+}
+
+section.slide p{
+   text-align:justify;
+   font-size: 20px;
+   line-height: 24px;
+}
+
+article.smaller q, div.author{
+   font-size: 32px;
+   line-height: 38px;
+}
+
+h1 {
+ /* color: #777D4F;*/
+  font-family:  'YanoneKaffeesatzBold', 'Oswald', sans-serif;
+/*  color: #47741A;*/
+/*  color: #DD1818;*/
+/*  color: white;*/
+  font-size:80px;
+  line-height:80px;
+  /*line-height: 40px;*/
+}
+
+/* Slide Classes */
+
+slide.smaller li{
+  font-size: 0.8em;
+  line-height: 1.3em;
+}
+
+slide.smaller p{
+  font-size: 0.8em;
+  line-height: 1.3em;
+}
+
+slide.large p, li{
+  font-size: 1.2em;
+}

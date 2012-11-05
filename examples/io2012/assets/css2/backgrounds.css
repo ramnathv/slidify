@@ -1,0 +1,22 @@
+/* Custom Stylesheet for Slidify */
+slide.license{
+  background: url('http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png') 20px 650px no-repeat;
+}
+
+slide.blue {
+  background: #4387fd !important;
+}
+
+slide.blue h2 {
+  color: inherit;
+}
+
+slide.red {
+  background: #6C140B !important;
+  color: white;
+}
+
+slide.red h2 {
+/*  font-size: 4em;*/
+  color: inherit;
+}

@@ -1,0 +1,10 @@
+<script src='{{url.widgets}}/quiz/js/jquery.quiz.js'></script>
+<script src='{{url.widgets}}/quiz/js/mustache.min.js'></script>
+<script type="text/javascript">
+ $('.quiz').find('li:has(em)').addClass('quiz-answer')
+ $('li.quiz-answer em').replaceWith(function(){
+   return $(this).contents()
+ })
+ $('.quiz').find('li').addClass('quiz-option')
+ $.quiz();
+</script>

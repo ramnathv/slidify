@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>rJekyll</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    
+    <link rel="stylesheet"
+      href="http://netdna.bootstrapcdn.com/bootswatch/2.1.0/{{theme}}/bootstrap.min.css" >
+    <link  rel="stylesheet" 
+      href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
+    <link rel="stylesheet" 
+      href="{{url.framework}}/css/main.css">
+    <link rel="stylesheet" 
+      href="{{url.lib}}/highlighters/{{highlighter}}/css/{{hitheme}}.css" />
+    <script src="{{url.framework}}/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js">
+    </script>  
+    <style>
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    </style>
+  </head>   
+  <body>
+   <!--[if lt IE 7]>
+     <p class="chromeframe">You are using an outdated browser. 
+       <a href="http://browsehappy.com/">Upgrade your browser today</a> or 
+       <a href="http://www.google.com/chromeframe/?redirect=true"> 
+         install Google Chrome Frame
+       </a> to better experience this site.
+    </p>
+   <![endif]-->
+   <!-- Ref: http://twitter.github.com/bootstrap/examples/hero.html -->
+        {{> navbar }}
+
+        <div class="container">
+          <div class = "row">
+            <div class="span3">
+              <div class="well">
+                {{> sidebar }}
+              </div>
+            </div>
+            <div class = 'span9'>
+              {{# slides }}
+                {{{ rendered }}}  
+              {{/ slides }}
+            </div>
+          </div>
+        </div>
+    </body>
+    {{> scripts }}
+    {{> javascripts }}
+</html>

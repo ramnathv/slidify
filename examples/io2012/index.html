@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slidify</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Slidify">
+  <meta name="author" content="Ramnath Vaidyanathan">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="../../libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="../../libraries/frameworks/io2012/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="../../libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="../../libraries/frameworks/io2012/js/slides" 
+    src="../../libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+    <link rel="stylesheet" href = "../../libraries/widgets/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href = "../../libraries/widgets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href = "../../libraries/widgets/quiz/css/jquery-quiz.css">
+<link rel="stylesheet" href = "../assets/css/lists.css">
+<link rel="stylesheet" href = "../assets/css/quotes.css">
+<link rel="stylesheet" href = "../assets/css/ribbons.css">
+<link rel="stylesheet" href = "../assets/css/tables.css">
+<link rel="stylesheet" href = "../assets/css/text.css">
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+    <slide class="nobackground">
+      <article class="flexbox vcenter">
+        <span>
+          <img width='400px' src="../assets/img/slidify_logo.png">
+        </span>
+      </article>
+    </slide>
+    <!-- END LOGO SLIDE -->
+    
+
+    <!-- TITLE SLIDE -->
+    <!-- Should I move this to a Local Layout File? -->
+    <slide class="title-slide segue nobackground">
+      <aside class="gdbar">
+        <img src="../assets/img/slidify_logo.png">
+      </aside>
+      <hgroup class="auto-fadein">
+        <h1>Slidify</h1>
+        <h2>Reproducible HTML5 Slides</h2>
+        <p>Ramnath Vaidyanathan<br/>Assistant Professor, McGill</p>
+      </hgroup>
+      <a href="https://github.com/ramnathv/slidify/zipball/gh-pages" class="example">
+        Download
+      </a>
+      
+      <footer class = 'source'>
+        <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/'>
+        <img width = '80px' src = 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png'>
+        </a>
+      </footer>
+    </slide>
+
+    <!-- SLIDES -->
+      <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Test Features of Slidify</h2>
+  </hgroup>
+  <article>
+    <ol>
+<li>Mathjax</li>
+<li>Layouts</li>
+<li>Backgrounds</li>
+<li>Widgets</li>
+<li>Overlays</li>
+<li>Metadata</li>
+<li>Embeds</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Setext Header</h2>
+  </hgroup>
+  <article>
+    <p>This slide shows a Setext style header.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Tables</h2>
+  </hgroup>
+  <article>
+    <p>Mardown tables contain <code>---</code> and should not be interpreted as separator.</p>
+
+<table><thead>
+<tr>
+<th>Column X</th>
+<th>Column Y</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Row 1</td>
+<td>Row 1</td>
+</tr>
+<tr>
+<td>Row 2</td>
+<td>Row 2</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Animated List, Ordered</h2>
+  </hgroup>
+  <article>
+    <p>This list should be animated</p>
+
+<ol class = "build">
+<li>Point 1</li>
+<li>Point 2</li>
+<li>Point 3</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Animated List, Unordered</h2>
+  </hgroup>
+  <article>
+    <p>This list should be animated</p>
+
+<ul class = "build">
+<li>Point 1</li>
+<li>Point 2</li>
+<li>Point 3</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-6" style="background:url(../assets/img/old_mathematics.png);">
+  <hgroup>
+    <h2>Mathjax</h2>
+  </hgroup>
+  <article>
+    <p>\[
+\begin{aligned}
+\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\   \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
+\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
+\nabla \cdot \vec{\mathbf{B}} & = 0 \end{aligned}
+\]
+<br />
+\[
+\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\
+\frac{\partial X}{\partial u} &  \frac{\partial Y}{\partial u} & 0 \\
+\frac{\partial X}{\partial v} &  \frac{\partial Y}{\partial v} & 0
+\end{vmatrix}
+\]</p>
+
+<div class='source'>
+  Source: <a href='www.subtlepatterns.com'>Background from SubtlePatterns</a>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Layouts, Custom Metadata</h2>
+  </hgroup>
+  <article>
+    
+<p>This is a slide with a two column layout.</p>
+
+
+
+<div style='float:left;width:48%'>
+  <p>Column 1</p>
+
+
+</div>
+<div style='float:right;width:48%'>
+  <p>Column 2</p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-8" style="background:#EEE;">
+  <hgroup>
+    <h2>Background Color</h2>
+  </hgroup>
+  <article>
+    <p>This slide should have a subtle gray background.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-9" style="background:url(../assets/img/grid.png);">
+  <hgroup>
+    <h2>Background Image</h2>
+  </hgroup>
+  <article>
+    <p>This slide should have a background image.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="quiz" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Widgets: jQuery-Quiz</h2>
+  </hgroup>
+  <article>
+    
+<div class="quiz-single well new">
+  <p>This is a multiple choice question</p>
+
+<ol>
+<li>Choice 1</li>
+<li>Choice 2</li>
+<li><em>Choice 3 (correct)</em></li>
+<li>Choice 4</li>
+</ol>
+
+
+  
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear">Clear</button>
+  
+  
+  <div class="quiz-hint">
+    <p>This is a hint</p>
+
+
+  </div>
+  
+  <div class="quiz-explanation">
+    <p>This is the explanation</p>
+
+  </div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Widgets: Bootstrap</h2>
+  </hgroup>
+  <article>
+    <p><strong>Blocks</strong></p>
+
+<div class="alert alert-info">
+  <p>This is an alert info block which should render in blue</p>
+</div>
+
+<p><strong>Tooltips</strong></p>
+
+<p>This is to check out tooltips in bootstrap <a href="#" rel="tooltip" data-original-title="Default tooltip">you probably</a></p>
+
+<p><strong>Popover</strong></p>
+
+<p><a class="btn btn-large btn-danger" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title" id='example'>Click to toggle popover</a></p>
+
+
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note">
+    <section>
+      <p>The font size and color needs some tweaking.</p>
+
+    </section>
+  </aside>
+</slide>
+
+      <slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Highlighter: Highlight JS</h2>
+  </hgroup>
+  <article>
+    <p>We can make this function more robust by adding a simple error checking statement to prevent illegal parameters from generating invalid results.</p>
+
+<pre><code class="r">qpareto &lt;- function(p, scale, loc) {
+  if (( scale &lt;= 0) | ( loc &lt;= 0)) {
+    stop(&quot;&#39;qpareto&#39; parameters must be greater than zero.&quot;)
+  }
+  q &lt;- loc*(1 - p)^(-1/scale)
+  return(q)
+}
+</code></pre>
+
+<p>Entering a negative parameter now raises an exception, instead of an invalid result that could silently corrupt subsequent results.</p>
+
+<pre><code class="r">qpareto(0.4, 5, -1)
+Error: &#39;qpareto&#39; parameters must be greater than zero.
+</code></pre>
+
+<p>We could improve this further by checking to ensure that <code>p</code> is a valid probability.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Check Chunk Execution</h2>
+  </hgroup>
+  <article>
+    <div class="rimage center"><img src="fig/scplot.svg"  class="plot" /></div>
+
+
+  </article>
+  <!-- Presenter Notes -->
+  <aside class="note">
+    <section>
+      <pre><code class="r">library(ggplot2); 
+library(ggthemes);
+qplot(wt, mpg, data = mtcars) +
+  theme_solarized()
+</code></pre>
+
+    </section>
+  </aside>
+</slide>
+
+      <slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    
+  </hgroup>
+  <article>
+    <p><q class='shout'>This is a shout</q></p>
+
+<p>I am checking key, <span class = 'key'>key</span></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+
+  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+<!-- Grab CDN jQuery, fall back to local if offline -->
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../libraries/widgets/quiz/js/jquery-1.7.min.js"><\/script>')</script>
+<!-- Load Javascripts for Widgets -->
+<!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="../../libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script src='../../libraries/widgets/bootstrap/js/bootstrap.min.js'></script>
+<script>  
+$(function (){ 
+  $("#example").popover(); 
+  $("[rel='tooltip']").tooltip(); 
+});  
+</script>  
+<script src='../../libraries/widgets/quiz/js/jquery.quiz.js'></script>
+<script src='../../libraries/widgets/quiz/js/mustache.min.js'></script>
+<script type="text/javascript">
+ $('.quiz').find('li:has(em)').addClass('quiz-answer')
+ $('li.quiz-answer em').replaceWith(function(){
+   return $(this).contents()
+ })
+ $('.quiz').find('li').addClass('quiz-option')
+ $.quiz();
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="../../libraries/highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+</html>

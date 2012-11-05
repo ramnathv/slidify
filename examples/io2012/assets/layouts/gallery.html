@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- PAGE TEMPLATE TO RENDER A GALLERY OF THUMBNAIL PHOTOS WITH CAPTIONS -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    {{> head }}
+    <style>
+    	.container {
+    		width:800px;
+    	}
+    </style>
+  </head>
+  <body>
+   <!--[if lt IE 7]>
+     <p class="chromeframe">You are using an outdated browser. 
+       <a href="http://browsehappy.com/">Upgrade your browser today</a> or 
+       <a href="http://www.google.com/chromeframe/?redirect=true"> 
+         install Google Chrome Frame
+       </a> to better experience this site.
+    </p>
+   <![endif]-->
+   <!-- Ref: http://twitter.github.com/bootstrap/examples/hero.html -->
+        {{> navbar }}
+        <div class="container">
+          <ul class="thumbnails">
+          {{# people }}
+            <li class="span2">
+              <a href='http://people.mcgill.ca/{{id}}/' class='thumbnail'>
+                <img src="http://people.mcgill.ca/files/{{id}}/{{id}}.jpg">
+                <h4 style='text-align:center;'>
+                  {{name}} <br/>
+                  ({{area}})
+                </h4>
+              </a>
+            </li>
+          {{/ people }}
+          </ul>
+        </div><!-- .container -->
+    </body>
+    {{> scripts }}
+    {{> javascripts }}
+</html>

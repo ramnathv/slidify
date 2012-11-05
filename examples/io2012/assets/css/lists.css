@@ -1,0 +1,24 @@
+/* Styling for Ordered Lists (only for io2012) */
+ol {
+  margin-left: 2em;
+  margin-bottom: 1em;
+  position: relative;
+}
+
+ol li {
+  margin-bottom: 0.5em;
+}
+
+ol li ol {
+  margin-left: 2em;
+  margin-bottom: 0;
+}
+
+ol ul {
+  margin-top: .5em;
+}
+
+ol {
+  list-style-type: decimal;
+}
+

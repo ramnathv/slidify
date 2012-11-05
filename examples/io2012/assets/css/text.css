@@ -1,0 +1,187 @@
+@import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
+@import url(http://fonts.googleapis.com/css?family=Crimson+Text);
+@import url(http://fonts.googleapis.com/css?family=The+Girl+Next+Door);
+@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans);
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700);
+@import url(http://fonts.googleapis.com/css?family=Vollkorn);
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+@import url(captions.css);
+@import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
+@import url(http://fonts.googleapis.com/css?family=Hammersmith+One);
+@import url(http://fonts.googleapis.com/css?family=Signika+Negative:400,600);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif);
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:600);
+@import url(../fonts/stylesheet.css);
+
+/* Modifications to Bootstrap by Ramnath Vaidyanathan*/
+div.alert p {
+  font-family: 'Arial', 'Helvetica Neue';
+	font-size: 16px;
+	line-height: 24px;
+	text-align: justify;
+	color: inherit;
+}
+
+/* Reduce Space between Title and Body */
+slides > slide > hgroup + article {
+  margin-top: 15px;
+}
+
+/* Remove Border, Margins and Padding from iframe */
+iframe {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Code and Pre Blocks */
+pre {
+  font-family: 'Monaco', 'Consolas', sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+code {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 20px;
+  font-weight: 600;
+  color: #800000;
+  color: green;
+}
+
+/* Knitr Images */
+.rimage.left {
+  text-align: left;
+}
+.rimage.right {
+  text-align: right;
+}
+.rimage.center {
+  text-align: center;
+}
+
+/* Rounded Pill around em Element */
+/* Usage: <em class="rounded">Text</em> */
+em.rounded {
+  font-style:normal;
+  -moz-border-radius:20px;
+  -webkit-border-radius:20px;
+  border-radius:20px;
+  padding:1px 10px;
+  background:#f0f0f0;
+  -moz-box-shadow: 1px 1px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 1px 1px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px rgba(0,0,0,0.2);
+}
+
+/* Redefine Fonts for Labels and Badges */
+.label, .badge {
+  font-size:14px;
+  text-transform:uppercase;
+  font-family: Helvetica, sans-serif;
+  margin: 2px;
+}
+
+.key {
+	color: white;
+	display: inline-block;
+	padding: 5px 6px 2px 5px;
+	/*font-size: 25px;*/
+	line-height: 16px;
+	text-shadow: none;
+	letter-spacing: 0;
+	bottom: 3px;
+	position: relative;
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	background: #BEBEBE;
+}
+
+/* Styles for Title Slide */
+.title-slide hgroup > h1{
+  font-family: 'Oswald', sans-serif;
+}
+
+.title-slide hgroup > h2{
+  font-family: 'Signika Negative', 'Calibri', sans-serif;
+}
+
+section p, section li,
+article p, article li, article li.build{
+  font-family: 'Crimson Text', 'Garamond',  'Palatino', 'Helvetica', sans-serif;
+  text-align: justify;
+  font-size:22px;
+  line-height: 1.5em;
+}
+
+article > p, article li, article li.build {
+  color: #565b62;
+  /* color: #000000; */
+}
+
+slide.segue:not(.title-slide) h2{
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 3.5em;
+  color: #F56702;
+}
+
+slide:not(.segue) h2 {
+  font-family: 'Oswald', 'Yanone Kaffeesatz', 'Calibri', 'Arial', 'Helvetica', sans-serif;
+  font-size:2em;
+  color: #004D5D; /*color: #495961;*/
+  color: #262b31;
+  line-height:1em;
+  letter-spacing: 4px;
+}
+
+slide:not(.segue) h2{
+  font-family: 'Signika Negative', 'Calibri', Arial, sans-serif;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: bold;
+  text-transform: normal;
+  letter-spacing: -2px;
+  line-height: 1.2em;
+/*  color: #193441;*/
+/*  color: #02574D;*/
+  color: #CC2904;
+}
+
+slide.fill h2{
+  color: black;
+  background: rgba(255, 255, 255, .75);
+  padding-top: .2em;
+  padding-bottom: .3em;
+  margin-top: -.2em;
+  margin-left: -60px;
+  padding-left: 60px;
+  margin-right: -1000px;
+  padding-right: 60px;
+}
+
+/*slide.segue h2{
+  font-size: 4em;
+  font-size: inherit;
+  color: inherit;
+}*/
+
+em.answer {
+  font-weight: bolder;
+  color: #0A8787;
+}
+
+.source {
+  font-size: 14px;
+  color: #a9a9a9;
+  position: absolute;
+  bottom: 30px;
+  left: 60px;
+}

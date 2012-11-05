@@ -1,0 +1,45 @@
+@import url(http://fonts.googleapis.com/css?family=Crimson+Text);
+
+/* Reduce Space between Title and Body */
+slides > slide > hgroup + article {
+  margin-top: 15px;
+}
+
+slide.segue:not(.title-slide) h2{
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 3.5em;
+  color: #F56702;
+}
+
+slide:not(.segue) h2 {
+  font-family: 'Yanone Kaffeesatz', 'Calibri', 'Arial', sans-serif;
+  font-size:2em;
+  color: #004D5D; /*color: #495961;*/
+  color: #262b31;
+  line-height:1em;
+  letter-spacing: 4px;
+}
+
+/* Styles for Title Slide */
+.title-slide hgroup > h1{
+  font-family: 'Oswald', sans-serif;
+}
+
+.title-slide hgroup > h2{
+  font-family: 'Signika Negative', 'Calibri', sans-serif;
+}
+
+/* Use Crimson Text for Text */
+article p, article li, article li.build{
+  font-family: 'Crimson Text', 'Garamond', 'Helvetica', sans-serif;
+  text-align: justify;
+  font-size:20px;
+  line-height: 1.5em;
+}
+
+/* Remove Border, Margins and Padding from iframe */
+iframe {
+  border: none;
+  margin: 0;
+  padding: 0;
+}

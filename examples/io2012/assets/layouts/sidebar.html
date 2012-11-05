@@ -1,0 +1,19 @@
+<ul class="nav nav-pills nav-stacked">
+  {{# sidebar.items }}
+  <li class="{{ class }}" id="{{ href }}">{{# href }}
+    <a href="#{{ href }}" {{#dropdown}}class="dropdown-toggle"
+       data-toggle="dropdown"{{/dropdown}}>{{/href}}
+      {{#icon}}<i class="icon-{{{.}}}"> </i>{{/icon}}
+      {{{ item }}}
+      {{#dropdown}}<b class="caret"></b>{{/dropdown}}{{# href }}
+    </a>{{/ href }}
+    {{#dropdown}}
+      <ul class="dropdown-menu">
+         {{# menu}}
+         <li><a href="#{{href}}">{{{ item }}}</a></li>
+         {{/ menu}}
+      </ul>
+    {{/dropdown}}
+  </li>
+  {{/ sidebar.items }}
+</ul>

@@ -1,0 +1,12 @@
+<ul class="thumbnails">
+  {{# deck.people }}
+  <li class="span2">
+    <a href='http://people.mcgill.ca/{{id}}/' class='thumbnail'>
+      <img src="http://people.mcgill.ca/files/{{id}}/{{id}}.jpg">
+        <h4 style='text-align:center;'>
+          {{name}} <br/>({{area}})
+        </h4>
+    </a>
+  </li>
+  {{/ deck.people }}
+</ul>

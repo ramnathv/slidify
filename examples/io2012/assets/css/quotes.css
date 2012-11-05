@@ -1,0 +1,55 @@
+/* Quotes and Shout (for io2012, custom) */
+article q {
+  font-family: 'Crimson Text', sans-serif;
+}
+
+q {
+  display: block;
+  font-size: 44px;
+  line-height: 56px;
+  margin-left: 50px;
+  margin-top: 100px;
+  margin-right: 150px;
+}
+
+q::before {
+  content: '“';
+  position: absolute;
+  display: inline-block;
+  margin-left: -2.1em;
+  width: 2em;
+  text-align: right;
+  font-size: 90px;
+  color: silver;
+}
+
+q::after {
+  content: '”';
+  position: absolute;
+  margin-left: .1em;
+  font-size: 90px;
+  color: silver;
+}
+
+div.author {
+  text-align: right;
+  font-size: 40px;
+  margin-top: 20px;
+  margin-right: 150px;
+}
+
+div.author::before {
+  content: '—';
+}
+
+q.shout:before {
+  content: '';
+  position: absolute;
+  margin-left: -0.5em;
+}
+
+q.shout:after {
+  content: '';
+  position: absolute;
+  margin-left: 0.1em;
+}
