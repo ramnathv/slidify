@@ -1,6 +1,12 @@
 #' Publish slide deck
 #' 
-#' @param host 
+#' This function makes it easy to publish your presentation. Currently supported
+#' hosts include Github, RPubs and Dropbox.
+#' 
+#' @param host where to publish presentation, Github, RPubs or Dropbox
+#' @param ... parameters to be passed to \code{\link{publish_github}}, 
+#'   \code{\link{publish_rpubs}} or \code{\link{publish_dropbox}}
+#' @family publish
 #' @export
 publish <- function(..., host = 'github'){
 	publish_deck <- switch(host, 
@@ -13,8 +19,21 @@ publish <- function(..., host = 'github'){
 
 #' Publish slide deck to Github
 #' 
+#' You will need \code{git} installed on your computer and a \code{github}
+#' account. In addition, you will \code{SSH} access to \code{github}. See 
+#' \url{https://help.github.com/articles/generating-ssh-keys} on how to set up
+#' \code{SSH} access
+#' 
+#' Login with your github account and create a new repository 
+#' \url{https://help.github.com/articles/creating-a-new-repository}. Note that 
+#' Github will prompt you to add a README file, but just use the defaults so 
+#' that your repo is empty. You will need to have \code{git} installed on your 
+#' computer and be able to push to \code{github} using SSH
+#' 
+#' 
 #' @param user github username
 #' @param repo github reponame
+#' @family publish
 #' @export
 publish_github <- function(user, repo){
 	if (!file.exists('libraries')){
@@ -39,6 +58,7 @@ publish_github <- function(user, repo){
 #' Publish slide deck to Dropbox
 #' 
 #' @param dirname name of directory to publish to; defaults to slide directory
+#' @family publish
 #' @export
 publish_dropbox <- function(dirname){
 	if (missing(dirname)){
