@@ -5,7 +5,6 @@
 #' information and examples.
 #' @docType package
 #' @name slidify-package
-#' @aliases slidify
 #' @author Ramnath Vaidyanathan <\url{http://www.slidify.org}>
 #' @seealso The core function in this package: \code{\link{slidify}}
 #' @references Full documentation and demos: \url{http://www.slidify.org};
