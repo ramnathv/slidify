@@ -39,7 +39,7 @@ pluck <- function (element){
 #' @param css_dir directory containing stylesheets
 #' @noRd
 combine_css <- function(css_dir){
-	css_files = dir(css_dir, pattern = '*.css', full = T)
+	css_files = dir(css_dir, pattern = '*.css', full.names = T)
 	out_file = file.path(css_dir, 'user.css')
 	css = paste(lapply(css_files, read_file), collapse = '\n')
 	writeLines(css, out_file)
@@ -52,7 +52,7 @@ combine_css <- function(css_dir){
 #' @noRd
 minify_css <- function(css_file){
 	yui = system.file('libraries', 'utilities', 'yuicompressor-2.4.7.jar', 
-		package = 'slidify2')
+		package = 'slidifyLibraries')
 	min_css_file = gsub('.css', '.min.css', css_file)
 	cmd = 'java -jar %s %s -o %s' 
 	system(sprintf(cmd, yui, css_file, min_css_file))
@@ -82,8 +82,8 @@ minify_css <- function(css_file){
 #' @return string with document contents
 #' @keywords internal
 #' @noRd
-read_file <- function(doc){
-	paste(readLines(doc), collapse = '\n')
+read_file <- function(doc, ...){
+	paste(readLines(doc, ...), collapse = '\n')
 }
 
 #' Capture patterns matched by regular expression
