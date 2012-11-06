@@ -1,0 +1,39 @@
+---
+title: DZSlides with Slidify
+author: Ramnath Vaidyanathan
+framework: dzslides
+url:
+  assets: .
+  lib: ../../libraries
+widgets: []
+hitheme: github
+mode: none
+---
+
+## Slide 1
+
+This is slide1
+
+---
+
+## Slide 2
+
+This is some code
+
+```r
+library(ggplot2)
+qplot(wt, mpg, data = mtcars)
+```
+
+--- &video 
+
+## Video
+
+<video src="http://videos-cdn.mozilla.net/brand/Mozilla_Firefox_Manifesto_v0.2_640.webm"></video>
+
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+---  plot #simple-plot
+  
+## A Simple Plot ##
+
+Let us create a simple scatterplot.
+
+```{r simple-plot, fig.height = 6, fig.align = 'center', message = F}
+require(ggplot2)
+qplot(wt, mpg, data = mtcars)
+```
+

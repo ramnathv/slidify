@@ -1,0 +1,279 @@
+---
+title    : Slidify
+subtitle : Reproducible HTML Slides from R Markdown
+author   : Ramnath Vaidyanathan
+job      : Assistant Professor, McGill University
+mode     : draft
+url:
+  lib   : ../io2012/libraries
+  assets: ../io2012/assets
+github:
+  user: ramnathv
+  repo: slidify
+license: by-sa
+hitheme: solarized_light
+--- .segue .quote .dark
+
+<q> Slidify is a tool that makes it easy to create, customize and publish, reproducible HTML5 slide decks using R Markdown.</q>
+
+<style>
+.dark q {
+  color: white;
+}
+</style>
+
+---
+
+## Install Slidify
+
+Slidify can be installed from `github` using Hadley's `devtools` package
+
+```r
+library(devtools)
+install_github('slidify', 'ramnathv')
+```
+
+If you are on Windows, you will need `gcc` and `RTools` to get `devtools` working.
+
+--- .segue .quote bg:yellow
+
+<q> Slidify is a tool that makes it easy to <span class = 'red'>create</span>, customize and publish, reproducible HTML5 slide decks using R Markdown.</q>
+
+---
+
+## Create Deck
+
+You can initialize a slide deck using the `author` function
+
+```r
+library(slidify)
+author("mydeck")
+```
+
+This will do the following
+
+1. Create a new directory named `mydeck`.
+2. Copy necessary scaffolding for the presentation.
+3. If `git` is installed on the system
+   - initialize a new git repo.
+   - checkout and switch to `gh-pages` branch
+   - add and commit all files to the repo
+4. Open `index.Rmd` for you to edit.
+
+---
+
+## Edit Slides
+
+```{r echo = F, results = 'asis'}
+f1 <- system.file('skeleton', 'index.Rmd', package = 'slidify')
+x = paste('\t', readLines(f1))
+cat(paste(x, collapse = '\n'))
+```
+
+1. Edit the metadata in the YAML front matter.
+2. Write your slides in R Markdown.
+3. Separate your slides by an empty blank line followed by three dashes.
+
+---
+
+## Add Slide Classes
+
+Add slide classes and id by appending them to the slide separator
+
+```{r echo = F, results = 'asis'}
+f2 <- "slides/example1.Rmd"
+x = paste('\t', readLines(f2))
+cat(paste(x, collapse = '\n'))
+```
+
+
+```{r echo = F, results = 'asis'}
+cat(slidify:::read_file(f2))
+```
+
+--- .segue .dark .quote
+
+<q> Slidify is a tool that makes it easy to create, <span class = 'red'>customize</span> and publish, reproducible HTML5 slide decks using R Markdown.</q>
+
+---
+
+## Customize ##
+
+Slidify is designed to be modular and provide a high degree of customization for the more advanced users.
+
+ Option         | Description
+ -------------- | ------------
+ framework      | slide generation framework to use
+ theme          | theme to use for styling slide content
+ highlighter    | tool to use for syntax highlighting
+ hitheme        | style to use for syntax highlighting
+ mode           | draft, standalone or selfcontained
+ url            | path to assets and libraries
+
+---
+
+## Style your Deck
+
+Use the options `framework` and `theme` to style your deck!
+
+ framework | theme
+ --------- | --------------------
+ [io2012]()|
+ [html5slides](http://html5slides.googlecode.com/) | default, uulm
+ [html5rocks]() |
+ [deck.js](http://imakewebthings.com/deck.js/)     | web2.0, swiss, neon
+ [dzslides](http://paulrouget.com/dzslides/)       | 
+ [landslide](https://github.com/adamzap/landslide) | default, tango, clean
+ [shower](http://pepelsbey.github.com/shower/en.htm) | ribbon
+ [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#) |
+ [slideous]() |
+ [beamer]() | 
+ [showoff](http://github.com/schacon/showoff) | 
+
+
+---
+
+## Slide Source
+
+
+    ```{r results = 'asis', echo = F}
+    f3 <- 'slides/slide1.Rmd'
+    x = paste(readLines(f3))
+    cat(paste(x, collapse = '\n')) 
+    ```
+
+---
+
+## knit Slide
+
+```{r echo = F, results = 'hide', eval = F}
+knit('slides/slide1.Rmd')
+```
+
+
+    ```{r echo = F, comment = NA, results = 'asis'}
+    x = paste(readLines('slide1.md'), collapse = '\n')
+    cat(paste(x, collapse = '\n'))
+    ```
+
+
+---
+
+## Parsed Slide
+
+    ```{r echo = F, results = 'asis'}
+    x = paste(readLines('slide1.md'), collapse = '\n')
+    slidify:::parse_slide(x) 
+    ```
+
+
+--- .segue .dark
+
+## Acknowledgements
+
+---
+
+## R Packages ##
+
+All the heavy lifting is actually done by three awesome R packages. Slidify is merely a wrapper around them. 
+
+* Yihui Xie (knitr)
+* RStudio (markdown)
+* Edwin de Jonge (whisker)
+
+---
+
+## HTML5 Slide Frameworks ##
+
+Slidify builds on HTML5 slide frameworks created by several individuals and organizations.
+
+ Framework | Author  | License
+ --------- | ------- | -------
+ [html5slides](http://code.google.com/p/html5slides/) | Luke Mah, Marcin Wichary | Apache
+ [deck.js](https://github.com/imakewebthings/deck.js) | Caleb Troughton |  MIT/GPL
+ [dzslides](https://github.com/paulrouget/dzslides) | Paul Roget | DWTFYW
+ [html5rocks](http://slides.html5rocks.com/) | Google | Apache
+ [landslide](https://github.com/adamzap/landslide)| Adam Zapletal| Apache
+ [shower](https://github.com/pepelsbey/shower) | Vadim Makeev | MIT
+ [slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#) | Dave Ragett  | MIT
+ [slideous]() | Stefan Goessner | LGPL
+
+---
+
+## Syntax Highlighters ##
+
+Syntax highlighting is powered by open source highlighters. 
+
+  Highlighter | Author  | License
+ --------- | ------- | -------
+ [highlight.js](https://github.com/isagalaev/highlight.js) | Software Maniacs | MIT
+ [Google Prettify](http://code.google.com/p/google-code-prettify/)| Google| Apache
+ [highlight](http://cran.r-project.org/web/packages/highlight/index.html)| Romain Francois | GPL
+
+---
+
+## Markdown-HTML5 Converters ##
+
+I have extensively borrowed ideas and features from HTML5 slide converters written in other languages. I have also borrowed from blogging frameworks.
+
+ Language | Framework 
+ -------- | -----------
+ Ruby     | [showoff](http://github.com/schacon/showoff)   
+ Ruby     | [slideshow](https://github.com/geraldb/slideshow)  
+ Ruby     | [keydown](https://github.com/infews/keydown) 
+ Ruby     | [ruhoh](https://github.com/ruhoh)
+ Python   | [hieroglyph](https://github.com/nyergler/hieroglyph)  
+ Python   | [landslide](https://github.com/adamzap/landslide) 
+ Haskell  | [pandoc](https://github.com/jgm/pandoc)
+
+--- .smaller
+
+## License ##
+
+`slidify` is made available under the MIT License. All included `css` and `javascript` are licensed under the terms specified by the respective libraries.
+
+**MIT License**
+
+Copyright (C) 2012 Ramnath Vaidyanathan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+--- .segue .dark
+
+## References ##
+
+---
+
+## HTML5 Slides with R ##
+
+
+1. [An Introduction to R](http://goo.gl/L79xW)
+2. [How to Make HTML Slides with knitr](http://goo.gl/7C907)
+3. [Fancy HTML5 Slides with knitr and Pandoc](http://goo.gl/Uqnq3)
+4. [Visualize World Bank Data](http://goo.gl/QlTA4)
+5. [Interactive Presentations with deck.js](http://goo.gl/kdhBO)
+
+---
+
+## R Markdown ##
+
+1. [Interactive Reports in R with knitr and RStudio](http://goo.gl/oTeV5)
+2. [Getting Started with R Markdown, knitr and RStudio](http://goo.gl/ALjtQ)
+3. [Dynamic Content RStudio, Markdown and Marked](http://goo.gl/84D5E)
+4. [Using Markdown with RStudio](http://goo.gl/KKdaf)
+5. [Example Reproducible Report using R Markdown](http://goo.gl/ZQF1u)
+6. [Interactive Slides with R, googleVis and knitR](http://goo.gl/cVS9W)
+7. [knitr, Slideshows and Dropbox](http://goo.gl/ZTSD7)
+
+
+
+
+
+
+
+
+

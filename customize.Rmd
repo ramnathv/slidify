@@ -1,0 +1,232 @@
+---
+navbar:
+  title: Slidify
+  items: 
+    - {item: Home, href: index, icon: home}
+    - {item: "Start", href: start, icon: signin}
+    - {item: Author, href: about, icon: pencil}
+    - {item: Style, href: style, icon: hand-right, class: dropdown, 
+        dropdown: true, menu: [
+         {item: io2012, href: 'samples/intro'},
+         {item: deck.js, href: 'samples/deck.js'},
+         {item: shower, href: 'samples/shower'},
+         {item: landslide, href: 'samples/landslide'}
+        ]
+      }
+    - {item: Customize, href: customize, class: active, icon: gift}
+    - {item: Extend, href: extend, icon: cogs}
+    - {item: Publish, href: publish,  icon: github}
+---
+
+# Customize
+
+A layout is a mustache template that specifies the markup to be used while rendering a slide deck. Layouts allow a clean separation of content from design, thereby allowing the same markdown document to be rendered using multiple HTML5 frameworks. The best way to understand layouts is to follow a slide through slidify
+
+### Slide
+
+Consider a simple text slide shown below. 
+
+```
+--- .class1 #id1 bg:yellow
+
+## Slide Title
+
+Slide Contents
+```
+
+
+### Parsed Slide
+
+Slidify parses this slide into metadata and content elements.
+
+```
+$id
+[1] "id1"
+
+$bg
+[1] "yellow"
+
+$class
+[1] "class1"
+
+$header
+[1] "<h2>Slide Title</h2>"
+
+$content
+[1] "<p>Slide Contents</p>\n"
+```
+
+### Layout
+
+The default slide layout used by the `io2012` framework is shown below. Note that the mustache template has placeholders for the metadata and content elements returned by the parser.
+
+```
+<!-- default slide template for the framework io2012 -->
+<slide class="{{ class }}" id="{{ id }}" style="background:{{bg}};">
+  <hgroup>
+    {{{ header }}}
+  </hgroup>
+  <article>
+    {{{ content }}}
+  </article>
+</slide>
+```
+
+### Rendered Slide
+
+Slidify uses `whisker` to render the final html by passing the parsed data to the layout file.
+
+```
+<slide class="class1" id="id" style="background:yellow;">
+  <hgroup>
+    <h2>Slide Title</h2>
+  </hgroup>
+  <article>
+    <p>Slide Contents</p>\n 
+  </article>
+</slide>
+```
+
+## Customizing Layouts
+
+Sometimes it takes more than CSS to achieve a certain layout and style for your slide. For example, suppose you want a slide with a two column layout and a red horizontal rule after the title. Here is how you can do it using layouts in Slidify. Any layout saved in the `assets/layouts` folder is automatically read by Slidify
+
+### Define Layout ###
+
+```
+<slide class="{{ class }}" id="{{ id }}">
+  <hgroup>
+    {{{ header }}}
+  </hgroup>
+  <article>
+    <hr noshade size=4 color='red'>  
+    {{{ content }}}  
+    <div class='left' style='float:left;width:48%'>
+     {{{ left }}}
+    </div>    
+    <div class='right' style='float:right;width:48%'>
+     {{{ right }}}
+    </div>
+  </article>
+</slide>
+```
+ 
+### Write Slide ###
+
+The `header` and `content` elements in the template are automatically included in the results of the parser. However, the elements `left` and `right` are blocks that need to be specified explicitly in your slide. You can define any portion of your slide as a named block by using an empty line and three stars `***` followed by the block name.
+```
+## Two Column Layout   
+This slide has two columns
+    
+*** left
+    
+- point 1
+- point 2
+- point 3
+    
+*** right
+
+- point 1
+- point 2
+- point 3
+```
+
+## More Uses 
+
+Layouts can be used to simplify slide design considerably and keep things DRY. Slidify ships with layouts for the six slide types that Google Docs or Powerpoint provides.
+
+* title-only
+* title-and-body
+* title-and-two-cols
+* title
+* caption
+* blank
+
+## Layout Inheritance
+
+Consider the following use-case. Suppose you want to add a footer to all slides including a logo. An obvious way to do it is to rewrite the default slide template, adding the footer after `{{{ content }}}`, and saving it as `slide.html` in the `assets/layouts` folder. Note that user define layouts override system layouts of the same name.
+
+```
+<slide class="{{ class }}" id="{{ id }}">
+  <hgroup>
+    {{{ header }}}
+  </hgroup>
+  <article>
+    {{{ content }}}  
+    <footer class = 'logo'>
+      <img src = 'path/to/logo'></img>
+    </footer>
+  </article>
+</slide>
+```
+
+There are two reasons this is not efficient. One, it is not DRY and repeats code unnecessarily. Two, when the default layout is modified, you need to manually modify the custom layout to ensure that layouts are in sync. This could happen when you decide to use a different HTML5 slide framework, which has a different markup for slides. This is where layout inheritance comes to play. 
+
+Note that while defining your custom slide layout, you are essentially replacing the `{{{ content }}}` placeholder in the slide layout by `{{{ content }}}` + footer. Slidify provides a mechanism, where layouts can inherit from a parent layout, thereby simplifying the template considerably and keeping thing DRY. 
+
+The modified layout for this use-case using inheritance is shown below. The YAML front matter indicates that this template inherits from `slide`, which is the default slide layout. The body of the layout is used to replace `{{{ content }}}` in the parent layout, thereby achieving what we wanted.
+
+```
+---
+layout: slide
+---
+{{{ content }}}
+<footer class = 'logo'>
+  <img src = 'path/to/logo'></img>
+</footer>
+```
+
+## Layouts with Parameters
+
+Slidify layouts can accept arbitrary parameters which expands its power. Let us return to the case of two column layouts. Suppose you want slides with different column widths. We can achieve this by rewriting the two column layout using parameters, and then passing them on to the layout using slide level metadata. Here are the steps
+
+**Layout**
+
+Note that the placeholders `w1` and `w2` are parameters that control the width of the two columns, and are provided by the slide.
+
+```
+---
+layout: slide
+---
+{{{ content }}}  
+<div class='left' style='float:left;width:{{{ w1 }}}'>
+ {{{ left }}}
+</div>    
+<div class='right' style='float:right;width:{{{ w2 }}}'>
+ {{{ right }}}
+</div>
+```
+
+**Slide**
+
+You can include arbitrary metadata for any slide using `key:value` pairs.
+
+```
+--- &twocol w1:40% w2:60%
+### Two Column Layout   
+This slide has two columns
+    
+*** left
+    
+- point 1
+- point 2
+- point 3
+    
+*** right
+
+- point 1
+- point 2
+- point 3
+```
+
+> Note. Slide level metadata are specified as `key:value` pairs. Commonly specified metadata like `id`, `class` and `layout` can also be identified by prefixing with punctuation marks `#`, `.` and `&` respectively. Spaces can be used ONLY to separate key:value pairs and not within a pair. This is a limitation of the metadata parser and will be relaxed in future versions of slidify
+
+**Miscellaneous Uses**
+
+The possibilities are endless. For example, if you are teaching a class on statistics, you might have slides that follow a specific pattern like 
+
+1. Start with the definition
+2. Explain its meaning
+2. Provide an example
+
+It is easy to encode such design patterns within a `slidify` template, which makes it easy to write complex slides in no time.

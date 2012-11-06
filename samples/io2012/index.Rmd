@@ -1,0 +1,236 @@
+---
+title: Slidify
+subtitle: Reproducible HTML5 Slides
+author: Ramnath Vaidyanathan
+job: Assistant Professor, McGill 
+logo: slidify_logo.png
+biglogo: slidify_logo.png
+license: by-nc-sa
+widgets: [mathjax, bootstrap, quiz]
+github:
+  user: ramnathv
+  repo: slidify
+url:
+  lib   : ../../libraries
+  assets: ../assets
+copy_libraries: false
+---
+
+```{r setup, cache = F, echo = F, message = F, warning = F, tidy = F}
+# make this an external chunk that can be included in any file
+options(width = 70)
+opts_chunk$set(message = F, error = F, warning = F, echo = F, comment = NA, fig.align = 'center', dpi = 100, fig.height = 4.5, fig.width = 8, tidy = F, cache = T, cache.path = '.cache/', fig.path = 'fig/')
+source('~/Dropbox/Inbox/R_Projects/Code_Snippets/prob.R')
+source('~/Dropbox/Inbox/R_Projects/Code_Snippets/getMooreData.R')
+require(ggplot2); require(xtable); require(plyr); require(openintro)
+options(xtable.type = 'html')
+knit_hooks$set(inline = function(x) {
+  if(is.numeric(x)) {
+    round(x, getOption('digits'))
+  } else {
+    paste(as.character(x), collapse = ', ')
+  }
+})
+knit_hooks$set(plot = knitr:::hook_plot_html)
+require(latticeExtra)
+trellis.par.set(theme = theEconomist.theme(box = 'transparent'))
+lattice.options(theEconomist.opts())
+knit_hooks$set(document = function(doc){
+  stringr::str_replace_all(doc, "```\n*```[^r]", "")
+})
+```
+
+## Test Features of Slidify ##
+
+1. Mathjax
+2. Layouts
+3. Backgrounds
+4. Widgets
+5. Overlays
+6. Metadata
+7. Embeds
+
+---
+
+Setext Header
+---
+
+
+This slide shows a Setext style header.
+
+---
+
+## Tables
+
+Mardown tables contain `---` and should not be interpreted as separator.
+
+Column X | Column Y
+---------|----------
+Row 1    | Row 1
+Row 2    | Row 2
+
+
+---
+
+## Animated List, Ordered
+
+This list should be animated
+
+> 1. Point 1
+> 2. Point 2
+> 3. Point 3
+
+---
+
+## Animated List, Unordered
+
+This list should be animated
+
+> - Point 1
+> - Point 2
+> - Point 3
+
+
+--- bg:url(../assets/img/old_mathematics.png)
+
+## Mathjax ##
+
+$$
+\begin{aligned}
+\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\   \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
+\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
+\nabla \cdot \vec{\mathbf{B}} & = 0 \end{aligned}
+$$
+<br />
+$$
+\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\
+\frac{\partial X}{\partial u} &  \frac{\partial Y}{\partial u} & 0 \\
+\frac{\partial X}{\partial v} &  \frac{\partial Y}{\partial v} & 0
+\end{vmatrix}
+$$
+
+<div class='source'>
+  Source: <a href='www.subtlepatterns.com'>Background from SubtlePatterns</a>
+</div>
+
+--- &twocol
+
+## Layouts, Custom Metadata ##
+
+This is a slide with a two column layout.
+
+*** left
+
+Column 1
+
+*** right
+
+Column 2
+
+
+
+--- bg:#EEE
+
+## Background Color ##
+
+This slide should have a subtle gray background.
+
+--- bg:url(../assets/img/grid.png)
+
+## Background Image ##
+
+This slide should have a background image.
+
+--- &radio .quiz
+
+## Widgets: jQuery-Quiz ##
+
+This is a multiple choice question
+
+1. Choice 1
+2. Choice 2
+3. _Choice 3 (correct)_
+4. Choice 4
+
+*** hint
+
+This is a hint
+
+*** explanation
+
+This is the explanation
+
+---
+
+## Widgets: Bootstrap ##
+
+**Blocks**
+
+<div class="alert alert-info">
+  <p>This is an alert info block which should render in blue</p>
+</div>
+
+**Tooltips**
+
+This is to check out tooltips in bootstrap <a href="#" rel="tooltip" data-original-title="Default tooltip">you probably</a>
+
+**Popover**
+
+<a class="btn btn-large btn-danger" rel="popover" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title" id='example'>Click to toggle popover</a>
+
+*** pnotes
+
+The font size and color needs some tweaking.
+
+---
+
+## Highlighter: Highlight JS ##
+
+We can make this function more robust by adding a simple error checking statement to prevent illegal parameters from generating invalid results.
+
+```{r echo = T}
+qpareto <- function(p, scale, loc) {
+  if (( scale <= 0) | ( loc <= 0)) {
+    stop("'qpareto' parameters must be greater than zero.")
+  }
+  q <- loc*(1 - p)^(-1/scale)
+  return(q)
+}
+```
+
+Entering a negative parameter now raises an exception, instead of an invalid result that could silently corrupt subsequent results.
+
+```{r echo = T, error = T}
+qpareto(0.4, 5, -1)
+```
+We could improve this further by checking to ensure that `p` is a valid probability.
+
+---
+
+## Check Chunk Execution ##
+
+```{r scplot, dev = 'svg', fig.width = 8, fig.height = 5, error = T}
+library(ggplot2); 
+library(ggthemes);
+qplot(wt, mpg, data = mtcars) +
+  theme_solarized()
+```
+
+*** pnotes
+
+```{r ref.label = "scplot", echo = T, eval = F}
+```
+
+---
+
+<q class='shout'>This is a shout</q>
+
+I am checking key, <span class = 'key'>key</span>
+
+
+
+
+
+
+

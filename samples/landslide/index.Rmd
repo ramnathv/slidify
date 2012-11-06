@@ -1,0 +1,36 @@
+---
+title: Landslide with Slidify
+author: Ramnath Vaidyanathan
+framework: landslide
+theme: clean
+mode : selfcontained
+---
+
+# Landslide with Slidify
+
+---
+
+## Slide 2
+
+This is slide 2
+
+1. Point 1
+2. Point 2
+3. Point 3
+
+*** pnotes
+
+This should show up as presenter notes
+
+---
+
+## Slide 3
+
+This is a code chunk
+
+```{r eval = F}
+library(ggplot2)
+qplot(wt, mpg, data = mtcars)
+```
+
+

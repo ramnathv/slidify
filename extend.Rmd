@@ -1,0 +1,50 @@
+---
+navbar:
+  title: Slidify
+  items: 
+    - {item: Home, href: index,  icon: home}
+    - {item: "Start", href: start, icon: signin}
+    - {item: Author, href: about, icon: pencil}
+    - {item: Style, href: style, icon: hand-right, class: dropdown, 
+        dropdown: true, menu: [
+         {item: io2012, href: 'samples/intro'},
+         {item: deck.js, href: 'samples/deck.js'},
+         {item: shower, href: 'samples/shower'},
+         {item: landslide, href: 'samples/landslide'}
+        ]
+      }
+    - {item: Customize, href: customize, icon: gift}
+    - {item: Extend, href: extend, icon: cogs}
+    - {item: Publish, href: publish, icon: github}
+---
+
+# Extend
+
+A widget is a collection of `stylesheets`, `javascripts` and `layouts` that add additional functionality to a slide deck. Let us take the example of `mathjax`, a widget that comes pre-bundled with `slidify`, that allows mathematical equations to be rendered beautifully.
+
+Shown below are the contents of the `mathjax` widget folder.
+
+![Imgur](http://i.imgur.com/y4Yep.png?1)
+
+`mathjax.html` is a mustache layout that specifies how this widget would be inserted into a slide deck. Note that it serves `mathjax` from a CDN when you are connected to the internet, and if not, it switches to a stripped down local version. The mustache variable `url.widgets`, specifies the path to the location of the widgets folder in the root directory, so that it is served correctly.
+
+```
+<!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="{{url.widgets}}/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+```
+
+Slidify automatically inserts the contents of a layout file if it has the same name as that of the widget.
+
+<div id="disqus_thread"></div>

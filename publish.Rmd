@@ -1,0 +1,51 @@
+---
+navbar:
+  title: Slidify
+  items: 
+    - {item: Home, href: index,  icon: home}
+    - {item: "Start", href: start, icon: signin}
+    - {item: Author, href: about, icon: pencil}
+    - {item: Style, href: style, icon: hand-right, class: dropdown, 
+        dropdown: true, menu: [
+         {item: io2012, href: 'samples/intro'},
+         {item: deck.js, href: 'samples/deck.js'},
+         {item: shower, href: 'samples/shower'},
+         {item: landslide, href: 'samples/landslide'}
+        ]
+      }
+    - {item: Customize, href: customize, icon: gift}
+    - {item: Extend, href: extend, icon: cogs}
+    - {item: Publish, href: publish, class: active, icon: github}
+---
+
+# Publish
+
+Slidify makes it easy to publish your slide decks online.
+
+### Github Pages
+
+Publishing to Github is as easy as running `publish` from inside the slide directory. You need to have `git` installed on your system, create an empty `github` repo and `ssh` access set up for `github`.
+
+```
+publish(user = "USER", repo = "REPO")
+```
+
+### Dropbox
+
+You can publish your slide deck using the `Public` folders feature of `Dropbox`. Run the following from inside your slide directory, where `dirname` is the name of the directory you want to create in your `~/Dropbox/Public` folder to host your presentation.
+
+```
+publish(dirname, host = "dropbox")
+```
+
+Copy the public link to `index.html` and share your presentation with the rest of the world! Note that you may need to remove the `http://` part of the URL for externally hosted stylesheets and javascripts to work correctly. Your public link should look like what is shown below.
+
+```
+dl.dropbox.com/u/{{user.id}}/{{dirname}}/
+```
+
+### Rpubs
+
+```
+publish(title = 'mytitle', 'index.html', host = 'rpubs')
+```
