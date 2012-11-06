@@ -7,10 +7,11 @@ Slidify helps you create and publish beautiful HTML5 presentations from [RMarkdo
 
 ### Install ###
 
-Slidify is still under heavy development. You can install it from `github` using the `devtools` package.
+Slidify is still under heavy development. You can install it from `github` using the `devtools` package. You will also need `slidifyLibraries` which contains all external libraries required by `slidify`.
 
 ```r
-devtools::install_github('slidify', 'ramnathv')
+install_github('slidify', 'ramnathv')
+install_github('slidifyLibraries', 'ramnathv')
 ```
 
 ### Initialize ###
@@ -19,7 +20,7 @@ You can initialize a presentation by running `create`. This will create a scaffo
 
 ```r
 library(slidify)
-create('mydeck')
+author('mydeck')
 ```
 
 ### Author ###
@@ -56,7 +57,7 @@ framework      : slide generation framework to use
 theme          : theme to use for styling slide content
 highlighter    : tool to use for syntax highlighting
 hitheme        : style to use for syntax highlighting
-copy_libraries : copy library files to slide directory?
+mode           : selfcontained, standalone, draft
 url            : paths to lib
 widgets        : widgets to include
 ```
