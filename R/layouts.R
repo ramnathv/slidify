@@ -5,7 +5,7 @@
 #' @keywords internal
 #' @noRd
 read_layouts <- function(path){
-  files = dir(path, pattern = '*.html', full = T)
+  files = dir(path, pattern = '*.html', full.names = T)
   setNames(
     lapply(files, read_file),
     gsub(".html", '', basename(files), fixed = TRUE)
@@ -51,6 +51,6 @@ get_layouts <- function(paths){
 #' @noRd
 get_slide_layout <- function(framework){
 	l_file = system.file('libraries', 'frameworks', framework, 'layouts', 
-											 'slide.html', package = 'slidify')
+   'slide.html', package = 'slidifyLibraries')
 	cat(slidify:::read_file(l_file))
 }
