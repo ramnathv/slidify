@@ -1,6 +1,6 @@
 ---
 title       : 
-substitle   : 
+subtitle    : 
 author      : 
 job         : 
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
