@@ -2,7 +2,8 @@
 #'
 #  Figure out a better mechanism for specifying defaults
 slidifyDefaults <- function(){list(
-	url = list(lib = system.file('libraries', package = 'slidify'), assets = "assets"),
+	url = list(lib = system.file('libraries', package = 'slidifyLibraries'), 
+	  assets = "assets"),
 	framework   = 'io2012',
 	theme       = "", 
 	highlighter = 'highlight.js',  
