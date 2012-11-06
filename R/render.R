@@ -26,6 +26,8 @@ render_deck <- function(deck, layouts){
 }
 
 #' Parse deck into metdata and slide elements
+#' 
+#' @param inputFile path to markdown file to parse
 parse_deck <- function(inputFile){
 	deck = inputFile %|% to_deck 
 	deck$slides = deck$slides %|% split_slides %|% parse_slides  
