@@ -46,7 +46,7 @@ slidify <- function(inputFile, outputFile, knit_deck = TRUE){
 #' @keywords internal
 make_standalone <- function(deck, html_in){
 	lib_url = paste0(deck$url$lib, '/')
-	lib_cdn = 'http://slidify.googlecode.com/git/inst/libraries/'
+	lib_cdn = 'http://slidifylibraries.googlecode.com/git/inst/libraries/'
 	html = read_file(html_in, warn = FALSE) %|% markdown:::.b64EncodeImages
 	html = gsub(lib_url, lib_cdn, html)
 	# html_out = sprintf('%s.html', basename(getwd()))
