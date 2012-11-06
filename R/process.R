@@ -37,9 +37,7 @@ to_deck <- function(doc){
   txt = str_split_fixed(read_file(doc), '\n---', 2)
   meta = yaml.load(gsub("^---\n+", '', txt[1]))
   deck = modifyList(get_config(), c(meta, slides = txt[2]))
-#   if (deck$copy_libraries){
-#   	deck$url[['lib']] <- 'libraries'
-#   }
+  deck$standalone = ifelse(deck$mode == "standalone", TRUE, FALSE)
   return(deck)
 }
 
