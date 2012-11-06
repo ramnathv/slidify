@@ -4,6 +4,7 @@
 #' @param outputFile path to output html document; default uses inputFile
 #' @param knit_deck should the input file be knit?; default is TRUE
 #' @return path to outputFile
+#' @seealso slidify-package
 #' @export
 slidify <- function(inputFile, outputFile, knit_deck = TRUE){
 	if (knit_deck == TRUE){
@@ -46,8 +47,9 @@ slidify <- function(inputFile, outputFile, knit_deck = TRUE){
 make_standalone <- function(deck, html_in){
 	lib_url = paste0(deck$url$lib, '/')
 	lib_cdn = 'http://slidify.googlecode.com/git/inst/libraries/'
-	html = read_file(html_in) %|% markdown:::.b64EncodeImages
+	html = read_file(html_in, warn = FALSE) %|% markdown:::.b64EncodeImages
 	html = gsub(lib_url, lib_cdn, html)
+	# html_out = sprintf('%s.html', basename(getwd()))
 	cat(html, file = html_in)
 	return(html_in)
 }
