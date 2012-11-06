@@ -10,12 +10,11 @@
   \item{repo}{github reponame}
 }
 \description{
-  \enumerate{
-    \item Install \code{git}
-    \item Create a \code{github} account
-    \item Set up \code{SSH} access. See
+  You will need \code{git} installed on your computer and a
+  \code{github} account. In addition, you will \code{SSH}
+  access to \code{github}. See
   \url{https://help.github.com/articles/generating-ssh-keys}
-  }
+  on how to set up \code{SSH} access
 }
 \details{
   Login with your github account and create a new

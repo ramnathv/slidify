@@ -1,6 +1,5 @@
 \docType{package}
 \name{slidify-package}
-\alias{slidify}
 \alias{slidify-package}
 \title{Create stunning presentations from R Markdown}
 \description{
