@@ -13,6 +13,8 @@
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
 @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:600);
+@import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:700);
+
 @import url(../fonts/stylesheet.css);
 
 /* Modifications to Bootstrap by Ramnath Vaidyanathan*/
@@ -39,8 +41,8 @@ iframe {
 /* Code and Pre Blocks */
 pre {
   font-family: 'Monaco', 'Consolas', sans-serif;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 18px;
+  line-height: 27px;
   white-space: pre-wrap;       /* css-3 */
   white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
   white-space: -pre-wrap;      /* Opera 4-6 */
@@ -49,9 +51,10 @@ pre {
 }
 
 code {
-  font-family: 'Source Code Pro', monospace;
-  font-size: 20px;
-  font-weight: 600;
+  font-family: 'Monaco', monospace;
+  font-size: 18px;
+  line-height: 27px;
+  /* font-weight: 600; */
   color: #800000;
   color: green;
 }
@@ -116,15 +119,15 @@ em.rounded {
 
 section p, section li,
 article p, article li, article li.build{
-  font-family: 'Crimson Text', 'Garamond',  'Palatino', 'Helvetica', sans-serif;
+  font-family: 'Helvetica', 'Crimson Text', 'Garamond',  'Palatino', sans-serif;
   text-align: justify;
   font-size:22px;
   line-height: 1.5em;
 }
 
 article > p, article li, article li.build {
-  color: #565b62;
-  /* color: #000000; */
+  /* color: #565b62;*/
+  color: #000000; 
 }
 
 slide.segue:not(.title-slide) h2{

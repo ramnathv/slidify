@@ -1,0 +1,15 @@
+/* Slide Classes */
+
+slide.smaller li{
+  font-size: 0.8em;
+  line-height: 1.3em;
+}
+
+slide.smaller p{
+  font-size: 0.8em;
+  line-height: 1.3em;
+}
+
+slide.large p, li{
+  font-size: 1.2em;
+}

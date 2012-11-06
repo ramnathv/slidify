@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../io2012/libraries/frameworks/io2012/css/default.css" media="all" >
   <link rel="stylesheet" href="../io2012/libraries/frameworks/io2012/phone.css" 
     media="only screen and (max-device-width: 480px)" >
-  <link rel="stylesheet" href="../io2012/libraries/highlighters/highlight.js/css/solarized_light.css" />
+  <link rel="stylesheet" href="../io2012/libraries/highlighters/highlight.js/css/github.css" />
   <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
   <script data-main="../io2012/libraries/frameworks/io2012/js/slides" 
     src="../io2012/libraries/frameworks/io2012/js/require-1.0.8.min.js">
@@ -20,6 +20,7 @@
     <link rel="stylesheet" href = "../io2012/assets/css/lists.css">
 <link rel="stylesheet" href = "../io2012/assets/css/quotes.css">
 <link rel="stylesheet" href = "../io2012/assets/css/ribbons.css">
+<link rel="stylesheet" href = "../io2012/assets/css/sizes.css">
 <link rel="stylesheet" href = "../io2012/assets/css/tables.css">
 <link rel="stylesheet" href = "../io2012/assets/css/text.css">
 
@@ -283,6 +284,10 @@ author(&quot;mydeck&quot;)
 </tr>
 </thead><tbody>
 <tr>
+<td><a href="">io2012</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="http://html5slides.googlecode.com/">html5slides</a></td>
 <td>default, uulm</td>
 </tr>
@@ -323,6 +328,314 @@ author(&quot;mydeck&quot;)
 <td></td>
 </tr>
 </tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Slide Source</h2>
+  </hgroup>
+  <article>
+    <pre><code>---  plot #simple-plot
+
+## A Simple Plot ##
+
+Let us create a simple scatterplot.
+
+```{r simple-plot, fig.height = 6, fig.align = &#39;center&#39;, message = F}
+require(ggplot2)
+qplot(wt, mpg, data = mtcars)
+```
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>knit Slide</h2>
+  </hgroup>
+  <article>
+    <pre><code>---  plot #simple-plot
+
+## A Simple Plot ##
+
+Let us create a simple scatterplot.
+
+```r
+require(ggplot2)
+qplot(wt, mpg, data = mtcars)
+```
+
+![plot of chunk simple-plot](figure/simple-plot.png) 
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Parsed Slide</h2>
+  </hgroup>
+  <article>
+    <pre><code>$id
+[1] &quot;simple-plot&quot;
+
+$html
+[1] &quot;&lt;h2&gt;A Simple Plot&lt;/h2&gt;\n\n&lt;p&gt;Let us create a simple scatterplot.&lt;/p&gt;\n\n&lt;pre&gt;&lt;code class=\&quot;r\&quot;&gt;require(ggplot2)\nqplot(wt, mpg, data = mtcars)\n&lt;/code&gt;&lt;/pre&gt;\n\n&lt;p&gt;&lt;img src=\&quot;figure/simple-plot.png\&quot; alt=\&quot;plot of chunk simple-plot\&quot;&gt; &lt;/p&gt;\n&quot;
+
+$header
+[1] &quot;&lt;h2&gt;A Simple Plot&lt;/h2&gt;&quot;
+
+$level
+[1] &quot;2&quot;
+
+$title
+[1] &quot;A Simple Plot&quot;
+
+$content
+[1] &quot;&lt;p&gt;Let us create a simple scatterplot.&lt;/p&gt;\n\n&lt;pre&gt;&lt;code class=\&quot;r\&quot;&gt;require(ggplot2)\nqplot(wt, mpg, data = mtcars)\n&lt;/code&gt;&lt;/pre&gt;\n\n&lt;p&gt;&lt;img src=\&quot;figure/simple-plot.png\&quot; alt=\&quot;plot of chunk simple-plot\&quot;&gt; &lt;/p&gt;\n&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="segue dark" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Acknowledgements</h2>
+  </hgroup>
+  <article>
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>R Packages</h2>
+  </hgroup>
+  <article>
+    <p>All the heavy lifting is actually done by three awesome R packages. Slidify is merely a wrapper around them. </p>
+
+<ul>
+<li>Yihui Xie (knitr)</li>
+<li>RStudio (markdown)</li>
+<li>Edwin de Jonge (whisker)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>HTML5 Slide Frameworks</h2>
+  </hgroup>
+  <article>
+    <p>Slidify builds on HTML5 slide frameworks created by several individuals and organizations.</p>
+
+<table><thead>
+<tr>
+<th>Framework</th>
+<th>Author</th>
+<th>License</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="http://code.google.com/p/html5slides/">html5slides</a></td>
+<td>Luke Mah, Marcin Wichary</td>
+<td>Apache</td>
+</tr>
+<tr>
+<td><a href="https://github.com/imakewebthings/deck.js">deck.js</a></td>
+<td>Caleb Troughton</td>
+<td>MIT/GPL</td>
+</tr>
+<tr>
+<td><a href="https://github.com/paulrouget/dzslides">dzslides</a></td>
+<td>Paul Roget</td>
+<td>DWTFYW</td>
+</tr>
+<tr>
+<td><a href="http://slides.html5rocks.com/">html5rocks</a></td>
+<td>Google</td>
+<td>Apache</td>
+</tr>
+<tr>
+<td><a href="https://github.com/adamzap/landslide">landslide</a></td>
+<td>Adam Zapletal</td>
+<td>Apache</td>
+</tr>
+<tr>
+<td><a href="https://github.com/pepelsbey/shower">shower</a></td>
+<td>Vadim Makeev</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="http://www.w3.org/Talks/Tools/Slidy2/Overview.html#">slidy</a></td>
+<td>Dave Ragett</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="">slideous</a></td>
+<td>Stefan Goessner</td>
+<td>LGPL</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Syntax Highlighters</h2>
+  </hgroup>
+  <article>
+    <p>Syntax highlighting is powered by open source highlighters. </p>
+
+<table><thead>
+<tr>
+<th>Highlighter</th>
+<th>Author</th>
+<th>License</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><a href="https://github.com/isagalaev/highlight.js">highlight.js</a></td>
+<td>Software Maniacs</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><a href="http://code.google.com/p/google-code-prettify/">Google Prettify</a></td>
+<td>Google</td>
+<td>Apache</td>
+</tr>
+<tr>
+<td><a href="http://cran.r-project.org/web/packages/highlight/index.html">highlight</a></td>
+<td>Romain Francois</td>
+<td>GPL</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Markdown-HTML5 Converters</h2>
+  </hgroup>
+  <article>
+    <p>I have extensively borrowed ideas and features from HTML5 slide converters written in other languages. I have also borrowed from blogging frameworks.</p>
+
+<table><thead>
+<tr>
+<th>Language</th>
+<th>Framework</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Ruby</td>
+<td><a href="http://github.com/schacon/showoff">showoff</a></td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td><a href="https://github.com/geraldb/slideshow">slideshow</a></td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td><a href="https://github.com/infews/keydown">keydown</a></td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td><a href="https://github.com/ruhoh">ruhoh</a></td>
+</tr>
+<tr>
+<td>Python</td>
+<td><a href="https://github.com/nyergler/hieroglyph">hieroglyph</a></td>
+</tr>
+<tr>
+<td>Python</td>
+<td><a href="https://github.com/adamzap/landslide">landslide</a></td>
+</tr>
+<tr>
+<td>Haskell</td>
+<td><a href="https://github.com/jgm/pandoc">pandoc</a></td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="smaller" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>License</h2>
+  </hgroup>
+  <article>
+    <p><code>slidify</code> is made available under the MIT License. All included <code>css</code> and <code>javascript</code> are licensed under the terms specified by the respective libraries.</p>
+
+<p><strong>MIT License</strong></p>
+
+<p>Copyright (C) 2012 Ramnath Vaidyanathan</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="segue dark" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>References</h2>
+  </hgroup>
+  <article>
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>HTML5 Slides with R</h2>
+  </hgroup>
+  <article>
+    <ol>
+<li><a href="http://goo.gl/L79xW">An Introduction to R</a></li>
+<li><a href="http://goo.gl/7C907">How to Make HTML Slides with knitr</a></li>
+<li><a href="http://goo.gl/Uqnq3">Fancy HTML5 Slides with knitr and Pandoc</a></li>
+<li><a href="http://goo.gl/QlTA4">Visualize World Bank Data</a></li>
+<li><a href="http://goo.gl/kdhBO">Interactive Presentations with deck.js</a></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>R Markdown</h2>
+  </hgroup>
+  <article>
+    <ol>
+<li><a href="http://goo.gl/oTeV5">Interactive Reports in R with knitr and RStudio</a></li>
+<li><a href="http://goo.gl/ALjtQ">Getting Started with R Markdown, knitr and RStudio</a></li>
+<li><a href="http://goo.gl/84D5E">Dynamic Content RStudio, Markdown and Marked</a></li>
+<li><a href="http://goo.gl/KKdaf">Using Markdown with RStudio</a></li>
+<li><a href="http://goo.gl/ZQF1u">Example Reproducible Report using R Markdown</a></li>
+<li><a href="http://goo.gl/cVS9W">Interactive Slides with R, googleVis and knitR</a></li>
+<li><a href="http://goo.gl/ZTSD7">knitr, Slideshows and Dropbox</a></li>
+</ol>
 
   </article>
   <!-- Presenter Notes -->

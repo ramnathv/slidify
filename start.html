@@ -162,7 +162,17 @@
 <tr>
 <td>0</td>
 <td>Install</td>
-<td><code>devtools::install_github(&quot;slidify&quot;, &quot;ramnathv&quot;)</code></td>
+<td><code>require(devtools)</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><code>install_github(&quot;slidify&quot;, &quot;ramnathv&quot;)</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><code>install_github(&quot;slidifyLibraries&quot;, &quot;ramnathv&quot;)</code></td>
 </tr>
 <tr>
 <td>1</td>
@@ -197,9 +207,11 @@
 
 <h3>Step 0: Install Slidify</h3>
 
-<p>Slidify is not on CRAN as yet and needs to be installed from <code>github</code>. You can use Hadley&#39;s <code>devtools</code> package to accomplish this easily.</p>
+<p>Slidify is not on CRAN as yet and needs to be installed from <code>github</code>. You can use Hadley&#39;s <code>devtools</code> package to accomplish this easily. You will also need <code>slidifyLibraries</code> which contains all external libraries required by Slidify.</p>
 
-<pre><code>devtools::install_github(&#39;slidify&#39;, &#39;ramnathv&#39;, ref = &#39;dev&#39;)
+<pre><code>library(devtools)
+install_github(&#39;slidify&#39;, &#39;ramnathv&#39;)
+install_github(&#39;slidifyLibraries&#39;, &#39;ramnathv&#39;)
 </code></pre>
 
 <h3>Step 1: Author Deck</h3>
