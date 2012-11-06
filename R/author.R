@@ -2,6 +2,7 @@
 #' 
 #' This function creates a slide directory, initializes it as a git repo and
 #' opens index.Rmd for users to edit.
+#' @param deckdir path to new slide directory
 #' @export
 author <- function(deckdir){
   message('Creating slide directory at ', deckdir, '...')
