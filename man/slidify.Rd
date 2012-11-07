@@ -19,4 +19,7 @@
 \description{
   Convert an Rmd document into HTML5 using a framework
 }
+\seealso{
+  slidify-package
+}
 
