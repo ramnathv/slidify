@@ -10,7 +10,7 @@ author <- function(deckdir){
   	return('Directory already exists. Please choose a different name.')
   }
   scaffold = system.file('skeleton', package = 'slidify')
-  system(sprintf('cp -r %s %s', scaffold, deckdir))
+  copy_dir(scaffold, deckdir)
   message('Finished creating slide directory...')
   message('Switching to slide directory...')
   setwd(deckdir)
