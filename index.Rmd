@@ -23,16 +23,18 @@ layout: landing
 
 Stunning presentations from markdown
 
-<a class="btn btn-primary btn-large" href='start.html'>
- Get Started &raquo;
+<a class="btn btn-primary btn-large" href='https://github.com/downloads/ramnathv/slidify/slidify_0.3.0.zip'>
+ Windows Binary
 </a>
 
 *** video
 
-<iframe class="frame" width="500" height="375" 
+<iframe width="500" height="360" src="http://www.youtube.com/embed/I95GOmLc7TA?rel=0&modestbranding=1" frameborder="0" allowfullscreen></iframe>
+
+<!-- <iframe class="frame" width="500" height="375" 
   src="samples/dzslides/embedder.html#index.html">
   <a href="samples/dzslides/index.html">link to the presentation</a>
-</iframe>
+</iframe> -->
 
 --- &div .features
 
