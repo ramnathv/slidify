@@ -1,0 +1,12 @@
+title: Slidify
+subtitle: Create stunning presentations from markdown
+framework: bootstrap
+cdn: false
+theme: journal
+widgets: [disqus, userecho]
+highlighter: prettify
+hitheme: twitter-bootstrap
+linenums: true
+disqus:
+  shortname: slidify
+mode: selfcontained
