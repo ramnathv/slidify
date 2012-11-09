@@ -1,6 +1,11 @@
 .onLoad <- function(libname, pkgname){
-	options(rstudio.markdownToHTML = 
+	options(rstudio.markdownToHTML = 	  
 		function(inputFile, outputFile) {      
-			slidify(inputFile, outputFile, knit_deck = FALSE)
+			if (readLines(inputFile)[1] == '---'){
+			  slidify(inputFile, outputFile, knit_deck = FALSE)
+			} else {
+				require(markdown)
+				markdownToHTML(inputFile, outputFile)   
+			}
 	})
 }
