@@ -22,7 +22,7 @@ parse_slide <- function(slide){
 # 2. One limitation is that key/values cannot contain any spaces.
 # 3. Rename tpl to layout to maintain consistency.
 parse_meta <- function(meta){
-  x <- strsplit(meta, ' ')[[1]]
+  x <- strsplit(meta, '[[:space:]]+')[[1]]
   x <- sub('^#', 'id:', x)
   x <- sub('&', 'tpl:', x, fixed = T)
   x <- sub('^\\.', 'class:', x)
