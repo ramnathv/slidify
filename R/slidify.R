@@ -13,8 +13,8 @@ slidify <- function(inputFile, outputFile, knit_deck = TRUE){
   deck = inputFile %|% parse_deck
   
   if (deck$mode == 'selfcontained'){
-    with(deck, copy_libraries(framework, highlighter, widgets))
-    deck$url[['lib']] <- 'libraries'
+    deck$url[['lib']] <- deck$url[['lib']] %||% 'libraries'
+    with(deck, copy_libraries(framework, highlighter, widgets, url$lib))
   }
   
   # add layouts, urls and stylesheets from frameworks, widgets and assets

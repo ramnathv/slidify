@@ -1,4 +1,5 @@
 add_urls <- function(deck){
+  deck$url[['lib']] = deck$url[['lib']] %||% system.file('libraries', package = 'slidifyLibraries')
   urls = with(deck, modifyList(url, list(
     widgets    = file.path(url$lib, 'widgets'),
     framework = file.path(url$lib, 'frameworks', framework),
