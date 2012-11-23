@@ -7,7 +7,7 @@
 author <- function(deckdir){
   message('Creating slide directory at ', deckdir, '...')
   if (file.exists(deckdir)){
-  	return('Directory already exists. Please choose a different name.')
+    return('Directory already exists. Please choose a different name.')
   }
   scaffold = system.file('skeleton', package = 'slidify')
   copy_dir(scaffold, deckdir)
@@ -15,7 +15,7 @@ author <- function(deckdir){
   message('Switching to slide directory...')
   setwd(deckdir)
   if (Sys.which('git') != ""){
-  	init_repo()
+    init_repo()
   }
   message('Opening slide deck...')
   file.edit('index.Rmd')
@@ -26,11 +26,11 @@ author <- function(deckdir){
 #' @keywords internal
 #' @noRd
 init_repo <- function(){
-	message('Initializing Git Repo')
-	system("git init")
-	system("git commit --allow-empty -m 'Initial Commit'")
-	message("Checking out gh-pages branch...")
-	system('git checkout -b gh-pages')
-	message('Adding .nojekyll to repo')
-	file.create('.nojekyll')
+  message('Initializing Git Repo')
+  system("git init")
+  system("git commit --allow-empty -m 'Initial Commit'")
+  message("Checking out gh-pages branch...")
+  system('git checkout -b gh-pages')
+  message('Adding .nojekyll to repo')
+  file.create('.nojekyll')
 }

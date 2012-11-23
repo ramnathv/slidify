@@ -5,17 +5,17 @@
 #' @param html_out path to output html file
 #' @noRd
 embed_images <- function(html_in){
-	html <- paste(readLines(html_in, warn = F), collapse = "\n")
-	html <- markdown:::.b64EncodeImages(html)
-	return(html)
+  html <- paste(readLines(html_in, warn = F), collapse = "\n")
+  html <- markdown:::.b64EncodeImages(html)
+  return(html)
 }
 
 #' Enable library files to be served from CDN
 #' 
 #' @noRd
 enable_cdn <- function(html){
-	cdn  = 'http://slidify.googlecode.com/git/inst/libraries/'
-	html = gsub("libraries/", cdn, html, fixed = TRUE)
+  cdn  = 'http://slidify.googlecode.com/git/inst/libraries/'
+  html = gsub("libraries/", cdn, html, fixed = TRUE)
 }
 
 #' Zip vectors into a single list
@@ -39,11 +39,11 @@ pluck <- function (element){
 #' @param css_dir directory containing stylesheets
 #' @noRd
 combine_css <- function(css_dir){
-	css_files = dir(css_dir, pattern = '*.css', full.names = T)
-	out_file = file.path(css_dir, 'user.css')
-	css = paste(lapply(css_files, read_file), collapse = '\n')
-	writeLines(css, out_file)
-	return(out_file)
+  css_files = dir(css_dir, pattern = '*.css', full.names = T)
+  out_file = file.path(css_dir, 'user.css')
+  css = paste(lapply(css_files, read_file), collapse = '\n')
+  writeLines(css, out_file)
+  return(out_file)
 }
 
 #' Minify stylesheet using YUI Compressor
@@ -51,12 +51,12 @@ combine_css <- function(css_dir){
 #' @param css_file path to css file
 #' @noRd
 minify_css <- function(css_file){
-	yui = system.file('libraries', 'utilities', 'yuicompressor-2.4.7.jar', 
-		package = 'slidifyLibraries')
-	min_css_file = gsub('.css', '.min.css', css_file)
-	cmd = 'java -jar %s %s -o %s' 
-	system(sprintf(cmd, yui, css_file, min_css_file))
-	return(min_css_file)
+  yui = system.file('libraries', 'utilities', 'yuicompressor-2.4.7.jar', 
+    package = 'slidifyLibraries')
+  min_css_file = gsub('.css', '.min.css', css_file)
+  cmd = 'java -jar %s %s -o %s' 
+  system(sprintf(cmd, yui, css_file, min_css_file))
+  return(min_css_file)
 }
 
 #' Binary operator useful for function composition
@@ -64,7 +64,7 @@ minify_css <- function(css_file){
 #' @keywords internal
 #' @noRd
 `%|%` <- function(x, f){
-	f(x)
+  f(x)
 }
 
 #' Binary operator useful from hadley's staticdocs package
@@ -83,7 +83,7 @@ minify_css <- function(css_file){
 #' @keywords internal
 #' @noRd
 read_file <- function(doc, ...){
-	paste(readLines(doc, ...), collapse = '\n')
+  paste(readLines(doc, ...), collapse = '\n')
 }
 
 #' Capture patterns matched by regular expression
@@ -142,5 +142,5 @@ merge_list <- function (x, y, ...){
 #' @keywords internal
 #' @noRd
 filter_blank <- function(x){
-	Filter(function(y) y != '', x)
+  Filter(function(y) y != '', x)
 }

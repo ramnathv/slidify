@@ -28,10 +28,10 @@ add_stylesheets <- function(deck){
 
 # Get user and widget stylesheets 
 get_stylesheets <- function(deck){
-	asset_css  = dir(file.path(deck$url$assets, 'css'), full.names = T)
-	widget_css = lapply(file.path(deck$url$widgets, deck$widgets, 'css'), 
-											dir, full = T)
-	c(unlist(widget_css), asset_css)
+  asset_css  = dir(file.path(deck$url$assets, 'css'), full.names = T)
+  widget_css = lapply(file.path(deck$url$widgets, deck$widgets, 'css'), 
+    dir, full = T)
+  c(unlist(widget_css), asset_css)
 }
 
 

@@ -29,10 +29,10 @@ render_deck <- function(deck, layouts){
 #' 
 #' @param inputFile path to markdown file to parse
 parse_deck <- function(inputFile){
-	deck = inputFile %|% to_deck 
-	deck$slides = deck$slides %|% split_slides %|% parse_slides  
-	deck$slides = deck$slides %|% add_slide_numbers %|% add_missing_id
-	return(deck)
+  deck = inputFile %|% to_deck 
+  deck$slides = deck$slides %|% split_slides %|% parse_slides  
+  deck$slides = deck$slides %|% add_slide_numbers %|% add_missing_id
+  return(deck)
 }
 
 

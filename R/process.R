@@ -20,11 +20,11 @@ knit_deck <- function(deck){
 #' @keywords internal
 #' @noRd
 get_config <- function(cfile = 'config.yml'){
-	config = slidifyDefaults()
-	if (file.exists(cfile)){
-		config = modifyList(config, yaml::yaml.load_file(cfile))
-	}
-	return(config)
+  config = slidifyDefaults()
+  if (file.exists(cfile)){
+    config = modifyList(config, yaml::yaml.load_file(cfile))
+  }
+  return(config)
 }
 
 #' Split document into metadata and slides

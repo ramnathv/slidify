@@ -50,7 +50,7 @@ get_layouts <- function(paths){
 #' 
 #' @noRd
 get_slide_layout <- function(framework){
-	l_file = system.file('libraries', 'frameworks', framework, 'layouts', 
+  l_file = system.file('libraries', 'frameworks', framework, 'layouts', 
    'slide.html', package = 'slidifyLibraries')
-	cat(slidify:::read_file(l_file))
+  cat(slidify:::read_file(l_file))
 }

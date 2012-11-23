@@ -7,32 +7,32 @@
 #' @seealso slidify-package
 #' @export
 slidify <- function(inputFile, outputFile, knit_deck = TRUE){
-	if (knit_deck == TRUE){
-		inputFile = inputFile %|% knit
-	}
-	deck = inputFile %|% parse_deck
-	
-	if (deck$mode == 'selfcontained'){
-		with(deck, copy_libraries(framework, highlighter, widgets))
-		deck$url[['lib']] <- 'libraries'
-	}
-	
-	# add layouts, urls and stylesheets from frameworks, widgets and assets
-	deck = deck %|% add_urls %|% add_stylesheets
-	layouts = get_layouts(deck$url$layouts)
-	layouts = modifyList(layouts, list(javascripts = get_javascripts(deck)))
-	
-	if (missing(outputFile)){
-		outputFile = gsub("*.[R]?md$", '.html', inputFile)
-	}
-	
-	cat(render_deck(deck, layouts), file = outputFile)
-	
-	if (deck$mode == 'standalone'){
-		outputFile = make_standalone(deck, outputFile)
-	}
-	
-	return(outputFile)
+  if (knit_deck == TRUE){
+    inputFile = inputFile %|% knit
+  }
+  deck = inputFile %|% parse_deck
+  
+  if (deck$mode == 'selfcontained'){
+    with(deck, copy_libraries(framework, highlighter, widgets))
+    deck$url[['lib']] <- 'libraries'
+  }
+  
+  # add layouts, urls and stylesheets from frameworks, widgets and assets
+  deck = deck %|% add_urls %|% add_stylesheets
+  layouts = get_layouts(deck$url$layouts)
+  layouts = modifyList(layouts, list(javascripts = get_javascripts(deck)))
+  
+  if (missing(outputFile)){
+    outputFile = gsub("*.[R]?md$", '.html', inputFile)
+  }
+  
+  cat(render_deck(deck, layouts), file = outputFile)
+  
+  if (deck$mode == 'standalone'){
+    outputFile = make_standalone(deck, outputFile)
+  }
+  
+  return(outputFile)
 }
 
 #' Create a standalone version of an HTML File
@@ -45,11 +45,11 @@ slidify <- function(inputFile, outputFile, knit_deck = TRUE){
 #' @noRd
 #' @keywords internal
 make_standalone <- function(deck, html_in){
-	lib_url = paste0(deck$url$lib, '/')
-	lib_cdn = 'http://slidifylibraries.googlecode.com/git/inst/libraries/'
-	html = read_file(html_in, warn = FALSE) %|% markdown:::.b64EncodeImages
-	html = gsub(lib_url, lib_cdn, html)
-	# html_out = sprintf('%s.html', basename(getwd()))
-	cat(html, file = html_in)
-	return(html_in)
+  lib_url = paste0(deck$url$lib, '/')
+  lib_cdn = 'http://slidifylibraries.googlecode.com/git/inst/libraries/'
+  html = read_file(html_in, warn = FALSE) %|% markdown:::.b64EncodeImages
+  html = gsub(lib_url, lib_cdn, html)
+  # html_out = sprintf('%s.html', basename(getwd()))
+  cat(html, file = html_in)
+  return(html_in)
 }
