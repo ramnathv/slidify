@@ -2,22 +2,6 @@
 #'
 #' @keywords internal
 #' @noRd
-parse_slide_v0 <- function(slide){
-  slide = str_split_fixed(slide, '\\s*\n', 2)
-  slide = setNames(as.list(slide), c('meta', 'body'))
-  if (is.null(slide$meta) || slide$meta == "" || is.na(slide$meta)){
-    meta = NULL
-  } else {
-    meta = parse_meta(slide$meta)
-  }
-  body = parse_body(slide$body)
-  merge_list(meta, body)
-}
-
-#' Parse slide into metadata and body
-#'
-#' @keywords internal
-#' @noRd
 parse_slide <- function(slide){
   slide <- str_split(slide, "\n\\*{3}\\s*")[[1]] # slide to blocks   
   slide <- str_split_fixed(slide, '\n', 2)       # blocks to metadata
