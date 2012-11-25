@@ -82,11 +82,11 @@ Write in [R Markdown](http://goo.gl/KKdaf), separating slides by a blank link li
 
 ## Slide 1
 
-This is an unordered list 
+This is an unordered list which is animated
 
-- Point 1
-- Point 2
-- Point 3
-- Point 4
+> - Point 1
+> - Point 2
+> - Point 3
+> - Point 4
 
 ---
