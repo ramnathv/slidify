@@ -6,10 +6,14 @@ parse_slide <- function(slide){
   slide <- str_split(slide, "\n\\*{3}\\s*")[[1]] # slide to blocks   
   slide <- str_split_fixed(slide, '\n', 2)       # blocks to metadata
   slide <- apply(slide, 1, function(x){
-    c(parse_meta(x[1]), parse_body(x[2]))
+    y = c(parse_meta(x[1]), parse_body(x[2]))
   })
   if (length(slide) > 1){
-    slide = c(slide[[1]], list(blocks = slide[-1]))
+    main  = slide[[1]]
+    named = Filter(function(z) !is.null(z$name), slide[-1])
+    names(named) = lapply(named, '[[', "name")
+    blocks = Filter(function(z) is.null(z$name), slide[-1])
+    slide  = c(main, named, list(blocks = blocks))
   } else {
     slide = slide[[1]]
   }
