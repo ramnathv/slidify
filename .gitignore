@@ -1,3 +1,4 @@
 .Rhistory
 *.md
 .cache
+.Rproj.user
