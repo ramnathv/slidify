@@ -2,3 +2,4 @@
 *.md
 .cache
 *.Rproj*
+.DS_Store
