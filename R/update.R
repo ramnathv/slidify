@@ -27,3 +27,13 @@ update_p_classes <- function(content){
   gsub("<p>\\.(.*?) ", "<p class = '\\1'>", content)
 }
 
+#' Update <*> classes by adding class specifier
+#'
+#' @keywords internal
+#' @noRd
+# It should convert <p>~ some text </p> to
+# <p class = "build"> some text </p>
+update_p_classes <- function(content){
+  gsub('<p>([^p>.]*)~</p>', "<p class='build'>//1</p>", content)
+}
+
