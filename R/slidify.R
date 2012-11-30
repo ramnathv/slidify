@@ -18,7 +18,7 @@ slidify <- function(inputFile, outputFile, knit_deck = TRUE){
   }
   
   # add layouts, urls and stylesheets from frameworks, widgets and assets
-  deck = deck %|% add_urls %|% add_stylesheets
+  deck = deck %|% add_urls %|% add_stylesheets %|% add_config_fr
   layouts = get_layouts(deck$url$layouts)
   layouts = modifyList(layouts, list(javascripts = get_javascripts(deck)))
   
