@@ -8,8 +8,6 @@ github:
   repo: slidify
 twitter:
   text: "Slidify with impress.js!"
-url:
-  lib   : ../../libraries
 --- .slide x:-1000 y:-1500
 
 <q>Aren't you just **bored** with all those slides-based presentations?</q>
