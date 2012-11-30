@@ -46,6 +46,11 @@ publish_github <- function(user, repo){
   if (!file.exists('.git')){
     init_repo()
   }
+  # check if .nojekyll exists, else add it to the repo
+  if (!file.exists('.nojekyll')){
+    message("Adding .nojekyll to your repo...")
+    file.create(".nojekyll")
+  }
   message('Publishing deck to ', user, '/', repo)
   system('git add .')
   system('git commit -a -m "publishing deck"')
