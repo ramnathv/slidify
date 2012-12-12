@@ -7,7 +7,9 @@ render_deck <- function(deck, layouts){
   #' Render a slide based on specified layout
   render_slide <- function(slide){
     tpl <- slide$tpl %||% 'slide'
+    slide2 <- modifyList(slide, list(deck = deck[names(deck) != 'slides']))
     slide$rendered = whisker.render(layouts[tpl], slide) %|% update_classes
+    slide$rendered = whisker.render(slide$rendered, slide2)
     return(slide)
   }
   #' Render slides based on specified layouts
