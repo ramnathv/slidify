@@ -3,7 +3,11 @@ render_slide <- function(slide, layouts, payload){
   tpl <- slide$tpl %||% 'slide'
   payload = modifyList(payload, list(slide = slide))
   slide$rendered = whisker.render(layouts[[tpl]], payload) %|% update_classes
-  slide$rendered = whisker.render(slide$rendered, payload)
+  
+  # HACK. Figure out a more elegant solution for this.
+  if (is.null(slide$class) || slide$class != 'RAW'){
+    slide$rendered = whisker.render(slide$rendered, payload)
+  }
   return(slide)
 }
 
@@ -42,8 +46,8 @@ render_page <- function(page, payload){
 }
 
 #' Render pages
-render_pages <- function(site, pages){
-  payload = list(site = site, pages = pages)
+render_pages <- function(pages, site, tags){
+  payload = list(site = site, pages = pages, tags = tags)
   invisible(lapply(pages, render_page, payload = payload))
 }
 
