@@ -43,6 +43,9 @@ render_page <- function(page, payload){
   outputFile = gsub("*.[R]?md$", '.html', page$file)
   main = page$layout %||% 'deck'
   cat(whisker.render(layouts[[main]], payload, partials = layouts), file = outputFile)
+  if (!is.null(page$purl) && page$purl == TRUE){
+    purl(page$file)
+  }
 }
 
 #' Render pages
