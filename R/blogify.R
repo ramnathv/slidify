@@ -1,4 +1,8 @@
 #' Render a slide
+#' 
+#' @param slide list containing elements of the parsed slide
+#' @param layouts list of layouts
+#' @param payload list containing site and page, useful for blogs
 render_slide <- function(slide, layouts, payload){
   tpl <- slide$tpl %||% 'slide'
   payload = modifyList(payload, list(slide = slide))
@@ -52,19 +56,4 @@ render_page <- function(page, payload){
 render_pages <- function(pages, site, tags){
   payload = list(site = site, pages = pages, tags = tags)
   invisible(lapply(pages, render_page, payload = payload))
-}
-
-#' Render post
-render_post <- function(post){
-  if (post$mode == 'selfcontained'){
-    post$url[['lib']] <- post$url[['lib']] %||% 'libraries'
-    with(post, copy_libraries(framework, highlighter, widgets, url$lib))
-  }
-  
-  # add layouts, urls and stylesheets from frameworks, widgets and assets
-  post = post %|% add_urls %|% add_stylesheets %|% add_config_fr
-  layouts = get_layouts(post$url$layouts)
-  layouts = modifyList(layouts, list(javascripts = get_javascripts(post)))
-  outputFile = gsub("*.[R]?md$", '.html', post$file)
-  cat(render_deck(post, layouts), file = outputFile)
 }
