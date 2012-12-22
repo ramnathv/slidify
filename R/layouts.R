@@ -33,6 +33,24 @@ expand_layouts <- function(layouts){
   lapply(layouts, expand_layout)
 }
 
+#' Expand child layouts
+#'
+#' Provides more control over what element to replace inside the parent layout.
+#' @param layouts layout to be expanded
+#' @return named list of expanded layouts
+#' @keywords internal
+#' @noRd
+expand_layout2 <- function(layout, layouts){
+  has_parent <- grepl("^---", layout)
+  if (has_parent){
+    txt = str_split_fixed(layout, '\n---', 2)
+    meta = yaml.load(gsub("^---\n+", '', txt[1]))
+    meta$replace = sprintf("{{{", meta$replace, '}}}')
+    layout <- sub(meta$replace, layouts[meta$layout], txt[2], fixed = TRUE)
+  }
+  return(layout)
+}
+
 #' Get layouts from list of paths provided
 #'
 #' @param paths list of paths to directories containing layout files
