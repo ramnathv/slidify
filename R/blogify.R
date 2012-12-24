@@ -3,6 +3,7 @@
 #' @param slide list containing elements of the parsed slide
 #' @param layouts list of layouts
 #' @param payload list containing site and page, useful for blogs
+#  TOTHINK: Should partials also be passed along?
 render_slide <- function(slide, layouts, payload){
   tpl <- slide$tpl %||% 'slide'
   payload = modifyList(payload, list(slide = slide))
@@ -22,6 +23,10 @@ render_slides <- function(slides, layouts, payload){
 
 
 #' Render page
+#' 
+#' @param page list containing the parsed page
+#' @param payload list containing site and pages
+#  TODO: Refactor by splitting code into smaller manageable chunks
 render_page <- function(page, payload){
   if (page$mode == 'selfcontained'){
     page$url[['lib']] <- page$url[['lib']] %||% 'libraries'
@@ -31,8 +36,6 @@ render_page <- function(page, payload){
   # add layouts, urls and stylesheets from frameworks, widgets and assets
   page = page %|% add_urls %|% add_stylesheets %|% add_config_fr
   layouts = get_layouts(page$url$layouts)
-  # layouts = modifyList(layouts, list(javascripts = get_javascripts(page)))
-  
   partials = get_layouts(file.path(page$url$framework, 'partials'))
   partials = modifyList(partials, list(javascripts = get_javascripts(page)))
   
@@ -50,6 +53,8 @@ render_page <- function(page, payload){
   outputFile = gsub("*.[R]?md$", '.html', page$file)
   main = page$layout %||% 'deck'
   cat(whisker.render(layouts[[main]], payload, partials = partials), file = outputFile)
+  
+  # Extract R Code from Page if purl = TRUE
   if (!is.null(page$purl) && page$purl == TRUE){
     purl(page$file)
   }
