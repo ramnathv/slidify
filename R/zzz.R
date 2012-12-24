@@ -66,3 +66,26 @@ set_urls <- function(deck){
     file.path(widgets, deck$widgets, 'layouts')
   ))
 }
+
+#' Split slide content into blocks 
+#'
+#' Content blocks are specified by a line starting with three stars followed
+#' by the block name. If no content blocks are specified, the entire slide
+#' is treated as a single block named "content"
+#' @param content slide content 
+#' @return list of named content blocks
+#' @keywords internal
+#' @noRd
+parse_content <- function(content){
+  blocks <- strsplit(content, "<p>\\*{3}\\s*")[[1]]
+  bpat   <- "^([a-zA-Z0-9]+)\\s*</p>\n*(.*)$"
+  bnames <- ifelse(grepl(bpat, blocks), gsub(bpat, "\\1", blocks), 'content')
+  bcont  <- gsub(bpat, "\\2", blocks)
+  bcont  <- setNames(as.list(bcont), bnames)
+  # HACK: Strip html tags from help contents 
+  # I think this was done for RGoogleForms
+  if ('help' %in% names(bcont)){
+    bcont$help = gsub("<p>(.+?)</p>", "\\1", bcont$help)
+  }
+  bcont
+}

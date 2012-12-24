@@ -55,7 +55,7 @@ parse_body <- function(body){
   pat = '^(<h([0-9])>([^\n]*)</h[0-9]>)?\n*(.*)$'
   body = setNames(as.list(str_match(html, pat)),
    c('html', 'header', 'level', 'title', 'content'))
-  body = modifyList(body, parse_content(body$content))
+  # body = modifyList(body, parse_content(body$content))
   # HACK: So that landslide h1's with no content are centered
   if (body$content == ""){
   	body$content = NULL
