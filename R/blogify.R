@@ -31,7 +31,10 @@ render_page <- function(page, payload){
   # add layouts, urls and stylesheets from frameworks, widgets and assets
   page = page %|% add_urls %|% add_stylesheets %|% add_config_fr
   layouts = get_layouts(page$url$layouts)
-  layouts = modifyList(layouts, list(javascripts = get_javascripts(page)))
+  # layouts = modifyList(layouts, list(javascripts = get_javascripts(page)))
+  
+  partials = get_layouts(file.path(page$url$framework, 'partials'))
+  partials = modifyList(partials, list(javascripts = get_javascripts(page)))
   
   payload = modifyList(payload, list(page = page))
   
@@ -46,7 +49,7 @@ render_page <- function(page, payload){
   
   outputFile = gsub("*.[R]?md$", '.html', page$file)
   main = page$layout %||% 'deck'
-  cat(whisker.render(layouts[[main]], payload, partials = layouts), file = outputFile)
+  cat(whisker.render(layouts[[main]], payload, partials = partials), file = outputFile)
   if (!is.null(page$purl) && page$purl == TRUE){
     purl(page$file)
   }
