@@ -24,7 +24,7 @@ render_deck <- function(deck, layouts, partials){
   #' Render deck
   deck$slides = deck$slides %|% render_slides
   main = deck$layout %||% 'deck'
-  whisker.render(layouts[[main]], deck, partials = partials)
+  whisker.render(layouts[[main]], deck, partials = layouts)
 }
 
 #' Parse deck into metdata and slide elements
