@@ -89,3 +89,14 @@ parse_content <- function(content){
   }
   bcont
 }
+
+#' Knit deck to markdown
+#'
+#' @keywords internal
+#' @noRd
+knit_deck <- function(deck){
+  render_markdown(strict = TRUE)
+  knit_hooks$set(plot = knitr:::hook_plot_html)
+  deck$slides = knit(text = deck$slides)
+  return(invisible(deck))
+}
