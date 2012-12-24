@@ -1,32 +1,3 @@
-#' Knit deck to markdown
-#'
-#' @keywords internal
-#' @noRd
-knit_deck <- function(deck){
-  render_markdown(strict = TRUE)
-  knit_hooks$set(plot = knitr:::hook_plot_html)
-  deck$slides = knit(text = deck$slides)
-  return(invisible(deck))
-}
-
-#' Get configuration
-#' 
-#' A config.yml file in the root directory of the slide deck can be used to 
-#' override slidify defaults. YAML front matter in the Rmd file overrides
-#' everything.
-#' 
-#' @param cfile path to config file
-#' @return list of config options
-#' @keywords internal
-#' @noRd
-get_config <- function(cfile = 'config.yml'){
-  config = slidifyDefaults()
-  if (file.exists(cfile)){
-    config = modifyList(config, yaml::yaml.load_file(cfile))
-  }
-  return(config)
-}
-
 #' Split document into metadata and slides
 #' 
 #' @param doc path to source file

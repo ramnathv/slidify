@@ -33,8 +33,3 @@ add_missing_id <- function(slides){
 #   }
 #   return(slides)
 # }
-
-add_config_fr <- function(deck){
-  config <- yaml.load_file(file.path(deck$url$framework, "config.yml"))
-  deck <- modifyList(config, deck)
-}
