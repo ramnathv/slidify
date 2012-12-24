@@ -24,7 +24,7 @@ Collate:
     'author.R'
     'blogify.R'
     'copy.R'
-    'defaults.R'
+    'config.R'
     'layouts.R'
     'package.R'
     'parse.R'
