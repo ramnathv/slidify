@@ -21,6 +21,10 @@ copy_libraries <- function(framework, highlighter, widgets, url_lib, pkg = 'slid
      to = file.path(url_lib, subdir, resource)
     )
   }
+  # stop and give an error message if slidifyLibraries is not installed
+  if (!is_installed("slidifyLibraries")){
+    stop("Please install slidifyLibraries");
+  }
   copy_resource('frameworks', framework)
   copy_resource('highlighters', highlighter)
   invisible(lapply(widgets, copy_resource, subdir = 'widgets'))
