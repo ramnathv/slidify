@@ -26,7 +26,7 @@ expand_layouts <- function(layouts){
     if (has_parent){
        main <- layouts[[gsub(mpat, '\\1', layout)]]
        content <- gsub(mpat, "\\2", layout)
-       layout <- sub("{{{ content }}}", content, main, fixed = TRUE)
+       layout <- sub("{{{ slide.content }}}", content, main, fixed = TRUE)
      }
     return(layout)
   }
