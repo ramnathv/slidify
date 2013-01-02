@@ -144,3 +144,10 @@ merge_list <- function (x, y, ...){
 filter_blank <- function(x){
   Filter(function(y) y != '', x)
 }
+
+#' Check if a package is installed
+#' 
+#' @noRd
+is_installed <- function(mypkg) {
+  is.element(mypkg, installed.packages()[,1]) 
+}
