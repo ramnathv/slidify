@@ -1,3 +1,14 @@
+#' Check for equality only if variable exists
+#' 
+#' @noRd
+`%?=%` <- function(x, y){
+  if (!is.null(x) && x == y){
+    TRUE
+  } else {
+    FALSE
+  }
+}
+
 #' Embed local images using base64
 #'
 #' @keywords internal
