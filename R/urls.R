@@ -12,10 +12,6 @@ add_urls <- function(deck){
     file.path(widgets, deck$widgets, 'layouts')
   ))
   urls$highlighter = file.path(urls$highlighters, deck$highlighter)
-  # this line should not be essential given default is set to 'assets'
-  #   if (is.null(urls$assets)){
-  #     urls$assets = 'assets'
-  #   }
   deck$url = urls
   return(deck)
 }
