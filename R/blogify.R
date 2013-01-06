@@ -5,14 +5,18 @@
 #' @param payload list containing site and page, useful for blogs
 #  TOTHINK: Should partials also be passed along?
 render_slide <- function(slide, layouts, payload){
-  tpl <- slide$tpl %||% 'slide'
+  layout  = layouts[[slide$tpl %||% 'slide']]
   payload = modifyList(payload, list(slide = slide))
-  slide$rendered = whisker.render(layouts[[tpl]], payload) %|% update_classes
+  slide$rendered = whisker.render(layout, payload) %|% update_classes
   
-  # HACK. Figure out a more elegant solution for this.
-  if (is.null(slide$class) || slide$class != 'RAW'){
+  if (!(slide$class %?=% 'RAW')){
     slide$rendered = whisker.render(slide$rendered, payload)
   }
+  
+  # HACK. Figure out a more elegant solution for this.
+  # if (is.null(slide$class) || slide$class != 'RAW'){
+  #  slide$rendered = whisker.render(slide$rendered, payload)
+  # }
   return(slide)
 }
 
@@ -41,24 +45,23 @@ render_page <- function(page, payload){
   
   payload = modifyList(payload, list(page = page))
   
-  # HACK ALERT. REALLY REALLY UGLY CODE TO FIX -----
-  page$slides = render_slides(page$slides, layouts, payload)
-  payload$page$slides = page$slides
   
-  paste_all = function(...) paste(..., collapse = "\n")
-  page$content = do.call(paste_all, lapply(page$slides, pluck('rendered')))
-  payload$page$content = page$content
-  # HACK ALERT. REALLY REALLY UGLY CODE TO FIX -----
+  page$slides = render_slides(page$slides, layouts, payload)
+  page$content = do.call(function(...) paste(..., collapse = '\n'), )
+    lapply(page$slides, pluck('rendered')
+   
+  payload$page = page
+ 
   
   outputFile = gsub("*.[R]?md$", '.html', page$file)
-  main = page$layout %||% 'deck'
-  cat(whisker.render(layouts[[main]], payload, partials = partials), file = outputFile)
+  layout = layouts[[page$layout %||% 'deck']]
+  cat(whisker.render(layout, payload, partials = partials), file = outputFile)
   
   # Extract R Code from Page if purl = TRUE
-  if (!is.null(page$purl) && page$purl == TRUE){
-    purl(page$file)
-  }
+  if (page$purl %?=% TRUE) purl(page$file)
 }
+
+
 
 #' Render pages
 render_pages <- function(pages, site, tags){
