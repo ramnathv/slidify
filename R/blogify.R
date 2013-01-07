@@ -12,11 +12,7 @@ render_slide <- function(slide, layouts, payload){
   if (!(slide$class %?=% 'RAW')){
     slide$rendered = whisker.render(slide$rendered, payload)
   }
-  
-  # HACK. Figure out a more elegant solution for this.
-  # if (is.null(slide$class) || slide$class != 'RAW'){
-  #  slide$rendered = whisker.render(slide$rendered, payload)
-  # }
+
   return(slide)
 }
 
@@ -47,13 +43,14 @@ render_page <- function(page, payload){
   
   
   page$slides = render_slides(page$slides, layouts, payload)
-  page$content = do.call(function(...) paste(..., collapse = '\n'), )
-    lapply(page$slides, pluck('rendered')
+  page$content = do.call(function(...) paste(..., collapse = '\n'), 
+    lapply(page$slides, pluck('rendered')))
    
   payload$page = page
  
   
-  outputFile = gsub("*.[R]?md$", '.html', page$file)
+  # outputFile = gsub("*.[R]?md$", '.html', page$file)
+  outputFile = sprintf("%s.html", page$filename)
   layout = layouts[[page$layout %||% 'deck']]
   cat(whisker.render(layout, payload, partials = partials), file = outputFile)
   
