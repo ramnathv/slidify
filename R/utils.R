@@ -162,3 +162,11 @@ filter_blank <- function(x){
 is_installed <- function(mypkg) {
   is.element(mypkg, installed.packages()[,1]) 
 }
+
+#' Execute code in  specified directory
+#' 
+#' @noRd
+in_dir <- function(dir, expr) {
+  owd = setwd(dir); on.exit(setwd(owd))
+  force(expr)
+}
