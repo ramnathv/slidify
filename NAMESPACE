@@ -1,4 +1,6 @@
 export(author)
+export(pagify)
+export(blogify)
 export(parse_deck)
 export(publish)
 export(publish_dropbox)
