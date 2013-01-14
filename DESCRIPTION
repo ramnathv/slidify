@@ -23,6 +23,7 @@ Collate:
     'assets.R'
     'author.R'
     'blogify.R'
+    'blogify2.R'
     'copy.R'
     'config.R'
     'layouts.R'
