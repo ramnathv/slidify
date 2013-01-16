@@ -4,7 +4,7 @@ pagify <- function(postFile){
   } else {
     site = list(x = 10)
   }
-  page = parse_post(postFile)
+  page = parse_page(postFile)
   in_dir(dirname(postFile), {
     render_page(page, payload = list(site = site))
   })
@@ -15,17 +15,13 @@ blogify <- function(blogDir = "."){
   cwd   = getwd(); on.exit(setwd(cwd))
   setwd(blogDir)
   rmdFiles = dir(".", recursive = TRUE, pattern = '*.Rmd')
-  pages = lapply(rmdFiles, parse_post)
-  tags = get_pages_by_groups(pages, 'tags')
-  payload = list(site = site, pages = pages, tags = tags)
-  invisible(lapply(pages, function(page){
-    in_dir(dirname(page$file), 
-      render_page(page = page, payload = payload))
-  }))
+  pages = parse_pages(rmdFiles)
+  tags = get_tags(pages)
+  render_pages(pages, site, tags)
   message('Blogification Successful :-)')
 }
 
-parse_post <- function(postFile){
+parse_page <- function(postFile){
   in_dir(dirname(postFile), {
     inputFile = basename(postFile)
     opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
@@ -40,6 +36,19 @@ parse_post <- function(postFile){
     post$raw = read_file(inputFile)
   })
   return(post)
+}
+
+parse_pages <- function(postFiles){
+  lapply(postFiles, parse_page)
+}
+
+#' Get pages by tags
+get_tags <- function(pages){
+  get_pages_by_groups(pages, gby = 'tags')
+}
+
+get_categories <- function(pages){
+  get_pages_by_groups(pages, gby = 'categories')
 }
 
 get_pages_by_groups <- function(pages, gby = 'tags'){
