@@ -43,9 +43,7 @@ render_page <- function(page, payload){
   
   
   page$slides = render_slides(page$slides, layouts, payload)
-  page$content = do.call(function(...) paste(..., collapse = '\n'), 
-    lapply(page$slides, pluck('rendered')))
-   
+  page$content = paste(lapply(page$slides, pluck('rendered')), collapse = '\n')
   payload$page = page
  
   
@@ -59,9 +57,10 @@ render_page <- function(page, payload){
 }
 
 
-
 #' Render pages
 render_pages <- function(pages, site, tags){
   payload = list(site = site, pages = pages, tags = tags)
-  invisible(lapply(pages, render_page, payload = payload))
+  invisible(lapply(pages, function(page){in_dir(dirname(page$file), 
+    render_page(page = page, payload = payload))
+  }))
 }
