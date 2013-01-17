@@ -1,6 +1,4 @@
 export(author)
-export(pagify)
-export(blogify)
 export(parse_deck)
 export(render_page)
 export(render_pages)
