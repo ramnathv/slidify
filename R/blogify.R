@@ -28,39 +28,40 @@ render_slides <- function(slides, layouts, payload){
 #' @param payload list containing site and pages
 #  TODO: Refactor by splitting code into smaller manageable chunks
 render_page <- function(page, payload){
-  if (page$mode == 'selfcontained'){
-    page$url[['lib']] <- page$url[['lib']] %||% 'libraries'
-    with(page, copy_libraries(framework, highlighter, widgets, url$lib))
-  }
+  in_dir(dirname(page$file), {
+    if (page$mode == 'selfcontained'){
+      page$url[['lib']] <- page$url[['lib']] %||% 'libraries'
+      with(page, copy_libraries(framework, highlighter, widgets, url$lib))
+    }
   
-  # add layouts, urls and stylesheets from frameworks, widgets and assets
-  page = page %|% add_urls %|% add_stylesheets %|% add_config_fr
-  layouts = get_layouts(page$url$layouts)
-  partials = get_layouts(file.path(page$url$framework, 'partials'))
-  partials = modifyList(partials, list(javascripts = get_javascripts(page)))
+    # add layouts, urls and stylesheets from frameworks, widgets and assets
+    page = page %|% add_urls %|% add_stylesheets %|% add_config_fr
+    layouts = get_layouts(page$url$layouts)
+    
+    partials = get_layouts(file.path(page$url$framework, 'partials'))
+    partials = modifyList(partials, list(javascripts = get_javascripts(page)))
   
-  payload = modifyList(payload, list(page = page))
+    payload = modifyList(payload, list(page = page))
   
   
-  page$slides = render_slides(page$slides, layouts, payload)
-  page$content = paste(lapply(page$slides, pluck('rendered')), collapse = '\n')
-  payload$page = page
+    page$slides = render_slides(page$slides, layouts, payload)
+    page$content = paste(lapply(page$slides, pluck('rendered')), collapse = '\n')
+    payload$page = page
  
   
-  # outputFile = gsub("*.[R]?md$", '.html', page$file)
-  outputFile = sprintf("%s.html", page$filename)
-  layout = layouts[[page$layout %||% 'deck']]
-  cat(whisker.render(layout, payload, partials = partials), file = outputFile)
+    # outputFile = gsub("*.[R]?md$", '.html', page$file)
+    outputFile = sprintf("%s.html", page$filename)
+    layout = layouts[[page$layout %||% 'deck']]
+    cat(whisker.render(layout, payload, partials = partials), file = outputFile)
   
-  # Extract R Code from Page if purl = TRUE
-  if (page$purl %?=% TRUE) purl(page$file)
+    # Extract R Code from Page if purl = TRUE
+    if (page$purl %?=% TRUE) purl(page$file)
+  })
 }
 
 
 #' Render pages
 render_pages <- function(pages, site, tags){
   payload = list(site = site, pages = pages, tags = tags)
-  invisible(lapply(pages, function(page){in_dir(dirname(page$file), 
-    render_page(page = page, payload = payload))
-  }))
+  invisible(lapply(pages, render_page, payload = payload)) 
 }
