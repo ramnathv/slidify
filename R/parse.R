@@ -7,10 +7,12 @@ parse_slide <- function(slide){
   slide <- str_split_fixed(slide, '\n', 2)       # blocks to metadata
   slide <- apply(slide, 1, function(x){
     y_meta = parse_meta(x[1])
+    # FIXME: figure out why the ifelse does not work correctly.
+    # y_body = ifelse(y_meta$class %?=% 'YAML', yaml.load(x[2]), parse_body(x[2]))
     if (y_meta$class %?=% 'YAML'){
-      y_body = yaml.load(x[2])
+     y_body = yaml.load(x[2])
     } else {
-      y_body = parse_body(x[2])
+     y_body = parse_body(x[2])
     }
     y = c(y_meta, y_body)
   })
