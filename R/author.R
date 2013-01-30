@@ -4,7 +4,7 @@
 #' opens index.Rmd for users to edit.
 #' @param deckdir path to new slide directory
 #' @export
-author <- function(deckdir){
+author <- function(deckdir, use_git = TRUE){
   message('Creating slide directory at ', deckdir, '...')
   if (file.exists(deckdir)){
     return('Directory already exists. Please choose a different name.')
@@ -14,7 +14,7 @@ author <- function(deckdir){
   message('Finished creating slide directory...')
   message('Switching to slide directory...')
   setwd(deckdir)
-  if (Sys.which('git') != ""){
+  if (use_git && Sys.which('git') != ""){
     init_repo()
   }
   message('Opening slide deck...')
