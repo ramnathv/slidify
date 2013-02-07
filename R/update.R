@@ -4,12 +4,12 @@
 #' @noRd
 update_classes <- function(content){
   update_ul_classes <- function(content){
-    content = gsub('<blockquote>\n*<ul>', '<ul class = "build">', content)
+    content = gsub('<blockquote>\n*<ul>', '<ul class = "build incremental">', content)
     content = gsub('</ul>\n*</blockquote>', "</ul>", content)
     return(content)
   }
   update_ol_classes <- function(content){
-    content = gsub('<blockquote>\n*<ol>', '<ol class = "build">', content)
+    content = gsub('<blockquote>\n*<ol>', '<ol class = "build incremental">', content)
     content = gsub('</ol>\n*</blockquote>', "</ol>", content)
     return(content)
   }
@@ -34,6 +34,6 @@ update_p_classes <- function(content){
 # It should convert <p>~ some text </p> to
 # <p class = "build"> some text </p>
 update_p_classes <- function(content){
-  gsub('<p>([^p>.]*)~</p>', "<p class='build'>//1</p>", content)
+  gsub('<p>([^p>.]*)~</p>', "<p class='build incremental'>//1</p>", content)
 }
 
