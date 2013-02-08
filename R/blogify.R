@@ -5,7 +5,8 @@
 #' @param payload list containing site and page, useful for blogs
 #  TOTHINK: Should partials also be passed along?
 render_slide <- function(slide, layouts, payload){
-  layout  = layouts[[slide$tpl %||% 'slide']]
+  default = "{{{slide.header}}}\n{{{slide.content}}}"
+  layout  = layouts[[slide$tpl %||% 'slide']] %||% default
   payload = modifyList(payload, list(slide = slide))
   slide$rendered = whisker.render(layout, payload) %|% update_classes
   
