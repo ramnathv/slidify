@@ -34,6 +34,8 @@ parse_deck <- function(inputFile){
   deck = inputFile %|% to_deck 
   deck$slides = deck$slides %|% split_slides %|% parse_slides  
   deck$slides = deck$slides %|% add_slide_numbers %|% add_missing_id
+  slide_rmd <- get_slide_rmd(sub(".md", ".Rmd", inputFile))
+  deck$slides = add_slide_rmd(deck$slides, slide_rmd)
   return(deck)
 }
 
