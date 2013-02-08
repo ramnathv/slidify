@@ -28,6 +28,7 @@ Collate:
     'layouts.R'
     'package.R'
     'parse.R'
+    'poirot.R'
     'process.R'
     'publish.R'
     'render.R'
