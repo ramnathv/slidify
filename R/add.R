@@ -22,6 +22,13 @@ add_missing_id <- function(slides){
   return(slides)
 }
 
+add_slide_rmd <- function(slides, slide_rmd){
+  for (i in seq_along(slides)){
+      slides[[i]]['raw'] = slide_rmd[i] 
+  }
+  return(slides)
+}
+
 # Add raw R markdown source to slide vars
 # 
 # @noRd
