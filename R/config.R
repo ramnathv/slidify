@@ -32,6 +32,10 @@ get_config <- function(cfile = 'config.yml'){
 
 #' Add default configuration of framework to fill up missing elements
 add_config_fr <- function(deck){
-  config <- yaml.load_file(file.path(deck$url$framework, "config.yml"))
-  deck <- modifyList(config, deck)
+  config_file <- file.path(deck$url$framework, "config.yml")
+  if (file.exists(config_file)){
+    config <- yaml.load_file(config_file)
+    deck <- modifyList(config, deck)
+  }
+  return(deck)
 }
