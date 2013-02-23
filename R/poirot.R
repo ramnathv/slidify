@@ -1,11 +1,11 @@
-pagify <- function(postFile){
+pagify <- function(postFile, return_page = FALSE){
   if (file.exists('site.yml')){
     site = yaml.load_file('site.yml')
   } else {
     site = list()
   }
   page = parse_page(postFile)
-  render_page(page, payload = list(site = site))
+  render_page(page, payload = list(site = site), return_page)
 }
 
 blogify <- function(blogDir = "."){

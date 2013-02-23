@@ -28,7 +28,7 @@ render_slides <- function(slides, layouts, payload){
 #' @param page list containing the parsed page
 #' @param payload list containing site and pages
 #  TODO: Refactor by splitting code into smaller manageable chunks
-render_page <- function(page, payload){
+render_page <- function(page, payload, return_page = FALSE){
   in_dir(dirname(page$file), {
     if (page$mode == 'selfcontained'){
       page$url[['lib']] <- page$url[['lib']] %||% 'libraries'
@@ -58,6 +58,7 @@ render_page <- function(page, payload){
     # Extract R Code from Page if purl = TRUE
     if (page$purl %?=% TRUE) purl(page$file)
   })
+  if (return_page){ return(page) }
 }
 
 
