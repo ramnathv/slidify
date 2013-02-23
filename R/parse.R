@@ -68,5 +68,8 @@ parse_body <- function(body){
   if (body$content == ""){
   	body$content = NULL
   }
+  if (body$header == ""){
+    body$header = NULL
+  }
   return(body)
 }
