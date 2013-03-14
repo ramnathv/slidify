@@ -3,8 +3,8 @@
 #' @keywords internal
 #' @noRd
 parse_slide <- function(slide){
-  slide <- str_split(slide, "\n\\*{3}\\s*")[[1]] # slide to blocks   
-  slide <- str_split_fixed(slide, '\n', 2)       # blocks to metadata
+  slide <- str_split(slide, "\n\\*{3}")[[1]] # slide to blocks   
+  slide <- str_split_fixed(slide, '\n', 2)   # blocks to metadata
   slide <- apply(slide, 1, function(x){
     y_meta = parse_meta(x[1])
     # FIXME: figure out why the ifelse does not work correctly.
