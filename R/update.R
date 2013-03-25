@@ -13,7 +13,8 @@ update_classes <- function(content){
     content = gsub('</ol>\n*</blockquote>', "</ol>", content)
     return(content)
   }
-  content <- content %|% update_ul_classes %|% update_ol_classes
+  content <- content %|% update_ul_classes %|% update_ol_classes %|% update_p_classes
+  content <- content %|% update_li_classes
   return(content)
 }
 
@@ -33,7 +34,11 @@ update_p_classes <- function(content){
 #' @noRd
 # It should convert <p>~ some text </p> to
 # <p class = "build"> some text </p>
-update_p_classes <- function(content){
-  gsub('<p>([^p>.]*)~</p>', "<p class='build incremental'>//1</p>", content)
+update_p_classes2 <- function(content){
+  gsub('<p>([^p>.]*)~</p>', "<span class='build incremental'><p>//1</p></span>", content)
+}
+
+update_li_classes <- function(content){
+  gsub("<li>\\.(.*?) ", "<li class = '\\1'>", content)
 }
 
