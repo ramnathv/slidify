@@ -22,22 +22,3 @@ to_deck <- function(doc){
 split_slides <- function(slides, pat = '\n\n---'){
   str_split(slides, pattern = pat)[[1]]
 }
-
-#' Parse slides into constitutent elements
-#'
-#' @keywords internal
-#' @noRd
-parse_slides <- function(slides){
-  lapply(slides, parse_slide)
-}
-
-#' Get the rmd source for each slide
-#' 
-#' @keywords internal
-#' @noRd
-#  Still repeats code and is hence not DRY
-get_slide_rmd <- function(doc){
-  paste('---', (doc %|% to_deck)$slides %|% split_slides)
-}
-
-

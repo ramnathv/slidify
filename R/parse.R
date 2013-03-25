@@ -1,3 +1,50 @@
+#' Parse pages
+#' 
+#' @noRd
+parse_pages <- function(postFiles){
+  lapply(postFiles, parse_page)
+}
+
+#' Parse page
+#'
+#' @noRd
+parse_page <- function(postFile){
+  in_dir(dirname(postFile), {
+    inputFile = basename(postFile)
+    opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
+    outputFile <- gsub(".Rmd", ".md", inputFile)
+    post = knit(inputFile, outputFile) %|% parse_deck
+    post$file = postFile
+    post$filename = tools:::file_path_sans_ext(inputFile)
+    if (!is.null(post$date)) {
+      post$date = as.Date(post$date, '%Y-%m-%d')
+    }
+    post$link = gsub("*.Rmd", ".html", post$file)
+    post$raw = read_file(inputFile)
+  })
+  return(post)
+}
+
+#' Parse deck into metdata and slide elements
+#' 
+#' @param inputFile path to markdown file to parse
+parse_deck <- function(inputFile){
+  deck = inputFile %|% to_deck 
+  deck$slides = deck$slides %|% split_slides %|% parse_slides  
+  deck$slides = deck$slides %|% add_slide_numbers %|% add_missing_id
+  slide_rmd <- get_slide_rmd(sub(".md", ".Rmd", inputFile))
+  deck$slides = add_slide_rmd(deck$slides, slide_rmd)
+  return(deck)
+}
+
+#' Parse slides into constitutent elements
+#'
+#' @keywords internal
+#' @noRd
+parse_slides <- function(slides){
+  lapply(slides, parse_slide)
+}
+
 #' Parse slide into metadata and body
 #'
 #' @keywords internal
@@ -28,7 +75,6 @@ parse_slide <- function(slide){
   return(slide)
 }
 
-
 #' Parse slide metadata into list
 #'
 #' Arbitrary metadata can be added to slide header as key:value pairs 
@@ -51,6 +97,26 @@ parse_meta <- function(meta){
   names(meta) = y1[y1 != 'class']
   meta$class = paste(y2[y1 == 'class'], collapse = ' ')
   filter_blank(meta)
+}
+
+#' Parse slide metadata into list
+#' 
+#' Metadata is enclosed within a pair of curly braces and is required to 
+#' be valid YAML. Commonly used metadata keys have predefined shortcuts.
+#' So . expands to class: , # expands to id: and & expands to layout: 
+#' IDEA: Use options, so that user can customize further shortcuts.
+parse_meta2 <- function(x){
+  myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'layout: '))
+  x1 = mgsub(myrepl, gsub("^\\{(.*)\\}$", "\\1", x))
+  x2 = str_split_fixed(x1, "\n", 2)
+  y1 = yaml.load(sprintf("{%s}", x2[1]))
+  if (x2[2] != ""){
+    y1 = modifyList(y1, y2)
+  }
+  if (!is.null(y1$class)){
+    y1$class = paste(y1$class, collapse = " ")
+  }
+  return(y1)
 }
 
 #' Parse slide body into list

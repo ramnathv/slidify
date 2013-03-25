@@ -170,3 +170,43 @@ in_dir <- function(dir, expr) {
   owd = setwd(dir); on.exit(setwd(owd))
   force(expr)
 }
+
+#' Multiple substitutions using gsub
+#' 
+#' @noRd
+#' @keywords internal
+mgsub <- function(myrepl, mystring){
+  gsub_ <- function(l, x){
+    do.call('gsub', list(x = x, pattern = l[1], replacement = l[2]))
+  }
+  Reduce(gsub_, myrepl, init = mystring, right = T) 
+}
+
+#' Create a standalone version of an HTML File
+#' 
+#' It works by embedding all images, switching links to use Slidify's googlecode
+#' repository and inlining all user assets.
+#' 
+#' @param deck parsed deck
+#' @param html_in html file with library files linked locally
+#' @noRd
+#' @keywords internal
+make_standalone <- function(deck, html_in){
+  lib_url = paste0(deck$url$lib, '/')
+  lib_cdn = 'http://slidifylibraries.googlecode.com/git/inst/libraries/'
+  html = read_file(html_in, warn = FALSE) %|% markdown:::.b64EncodeImages
+  html = gsub(lib_url, lib_cdn, html)
+  # html_out = sprintf('%s.html', basename(getwd()))
+  cat(html, file = html_in)
+  return(html_in)
+}
+
+
+#' Get the rmd source for each slide
+#' 
+#' @keywords internal
+#' @noRd
+#  Still repeats code and is hence not DRY
+get_slide_rmd <- function(doc){
+  paste('---', (doc %|% to_deck)$slides %|% split_slides)
+}
