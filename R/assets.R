@@ -6,9 +6,10 @@ get_javascripts <- function(deck){
   make_path <- function(asset, url){
     file.path(url, asset, sprintf("%s.html", asset))
   }
+  asset_js  = dir(file.path(deck$url$assets, 'js'), full.names = T, pattern = '.js$')
   widget_js = with(deck, make_path(widgets, url$widgets))
   hilite_js = with(deck, make_path(highlighter, url$highlighters))
-  javascripts = lapply(c(widget_js, hilite_js), read_file)
+  javascripts = lapply(c(widget_js, hilite_js, asset_js), read_file)
   paste(javascripts, collapse = '\n')
 }
 
