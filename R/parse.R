@@ -8,12 +8,13 @@ parse_pages <- function(postFiles){
 #' Parse page
 #'
 #' @noRd
-parse_page <- function(postFile){
+parse_page <- function(postFile, knit_deck = TRUE){
   in_dir(dirname(postFile), {
     inputFile = basename(postFile)
     opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
     outputFile <- gsub(".Rmd", ".md", inputFile)
-    post = knit(inputFile, outputFile) %|% parse_deck
+    deckFile <- ifelse(knit_deck, knit(inputFile, outputFile), inputFile)
+    post <- deckFile %|% parse_deck
     post$file = postFile
     post$filename = tools:::file_path_sans_ext(inputFile)
     if (!is.null(post$date)) {
@@ -53,15 +54,19 @@ parse_slide <- function(slide){
   slide <- str_split(slide, "\n\\*{3}")[[1]] # slide to blocks   
   slide <- str_split_fixed(slide, '\n', 2)   # blocks to metadata
   slide <- apply(slide, 1, function(x){
-    y_meta = parse_meta(x[1])
+    y_meta <- if(grepl("{", x[1], fixed = TRUE)) {
+      parse_meta3(x[1])
+    } else {
+      parse_meta(x[1])
+    }
     # FIXME: figure out why the ifelse does not work correctly.
     # y_body = ifelse(y_meta$class %?=% 'YAML', yaml.load(x[2]), parse_body(x[2]))
     if (y_meta$class %?=% 'YAML'){
-     y_body = yaml.load(x[2])
+      y_body = yaml.load(x[2])
     } else {
-     y_body = parse_body(x[2])
+      y_body = parse_body(x[2])
     }
-    y = c(y_meta, y_body)
+      y = modifyList(y_body, y_meta)
   })
   if (length(slide) > 1){
     main  = slide[[1]]
@@ -106,13 +111,22 @@ parse_meta <- function(meta){
 #' So . expands to class: , # expands to id: and & expands to layout: 
 #' IDEA: Use options, so that user can customize further shortcuts.
 parse_meta2 <- function(x){
-  myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'layout: '))
+  myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
   x1 = mgsub(myrepl, gsub("^\\{(.*)\\}$", "\\1", x))
   x2 = str_split_fixed(x1, "\n", 2)
   y1 = yaml.load(sprintf("{%s}", x2[1]))
   if (x2[2] != ""){
     y1 = modifyList(y1, y2)
   }
+  if (!is.null(y1$class)){
+    y1$class = paste(y1$class, collapse = " ")
+  }
+  return(y1)
+}
+
+parse_meta3 <- function(x){
+  myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
+  y1 = yaml.load(mgsub(myrepl, x))
   if (!is.null(y1$class)){
     y1$class = paste(y1$class, collapse = " ")
   }
