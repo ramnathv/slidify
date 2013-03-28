@@ -6,9 +6,9 @@
 #' @export
 author <- function(deckdir, use_git = TRUE){
   message('Creating slide directory at ', deckdir, '...')
-  if (file.exists(deckdir)){
-    return('Directory already exists. Please choose a different name.')
-  }
+  #   if (file.exists(deckdir)){
+  #     return('Directory already exists. Please choose a different name.')
+  #   }
   scaffold = system.file('skeleton', package = 'slidify')
   copy_dir(scaffold, deckdir)
   message('Finished creating slide directory...')

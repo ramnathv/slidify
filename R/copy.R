@@ -6,8 +6,8 @@ copy_dir <- function(from, to){
   if (!(file.exists(to))){
     dir.create(to, recursive = TRUE)
     message('Copying files to ', to, '...')
-    file.copy(list.files(from, full.names = T), to, recursive = TRUE)
   }
+  file.copy(list.files(from, full.names = T), to, recursive = TRUE)
 }
 
 #' Copy libraries: framework, highlighter and widgets
