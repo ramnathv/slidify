@@ -31,11 +31,11 @@ publish <- function(..., host = 'github'){
 #' computer and be able to push to \code{github} using SSH
 #' 
 #' 
-#' @param user github username
 #' @param repo github reponame
+#' @param username github username
 #' @family publish
 #' @export
-publish_github <- function(user, repo){
+publish_github <- function(repo, username = getOption('github.user')){
   if (!file.exists('libraries')){
     message('Please set mode to selfcontained and run Slidify')
     message('This would place library files in the slide folder')
@@ -51,11 +51,11 @@ publish_github <- function(user, repo){
     message("Adding .nojekyll to your repo...")
     file.create(".nojekyll")
   }
-  message('Publishing deck to ', user, '/', repo)
+  message('Publishing deck to ', username, '/', repo)
   system('git add .')
   system('git commit -a -m "publishing deck"')
-  system(sprintf('git push git@github.com:%s/%s gh-pages', user, repo))
-  link = sprintf('http://%s.github.com/%s', user, repo)
+  system(sprintf('git push git@github.com:%s/%s gh-pages', username, repo))
+  link = sprintf('http://%s.github.com/%s', username, repo)
   message('You can now view your slide deck at ', link)
   browseURL(link)
 }
