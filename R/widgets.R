@@ -1,4 +1,4 @@
-#' Read widget config information
+#' Read widget configuration
 #' 
 #' @keywords internal
 read_config <- function(widget, url_widgets){
@@ -22,6 +22,29 @@ read_config <- function(widget, url_widgets){
   setNames(list(w), widget)
 }
 
-# widget = "bootstrap"
-# url_widgets = '../../libraries/widgets'
-# wconfig = read_config(widget, url_widgets)
+
+
+#' Read widget configuration for all selected widgets
+#' 
+#' @keywords internal 
+read_configs <- function(widgets, url_widgets){
+  configs = lapply(widgets, read_config, url_widgets)
+  Reduce('modifyList', configs)
+}
+
+
+get_assets = function(asset_type, widget_configs, custom_config = ""){
+  assets = unlist(sapply(widget_configs, pluck(asset_type)), use.names = F)
+  names(assets) = NULL
+  if (asset_type == 'css'){
+    tpl <- '{{# assets }}<link rel=stylesheet href="{{.}}"></link>\n{{/ assets }}'
+  } else {
+    tpl <- '{{# assets }}<script src="{{{.}}}"></script>\n{{/assets}}'
+  }
+  whisker.render(tpl)
+}
+
+# widgets = c('nvd3', 'bootstrap', 'scianimator')
+# url_widgets = "~/Documents/Projects/dev/slidifyLibraries/inst/libraries/widgets"
+# widget_configs = read_configs(widgets, url_widgets)
+# myassets = as.list(sapply(c('css', 'js', 'jshead'), get_assets, widget_configs))

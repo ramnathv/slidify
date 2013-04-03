@@ -37,11 +37,18 @@ render_page <- function(page, payload, return_page = FALSE){
     
     # add layouts, urls and stylesheets from frameworks, widgets and assets
     page = page %|% add_urls %|% add_stylesheets %|% add_config_fr
+    
+    widget_configs = read_configs(page$widgets, page$url$widgets)
+    widget_configs = modifyList(widget_configs, read_config('assets', "."))
+    widget_configs = modifyList(widget_configs, list(custom = page$assets))
+    
+    page$assets = as.list(sapply(c('css', 'js', 'jshead'), get_assets, widget_configs))
+    
     layouts = get_layouts(page$url$layouts)
     
     partials = get_layouts(file.path(page$url$framework, 'partials'))
     partials = modifyList(partials, list(javascripts = get_javascripts(page)))
-    
+      
     payload = modifyList(payload, list(page = page))
     
     
