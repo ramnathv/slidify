@@ -210,3 +210,12 @@ make_standalone <- function(deck, html_in){
 get_slide_rmd <- function(doc){
   paste('---', (doc %|% to_deck)$slides %|% split_slides)
 }
+
+#' Combine two lists, component by component
+#' 
+#' @keywords internal
+combine_lists <- function(x, y){
+  nms = union(names(x), names(y))
+  lapply(nms, function(nm){c(x[[nm]], y[[nm]])
+  })
+}
