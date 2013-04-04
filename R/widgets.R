@@ -28,8 +28,12 @@ read_config <- function(widget, url_widgets){
 #' 
 #' @keywords internal 
 read_configs <- function(widgets, url_widgets){
-  configs = lapply(widgets, read_config, url_widgets)
-  Reduce('modifyList', configs)
+  if (length(widgets) != 0){
+    configs = lapply(widgets, read_config, url_widgets)
+    Reduce('modifyList', configs)
+  } else {
+    return(list())
+  }
 }
 
 
