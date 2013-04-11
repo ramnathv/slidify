@@ -60,6 +60,7 @@ render_page <- function(page, payload, return_page = FALSE){
     # outputFile = gsub("*.[R]?md$", '.html', page$file)
     outputFile = sprintf("%s.html", page$filename)
     layout = layouts[[page$layout %||% 'deck']]
+    save(layout, payload, partials, file = "payload.RData")
     cat(whisker.render(layout, payload, partials = partials), file = outputFile)
     
     # Extract R Code from Page if purl = TRUE
