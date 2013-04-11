@@ -5,6 +5,9 @@ read_config <- function(widget, url_widgets){
   get_full_path <- function(x){
     res = wconfig[[1]][[x]]
     if (!is.null(res)){
+      # change this so that paths with a trailing / are appended with wpath.
+      # allows for specifications like shiny which uses a shared directory
+      # note that this requires changes to all config.yml files.
       res <- ifelse(grepl("^http", res), res, file.path(wpath, res))
     }
     return(res)
