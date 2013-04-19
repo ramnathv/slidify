@@ -26,7 +26,7 @@ update_classes <- function(content){
 # <p class = "build"> some text </p>
 update_p_classes <- function(content){
   content = gsub("<p>\\.(.*?) ", "<p class='\\1'>", content)
-  gsub("<p class='build'>(.*)</p>", "<p class='build'><span>\\1</span></p>", content)
+  gsub("<p class='build'>([^>.]*)</p>", "<p class='build'><span>\\1</span></p>", content)
 }
 
 #' Update <*> classes by adding class specifier
