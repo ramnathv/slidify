@@ -42,6 +42,7 @@ read_configs <- function(widgets, url_widgets){
 
 get_assets = function(asset_type, widget_configs, custom_config = ""){
   assets = unlist(sapply(widget_configs, pluck(asset_type)), use.names = F)
+  assets = remove_duplicates(assets)
   names(assets) = NULL
   if (asset_type == 'css'){
     tpl <- '{{# assets }}<link rel=stylesheet href="{{.}}"></link>\n{{/ assets }}'
@@ -49,6 +50,10 @@ get_assets = function(asset_type, widget_configs, custom_config = ""){
     tpl <- '{{# assets }}<script src="{{{.}}}"></script>\n{{/assets}}'
   }
   whisker.render(tpl)
+}
+
+remove_duplicates <- function(assets){
+  return(assets[!duplicated(basename(assets))])
 }
 
 # widgets = c('nvd3', 'bootstrap', 'scianimator')
