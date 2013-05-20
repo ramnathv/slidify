@@ -12,7 +12,7 @@ parse_page <- function(postFile, knit_deck = TRUE){
   in_dir(dirname(postFile), {
     inputFile = basename(postFile)
     opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
-    outputFile <- gsub(".Rmd", ".md", inputFile)
+    outputFile <- gsub(".[r|R]md", ".md", inputFile)
     deckFile <- ifelse(knit_deck, knit(inputFile, outputFile), inputFile)
     post <- deckFile %|% parse_deck
     post$file = postFile
