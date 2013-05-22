@@ -5,13 +5,14 @@
 #' @param deckdir path to new slide directory
 #' @param use_git whether to initialize directory as git repo
 #' @param open_rmd whether to open the rmd file created
+#' @param scaffold path to directory containing scaffold for deck 
 #' @export
-author <- function(deckdir, use_git = TRUE, open_rmd = TRUE){
+author <- function(deckdir, use_git = TRUE, open_rmd = TRUE, 
+    scaffold = system.file('skeleton', package = 'slidify')){
   message('Creating slide directory at ', deckdir, '...')
   #   if (file.exists(deckdir)){
   #     return('Directory already exists. Please choose a different name.')
   #   }
-  scaffold = system.file('skeleton', package = 'slidify')
   copy_dir(scaffold, deckdir)
   message('Finished creating slide directory...')
   message('Switching to slide directory...')
