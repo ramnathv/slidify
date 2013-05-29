@@ -1,10 +1,11 @@
 #' Convert an Rmd document into HTML5
 #' 
 #' @noRd
-pagify <- slidify <- function(inputFile, knit_deck = TRUE, return_page = FALSE){
+pagify <- slidify <- function(inputFile, knit_deck = TRUE, return_page = FALSE,
+    save_payload = FALSE){
   site = ifelse(file.exists('site.yml'), yaml.load_file('site.yml'), list())
   page = parse_page(inputFile, knit_deck)
-  render_page(page, payload = list(site = site), return_page)
+  render_page(page, payload = list(site = site), return_page, save_payload)
 }
 
 #' Convert a directory of Rmd documents into HTML5
