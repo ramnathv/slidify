@@ -29,3 +29,21 @@ copy_libraries <- function(framework, highlighter, widgets, url_lib, pkg = 'slid
   copy_resource('highlighters', highlighter)
   invisible(lapply(widgets, copy_resource, subdir = 'widgets'))
 }
+
+#' Copy external widgets from other libraries
+#' 
+#' @keywords internal
+#' @noRd
+copy_external_widgets <- function(ext_widgets, url_lib){
+  ext_widget_paths = lapply(names(ext_widgets), function(e){
+    x = strsplit(ext_widgets[[e]], '/')
+    y = function(...){ system.file(..., package = e) }
+    sapply(x, function(z) do.call('y', as.list(z)))
+  })
+  invisible(lapply(unlist(ext_widget_paths), function(epath){
+     copy_dir(
+       from = epath,
+       to = file.path(url_lib, 'widgets', basename(epath))
+     )
+  }))
+}
