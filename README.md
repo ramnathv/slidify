@@ -1,4 +1,4 @@
-# Overview #
+![slidify_logo](https://f.cloud.github.com/assets/346288/650134/894eadd0-d455-11e2-8be5-8d463050f4ef.png) 
 
 Slidify helps you create and publish beautiful HTML5 presentations from [RMarkdown](http://goo.gl/KKdaf)
 
