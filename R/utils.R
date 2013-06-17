@@ -1,3 +1,11 @@
+#' Include a slidify created html document in Shiny
+includeDeck <- function(path){
+  shiny:::dependsOnFile(path)
+  slidify(path)
+  html_file <- gsub('.Rmd$', '.html', path)
+  shiny::includeHTML(html_file)
+}
+
 #' Check for equality only if variable exists
 #' 
 #' @noRd
