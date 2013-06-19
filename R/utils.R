@@ -1,9 +1,46 @@
+#' Run a slide Deck
+runDeck <- function(deckDir = ".", appDir = file.path(deckDir, "apps")){
+  require(shiny)
+  require(slidifyLibraries)
+  .slidifyEnv = new.env()
+  make_interactive()
+  addResourcePath('libraries', file.path(deckDir, "libraries"))
+  addResourcePath('assets', file.path(deckDir, "assets"))
+  
+  deckDir = normalizePath(deckDir)
+  appDir  = normalizePath(appDir)
+  
+  render_markdown()
+  
+  shiny::runApp(list(
+    ui = includeDeck(file.path(deckDir, 'index.Rmd')), 
+    server = function(input, output){
+      apps = dir(appDir, pattern = '^app', full = T)
+      for (app in apps){
+        source(app, local = TRUE)
+      }
+      renderCodeCells(input, output, env = .slidifyEnv, deckDir)
+    }
+  ))
+}
+
 #' Include a slidify created html document in Shiny
 includeDeck <- function(path){
   shiny:::dependsOnFile(path)
+  slidifyLibraries::make_interactive()
   slidify(path)
   html_file <- gsub('.Rmd$', '.html', path)
-  shiny::includeHTML(html_file)
+  lines <- c(
+    readLines(html_file, warn=FALSE, encoding='UTF-8'),
+    "<script type='text/javascript'>
+      // snippet required to activate shiny outputs, since slides are hidden
+    // thanks to @jcheng
+    $('slide').on('slideenter', function(){
+      $(this).trigger('shown');
+    })
+    </script>"
+  )
+  return(HTML(paste(lines, collapse='\r\n')))
 }
 
 #' Check for equality only if variable exists
@@ -199,9 +236,9 @@ mgsub <- function(myrepl, mystring){
 #' @param html_in html file with library files linked locally
 #' @noRd
 #' @keywords internal
-make_standalone <- function(deck, html_in){
+make_standalone <- function(deck, html_in, lib_cdn = getOption('slidifylibraries.cdn', 
+    'http://slidifylibraries2.googlecode.com/git/inst/libraries/')){
   lib_url = paste0(deck$url$lib, '/')
-  lib_cdn = 'http://slidifylibraries.googlecode.com/git/inst/libraries/'
   html = read_file(html_in, warn = FALSE) %|% markdown:::.b64EncodeImages
   html = gsub(lib_url, lib_cdn, html)
   # html_out = sprintf('%s.html', basename(getwd()))
