@@ -70,6 +70,11 @@ render_page <- function(page, payload, return_page = FALSE, save_payload = FALSE
     }
     cat(whisker.render(layout, payload, partials = partials), file = outputFile)
     
+    # create standalone deck if page mode is standalone
+    if (page$mode == 'standalone'){
+      outputFile = make_standalone(page, outputFile)
+    }
+    
     # Extract R Code from Page if purl = TRUE
     if (page$purl %?=% TRUE) purl(page$file)
   })
