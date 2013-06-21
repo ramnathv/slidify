@@ -1,14 +1,21 @@
 #' Run a slide Deck
-runDeck <- function(deckDir = ".", appDir = file.path(deckDir, "apps")){
+runDeck <- function(deckDir = ".", appDir = file.path(deckDir, "apps"), 
+  shiny = TRUE){
   require(shiny)
   require(slidifyLibraries)
   .slidifyEnv = new.env()
   make_interactive()
+  myDeckDir = file.path(deckDir, "libraries")
+  if (!file.exists(myDeckDir)){
+    dir.create(myDeckDir)
+  }
   addResourcePath('libraries', file.path(deckDir, "libraries"))
   addResourcePath('assets', file.path(deckDir, "assets"))
   
   deckDir = normalizePath(deckDir)
-  appDir  = normalizePath(appDir)
+  if (file.exists(appDir)){
+    appDir  = normalizePath(appDir)
+  }
   
   render_markdown()
   
@@ -19,7 +26,9 @@ runDeck <- function(deckDir = ".", appDir = file.path(deckDir, "apps")){
       for (app in apps){
         source(app, local = TRUE)
       }
-      renderCodeCells(input, output, env = .slidifyEnv, deckDir)
+      if (shiny){
+        renderCodeCells(input, output, env = .slidifyEnv, deckDir)
+      }
     }
   ))
 }
@@ -41,6 +50,7 @@ includeDeck <- function(path){
     </script>"
   )
   return(HTML(paste(lines, collapse='\r\n')))
+  # includeHTML(html_file)
 }
 
 #' Check for equality only if variable exists
