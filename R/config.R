@@ -33,6 +33,7 @@ get_config <- function(cfile = 'config.yml'){
 #' Add default configuration of framework to fill up missing elements
 #' 
 #' @keywords internal
+#' @noRd
 add_config_fr <- function(deck){
   config_file <- file.path(deck$url$framework, "config.yml")
   if (file.exists(config_file)){

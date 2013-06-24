@@ -34,6 +34,7 @@ runDeck <- function(deckDir = ".", appDir = file.path(deckDir, "apps"),
 }
 
 #' Include a slidify created html document in Shiny
+#' @noRd
 includeDeck <- function(path){
   shiny:::dependsOnFile(path)
   slidifyLibraries::make_interactive()
@@ -269,6 +270,7 @@ get_slide_rmd <- function(doc){
 #' Combine two lists, component by component
 #' 
 #' @keywords internal
+#' @noRd
 combine_lists <- function(x, y){
   nms = union(names(x), names(y))
   lapply(nms, function(nm){c(x[[nm]], y[[nm]])

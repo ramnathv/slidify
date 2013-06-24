@@ -1,6 +1,7 @@
 #' Read widget configuration
 #' 
 #' @keywords internal
+#' @noRd
 read_config <- function(widget, url_widgets){
   get_full_path <- function(x){
     res = wconfig[[1]][[x]]
@@ -30,6 +31,7 @@ read_config <- function(widget, url_widgets){
 #' Read widget configuration for all selected widgets
 #' 
 #' @keywords internal 
+#' @noRd
 read_configs <- function(widgets, url_widgets){
   if (length(widgets) != 0){
     configs = lapply(widgets, read_config, url_widgets)

@@ -1,10 +1,10 @@
 \name{slidifyDefaults}
 \alias{slidifyDefaults}
-\title{Set default options for slidify}
+\title{Default configuration}
 \usage{
   slidifyDefaults()
 }
 \description{
-  Set default options for slidify
+  Default configuration
 }
 

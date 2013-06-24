@@ -2,12 +2,12 @@
 \alias{publish_github}
 \title{Publish slide deck to Github}
 \usage{
-  publish_github(user, repo)
+  publish_github(repo, username = getOption("github.user"))
 }
 \arguments{
-  \item{user}{github username}
-
   \item{repo}{github reponame}
+
+  \item{username}{github username}
 }
 \description{
   You will need \code{git} installed on your computer and a

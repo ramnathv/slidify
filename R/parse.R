@@ -29,6 +29,7 @@ parse_page <- function(postFile, knit_deck = TRUE){
 #' Parse deck into metdata and slide elements
 #' 
 #' @param inputFile path to markdown file to parse
+#' @noRd
 parse_deck <- function(inputFile){
   deck = inputFile %|% to_deck 
   deck$slides = deck$slides %|% split_slides %|% parse_slides  
@@ -106,6 +107,7 @@ parse_meta <- function(meta){
 
 #' Parse slide metadata into list
 #' 
+#' @noRd
 #' Metadata is enclosed within a pair of curly braces and is required to 
 #' be valid YAML. Commonly used metadata keys have predefined shortcuts.
 #' So . expands to class: , # expands to id: and & expands to layout: 
@@ -124,6 +126,7 @@ parse_meta2 <- function(x){
   return(y1)
 }
 
+#' @noRd
 parse_meta3 <- function(x){
   myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
   y1 = yaml.load(mgsub(myrepl, x))

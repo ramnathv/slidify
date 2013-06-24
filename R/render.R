@@ -3,6 +3,7 @@
 #' @param slide list containing elements of the parsed slide
 #' @param layouts list of layouts
 #' @param payload list containing site and page, useful for blogs
+#' @noRd
 #  TOTHINK: Should partials also be passed along?
 render_slide <- function(slide, layouts, payload){
   default = "{{{slide.header}}}\n{{{slide.content}}}"
@@ -18,6 +19,7 @@ render_slide <- function(slide, layouts, payload){
 }
 
 #' Render slides
+#' @noRd
 render_slides <- function(slides, layouts, payload){
   lapply(slides, render_slide, layouts = layouts, payload = payload)
 }
