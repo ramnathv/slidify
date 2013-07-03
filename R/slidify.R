@@ -6,6 +6,11 @@
 #' @param save_payload should the payload be saved to the slide directory
 slidify <- pagify <- function(inputFile, knit_deck = TRUE, return_page = FALSE,
     save_payload = FALSE){
+  ## REMOVE LINES AFTER KNITR IS UPDATED ------
+  options('knitr.in.progress' = TRUE)
+  on.exit(options('knitr.in.progress' = FALSE))
+  ## -------------------------------------------
+  
   site = ifelse(file.exists('site.yml'), yaml.load_file('site.yml'), list())
   page = parse_page(inputFile, knit_deck)
   render_page(page, payload = list(site = site), return_page, save_payload)
