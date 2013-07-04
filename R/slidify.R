@@ -11,8 +11,11 @@ slidify <- pagify <- function(inputFile, knit_deck = TRUE, return_page = FALSE,
   on.exit(options('knitr.in.progress' = FALSE))
   ## -------------------------------------------
   
+  .SLIDIFY_ENV <<- new.env()
   site = ifelse(file.exists('site.yml'), yaml.load_file('site.yml'), list())
   page = parse_page(inputFile, knit_deck)
+  
+  page = modifyList(page, as.list(.SLIDIFY_ENV))
   render_page(page, payload = list(site = site), return_page, save_payload)
 }
 
