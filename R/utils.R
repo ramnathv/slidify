@@ -247,8 +247,8 @@ mgsub <- function(myrepl, mystring){
 #' @param html_in html file with library files linked locally
 #' @noRd
 #' @keywords internal
-make_standalone <- function(deck, html_in, lib_cdn = getOption('slidifylibraries.cdn', 
-    'http://slidifylibraries2.googlecode.com/git/inst/libraries/')){
+make_standalone <- function(deck, html_in){
+  lib_cdn = paste0(deck$lib_cdn %||% 'http://slidifylibraries2.googlecode.com/git/inst/libraries', '/')
   lib_url = paste0(deck$url$lib, '/')
   html = read_file(html_in, warn = FALSE) %|% markdown:::.b64EncodeImages
   html = gsub(lib_url, lib_cdn, html)
