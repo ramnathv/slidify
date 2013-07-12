@@ -12,7 +12,7 @@ get_javascripts <- function(deck){
   widget_js = with(deck, make_path(widgets, url$widgets))
   hilite_js = with(deck, make_path(highlighter, url$highlighters))
   javascripts = lapply(c(widget_js, hilite_js), read_file)
-  javascripts = c(javascripts, sprintf("<script src='%s'></script", asset_js))
+  # javascripts = c(javascripts, sprintf("<script src='%s'></script", asset_js))
   paste(paste(javascripts, collapse = '\n'), "\n")
 }
 
