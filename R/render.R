@@ -10,8 +10,8 @@ render_slide <- function(slide, layouts, payload){
   layout  = layouts[[slide$tpl %||% 'slide']] %||% default
   payload = modifyList(payload, list(slide = slide))
   slide$rendered = whisker.render(layout, payload, partials = layouts) %|% update_classes
-  
-  if (!(slide$class %?=% 'RAW')){
+  raw_slide = !is.null(slide$class) && grepl('RAW', slide$class)
+  if (!(raw_slide)){
     slide$rendered = whisker.render(slide$rendered, payload, partials = layouts)
   }
   
