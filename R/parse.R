@@ -52,8 +52,9 @@ parse_slides <- function(slides){
 #' @keywords internal
 #' @noRd
 parse_slide <- function(slide){
-  slide <- str_split(slide, "\n\\*{3}")[[1]] # slide to blocks   
-  slide <- str_split_fixed(slide, '\n', 2)   # blocks to metadata
+  slide <- str_split(slide, "\n\\*{3}")[[1]] %|% split_meta
+  # slide <- str_split(slide, "\n\\*{3}")[[1]] # slide to blocks   
+  # slide <- str_split_fixed(slide, '\n', 2)   # blocks to metadata
   slide <- apply(slide, 1, function(x){
     y_meta <- if(grepl("{", x[1], fixed = TRUE)) {
       parse_meta3(x[1])
@@ -74,11 +75,28 @@ parse_slide <- function(slide){
     named = Filter(function(z) !is.null(z$name), slide[-1])
     names(named) = lapply(named, '[[', "name")
     blocks = Filter(function(z) is.null(z$name), slide[-1])
+    blocks = lapply(seq_along(blocks), function(i){
+      modifyList(blocks[[i]], list(num = i))
+    })
     slide  = c(main, named, list(blocks = blocks))
   } else {
     slide = slide[[1]]
   }
   return(slide)
+}
+
+
+split_meta <- function(blocks){
+  split_block <- function(block){
+    if (grepl("^\\s*\\{", block)){
+      block <- str_split_fixed(block, "}\n", 2)
+      block[1] <- paste(block[1], "}")
+    } else {
+      block <- str_split_fixed(block, "\n", 2)
+    }
+    return(block)
+  }
+  t(sapply(blocks, split_block, USE.NAMES = F))
 }
 
 #' Parse slide metadata into list
@@ -129,7 +147,8 @@ parse_meta2 <- function(x){
 #' @noRd
 parse_meta3 <- function(x){
   myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
-  y1 = yaml.load(mgsub(myrepl, x))
+  # y1 = yaml.load(mgsub(myrepl, x))
+  y1 = yaml.load(x)
   if (!is.null(y1$class)){
     y1$class = paste(y1$class, collapse = " ")
   }
