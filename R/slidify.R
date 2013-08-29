@@ -6,6 +6,7 @@
 #' @param save_payload should the payload be saved to the slide directory
 slidify <- pagify <- function(inputFile, knit_deck = TRUE, return_page = FALSE,
     save_payload = FALSE){
+  
   ## REMOVE LINES AFTER KNITR IS UPDATED ------
   options('knitr.in.progress' = TRUE)
   on.exit(options('knitr.in.progress' = FALSE))
@@ -72,3 +73,10 @@ blogify <- function(blogDir = "."){
 #   
 #   return(outputFile)
 # }
+
+check_slidifyLibraries <- function(){
+  if (require('slidifyLibraries') && packageVersion('slidifyLibraries') <= 0.3){
+    stop("Stop! You need to update slidifyLibraries")
+  }
+  return(invisible())
+}
