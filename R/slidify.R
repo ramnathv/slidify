@@ -4,8 +4,8 @@
 #' @param knit_deck whether the file needs to be run through knit
 #' @param return_page should the function return the payload
 #' @param save_payload should the payload be saved to the slide directory
-slidify <- pagify <- function(inputFile, knit_deck = TRUE, return_page = FALSE,
-    save_payload = FALSE){
+slidify <- pagify <- function(inputFile, knit_deck = TRUE, 
+  return_page = FALSE, save_payload = FALSE, envir = parent.frame()){
   
   ## REMOVE LINES AFTER KNITR IS UPDATED ------
   options('knitr.in.progress' = TRUE)
@@ -14,7 +14,7 @@ slidify <- pagify <- function(inputFile, knit_deck = TRUE, return_page = FALSE,
   
   .SLIDIFY_ENV <<- new.env()
   site = ifelse(file.exists('site.yml'), yaml.load_file('site.yml'), list())
-  page = parse_page(inputFile, knit_deck)
+  page = parse_page(inputFile, knit_deck, envir = envir)
   
   page = modifyList(page, as.list(.SLIDIFY_ENV))
   render_page(page, payload = list(site = site), return_page, save_payload)

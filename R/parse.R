@@ -8,12 +8,13 @@ parse_pages <- function(postFiles){
 #' Parse page
 #'
 #' @noRd
-parse_page <- function(postFile, knit_deck = TRUE){
+parse_page <- function(postFile, knit_deck = TRUE, envir){
   in_dir(dirname(postFile), {
     inputFile = basename(postFile)
     opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
     outputFile <- gsub(".[r|R]md", ".md", inputFile)
-    deckFile <- ifelse(knit_deck, knit(inputFile, outputFile), inputFile)
+    deckFile <- ifelse(knit_deck, 
+      knit(inputFile, outputFile, envir = envir), inputFile)
     post <- deckFile %|% parse_deck
     post$file = postFile
     post$filename = tools:::file_path_sans_ext(inputFile)
@@ -22,6 +23,7 @@ parse_page <- function(postFile, knit_deck = TRUE){
     }
     post$link = gsub("*.Rmd", ".html", post$file)
     post$raw = read_file(inputFile)
+    # saveRDS(post, file = "_payload.rds")
   })
   return(post)
 }
