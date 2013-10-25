@@ -12,7 +12,8 @@ publish <- function(..., host = 'github'){
   publish_deck <- switch(host, 
      github = publish_github, 
     dropbox = publish_dropbox,
-      rpubs = publish_rpubs
+      rpubs = publish_rpubs,
+      gist  = publish_gist
   )
   publish_deck(...)
 }
@@ -87,6 +88,51 @@ publish_rpubs <- function(title, html_file = 'index.html'){
   writeLines(html, html_out)
   url = rpubsUpload(title, html_out)$continueUrl
   browseURL(url)
+}
+
+#' Publish slide deck to gist
+#' 
+#' @param title title of the presentation
+#' @param files list of files to publish, defaults to index.* files
+#' @export
+publish_gist <- function(title, 
+  filenames = dir(".", pattern = "index"), public = T){
+  require(httr)
+  files = lapply(filenames, function(file) {
+    x = list(content = paste(readLines(file, warn = F), collapse = "\n"))
+  })
+  names(files) = basename(filenames)
+  body = list(description = title, files = files, public = public)
+  
+  credentials = getCredentials()
+  response = POST(
+    url = "https://api.github.com/gists", 
+    body = rjson::toJSON(body), 
+    config = c(
+      authenticate(
+        getOption("github.username"), 
+        getOption("github.password"), 
+        type = "basic"
+    ), 
+    add_headers(`User-Agent` = "Dummy"))
+  )
+  html_url = content(response)$html_url
+  message("Your deck has been published")
+  message("View deck at ", paste('http://bl.ocks.org',   
+   getOption('github.username'), "raw", basename(html_url), sep = "/")
+  )
+}
+
+#' @internal
+getCredentials = function (){
+  if (is.null(getOption("github.username"))){
+    username <- readline("Please enter your github username: ")
+    options(github.username = username)
+  }
+  if (is.null(getOption("github.password"))){
+    password <- readline("Please enter your github password: ")
+    options(github.password = password)
+  }
 }
 
 
