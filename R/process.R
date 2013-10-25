@@ -7,7 +7,8 @@
 to_deck <- function(doc){
   txt = str_split_fixed(read_file(doc), '\n---', 2)
   meta = yaml.load(gsub("^---\n+", '', txt[1]))
-  deck = modifyList(get_config(), c(meta, slides = txt[2]))
+  cfile = ifelse(is.null(meta$config), 'config.yml', meta$config)
+  deck = modifyList(get_config(cfile), c(meta, slides = txt[2]))
   deck$standalone = ifelse(deck$mode == "standalone", TRUE, FALSE)
   return(deck)
 }
