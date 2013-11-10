@@ -1,6 +1,6 @@
 #' Run a slide Deck
 runDeck <- function(deckDir = ".", appDir = file.path(deckDir, "apps"), 
-  shiny = TRUE){
+  shiny = TRUE, ...){
   require(shiny)
   require(slidifyLibraries)
   .slidifyEnv = new.env()
@@ -30,7 +30,7 @@ runDeck <- function(deckDir = ".", appDir = file.path(deckDir, "apps"),
         renderCodeCells(input, output, env = .slidifyEnv, deckDir)
       }
     }
-  ))
+  ), ...)
 }
 
 #' Include a slidify created html document in Shiny
@@ -275,4 +275,11 @@ combine_lists <- function(x, y){
   nms = union(names(x), names(y))
   lapply(nms, function(nm){c(x[[nm]], y[[nm]])
   })
+}
+
+view_deck <- function(dir = "."){
+  td <- file.path(tempdir(), basename(tempfile(pattern = 'slidify')))
+  suppressMessages(copy_dir(".", td))
+  tf <- file.path(td, 'index.html')
+  rstudio::viewer(tf)
 }
