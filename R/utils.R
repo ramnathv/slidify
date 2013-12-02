@@ -81,7 +81,7 @@ embed_images <- function(html_in){
 #' 
 #' @noRd
 enable_cdn <- function(html){
-  cdn  = 'http://slidify.googlecode.com/git/inst/libraries/'
+  cdn  = 'http://slidifylibraries2.googlecode.com/git/inst/libraries/'
   html = gsub("libraries/", cdn, html, fixed = TRUE)
 }
 
