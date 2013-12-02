@@ -10,7 +10,7 @@ Description: This package provides a tool to generate reproducible html5 slides
 Depends:
     R (>= 2.15.0)
 Imports:
-    knitr,
+    knitr (>= 0.1),
     markdown,
     stringr,
     yaml,
