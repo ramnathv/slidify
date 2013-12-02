@@ -18,6 +18,7 @@ Imports:
 License: MIT
 URL: http://ramnathv.github.com/slidify/
 BugReports: https://github.com/ramnathv/slidify/issues
+BuildKeepEmpty: TRUE
 Collate:
     'add.R'
     'assets.R'
