@@ -1,7 +1,6 @@
 .Rproj.user
 .Rhistory
 .RData
-.Rbuildignore
 .DS_Store
 .cache
 examples/
