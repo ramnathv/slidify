@@ -223,7 +223,9 @@ is_installed <- function(mypkg) {
 #' 
 #' @noRd
 in_dir <- function(dir, expr) {
-  owd = setwd(dir); on.exit(setwd(owd))
+  if (is.null(getOption('slidify.changedir'))){
+     owd = setwd(dir); on.exit(setwd(owd))
+  }
   force(expr)
 }
 
