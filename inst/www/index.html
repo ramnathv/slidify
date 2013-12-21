@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Slidify Playground</title>
+<link rel="icon" 
+      type="image/png" 
+      href="favicon.png">
+    
+<script src="underscore-min.js"></script>    
+<script src="jquery-1.10.2.min.js"></script>
+<script src="opencpu-0.4.js"></script>
+<script src="http://slidify.github.io/ile/libraries/widgets/interactive/js/ace/js/ace.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+$(function(){
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/solarized_light");
+  editor.getSession().setMode("ace/mode/r");
+  editor.getSession().setUseWrapMode(true)
+  editor.setFontSize("14px");
+
+  //This app requires OpenCPU 1.0.1 or higher!
+  
+  function domarkdown(e){
+    var req = ocpu.call("slidify_text", {
+      text : editor.getSession().getValue()
+    }, function(session){
+      $("iframe").attr('src', session.getFileURL("output.html"));     
+    }).fail(function(text){
+      alert("Error: " + req.responseText);
+    });
+  }
+
+  //auto run after 3 seconds of no activity
+  var update = _.debounce(domarkdown, 3000);
+  
+  //register event
+  editor.on("change", update);
+  
+  //init on start
+  domarkdown();  
+});
+</script>
+
+<style type="text/css" media="screen">
+ 
+#editor { 
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 400px;
+  height: 100%;
+}
+
+iframe { 
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 1030px;
+  height: 100%;
+  border: 0;
+  margin: 0;
+  z-index: 999999;
+}
+
+</style>
+</head>
+<body>
+
+<div id="editor">---
+title: Slidify Playground
+subtitle: Adapted from OpenCPU MarkdownApp
+author: Ramnath Vaidyanathan
+framework: io2012
+widgets: [mathjax]
+---
+
+## Normal Distribution
+
+The normal (or Gaussian) distribution is defined as follows:
+
+$$latex
+f(x;\mu,\sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} 
+e^{ -\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2 }
+$$
+
+---
+
+## Density Plot
+
+To generate random draws from a normal distribution we use the **rnorm** function:
+
+```{r block1}
+output <- rnorm(1000, 100, 15);
+```
+
+---
+
+## Bell Shape
+
+The normal distribution has the typical bell shape:
+
+```{r block2, fig.width=8, fig.height=5}
+library(ggplot2)
+qplot(output)
+```
+
+---
+
+## Kernel density estimation
+
+We can perform density estimation on the sample:
+
+```{r block3, fig.width=8, fig.height=5}
+plot(density(output))
+``` 
+
+---
+
+## Carl Friedrich Gauß
+
+This little guy had something to do with it
+
+!['Gauss'](http://goo.gl/ZwTTXv)
+</div>
+
+<iframe src="about:blank"></iframe>
+
+</body>
+</html>

@@ -285,3 +285,15 @@ view_deck <- function(dir = "."){
   tf <- file.path(td, 'index.html')
   rstudio::viewer(tf)
 }
+
+## This app requires OpenCPU 1.0.1 or higher !!!! 
+##
+
+#' @export
+slidify_text <- function(text){
+  writeLines(text, con="output.Rmd");
+  # knit2html("input.Rmd", output="output.html");
+  options(slidify.changedir = FALSE)
+  slidify('output.Rmd')
+  invisible();
+}
