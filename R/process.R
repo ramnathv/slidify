@@ -1,32 +1,3 @@
-#' Knit deck to markdown
-#'
-#' @keywords internal
-#' @noRd
-knit_deck <- function(deck){
-  render_markdown(strict = TRUE)
-  knit_hooks$set(plot = hook_plot_html)
-  deck$slides = knit(text = deck$slides)
-  return(invisible(deck))
-}
-
-#' Get configuration
-#' 
-#' A config.yml file in the root directory of the slide deck can be used to 
-#' override slidify defaults. YAML front matter in the Rmd file overrides
-#' everything.
-#' 
-#' @param cfile path to config file
-#' @return list of config options
-#' @keywords internal
-#' @noRd
-get_config <- function(cfile = 'config.yml'){
-  config = slidifyDefaults()
-  if (file.exists(cfile)){
-    config = modifyList(config, yaml::yaml.load_file(cfile))
-  }
-  return(config)
-}
-
 #' Split document into metadata and slides
 #' 
 #' @param doc path to source file
@@ -36,7 +7,8 @@ get_config <- function(cfile = 'config.yml'){
 to_deck <- function(doc){
   txt = str_split_fixed(read_file(doc), '\n---', 2)
   meta = yaml.load(gsub("^---\n+", '', txt[1]))
-  deck = modifyList(get_config(), c(meta, slides = txt[2]))
+  cfile = ifelse(is.null(meta$config), 'config.yml', meta$config)
+  deck = modifyList(get_config(cfile), c(meta, slides = txt[2]))
   deck$standalone = ifelse(deck$mode == "standalone", TRUE, FALSE)
   return(deck)
 }
@@ -51,22 +23,3 @@ to_deck <- function(doc){
 split_slides <- function(slides, pat = '\n\n---'){
   str_split(slides, pattern = pat)[[1]]
 }
-
-#' Parse slides into constitutent elements
-#'
-#' @keywords internal
-#' @noRd
-parse_slides <- function(slides){
-  lapply(slides, parse_slide)
-}
-
-#' Get the rmd source for each slide
-#' 
-#' @keywords internal
-#' @noRd
-#  Still repeats code and is hence not DRY
-get_slide_rmd <- function(doc){
-  paste('---', (doc %|% to_deck)$slides %|% split_slides)
-}
-
-

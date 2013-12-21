@@ -1,25 +1,23 @@
 \name{slidify}
 \alias{slidify}
-\title{Convert an Rmd document into HTML5 using a framework}
+\title{Convert an Rmd document into HTML5}
 \usage{
-  slidify(inputFile, outputFile, knit_deck = TRUE)
+  slidify(inputFile, knit_deck = TRUE, return_page = FALSE,
+    save_payload = FALSE)
 }
 \arguments{
-  \item{inputFile}{path to input Rmd document}
+  \item{inputFile}{path to the Rmd file to slidify}
 
-  \item{outputFile}{path to output html document; default
-  uses inputFile}
+  \item{knit_deck}{whether the file needs to be run through
+  knit}
 
-  \item{knit_deck}{should the input file be knit?; default
-  is TRUE}
-}
-\value{
-  path to outputFile
+  \item{return_page}{should the function return the
+  payload}
+
+  \item{save_payload}{should the payload be saved to the
+  slide directory}
 }
 \description{
-  Convert an Rmd document into HTML5 using a framework
-}
-\seealso{
-  slidify-package
+  Convert an Rmd document into HTML5
 }
 

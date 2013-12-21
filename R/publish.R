@@ -12,7 +12,8 @@ publish <- function(..., host = 'github'){
   publish_deck <- switch(host, 
      github = publish_github, 
     dropbox = publish_dropbox,
-      rpubs = publish_rpubs
+      rpubs = publish_rpubs,
+      gist  = publish_gist
   )
   publish_deck(...)
 }
@@ -31,11 +32,11 @@ publish <- function(..., host = 'github'){
 #' computer and be able to push to \code{github} using SSH
 #' 
 #' 
-#' @param user github username
 #' @param repo github reponame
+#' @param username github username
 #' @family publish
 #' @export
-publish_github <- function(user, repo){
+publish_github <- function(repo, username = getOption('github.user')){
   if (!file.exists('libraries')){
     message('Please set mode to selfcontained and run Slidify')
     message('This would place library files in the slide folder')
@@ -51,11 +52,11 @@ publish_github <- function(user, repo){
     message("Adding .nojekyll to your repo...")
     file.create(".nojekyll")
   }
-  message('Publishing deck to ', user, '/', repo)
+  message('Publishing deck to ', username, '/', repo)
   system('git add .')
   system('git commit -a -m "publishing deck"')
-  system(sprintf('git push git@github.com:%s/%s gh-pages', user, repo))
-  link = sprintf('http://%s.github.com/%s', user, repo)
+  system(sprintf('git push git@github.com:%s/%s gh-pages', username, repo))
+  link = sprintf('http://%s.github.com/%s', username, repo)
   message('You can now view your slide deck at ', link)
   browseURL(link)
 }
@@ -87,6 +88,51 @@ publish_rpubs <- function(title, html_file = 'index.html'){
   writeLines(html, html_out)
   url = rpubsUpload(title, html_out)$continueUrl
   browseURL(url)
+}
+
+#' Publish slide deck to gist
+#' 
+#' @param title title of the presentation
+#' @param files list of files to publish, defaults to index.* files
+#' @export
+publish_gist <- function(title, 
+  filenames = dir(".", pattern = "index"), public = T){
+  require(httr)
+  files = lapply(filenames, function(file) {
+    x = list(content = paste(readLines(file, warn = F), collapse = "\n"))
+  })
+  names(files) = basename(filenames)
+  body = list(description = title, files = files, public = public)
+  
+  credentials = getCredentials()
+  response = POST(
+    url = "https://api.github.com/gists", 
+    body = rjson::toJSON(body), 
+    config = c(
+      authenticate(
+        getOption("github.username"), 
+        getOption("github.password"), 
+        type = "basic"
+    ), 
+    add_headers(`User-Agent` = "Dummy"))
+  )
+  html_url = content(response)$html_url
+  message("Your deck has been published")
+  message("View deck at ", paste('http://bl.ocks.org',   
+   getOption('github.username'), "raw", basename(html_url), sep = "/")
+  )
+}
+
+#' @internal
+getCredentials = function (){
+  if (is.null(getOption("github.username"))){
+    username <- readline("Please enter your github username: ")
+    options(github.username = username)
+  }
+  if (is.null(getOption("github.password"))){
+    password <- readline("Please enter your github password: ")
+    options(github.password = password)
+  }
 }
 
 

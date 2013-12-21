@@ -1,7 +1,7 @@
 Package: slidify
 Type: Package
 Title: Generate reproducible html5 slides from R markdown
-Version: 0.3.3
+Version: 0.3.52
 Date: 2012-10-18
 Author: Ramnath Vaidyanathan <ramnath.vaidya@gmail.com>
 Maintainer: Ramnath Vaidyanathan <ramnath.vaidya@gmail.com>
@@ -23,8 +23,9 @@ Collate:
     'add.R'
     'assets.R'
     'author.R'
+    'bloghelpers.R'
     'copy.R'
-    'defaults.R'
+    'config.R'
     'layouts.R'
     'package.R'
     'parse.R'
@@ -35,4 +36,5 @@ Collate:
     'update.R'
     'urls.R'
     'utils.R'
+    'widgets.R'
     'zzz.R'

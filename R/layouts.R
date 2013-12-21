@@ -26,11 +26,30 @@ expand_layouts <- function(layouts){
     if (has_parent){
        main <- layouts[[gsub(mpat, '\\1', layout)]]
        content <- gsub(mpat, "\\2", layout)
-       layout <- sub("{{{ content }}}", content, main, fixed = TRUE)
+       layout <- sub("{{{ slide.content }}}", content, main, fixed = TRUE)
      }
     return(layout)
   }
   lapply(layouts, expand_layout)
+}
+
+#' Expand child layouts
+#'
+#' Provides more control over what element to replace inside the parent layout.
+#' @param layouts layout to be expanded
+#' @return named list of expanded layouts
+#' @keywords internal
+#' @noRd
+expand_layout2 <- function(layout, layouts){
+  has_parent <- grepl("^---", layout)
+  if (has_parent){
+    txt = str_split_fixed(layout, '\n---', 2)
+    meta = yaml.load(gsub("^---\n+", '', txt[1]))
+    pattern = paste("{{{", meta$replace, '}}}')
+    replacement = layouts[meta$layout]
+    layout <- sub(pattern, replacement, txt[2], fixed = TRUE)
+  }
+  return(layout)
 }
 
 #' Get layouts from list of paths provided
@@ -49,6 +68,7 @@ get_layouts <- function(paths){
 #' Get default slide layout for a framework
 #' 
 #' @noRd
+# TODO: Move this to slidifyLibraries
 get_slide_layout <- function(framework){
   l_file = system.file('libraries', 'frameworks', framework, 'layouts', 
    'slide.html', package = 'slidifyLibraries')

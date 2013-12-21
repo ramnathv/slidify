@@ -4,12 +4,16 @@
 #' @noRd
 get_javascripts <- function(deck){
   make_path <- function(asset, url){
-    file.path(url, asset, sprintf("%s.html", asset))
+    html_file = file.path(url, asset, sprintf("%s.html", asset))
+    file_there = file.exists(html_file)
+    return(html_file[file_there])
   }
+  asset_js  = dir(file.path(deck$url$assets, 'js'), full.names = T, pattern = '.js$')
   widget_js = with(deck, make_path(widgets, url$widgets))
   hilite_js = with(deck, make_path(highlighter, url$highlighters))
   javascripts = lapply(c(widget_js, hilite_js), read_file)
-  paste(javascripts, collapse = '\n')
+  # javascripts = c(javascripts, sprintf("<script src='%s'></script", asset_js))
+  paste(paste(javascripts, collapse = '\n'), "\n")
 }
 
 #' Add stylesheets

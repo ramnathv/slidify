@@ -1,19 +1,105 @@
+#' Parse pages
+#' 
+#' @noRd
+parse_pages <- function(postFiles){
+  lapply(postFiles, parse_page)
+}
+
+#' Parse page
+#'
+#' @noRd
+parse_page <- function(postFile, knit_deck = TRUE, envir){
+  in_dir(dirname(postFile), {
+    inputFile = basename(postFile)
+    opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
+    outputFile <- gsub(".[r|R]md", ".md", inputFile)
+    deckFile <- ifelse(knit_deck, 
+      knit(inputFile, outputFile, envir = envir), inputFile)
+    post <- deckFile %|% parse_deck
+    post$file = postFile
+    post$filename = tools:::file_path_sans_ext(inputFile)
+    if (!is.null(post$date)) {
+      post$date = as.Date(post$date, '%Y-%m-%d')
+    }
+    post$link = gsub("*.Rmd", ".html", post$file)
+    post$raw = read_file(inputFile)
+    # saveRDS(post, file = "_payload.rds")
+  })
+  return(post)
+}
+
+#' Parse deck into metdata and slide elements
+#' 
+#' @param inputFile path to markdown file to parse
+#' @noRd
+parse_deck <- function(inputFile){
+  deck = inputFile %|% to_deck 
+  deck$slides = deck$slides %|% split_slides %|% parse_slides  
+  deck$slides = deck$slides %|% add_slide_numbers %|% add_missing_id
+  slide_rmd <- get_slide_rmd(sub(".md", ".Rmd", inputFile))
+  deck$slides = add_slide_rmd(deck$slides, slide_rmd)
+  return(deck)
+}
+
+#' Parse slides into constitutent elements
+#'
+#' @keywords internal
+#' @noRd
+parse_slides <- function(slides){
+  lapply(slides, parse_slide)
+}
+
 #' Parse slide into metadata and body
 #'
 #' @keywords internal
 #' @noRd
 parse_slide <- function(slide){
-  slide = str_split_fixed(slide, '\\s*\n', 2)
-  slide = setNames(as.list(slide), c('meta', 'body'))
-  if (is.null(slide$meta) || slide$meta == "" || is.na(slide$meta)){
-    meta = NULL
+  slide <- str_split(slide, "\n\\*{3}")[[1]] %|% split_meta
+  # slide <- str_split(slide, "\n\\*{3}")[[1]] # slide to blocks   
+  # slide <- str_split_fixed(slide, '\n', 2)   # blocks to metadata
+  slide <- apply(slide, 1, function(x){
+    y_meta <- if(grepl("{", x[1], fixed = TRUE)) {
+      parse_meta3(x[1])
+    } else {
+      parse_meta(x[1])
+    }
+    # FIXME: figure out why the ifelse does not work correctly.
+    # y_body = ifelse(y_meta$class %?=% 'YAML', yaml.load(x[2]), parse_body(x[2]))
+    if (y_meta$class %?=% 'YAML'){
+      y_body = yaml.load(x[2])
+    } else {
+      y_body = parse_body(x[2])
+    }
+      y = modifyList(y_body, y_meta)
+  })
+  if (length(slide) > 1){
+    main  = slide[[1]]
+    named = Filter(function(z) !is.null(z$name), slide[-1])
+    names(named) = lapply(named, '[[', "name")
+    blocks = Filter(function(z) is.null(z$name), slide[-1])
+    blocks = lapply(seq_along(blocks), function(i){
+      modifyList(blocks[[i]], list(num = i))
+    })
+    slide  = c(main, named, list(blocks = blocks))
   } else {
-    meta = parse_meta(slide$meta)
+    slide = slide[[1]]
   }
-  body = parse_body(slide$body)
-  merge_list(meta, body)
+  return(slide)
 }
 
+
+split_meta <- function(blocks){
+  split_block <- function(block){
+    if (grepl("^\\s*\\{", block)){
+      block <- str_split_fixed(block, "}\n", 2)
+      block[1] <- paste(block[1], "}")
+    } else {
+      block <- str_split_fixed(block, "\n", 2)
+    }
+    return(block)
+  }
+  t(sapply(blocks, split_block, USE.NAMES = F))
+}
 
 #' Parse slide metadata into list
 #'
@@ -39,6 +125,38 @@ parse_meta <- function(meta){
   filter_blank(meta)
 }
 
+#' Parse slide metadata into list
+#' 
+#' @noRd
+#' Metadata is enclosed within a pair of curly braces and is required to 
+#' be valid YAML. Commonly used metadata keys have predefined shortcuts.
+#' So . expands to class: , # expands to id: and & expands to layout: 
+#' IDEA: Use options, so that user can customize further shortcuts.
+parse_meta2 <- function(x){
+  myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
+  x1 = mgsub(myrepl, gsub("^\\{(.*)\\}$", "\\1", x))
+  x2 = str_split_fixed(x1, "\n", 2)
+  y1 = yaml.load(sprintf("{%s}", x2[1]))
+  if (x2[2] != ""){
+    y1 = modifyList(y1, y2)
+  }
+  if (!is.null(y1$class)){
+    y1$class = paste(y1$class, collapse = " ")
+  }
+  return(y1)
+}
+
+#' @noRd
+parse_meta3 <- function(x){
+  myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
+  # y1 = yaml.load(mgsub(myrepl, x))
+  y1 = yaml.load(x)
+  if (!is.null(y1$class)){
+    y1$class = paste(y1$class, collapse = " ")
+  }
+  return(y1)
+}
+
 #' Parse slide body into list
 #'
 #' @param body slide contents without the metadata header
@@ -49,33 +167,13 @@ parse_body <- function(body){
   pat = '^(<h([0-9])>([^\n]*)</h[0-9]>)?\n*(.*)$'
   body = setNames(as.list(str_match(html, pat)),
    c('html', 'header', 'level', 'title', 'content'))
-  body = modifyList(body, parse_content(body$content))
+  # body = modifyList(body, parse_content(body$content))
   # HACK: So that landslide h1's with no content are centered
   if (body$content == ""){
   	body$content = NULL
   }
-  return(body)
-}
-
-#' Split slide content into blocks 
-#'
-#' Content blocks are specified by a line starting with three stars followed
-#' by the block name. If no content blocks are specified, the entire slide
-#' is treated as a single block named "content"
-#' @param content slide content 
-#' @return list of named content blocks
-#' @keywords internal
-#' @noRd
-parse_content <- function(content){
-  blocks <- strsplit(content, "<p>\\*{3}\\s*")[[1]]
-  bpat   <- "^([a-zA-Z0-9]+)\\s*</p>\n*(.*)$"
-  bnames <- ifelse(grepl(bpat, blocks), gsub(bpat, "\\1", blocks), 'content')
-  bcont  <- gsub(bpat, "\\2", blocks)
-  bcont  <- setNames(as.list(bcont), bnames)
-  # HACK: Strip html tags from help contents 
-  # I think this was done for RGoogleForms
-  if ('help' %in% names(bcont)){
-    bcont$help = gsub("<p>(.+?)</p>", "\\1", bcont$help)
+  if (body$header == ""){
+    body$header = NULL
   }
-  bcont
+  return(body)
 }
