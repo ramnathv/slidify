@@ -43,3 +43,10 @@ update_li_classes <- function(content){
   gsub("<li>\\.(.*?) ", "<li class = '\\1'>", content)
 }
 
+update_li_classes <- function(content){
+  y = str_replace(content, perl("<ul>\n<li>\\.{2}(.*)\\.{2}"), 
+    "<ul class='\\1'>\n<li>")
+  y = str_replace_all(y, perl("<li>\\s*\\.([^\\s]*)\\s+"), "<li class='\\1'>")
+  return(y)
+}
+
