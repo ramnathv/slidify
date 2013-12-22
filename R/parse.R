@@ -1,8 +1,8 @@
 #' Parse pages
 #' 
 #' @noRd
-parse_pages <- function(postFiles){
-  lapply(postFiles, parse_page)
+parse_pages <- function(postFiles, envir){
+  lapply(postFiles, parse_page, envir = envir)
 }
 
 #' Parse page

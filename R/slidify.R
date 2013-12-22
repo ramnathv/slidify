@@ -23,12 +23,12 @@ slidify <- pagify <- function(inputFile, knit_deck = TRUE,
 #' Convert a directory of Rmd documents into HTML5
 #' 
 #' @noRd
-blogify <- function(blogDir = "."){
+blogify <- function(blogDir = ".", envir = parent.frame()){
   site = yaml.load_file('site.yml')
   cwd   = getwd(); on.exit(setwd(cwd))
   setwd(blogDir)
   rmdFiles = dir(".", recursive = TRUE, pattern = '*.Rmd')
-  pages = parse_pages(rmdFiles)
+  pages = parse_pages(rmdFiles, envir = envir)
   tags = get_tags(pages)
   render_pages(pages, site, tags)
   message('Blogification Successful :-)')
