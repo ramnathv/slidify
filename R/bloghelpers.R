@@ -30,3 +30,23 @@ get_pages_by_groups <- function(pages, gby = 'tags'){
   y$all = x
   y
 }
+
+sort_posts_on_date <- function(posts){
+  dates = sapply(posts, '[[', 'date')
+  idx = rev(sort(dates, index.return = TRUE)$ix)
+  return(posts[idx])
+}
+
+add_next_post <- function(posts){
+  posts_ = list()
+  for (i in 1:(length(posts) - 1)){
+    post_ = posts[[i]]
+    post_[['next']] = posts[[i + 1]][c('title', 'link', 'image', 'quote')]
+    post_[['next']]['image'] = paste(
+      "", dirname(post_[['next']]$link), post_[['next']]$image, sep = '/'
+    )
+    post_[['next']]$link = paste0("/", post_[['next']]$link)
+    posts_[[i]] = post_
+  }
+  return(c(posts_, posts[length(posts)]))
+}
