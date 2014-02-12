@@ -30,10 +30,15 @@ blogify <- function(blogDir = ".", envir = parent.frame()){
   rmdFiles = dir(".", recursive = TRUE, pattern = '*.Rmd')
   pages = parse_pages(rmdFiles, envir = envir)
   tags = get_tags(pages)
+
+  is_post = grepl('^posts', sapply(pages, '[[', 'link'))
+  posts = pages[is_post] 
+  posts = posts %|% sort_posts_on_date %|% add_next_post
+  pages = c(posts, pages[!is_post])
   render_pages(pages, site, tags)
   message('Blogification Successful :-)')
+  return(invisible(list(pages = pages, site = site, tags = tags)))
 }
-
 
 #' Convert an Rmd document into HTML5 using a framework
 #' 
