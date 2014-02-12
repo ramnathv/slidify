@@ -7,7 +7,7 @@
 #  TOTHINK: Should partials also be passed along?
 render_slide <- function(slide, layouts, payload){
   default = "{{{slide.header}}}\n{{{slide.content}}}"
-  layout  = layouts[[slide$tpl %||% 'slide']] %||% default
+  layout  = layouts[[slide$tpl %||% 'slide']] %||% slide$tpl2 %||% default
   payload = modifyList(payload, list(slide = slide))
   slide$rendered = whisker.render(layout, payload, partials = layouts) %|% update_classes
   raw_slide = !is.null(slide$class) && grepl('RAW', slide$class)
@@ -45,15 +45,36 @@ render_page <- function(page, payload, return_page = FALSE, save_payload = FALSE
     if (!is.null(page$ext_widgets)){
       page$widgets = c(page$widgets, basename(unlist(page$ext_widgets)))
     }
+  
+    
     widget_configs = read_configs(page$widgets, page$url$widgets)
     widget_configs = modifyList(widget_configs, read_config('assets', "."))
     widget_configs = modifyList(widget_configs, list(custom = page$assets))
     
-    page$assets = as.list(sapply(c('css', 'js', 'jshead'), get_assets, widget_configs))
+    if (page$onefile %?=% TRUE){
+      framework_config = read_config(page$framework, file.path(page$url$lib, 'frameworks'))
+      highlighter_config = read_config(page$highlighter, 
+        file.path(page$url$lib, 'highlighters')
+      )
+      highlighter_config[[1]]$css = file.path(page$url$highlighters, 
+        page$highlighter, "css", paste0(page$hitheme, '.css')
+      )
+      widget_configs = c(widget_configs, framework_config, highlighter_config)
+    }
+
+    page$assets = as.list(sapply(c('css', 'js', 'jshead', 'ready'), function(x){
+      return(get_assets(x, widget_configs, standalone = page$onefile))
+    }))
     
     layouts = get_layouts(page$url$layouts)
     
-    partials = get_layouts(file.path(page$url$framework, 'partials'))
+    # Quick Fix for Backward Compatibility with Older slidifyLibraries
+    path_to_partials = file.path(page$url$framework, 'partials')
+    if (file.exists(path_to_partials)){
+      partials = get_layouts(path_to_partials)
+    } else {
+      partials = get_layouts(file.path(page$url$framework, 'layouts'))
+    }
     partials = modifyList(partials, list(javascripts = get_javascripts(page)))
       
     payload = modifyList(payload, list(page = page))

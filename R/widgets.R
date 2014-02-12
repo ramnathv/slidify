@@ -5,7 +5,7 @@
 read_config <- function(widget, url_widgets){
   get_full_path <- function(x){
     res = wconfig[[1]][[x]]
-    if (!is.null(res) && x != 'cdn'){
+    if (!is.null(res) && x != 'cdn' && x!= 'ready'){
       # change this so that paths with a trailing / are appended with wpath.
       # allows for specifications like shiny which uses a shared directory
       # note that this requires changes to all config.yml files.
@@ -42,18 +42,29 @@ read_configs <- function(widgets, url_widgets){
 }
 
 
-get_assets = function(asset_type, widget_configs, custom_config = ""){
+get_assets = function(asset_type, widget_configs, custom_config = "", standalone = F){
   assets = unlist(sapply(widget_configs, pluck(asset_type)), use.names = F)
   if (length(assets) > 1){
     assets = remove_duplicates(assets)
   }
-  names(assets) = NULL
-  if (asset_type == 'css'){
-    tpl <- '{{# assets }}<link rel=stylesheet href="{{.}}"></link>\n{{/ assets }}'
-  } else {
-    tpl <- '{{# assets }}<script src="{{{.}}}"></script>\n{{/assets}}'
+  if (standalone && asset_type != "ready"){
+    mime_type = ifelse(asset_type == "css", "text/css", "application/javascript")
+    assets = sapply(assets, function(x) {
+      make_standalone_(file = x, mime = mime_type)
+    })
   }
+  names(assets) = NULL
+  tpl <- switch(asset_type, 
+    css =  '{{# assets }}<link rel=stylesheet href="{{.}}"></link>\n{{/ assets }}',
+    ready = '{{ assets }}',
+    '{{# assets }}<script src="{{{.}}}"></script>\n{{/assets}}'         
+  )
   whisker.render(tpl)
+}
+
+make_standalone_ <- function(file, mime){
+  prefix = paste0('data:', mime, ',')
+  paste(prefix, URLencode(read_file(file)), collapse = "")
 }
 
 remove_duplicates <- function(assets){
