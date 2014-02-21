@@ -3,7 +3,7 @@
 #' This function makes it easy to publish your presentation. Currently supported
 #' hosts include Github, RPubs and Dropbox.
 #' 
-#' @param host where to publish presentation, Github, RPubs or Dropbox
+#' @param host where to publish presentation, Github, RPubs, Folder, or Dropbox
 #' @param ... parameters to be passed to \code{\link{publish_github}}, 
 #'   \code{\link{publish_rpubs}} or \code{\link{publish_dropbox}}
 #' @family publish
@@ -13,7 +13,8 @@ publish <- function(..., host = 'github'){
      github = publish_github, 
     dropbox = publish_dropbox,
       rpubs = publish_rpubs,
-      gist  = publish_gist
+      gist  = publish_gist,
+      folder = publish_folder
   )
   publish_deck(...)
 }
@@ -67,14 +68,31 @@ publish_github <- function(repo, username = getOption('github.user')){
 #' @family publish
 #' @export
 publish_dropbox <- function(dirname){
+  publish_folder(paste('~/Dropbox/Public', dirname, sep="/"), html_only=FALSE)
+}
+
+#' Publish to any folder accessible by the file system
+#'
+#' @param dirname name of directory to publish to; defaults to slide directory
+#' @param html_only if true will only copy html, asset, lib, fig content (no R), else will include all
+#' @family publish
+#' @export
+publish_folder <- function(dirname, html_only=TRUE) {
   if (missing(dirname)){
     dirname = basename(getwd())
   }
-  drop_dir = file.path('~/Dropbox/Public', dirname)
-  message('Creating slide directory at ', drop_dir)
-  dir.create(drop_dir)
-  message('Copying files to ', drop_dir)
-  file.copy(".", drop_dir, overwrite = F, recursive = TRUE)
+  
+  pattern = "."
+  if(html_only) {
+    pattern=".html$|^lib|^fig|^asset"
+  }
+
+  folder_dir = file.path(dirname)
+  message('Creating slide directory at ', folder_dir)
+  dir.create(folder_dir)
+  message('Copying files to ', folder_dir)
+  file_list = list.files(".",pattern)
+  file.copy(file_list, folder_dir, overwrite = TRUE, recursive = TRUE)
 }
 
 #' Publish slide deck to rPubs
