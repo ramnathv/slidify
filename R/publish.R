@@ -66,9 +66,15 @@ publish_github <- function(repo, username = getOption('github.user'), ssh = TRUE
     system(sprintf('git push git@github.com:%s/%s gh-pages', username, repo))
   } else {
     remote<-system('git config --get remote.origin.url',intern=TRUE)
-    push<-sprintf("git remote set-url origin https://%s:%s@github.com/%s/%s.git",
+    if(length(remote)==0){
+      push<-sprintf("git remote add origin https://%s:%s@github.com/%s/%s.git",
                     username,password,username,repo)
-    system(push)
+      system(push)
+    } else {
+      push<-sprintf("git remote set-url origin https://%s:%s@github.com/%s/%s.git",
+                      username,password,username,repo)
+      system(push)
+    }
   }
   # As of 3/6/14 
   # Tested on Win 7, Pro, R 3.0.2, RStudio 0.98.501
