@@ -29,14 +29,21 @@ publish <- function(..., host = 'github'){
 #' \url{https://help.github.com/articles/creating-a-new-repository}. Note that 
 #' Github will prompt you to add a README file, but just use the defaults so 
 #' that your repo is empty. You will need to have \code{git} installed on your 
-#' computer and be able to push to \code{github} using SSH
+#' computer.  You can push to \code{github} using SSH or https.  You may
+#' store your crendentials as options with \code{options(github.user="username",
+#' github.password="password") or specifiy them in the function call.  Please note
+#' that this method stores you password as clear text and use accordingly.}
 #' 
 #' 
 #' @param repo github reponame
 #' @param username github username
+#' @param ssh logical to indicate which method to push with.  
+#'            ssh=TRUE uses ssh, ssh=False uses https.
+#' @param password github password needed for https push          
 #' @family publish
 #' @export
-publish_github <- function(repo, username = getOption('github.user')){
+publish_github <- function(repo, username = getOption('github.user'), ssh = TRUE, 
+                           password = getOption('github.password')){
   if (!file.exists('libraries')){
     message('Please set mode to selfcontained and run Slidify')
     message('This would place library files in the slide folder')
@@ -55,7 +62,28 @@ publish_github <- function(repo, username = getOption('github.user')){
   message('Publishing deck to ', username, '/', repo)
   system('git add .')
   system('git commit -a -m "publishing deck"')
-  system(sprintf('git push git@github.com:%s/%s gh-pages', username, repo))
+  if(ssh){
+    system(sprintf('git push git@github.com:%s/%s gh-pages', username, repo))
+  } else {
+    remote<-system('git config --get remote.origin.url',intern=TRUE)
+    if(length(remote)==0){
+      push<-sprintf("git remote add origin https://%s:%s@github.com/%s/%s.git",
+                    username,password,username,repo)
+      system(push)
+    } else {
+      push<-sprintf("git remote set-url origin https://%s:%s@github.com/%s/%s.git",
+                      username,password,username,repo)
+      system(push)
+    }
+  }
+  # As of 3/6/14 
+  # Tested on Win 7, Pro, R 3.0.2, RStudio 0.98.501
+  # Tested on Ubuntu 12.04 LTS, R 3.02, RStudio Server 0.98.501
+  system('git push origin gh-pages')
+  #changes back to remote withour passwords
+  system(sprintf('git remote set-url origin https://github.com/%s/%s.git', 
+                 username,repo))
+  
   link = sprintf('http://%s.github.com/%s', username, repo)
   message('You can now view your slide deck at ', link)
   browseURL(link)
