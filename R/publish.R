@@ -29,7 +29,10 @@ publish <- function(..., host = 'github'){
 #' \url{https://help.github.com/articles/creating-a-new-repository}. Note that 
 #' Github will prompt you to add a README file, but just use the defaults so 
 #' that your repo is empty. You will need to have \code{git} installed on your 
-#' computer and be able to push to \code{github} using SSH
+#' computer.  You can push to \code{github} using SSH or https.  You may
+#' store your crendentials as options with \code{options(github.user="username",
+#' github.password="password") or specifiy them in the function call.  Please note
+#' that this method stores you password as clear text and use accordingly.}
 #' 
 #' 
 #' @param repo github reponame
@@ -38,7 +41,8 @@ publish <- function(..., host = 'github'){
 #'            ssh=TRUE uses ssh, ssh=False uses https.
 #' @family publish
 #' @export
-publish_github <- function(repo, username = getOption('github.user'), ssh=TRUE){
+publish_github <- function(repo, username = getOption('github.user'), ssh = TRUE, 
+                           password = getOption('github.password')){
   if (!file.exists('libraries')){
     message('Please set mode to selfcontained and run Slidify')
     message('This would place library files in the slide folder')
@@ -60,24 +64,18 @@ publish_github <- function(repo, username = getOption('github.user'), ssh=TRUE){
   if(ssh){
     system(sprintf('git push git@github.com:%s/%s gh-pages', username, repo))
   } else {
-    # Check existing remote (should deal with cloned repos)
-    # if doesn't exist returns status 1, creates new origin
-    # if does exists modifies URL to specific repo and username
-    remote<-system('git config --get remote.origin.url')
-    if(remote==1){
-      system(sprintf('git remote add origin https://github.com/%s/%s.git',username,repo))
-    } else {
-      system(sprintf('git remote set-url origin https://github.com/%s/%s.git',username,repo))
-    }
-    # Will spawn a shell for username and password input
-    # On RStudio getting "error", but does not impact function
-    # No error thrown on R Console
-    # As of 3/6/14 Tested only on Win 7, Pro, R 3.0.2, RStudio 0.98.501
-    system('git push origin gh-pages',wait=FALSE,invisible=FALSE)
+    remote<-system('git config --get remote.origin.url',intern=TRUE)
+    push<-sprintf("git remote set-url origin https://%s:%s@github.com/%s/%s.git",
+                    username,password,username,repo)
+    system(push)
   }
+  # As of 3/6/14 Tested only on Win 7, Pro, R 3.0.2, RStudio 0.98.501
+  system('git push origin gh-pages')
+  #changes back to original remote so as not to store password inside of .git
+  system(sprintf('git remote set-url origin %s', remote))
+  
   link = sprintf('http://%s.github.com/%s', username, repo)
   message('You can now view your slide deck at ', link)
-  Sys.sleep(3) #Waiting for github refresh
   browseURL(link)
 }
 
