@@ -34,9 +34,11 @@ publish <- function(..., host = 'github'){
 #' 
 #' @param repo github reponame
 #' @param username github username
+#' @param ssh logical to indicate which method to push with.  
+#'            ssh=TRUE uses ssh, ssh=False uses https.
 #' @family publish
 #' @export
-publish_github <- function(repo, username = getOption('github.user')){
+publish_github <- function(repo, username = getOption('github.user'), ssh=TRUE){
   if (!file.exists('libraries')){
     message('Please set mode to selfcontained and run Slidify')
     message('This would place library files in the slide folder')
@@ -55,9 +57,27 @@ publish_github <- function(repo, username = getOption('github.user')){
   message('Publishing deck to ', username, '/', repo)
   system('git add .')
   system('git commit -a -m "publishing deck"')
-  system(sprintf('git push git@github.com:%s/%s gh-pages', username, repo))
+  if(ssh){
+    system(sprintf('git push git@github.com:%s/%s gh-pages', username, repo))
+  } else {
+    # Check existing remote (should deal with cloned repos)
+    # if doesn't exist returns status 1, creates new origin
+    # if does exists modifies URL to specific repo and username
+    remote<-system('git config --get remote.origin.url')
+    if(remote==1){
+      system(sprintf('git remote add origin https://github.com/%s/%s.git',username,repo))
+    } else {
+      system(sprintf('git remote set-url origin https://github.com/%s/%s.git',username,repo))
+    }
+    # Will spawn a shell for username and password input
+    # On RStudio getting "error", but does not impact function
+    # No error thrown on R Console
+    # As of 3/6/14 Tested only on Win 7, Pro, R 3.0.2, RStudio 0.98.501
+    system('git push origin gh-pages',wait=FALSE,invisible=FALSE)
+  }
   link = sprintf('http://%s.github.com/%s', username, repo)
   message('You can now view your slide deck at ', link)
+  Sys.sleep(3) #Waiting for github refresh
   browseURL(link)
 }
 
