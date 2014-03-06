@@ -39,6 +39,7 @@ publish <- function(..., host = 'github'){
 #' @param username github username
 #' @param ssh logical to indicate which method to push with.  
 #'            ssh=TRUE uses ssh, ssh=False uses https.
+#' @param password github password needed for https push          
 #' @family publish
 #' @export
 publish_github <- function(repo, username = getOption('github.user'), ssh = TRUE, 
