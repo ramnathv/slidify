@@ -34,15 +34,7 @@ get_config <- function(cfile = 'config.yml'){
     # 4. back the resutls into native.enc
     txt = read_file(cfile)
     txt = enc2utf8(txt)
-    config = modifyList(config, yaml.load(txt))
-    config = rapply(config, function(x) {
-      if (is.character(x)) {
-        Encoding(x) <- "UTF-8"
-        enc2native(x)
-      } else {
-        x
-      }
-    }, how = "replace")
+    config = modifyList(config, yaml_load(txt))
   }
   return(config)
 }

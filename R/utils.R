@@ -319,3 +319,23 @@ slidify_text <- function(text){
   slidify('output.Rmd')
   invisible();
 }
+
+#' parse YAML text into a nested list
+#'
+#' @param txt YAML text to be parsed. MBCS text must be UTF-8 encoding.
+#' @return a nested list representing YAML. Text element is native.enc.
+#' @keywords internal
+#' @noRd
+yaml_load <- function(txt) {
+  yaml <- yaml.load(txt)
+  yaml = rapply(yaml, function(x) {
+    if (is.character(x)) {
+      Encoding(x) <- "UTF-8"
+      enc2native(x)
+    } else {
+      x
+    }
+  }, how = "replace")
+  return(yaml)
+}
+

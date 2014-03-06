@@ -11,22 +11,10 @@ to_deck <- function(doc){
   txt = str_split_fixed(read_file(doc), '\n---', 2)
 
   # @kohske
-  # Here txt is native.enc. Probably yaml.load accepts only UTF8 (and ascii?).
-  # In MBCS locale, gsub/sub sometimes returns char marked as UTF8
-  # (when fixed = FALSE), but sometimes not (if there is no match).
-  # So just in case, convert it into utf8 before yaml.load.
-  meta = yaml.load(enc2utf8(gsub("^---\n+", '', txt[1])))
-  # Then mark meta as UTF8 (because yaml.load doesn't this)
-  # and convert it to native.enc.
-  meta = rapply(meta, function(x) {
-    if (is.character(x)) {
-      Encoding(x) <- "UTF-8"
-      enc2native(x)
-    } else {
-      x
-    }
-  }, how = "replace")
-
+  # now yaml_load do all the work.
+  # meta is native.enc
+  meta = yaml_load(enc2utf8(gsub("^---\n+", '', txt[1])))
+  
   # custom config also care encoding
   # Note that if custom config is MBCS, it MUST be same encoding
   # as input Rmd.
