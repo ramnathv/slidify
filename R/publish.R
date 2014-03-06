@@ -69,7 +69,9 @@ publish_github <- function(repo, username = getOption('github.user'), ssh = TRUE
                     username,password,username,repo)
     system(push)
   }
-  # As of 3/6/14 Tested only on Win 7, Pro, R 3.0.2, RStudio 0.98.501
+  # As of 3/6/14 
+  # Tested on Win 7, Pro, R 3.0.2, RStudio 0.98.501
+  # Tested on Ubuntu 12.04 LTS, R 3.02, RStudio Server 0.98.501
   system('git push origin gh-pages')
   #changes back to original remote so as not to store password inside of .git
   system(sprintf('git remote set-url origin %s', remote))
