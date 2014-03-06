@@ -70,15 +70,36 @@ render_page <- function(page, payload, return_page = FALSE, save_payload = FALSE
     if (save_payload){
       save(layout, payload, partials, file = "payload.RData")
     }
-    cat(whisker.render(layout, payload, partials = partials), file = outputFile)
-    
+
+    # @kohske
+    # output file should be UTF-8 definietely (right?),
+    # because almost all libraries put meta tag indicating utf-8 charaset in HTML.
+    # So here the encoding is hard-coded.
+    # In future, it may be better to accept output encoding.
+    outp = whisker.render(layout, payload, partials = partials) # native.enc
+
     # create standalone deck if page mode is standalone
     if (page$mode == 'standalone'){
-      outputFile = make_standalone(page, outputFile)
+      outp = make_standalone(page, outp)
     }
+
+    con <- file(outputFile, "w", encoding = "UTF8")
+    cat(outp, file = outputFile)
+    writeLines(outp, con)
+    close(con)
+
+    # @kohske
+    # why not make standalone before the file?
+    # I changed these order, but if there is reason
+    # please check it.
+    # create standalone deck if page mode is standalone
+    
+    #if (page$mode == 'standalone'){
+    #  outputFile = make_standalone(page, outputFile)
+    #}
     
     # Extract R Code from Page if purl = TRUE
-    if (page$purl %?=% TRUE) purl(page$file)
+    if (page$purl %?=% TRUE) purl(page$file, encoding = .input.enc)
   })
   if (return_page){ return(page) }
 }

@@ -14,14 +14,16 @@ parse_page <- function(postFile, knit_deck = TRUE, envir){
     opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
     outputFile <- gsub(".[r|R]md", ".md", inputFile)
     deckFile <- ifelse(knit_deck, 
-      knit(inputFile, outputFile, envir = envir), inputFile)
+      knit(inputFile, outputFile, envir = envir, encoding = .input.enc), inputFile)
     post <- deckFile %|% parse_deck
     post$file = postFile
     post$filename = tools:::file_path_sans_ext(inputFile)
     if (!is.null(post$date)) {
       post$date = as.Date(post$date, '%Y-%m-%d')
     }
-    post$link = gsub("*.Rmd", ".html", post$file)
+    # @kohske
+    # shouldn't be like this?
+    post$link = gsub("\\.Rmd$", ".html", post$file, fixed = TRUE)
     post$raw = read_file(inputFile)
     # saveRDS(post, file = "_payload.rds")
   })

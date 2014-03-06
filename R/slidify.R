@@ -4,19 +4,39 @@
 #' @param knit_deck whether the file needs to be run through knit
 #' @param return_page should the function return the payload
 #' @param save_payload should the payload be saved to the slide directory
+#' @param encoding the encoding of the input file; see \code{\link{file}}
 slidify <- pagify <- function(inputFile, knit_deck = TRUE, 
-  return_page = FALSE, save_payload = FALSE, envir = parent.frame()){
-  
+  return_page = FALSE, save_payload = FALSE, envir = parent.frame(),
+  encoding = getOption('encoding')){
+
+  # @kohske
+  # To make changes as small as possible,
+  # I use here a global variable, instead of
+  # passing function params.
+  .input.enc <<- encoding
+    
   ## REMOVE LINES AFTER KNITR IS UPDATED ------
   options('knitr.in.progress' = TRUE)
   on.exit(options('knitr.in.progress' = FALSE))
   ## -------------------------------------------
   
   .SLIDIFY_ENV <<- new.env()
+
+  # @kohske
+  # I have no idea what 'site.yml' is. It is possible to be MultiByte char or only ascii?
+  # If there is possibly MB char, we need to fix this.
   site = ifelse(file.exists('site.yml'), yaml.load_file('site.yml'), list())
+
+  # @kohse
+  # there are changes inside parse_page to care encoding
   page = parse_page(inputFile, knit_deck, envir = envir)
-  
+
+  # @kohske
+  # What's this?
   page = modifyList(page, as.list(.SLIDIFY_ENV))
+
+  # @kohske
+  # render_page is changes so that output is always UTF8
   render_page(page, payload = list(site = site), return_page, save_payload)
 }
 
@@ -80,3 +100,9 @@ check_slidifyLibraries <- function(){
   }
   return(invisible())
 }
+
+#' Encoding of input file
+#'
+#' @keywords internal
+#' @noRd
+.input.enc <- NULL
