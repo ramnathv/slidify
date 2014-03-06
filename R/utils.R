@@ -339,3 +339,16 @@ yaml_load <- function(txt) {
   return(yaml)
 }
 
+#' parse YAML file into a nested list
+#'
+#' @param file path to file
+#' @param encoding encoding of file. If \code{NULL}, use \code{.input.enc}
+#'   (i.e., encoding specfied in a call of \code{\link{slidify}}
+#' @return a nested list representing YAML. Text element is native.enc.
+#' @noRd
+yaml_load_file <- function(file, encoding = NULL) {
+  if (is.null(encoding)) encoding <- .input.enc
+  txt = read_file(file, encoding)
+  txt = enc2utf8(txt)
+  yaml_load(txt)
+}

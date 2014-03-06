@@ -25,16 +25,7 @@ slidifyDefaults <- function(){list(
 get_config <- function(cfile = 'config.yml'){
   config = slidifyDefaults()
   if (file.exists(cfile)){
-    # @kohske
-    # yaml only accepts UTF8 (probably)
-    # so here,
-    # 1. read config in .input.enc
-    # 2. convert it into UTF8
-    # 3. load yaml
-    # 4. back the resutls into native.enc
-    txt = read_file(cfile)
-    txt = enc2utf8(txt)
-    config = modifyList(config, yaml_load(txt))
+    config = modifyList(config, yaml_load_file(cfile))
   }
   return(config)
 }
