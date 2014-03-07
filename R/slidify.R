@@ -80,3 +80,20 @@ check_slidifyLibraries <- function(){
   }
   return(invisible())
 }
+
+#' Custom Knit function for RStudio
+#' 
+#' @noRd
+knit2slides <- function(inputFile, encoding) {
+  
+  # render slides
+  slidify(inputFile)
+  
+  # indicate success and let RStudio know the path to the output file
+  outputFile = sprintf("%s.html", 
+                       basename(tools::file_path_sans_ext(inputFile)))
+  message("Output created: ", outputFile)
+}
+
+
+
