@@ -37,8 +37,7 @@ get_config <- function(cfile = 'config.yml'){
 add_config_fr <- function(deck){
   config_file <- file.path(deck$url$framework, "config.yml")
   if (file.exists(config_file)){
-    config <- yaml.load_file(config_file)
-    deck <- modifyList(config, deck)
+    deck <- modifyList(yaml_load_file(config_file), deck)
   }
   return(deck)
 }

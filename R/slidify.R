@@ -23,9 +23,8 @@ slidify <- pagify <- function(inputFile, knit_deck = TRUE,
   .SLIDIFY_ENV <<- new.env()
 
   # @kohske
-  # I have no idea what 'site.yml' is. It is possible to be MultiByte char or only ascii?
-  # If there is possibly MB char, we need to fix this.
-  site = ifelse(file.exists('site.yml'), yaml.load_file('site.yml'), list())
+  # now site.yml can be MBCS. The encoding must be same as input.
+  site = ifelse(file.exists('site.yml'), yaml_load_file('site.yml'), list())
 
   # @kohse
   # there are changes inside parse_page to care encoding
@@ -44,7 +43,7 @@ slidify <- pagify <- function(inputFile, knit_deck = TRUE,
 #' 
 #' @noRd
 blogify <- function(blogDir = "."){
-  site = yaml.load_file('site.yml')
+  site = yaml_load_file('site.yml')
   cwd   = getwd(); on.exit(setwd(cwd))
   setwd(blogDir)
   rmdFiles = dir(".", recursive = TRUE, pattern = '*.Rmd')
