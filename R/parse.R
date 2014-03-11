@@ -14,7 +14,7 @@ parse_page <- function(postFile, knit_deck = TRUE, envir){
     opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
     outputFile <- gsub(".[r|R]md", ".md", inputFile)
     deckFile <- ifelse(knit_deck, 
-      knit(inputFile, outputFile, envir = envir, encoding = .input.enc), inputFile)
+      knit(inputFile, outputFile, envir = envir, encoding = .input.enc$get()), inputFile)
     post <- deckFile %|% parse_deck
     post$file = postFile
     post$filename = tools:::file_path_sans_ext(inputFile)

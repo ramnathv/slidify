@@ -99,7 +99,7 @@ render_page <- function(page, payload, return_page = FALSE, save_payload = FALSE
     #}
     
     # Extract R Code from Page if purl = TRUE
-    if (page$purl %?=% TRUE) purl(page$file, encoding = .input.enc)
+    if (page$purl %?=% TRUE) purl(page$file, encoding = .input.enc$get())
   })
   if (return_page){ return(page) }
 }

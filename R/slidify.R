@@ -10,10 +10,9 @@ slidify <- pagify <- function(inputFile, knit_deck = TRUE,
   encoding = getOption('encoding')){
 
   # @kohske
-  # To make changes as small as possible,
-  # I use here a global variable, instead of
-  # passing function params.
-  .input.enc <<- encoding
+  # global vairable is not available.
+  # Use closure instead
+  .input.enc$set(encoding)
     
   ## REMOVE LINES AFTER KNITR IS UPDATED ------
   options('knitr.in.progress' = TRUE)
@@ -99,9 +98,3 @@ check_slidifyLibraries <- function(){
   }
   return(invisible())
 }
-
-#' Encoding of input file
-#'
-#' @keywords internal
-#' @noRd
-.input.enc <- NULL
