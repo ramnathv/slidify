@@ -14,14 +14,16 @@ parse_page <- function(postFile, knit_deck = TRUE, envir){
     opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
     outputFile <- gsub(".[r|R]md", ".md", inputFile)
     deckFile <- ifelse(knit_deck, 
-      knit(inputFile, outputFile, envir = envir), inputFile)
+      knit(inputFile, outputFile, envir = envir, encoding = .input.enc$get()), inputFile)
     post <- deckFile %|% parse_deck
     post$file = postFile
     post$filename = tools:::file_path_sans_ext(inputFile)
     if (!is.null(post$date)) {
       post$date = as.Date(post$date, '%Y-%m-%d')
     }
-    post$link = gsub("*.Rmd", ".html", post$file)
+    # @kohske
+    # shouldn't be like this?
+    post$link = gsub("\\.Rmd$", ".html", post$file, fixed = TRUE)
     post$raw = read_file(inputFile)
     # saveRDS(post, file = "_payload.rds")
   })
@@ -66,7 +68,7 @@ parse_slide <- function(slide){
     # FIXME: figure out why the ifelse does not work correctly.
     # y_body = ifelse(y_meta$class %?=% 'YAML', yaml.load(x[2]), parse_body(x[2]))
     if (y_meta$class %?=% 'YAML'){
-      y_body = yaml.load(x[2])
+      y_body = yaml_load(enc2utf8(x[2]))
     } else {
       y_body = parse_body(x[2])
     }
@@ -148,9 +150,12 @@ parse_meta2 <- function(x){
 
 #' @noRd
 parse_meta3 <- function(x){
-  myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
+  # myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
   # y1 = yaml.load(mgsub(myrepl, x))
-  y1 = yaml.load(x)
+    
+  # @kohske
+  # x is native.enc, y1 is native.enc
+  y1 = yaml_load(enc2utf8(x))
   if (!is.null(y1$class)){
     y1$class = paste(y1$class, collapse = " ")
   }
