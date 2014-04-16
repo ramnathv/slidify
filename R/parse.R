@@ -1,5 +1,5 @@
 #' Parse pages
-#' 
+#'
 #' @noRd
 parse_pages <- function(postFiles){
   lapply(postFiles, parse_page)
@@ -13,7 +13,7 @@ parse_page <- function(postFile, knit_deck = TRUE, envir){
     inputFile = basename(postFile)
     opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
     outputFile <- gsub(".[r|R]md", ".md", inputFile)
-    deckFile <- ifelse(knit_deck, 
+    deckFile <- ifelse(knit_deck,
       knit(inputFile, outputFile, envir = envir), inputFile)
     post <- deckFile %|% parse_deck
     post$file = postFile
@@ -21,7 +21,7 @@ parse_page <- function(postFile, knit_deck = TRUE, envir){
     if (!is.null(post$date)) {
       post$date = as.Date(post$date, '%Y-%m-%d')
     }
-    post$link = gsub("*.Rmd", ".html", post$file)
+    post$link = gsub("*.[r|R]md", ".html", post$file)
     post$raw = read_file(inputFile)
     # saveRDS(post, file = "_payload.rds")
   })
@@ -29,14 +29,19 @@ parse_page <- function(postFile, knit_deck = TRUE, envir){
 }
 
 #' Parse deck into metdata and slide elements
-#' 
+#'
 #' @param inputFile path to markdown file to parse
 #' @noRd
 parse_deck <- function(inputFile){
-  deck = inputFile %|% to_deck 
-  deck$slides = deck$slides %|% split_slides %|% parse_slides  
+  # Determine path to original Rmd
+  rmd_filepath = sub(".md", ".Rmd", inputFile)
+  if (!file.exists(rmd_filepath)) {
+      rmd_filepath = sub(".md", ".rmd", inputFile)
+  }
+  deck = inputFile %|% to_deck
+  deck$slides = deck$slides %|% split_slides %|% parse_slides
   deck$slides = deck$slides %|% add_slide_numbers %|% add_missing_id
-  slide_rmd <- get_slide_rmd(sub(".md", ".Rmd", inputFile))
+  slide_rmd <- get_slide_rmd(rmd_filepath)
   deck$slides = add_slide_rmd(deck$slides, slide_rmd)
   return(deck)
 }
@@ -55,7 +60,7 @@ parse_slides <- function(slides){
 #' @noRd
 parse_slide <- function(slide){
   slide <- str_split(slide, "\n\\*{3}")[[1]] %|% split_meta
-  # slide <- str_split(slide, "\n\\*{3}")[[1]] # slide to blocks   
+  # slide <- str_split(slide, "\n\\*{3}")[[1]] # slide to blocks
   # slide <- str_split_fixed(slide, '\n', 2)   # blocks to metadata
   slide <- apply(slide, 1, function(x){
     y_meta <- if(grepl("{", x[1], fixed = TRUE)) {
@@ -103,7 +108,7 @@ split_meta <- function(blocks){
 
 #' Parse slide metadata into list
 #'
-#' Arbitrary metadata can be added to slide header as key:value pairs 
+#' Arbitrary metadata can be added to slide header as key:value pairs
 #' Slide classes, id and layouts can also be defined using prefixes
 #' class = ., id = #, layouts = &
 #' @keywords internal
@@ -126,11 +131,11 @@ parse_meta <- function(meta){
 }
 
 #' Parse slide metadata into list
-#' 
+#'
 #' @noRd
-#' Metadata is enclosed within a pair of curly braces and is required to 
+#' Metadata is enclosed within a pair of curly braces and is required to
 #' be valid YAML. Commonly used metadata keys have predefined shortcuts.
-#' So . expands to class: , # expands to id: and & expands to layout: 
+#' So . expands to class: , # expands to id: and & expands to layout:
 #' IDEA: Use options, so that user can customize further shortcuts.
 parse_meta2 <- function(x){
   myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
