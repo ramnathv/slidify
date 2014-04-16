@@ -1,5 +1,5 @@
 #' Run a slide Deck
-runDeck <- function(deckDir = ".", appDir = file.path(deckDir, "apps"), 
+runDeck <- function(deckDir = ".", appDir = file.path(deckDir, "apps"),
   shiny = TRUE, ...){
   require(shiny)
   require(slidifyLibraries)
@@ -11,16 +11,16 @@ runDeck <- function(deckDir = ".", appDir = file.path(deckDir, "apps"),
   }
   addResourcePath('libraries', file.path(deckDir, "libraries"))
   addResourcePath('assets', file.path(deckDir, "assets"))
-  
+
   deckDir = normalizePath(deckDir)
   if (file.exists(appDir)){
     appDir  = normalizePath(appDir)
   }
-  
+
   render_markdown()
-  
+
   shiny::runApp(list(
-    ui = includeDeck(file.path(deckDir, 'index.Rmd')), 
+    ui = includeDeck(file.path(deckDir, 'index.Rmd')),
     server = function(input, output){
       apps = dir(appDir, pattern = '^app', full = T)
       for (app in apps){
@@ -55,7 +55,7 @@ includeDeck <- function(path){
 }
 
 #' Check for equality only if variable exists
-#' 
+#'
 #' @noRd
 `%?=%` <- function(x, y){
   if (!is.null(x) && x == y){
@@ -78,7 +78,7 @@ embed_images <- function(html_in){
 }
 
 #' Enable library files to be served from CDN
-#' 
+#'
 #' @noRd
 enable_cdn <- function(html){
   cdn  = 'http://slidifylibraries2.googlecode.com/git/inst/libraries/'
@@ -86,7 +86,7 @@ enable_cdn <- function(html){
 }
 
 #' Zip vectors into a single list
-#' 
+#'
 #' @noRd
 zip_vectors <- function(...){
   x = list(...)
@@ -94,7 +94,7 @@ zip_vectors <- function(...){
 }
 
 #' Stolen from Hadley's HOF package
-#' 
+#'
 #' @keywords internal
 #' @noRd
 pluck <- function (element){
@@ -102,7 +102,7 @@ pluck <- function (element){
 }
 
 #' Combine stylesheets in a directory
-#' 
+#'
 #' @param css_dir directory containing stylesheets
 #' @noRd
 combine_css <- function(css_dir){
@@ -114,20 +114,20 @@ combine_css <- function(css_dir){
 }
 
 #' Minify stylesheet using YUI Compressor
-#' 
+#'
 #' @param css_file path to css file
 #' @noRd
 minify_css <- function(css_file){
-  yui = system.file('libraries', 'utilities', 'yuicompressor-2.4.7.jar', 
+  yui = system.file('libraries', 'utilities', 'yuicompressor-2.4.7.jar',
     package = 'slidifyLibraries')
   min_css_file = gsub('.css', '.min.css', css_file)
-  cmd = 'java -jar %s %s -o %s' 
+  cmd = 'java -jar %s %s -o %s'
   system(sprintf(cmd, yui, css_file, min_css_file))
   return(min_css_file)
 }
 
 #' Binary operator useful for function composition
-#' 
+#'
 #' @keywords internal
 #' @noRd
 `%|%` <- function(x, f){
@@ -135,7 +135,7 @@ minify_css <- function(css_file){
 }
 
 #' Binary operator useful from hadley's staticdocs package
-#' 
+#'
 #' @keywords internal
 #' @noRd
 "%||%" <- function(a, b) {
@@ -144,7 +144,7 @@ minify_css <- function(css_file){
 
 
 #' Read a text file into a single string
-#' 
+#'
 #' @param doc path to text document
 #' @return string with document contents
 #' @keywords internal
@@ -160,10 +160,10 @@ read_file <- function(doc, ...){
 re_capture <- function(pattern, string, ...) {
   rex = list(src = string, names  = list(),
     result = regexpr(pattern, string, perl = TRUE, ...))
-  
+
   for (.name in attr(rex$result, 'capture.name')) {
-    rex$names[[.name]] = substr(rex$src, 
-      attr(rex$result, 'capture.start')[,.name], 
+    rex$names[[.name]] = substr(rex$src,
+      attr(rex$result, 'capture.start')[,.name],
       attr(rex$result, 'capture.start')[,.name]
       + attr(rex$result, 'capture.length')[,.name]
       - 1)
@@ -172,7 +172,7 @@ re_capture <- function(pattern, string, ...) {
 }
 
 #' Convert markdown document into html
-#' 
+#'
 #' @import markdown
 #' @keywords internal
 #' @noRd
@@ -182,30 +182,30 @@ md2html <- function(md){
 
 #' Merge two lists by name
 #'
-#' This is a method that merges the contents of one list with another by 
-#' adding the named elements in the second that are not in the first. 
-#' In other words, the first list is the target template, and the second 
+#' This is a method that merges the contents of one list with another by
+#' adding the named elements in the second that are not in the first.
+#' In other words, the first list is the target template, and the second
 #' one adds any extra elements that it has
 #'
 #' @param x the list to which elements will be added
-#' @param y the list from which elements will be added to x, if they are not 
+#' @param y the list from which elements will be added to x, if they are not
 #'    already there by name
 #' @keywords internal
 #' @noRd
 merge_list <- function (x, y, ...){
-  if (length(x) == 0) 
+  if (length(x) == 0)
     return(y)
-  if (length(y) == 0) 
+  if (length(y) == 0)
     return(x)
   i = match(names(y), names(x))
   i = is.na(i)
-  if (any(i)) 
+  if (any(i))
     x[names(y)[which(i)]] = y[which(i)]
   return(x)
 }
 
-#' Filter blanks 
-#' 
+#' Filter blanks
+#'
 #' @keywords internal
 #' @noRd
 filter_blank <- function(x){
@@ -213,14 +213,14 @@ filter_blank <- function(x){
 }
 
 #' Check if a package is installed
-#' 
+#'
 #' @noRd
 is_installed <- function(mypkg) {
-  is.element(mypkg, installed.packages()[,1]) 
+  is.element(mypkg, installed.packages()[,1])
 }
 
 #' Execute code in  specified directory
-#' 
+#'
 #' @noRd
 in_dir <- function(dir, expr) {
   if (is.null(getOption('slidify.changedir'))){
@@ -230,21 +230,21 @@ in_dir <- function(dir, expr) {
 }
 
 #' Multiple substitutions using gsub
-#' 
+#'
 #' @noRd
 #' @keywords internal
 mgsub <- function(myrepl, mystring){
   gsub_ <- function(l, x){
     do.call('gsub', list(x = x, pattern = l[1], replacement = l[2]))
   }
-  Reduce(gsub_, myrepl, init = mystring, right = T) 
+  Reduce(gsub_, myrepl, init = mystring, right = T)
 }
 
 #' Create a standalone version of an HTML File
-#' 
+#'
 #' It works by embedding all images, switching links to use Slidify's googlecode
 #' repository and inlining all user assets.
-#' 
+#'
 #' @param deck parsed deck
 #' @param html_in html file with library files linked locally
 #' @noRd
@@ -261,7 +261,7 @@ make_standalone <- function(deck, html_in){
 
 
 #' Get the rmd source for each slide
-#' 
+#'
 #' @keywords internal
 #' @noRd
 #  Still repeats code and is hence not DRY
@@ -270,7 +270,7 @@ get_slide_rmd <- function(doc){
 }
 
 #' Combine two lists, component by component
-#' 
+#'
 #' @keywords internal
 #' @noRd
 combine_lists <- function(x, y){
@@ -286,7 +286,7 @@ view_deck <- function(dir = "."){
   rstudio::viewer(tf)
 }
 
-## This app requires OpenCPU 1.0.1 or higher !!!! 
+## This app requires OpenCPU 1.0.1 or higher !!!!
 ##
 
 #' @export
