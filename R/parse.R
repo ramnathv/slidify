@@ -20,6 +20,7 @@ parse_page <- function(postFile, knit_deck = TRUE, envir){
     post$filename = tools:::file_path_sans_ext(inputFile)
     if (!is.null(post$date)) {
       post$date = as.Date(post$date, '%Y-%m-%d')
+      post$pubDate = format(post$date, "%a, %d %b %Y %H:%M:%S %z")
     }
     post$link = gsub("*.Rmd", ".html", post$file)
     post$raw = read_file(inputFile)
