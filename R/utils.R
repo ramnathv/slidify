@@ -149,8 +149,20 @@ minify_css <- function(css_file){
 #' @return string with document contents
 #' @keywords internal
 #' @noRd
-read_file <- function(doc, ...){
-  paste(readLines(doc, ...), collapse = '\n')
+read_file <- function(doc, encoding = NULL, ...){
+  # @kohske
+  # read all files in specified encoding, and then convert it
+  # into native.enc.
+  # So, if input Rmd/md is CP932, all libraries etc needs to be
+  # written with CP932. Maybe we need more fine control,
+  # but useally libraries are written in ascii,
+  # so there is unlikely a problem.
+  if (is.null(encoding)) encoding = .input.enc$get()
+  con <- file(doc, "r", encoding = encoding)
+  text <- paste(readLines(con, ...), collapse = '\n')
+  text <- enc2native(text) # this may be unnesessary...(?)
+  close(con)
+  return(text)
 }
 
 #' Capture patterns matched by regular expression
@@ -240,23 +252,33 @@ mgsub <- function(myrepl, mystring){
   Reduce(gsub_, myrepl, init = mystring, right = T) 
 }
 
+# @kohske
+# I changed this function so that it doesn't read and write file.
+# see also render_page()
+
 #' Create a standalone version of an HTML File
 #' 
 #' It works by embedding all images, switching links to use Slidify's googlecode
 #' repository and inlining all user assets.
 #' 
 #' @param deck parsed deck
-#' @param html_in html file with library files linked locally
+#' @param html output html text (native.enc)
 #' @noRd
 #' @keywords internal
-make_standalone <- function(deck, html_in){
+make_standalone <- function(deck, html){
   lib_cdn = paste0(deck$lib_cdn %||% 'http://slidifylibraries2.googlecode.com/git/inst/libraries', '/')
   lib_url = paste0(deck$url$lib, '/')
-  html = read_file(html_in, warn = FALSE) %|% markdown:::.b64EncodeImages
-  html = gsub(lib_url, lib_cdn, html)
+
+  html = html %|% markdown:::.b64EncodeImages
+  
+  # @kohske
+  # shouldn't be fixed=TRUE?
+  html = gsub(lib_url, lib_cdn, html, fixed = TRUE)
   # html_out = sprintf('%s.html', basename(getwd()))
-  cat(html, file = html_in)
-  return(html_in)
+
+  # @kohske
+  # need not write a file, but return text
+  return(html)
 }
 
 
@@ -297,3 +319,53 @@ slidify_text <- function(text){
   slidify('output.Rmd')
   invisible();
 }
+
+#' parse YAML text into a nested list
+#'
+#' @param txt YAML text to be parsed. MBCS text must be UTF-8 encoding.
+#' @return a nested list representing YAML. Text element is native.enc.
+#' @keywords internal
+#' @noRd
+yaml_load <- function(txt) {
+  yaml <- yaml.load(txt)
+  yaml = rapply(yaml, function(x) {
+    if (is.character(x)) {
+      Encoding(x) <- "UTF-8"
+      enc2native(x)
+    } else {
+      x
+    }
+  }, how = "replace")
+  return(yaml)
+}
+
+#' parse YAML file into a nested list
+#'
+#' @param file path to file
+#' @param encoding encoding of file. If \code{NULL}, use \code{.input.enc$get()}
+#'   (i.e., encoding specfied in a call of \code{\link{slidify}}
+#' @return a nested list representing YAML. Text element is native.enc.
+#' @noRd
+yaml_load_file <- function(file, encoding = NULL) {
+  if (is.null(encoding)) encoding <- .input.enc$get()
+  txt = read_file(file, encoding)
+  txt = enc2utf8(txt)
+  yaml_load(txt)
+}
+
+
+#' Closure object for encoding of input file
+#'
+#' @keywords internal
+#' @noRd
+input_enc <- function() {
+  enc <- NULL
+  list(set = function(encoding) enc <<- encoding,
+       get = function() enc)
+}
+
+#' Encoding of input file
+#'
+#' @keywords internal
+#' @noRd
+.input.enc <- input_enc()

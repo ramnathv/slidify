@@ -4,19 +4,37 @@
 #' @param knit_deck whether the file needs to be run through knit
 #' @param return_page should the function return the payload
 #' @param save_payload should the payload be saved to the slide directory
+#' @param encoding the encoding of the input file; see \code{\link{file}}
 slidify <- pagify <- function(inputFile, knit_deck = TRUE, 
-  return_page = FALSE, save_payload = FALSE, envir = parent.frame()){
-  
+  return_page = FALSE, save_payload = FALSE, envir = parent.frame(),
+  encoding = getOption('encoding')){
+
+  # @kohske
+  # global vairable is not available.
+  # Use closure instead
+  .input.enc$set(encoding)
+    
   ## REMOVE LINES AFTER KNITR IS UPDATED ------
   options('knitr.in.progress' = TRUE)
   on.exit(options('knitr.in.progress' = FALSE))
   ## -------------------------------------------
   
   .SLIDIFY_ENV <<- new.env()
-  site = ifelse(file.exists('site.yml'), yaml.load_file('site.yml'), list())
+
+  # @kohske
+  # now site.yml can be MBCS. The encoding must be same as input.
+  site = ifelse(file.exists('site.yml'), yaml_load_file('site.yml'), list())
+
+  # @kohse
+  # there are changes inside parse_page to care encoding
   page = parse_page(inputFile, knit_deck, envir = envir)
-  
+
+  # @kohske
+  # What's this?
   page = modifyList(page, as.list(.SLIDIFY_ENV))
+
+  # @kohske
+  # render_page is changes so that output is always UTF8
   render_page(page, payload = list(site = site), return_page, save_payload)
 }
 
@@ -24,7 +42,7 @@ slidify <- pagify <- function(inputFile, knit_deck = TRUE,
 #' 
 #' @noRd
 blogify <- function(blogDir = ".", envir = parent.frame()){
-  site = yaml.load_file('site.yml')
+  site = yaml_load_file('site.yml')
   cwd   = getwd(); on.exit(setwd(cwd))
   setwd(blogDir)
   rmdFiles = dir(".", recursive = TRUE, pattern = '*.Rmd')
