@@ -108,9 +108,9 @@ render_page <- function(page, payload, return_page = FALSE, save_payload = FALSE
 #' Render pages
 #' 
 #' @noRd
-render_pages <- function(pages, site, tags){
+render_pages <- function(pages, site, tags, ...){
   payload = list(site = site, pages = pages, tags = tags)
-  invisible(lapply(pages, render_page, payload = payload)) 
+  invisible(lapply(pages, render_page, payload = payload, ...)) 
 }
 
 #' Render deck using layouts
