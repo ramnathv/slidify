@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 /\.gitkeep$
 .git
+.travis.yml
+
