@@ -35,7 +35,7 @@ blogify <- function(blogDir = ".", envir = parent.frame()){
   posts = pages[is_post] 
   posts = posts %|% sort_posts_on_date %|% add_next_post
   pages = c(posts, pages[!is_post])
-  render_pages(pages, site, tags)
+  pages = render_pages(pages, site, tags, return_page = TRUE)
   message('Blogification Successful :-)')
   return(invisible(list(pages = pages, site = site, tags = tags)))
 }
