@@ -9,7 +9,8 @@ slidifyDefaults <- function(){list(
   hitheme     = 'tomorrow',
   copy_libraries = TRUE,
   mode = 'standalone',
-  widgets = list()
+  widgets = list(),
+  onefile = FALSE
 )}
 
 #' Get configuration
@@ -38,6 +39,11 @@ add_config_fr <- function(deck){
   config_file <- file.path(deck$url$framework, "config.yml")
   if (file.exists(config_file)){
     config <- yaml.load_file(config_file)
+    deck <- modifyList(config, deck)
+  }
+  cfile = deck$url$config
+  if (!is.null(cfile) && file.exists(cfile)){
+    config <- yaml.load_file(cfile)
     deck <- modifyList(config, deck)
   }
   return(deck)
