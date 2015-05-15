@@ -9,9 +9,7 @@ parse_pages <- function(postFiles, envir){
 #'
 #' @noRd
 parse_page <- function(postFile, knit_deck = TRUE, envir){
-  in_dir(dirname(postFile), {
-    cat("in parse_page\n")
-    
+  in_dir(dirname(postFile), {  
     inputFile = basename(postFile)
     opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
     outputFile <- gsub(".[r|R]md", ".md", inputFile)
@@ -62,10 +60,8 @@ parse_slide <- function(slide){
   # slide <- str_split_fixed(slide, '\n', 2)   # blocks to metadata
   slide <- apply(slide, 1, function(x){
     y_meta <- if(grepl("{", x[1], fixed = TRUE)) {
-      cat("Parsing Meta3\n")
       parse_meta3(x[1])
     } else {
-      cat("Parsing Meta reg\n")
       parse_meta(x[1])
     }
     # FIXME: figure out why the ifelse does not work correctly.
@@ -95,13 +91,10 @@ parse_slide <- function(slide){
 
 split_meta <- function(blocks){
   split_block <- function(block){
-    cat("in split_block\n")
     if (grepl("^\\s*\\{", block)){
-      cat("in grepl\n")
       block <- str_split_fixed(block, "\\}\n", 2)
       block[1] <- paste(block[1], "}")
     } else {
-      cat("not in grepl\n")
       block <- str_split_fixed(block, "\n", 2)
     }
     return(block)
@@ -120,24 +113,16 @@ split_meta <- function(blocks){
 # 2. One limitation is that key/values cannot contain any spaces.
 # 3. Rename tpl to layout to maintain consistency.
 parse_meta <- function(meta){
-  print(meta)
   x <- strsplit(meta, ' ')[[1]]
-  print(x)
   x <- sub('^#', 'id:', x)
   x <- sub('&', 'tpl:', x, fixed = T)
   x <- sub('^\\.', 'class:', x)
   x <- sub('^=', 'name:', x)
   y <- str_split_fixed(x[grep(":", x)], ":", 2)
-  cat("Y is \n")
-  print(y)
   y1 = y[,1]; y2 = y[,2]
   meta  = as.list(y2[y1 != 'class'])
   names(meta) = y1[y1 != 'class']
   meta$class = paste(y2[y1 == 'class'], collapse = ' ')
-  print("Meta is")
-  print(meta)
-  filter_blank(meta)
-  print("Filter blank worked\n")
   filter_blank(meta)
 }
 
@@ -149,8 +134,6 @@ parse_meta <- function(meta){
 #' So . expands to class: , # expands to id: and & expands to layout: 
 #' IDEA: Use options, so that user can customize further shortcuts.
 parse_meta2 <- function(x){
-  cat("in meta2\n")
-  
   myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
   x1 = mgsub(myrepl, gsub("^\\{(.*)\\}$", "\\1", x))
   x2 = str_split_fixed(x1, "\n", 2)
@@ -166,16 +149,12 @@ parse_meta2 <- function(x){
 
 #' @noRd
 parse_meta3 <- function(x){
-  cat("in meta3\n")
-  
   myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
   # y1 = yaml.load(mgsub(myrepl, x))
-  cat("After myrepl\n")
   y1 = yaml.load(x)
   if (!is.null(y1$class)){
     y1$class = paste(y1$class, collapse = " ")
   }
-  cat("After class\n")
   return(y1)
 }
 
@@ -185,8 +164,6 @@ parse_meta3 <- function(x){
 #' @keywords internal
 #' @noRd
 parse_body <- function(body){
-  cat("in parse_body\n")
-  
   html = ifelse(body != '', md2html(body), '')
   pat = '^(<h([0-9])>([^\n]*)</h[0-9]>)?\n*(.*)$'
   pat = regex(pat, dotall = TRUE, multiline = TRUE)
