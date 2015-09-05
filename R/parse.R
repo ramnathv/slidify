@@ -9,7 +9,7 @@ parse_pages <- function(postFiles, envir){
 #'
 #' @noRd
 parse_page <- function(postFile, knit_deck = TRUE, envir){
-  in_dir(dirname(postFile), {
+  in_dir(dirname(postFile), {  
     inputFile = basename(postFile)
     opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
     outputFile <- gsub(".[r|R]md", ".md", inputFile)
@@ -92,7 +92,7 @@ parse_slide <- function(slide){
 split_meta <- function(blocks){
   split_block <- function(block){
     if (grepl("^\\s*\\{", block)){
-      block <- str_split_fixed(block, "}\n", 2)
+      block <- str_split_fixed(block, "\\}\n", 2)
       block[1] <- paste(block[1], "}")
     } else {
       block <- str_split_fixed(block, "\n", 2)
@@ -168,11 +168,11 @@ parse_body <- function(body){
   pat = '^(<h([0-9])>([^\n]*)</h[0-9]>)?\n*(.*)$'
   pat = regex(pat, dotall = TRUE, multiline = TRUE)
   body = setNames(as.list(str_match(html, pat)),
-   c('html', 'header', 'level', 'title', 'content'))
+                  c('html', 'header', 'level', 'title', 'content'))
   # body = modifyList(body, parse_content(body$content))
   # HACK: So that landslide h1's with no content are centered
   if (body$content == "" | is.na(body$content)){
-  	body$content = NULL
+    body$content = NULL
   }
   if (body$header == "" | is.na(body$header)){
     body$header = NULL
