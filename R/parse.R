@@ -166,14 +166,15 @@ parse_meta3 <- function(x){
 parse_body <- function(body){
   html = ifelse(body != '', md2html(body), '')
   pat = '^(<h([0-9])>([^\n]*)</h[0-9]>)?\n*(.*)$'
+  pat = regex(pat, dotall = TRUE, multiline = TRUE)
   body = setNames(as.list(str_match(html, pat)),
    c('html', 'header', 'level', 'title', 'content'))
   # body = modifyList(body, parse_content(body$content))
   # HACK: So that landslide h1's with no content are centered
-  if (body$content == ""){
+  if (body$content == "" | is.na(body$content)){
   	body$content = NULL
   }
-  if (body$header == ""){
+  if (body$header == "" | is.na(body$header)){
     body$header = NULL
   }
   return(body)
