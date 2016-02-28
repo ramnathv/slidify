@@ -91,7 +91,9 @@ render_page <- function(page, payload, return_page = FALSE, save_payload = FALSE
     if (save_payload){
       save(layout, payload, partials, file = "payload.RData")
     }
-    cat(whisker.render(layout, payload, partials = partials), file = outputFile)
+    writeLines(whisker.render(layout, payload, partials = partials),
+               con = outputFile,
+               useBytes = TRUE)
     
     # create standalone deck if page mode is standalone
     if (page$mode == 'standalone'){

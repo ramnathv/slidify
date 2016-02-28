@@ -150,7 +150,7 @@ minify_css <- function(css_file){
 #' @keywords internal
 #' @noRd
 read_file <- function(doc, ...){
-  paste(readLines(doc, ...), collapse = '\n')
+  paste(readLines(doc,encoding = "UTF-8", ...), collapse = '\n')
 }
 
 #' Capture patterns matched by regular expression

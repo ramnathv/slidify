@@ -7,6 +7,10 @@
 to_deck <- function(doc){
   txt = str_split_fixed(read_file(doc), '\n---', 2)
   meta = yaml.load(gsub("^---\n+", '', txt[1]))
+  meta = lapply(meta,function(x){
+    if(class(x)=="list" | length(x)!=1) return(x)
+    return(iconv(x,"UTF-8","UTF-8"))
+  })
   cfile = ifelse(is.null(meta$config), 'config.yml', meta$config)
   deck = modifyList(get_config(cfile), c(meta, slides = txt[2]))
   deck$standalone = ifelse(deck$mode == "standalone", TRUE, FALSE)
