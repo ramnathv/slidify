@@ -13,7 +13,7 @@ slidify <- pagify <- function(inputFile, knit_deck = TRUE,
   ## -------------------------------------------
   
   .SLIDIFY_ENV <<- new.env()
-  site = ifelse(file.exists('site.yml'), yaml.load_file('site.yml'), list())
+  site = ifelse(file.exists('site.yml'), EncodingList(yaml.load_file('site.yml')), list())
   page = parse_page(inputFile, knit_deck, envir = envir)
   
   page = modifyList(page, as.list(.SLIDIFY_ENV))
@@ -24,7 +24,7 @@ slidify <- pagify <- function(inputFile, knit_deck = TRUE,
 #' 
 #' @noRd
 blogify <- function(blogDir = ".", envir = parent.frame()){
-  site = yaml.load_file('site.yml')
+  site = EncodingList(yaml.load_file('site.yml'))
   cwd   = getwd(); on.exit(setwd(cwd))
   setwd(blogDir)
   rmdFiles = dir(".", recursive = TRUE, pattern = '*.Rmd')

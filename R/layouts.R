@@ -44,7 +44,7 @@ expand_layout2 <- function(layout, layouts){
   has_parent <- grepl("^---", layout)
   if (has_parent){
     txt = str_split_fixed(layout, '\n---', 2)
-    meta = yaml.load(gsub("^---\n+", '', txt[1]))
+    meta = EncodingList(yaml.load(gsub("^---\n+", '', txt[1])))
     pattern = paste("{{{", meta$replace, '}}}')
     replacement = layouts[meta$layout]
     layout <- sub(pattern, replacement, txt[2], fixed = TRUE)

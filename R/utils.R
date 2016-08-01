@@ -149,8 +149,8 @@ minify_css <- function(css_file){
 #' @return string with document contents
 #' @keywords internal
 #' @noRd
-read_file <- function(doc, ...){
-  paste(readLines(doc, ...), collapse = '\n')
+read_file <- function(doc,...){
+  paste(readLines(doc,encoding = "UTF-8",...), collapse = '\n')
 }
 
 #' Capture patterns matched by regular expression
@@ -177,7 +177,7 @@ re_capture <- function(pattern, string, ...) {
 #' @keywords internal
 #' @noRd
 md2html <- function(md){
-  renderMarkdown(text = md, renderer.options = markdownExtensions())
+  EncodingList(renderMarkdown(text = md, renderer.options = markdownExtensions()))
 }
 
 #' Merge two lists by name
@@ -255,7 +255,8 @@ make_standalone <- function(deck, html_in){
   html = read_file(html_in, warn = FALSE) %|% markdown:::.b64EncodeImages
   html = gsub(lib_url, lib_cdn, html)
   # html_out = sprintf('%s.html', basename(getwd()))
-  cat(html, file = html_in)
+  cat(html, 
+      file = file(html_in,'w',encoding = "UTF-8"))
   return(html_in)
 }
 
@@ -296,4 +297,24 @@ slidify_text <- function(text){
   options(slidify.changedir = FALSE)
   slidify('output.Rmd')
   invisible();
+}
+
+
+
+EncodingList <- function(li){
+  if(length(li) == 0) return(li)
+  for(i in 1:length(li)){
+    if(is.list(li[[i]])){
+      if(!length(li[[i]]) == 0)
+        EncodingList(li[[i]])
+    }
+    else{
+      if(!is.null(li[[i]])){
+      temp <- li[[i]]
+      Encoding(temp) <- "UTF-8"
+      li[[i]] <- temp
+      }
+    }
+  }
+  return(li)
 }

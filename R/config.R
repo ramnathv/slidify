@@ -26,7 +26,7 @@ slidifyDefaults <- function(){list(
 get_config <- function(cfile = 'config.yml'){
   config = slidifyDefaults()
   if (file.exists(cfile)){
-    config = modifyList(config, yaml::yaml.load_file(cfile))
+    config = modifyList(config, EncodingList(yaml::yaml.load_file(cfile)))
   }
   return(config)
 }
@@ -38,12 +38,12 @@ get_config <- function(cfile = 'config.yml'){
 add_config_fr <- function(deck){
   config_file <- file.path(deck$url$framework, "config.yml")
   if (file.exists(config_file)){
-    config <- yaml.load_file(config_file)
+    config <- EncodingList(yaml.load_file(config_file))
     deck <- modifyList(config, deck)
   }
   cfile = deck$url$config
   if (!is.null(cfile) && file.exists(cfile)){
-    config <- yaml.load_file(cfile)
+    config <- EncodingList(yaml.load_file(cfile))
     deck <- modifyList(config, deck)
   }
   return(deck)
