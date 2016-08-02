@@ -73,4 +73,4 @@ It is designed to make it very easy for a HTML novice to generate a crisp, visua
 The guiding philosophy of `slidify` is to completely separate writing of content from its rendering, so that content can be written once in `R Markdown`, and rendered as an `HTML5` presentation using any of the `HTML5` slide frameworks supported.
 
 ## FIX
-- 修复在Windows平台下生成中文slide显示软码的问题
+- 修复在Windows平台下生成中文slides显示乱码的问题
