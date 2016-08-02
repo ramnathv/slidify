@@ -14,7 +14,7 @@ parse_page <- function(postFile, knit_deck = TRUE, envir){
     opts_chunk$set(fig.path = "assets/fig/", cache.path = '.cache/', cache = TRUE)
     outputFile <- gsub(".[r|R]md", ".md", inputFile)
     deckFile <- ifelse(knit_deck, 
-      knit(inputFile, outputFile, envir = envir), inputFile)
+      knit(inputFile, outputFile, envir = envir,encoding = "UTF-8"), inputFile)
     post <- deckFile %|% parse_deck
     post$file = postFile
     post$filename = tools:::file_path_sans_ext(inputFile)
@@ -68,6 +68,7 @@ parse_slide <- function(slide){
     # y_body = ifelse(y_meta$class %?=% 'YAML', yaml.load(x[2]), parse_body(x[2]))
     if (y_meta$class %?=% 'YAML'){
       y_body = yaml.load(x[2])
+      y_body <- EncodingList(y_body)
     } else {
       y_body = parse_body(x[2])
     }
@@ -138,6 +139,7 @@ parse_meta2 <- function(x){
   x1 = mgsub(myrepl, gsub("^\\{(.*)\\}$", "\\1", x))
   x2 = str_split_fixed(x1, "\n", 2)
   y1 = yaml.load(sprintf("{%s}", x2[1]))
+  y1 <- Encoding(y1)
   if (x2[2] != ""){
     y1 = modifyList(y1, y2)
   }
@@ -152,6 +154,7 @@ parse_meta3 <- function(x){
   myrepl = list(c('\\.', 'class: '), c('\\#', 'id: '), c('\\&', 'tpl: '))
   # y1 = yaml.load(mgsub(myrepl, x))
   y1 = yaml.load(x)
+  y1 <- EncodingList(y1)
   if (!is.null(y1$class)){
     y1$class = paste(y1$class, collapse = " ")
   }

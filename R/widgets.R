@@ -16,7 +16,7 @@ read_config <- function(widget, url_widgets){
   wpath = file.path(url_widgets, widget)
   cfile = file.path(wpath, 'config.yml')
   if (file.exists(cfile)){
-    wconfig <- yaml::yaml.load_file(cfile)
+    wconfig <- EncodingList(yaml::yaml.load_file(cfile))
     w <- setNames(lapply(names(wconfig[[1]]), get_full_path), names(wconfig[[1]]))
   } else {
     css = dir(file.path(wpath, 'css'), pattern = '.css$', full = TRUE)

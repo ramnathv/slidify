@@ -10,7 +10,8 @@ Slidify helps you create and publish beautiful HTML5 presentations from [RMarkdo
 Slidify is still under heavy development. You can install it from `github` using the `devtools` package. You will also need `slidifyLibraries` which contains all external libraries required by `slidify`.
 
 ```r
-install_github('ramnathv/slidify')
+#install_github('ramnathv/slidify')
+install_github('junjiemao/slidify')
 install_github('ramnathv/slidifyLibraries')
 ```
 
@@ -22,6 +23,8 @@ You can initialize a presentation by running `create`. This will create a scaffo
 library(slidify)
 author('mydeck')
 ```
+
+
 
 ### Author ###
 
@@ -69,3 +72,5 @@ It is designed to make it very easy for a HTML novice to generate a crisp, visua
 
 The guiding philosophy of `slidify` is to completely separate writing of content from its rendering, so that content can be written once in `R Markdown`, and rendered as an `HTML5` presentation using any of the `HTML5` slide frameworks supported.
 
+## FIX
+- 修复在Windows平台下生成中文slides显示乱码的问题
