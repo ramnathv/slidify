@@ -24,6 +24,8 @@ library(slidify)
 author('mydeck')
 ```
 
+
+
 ### Author ###
 
 Write your presentation in RMarkdown, using a newline followed by three dashes to separate slides. You can mix markdown with code chunks to create a reproducible slide deck. 
@@ -70,3 +72,5 @@ It is designed to make it very easy for a HTML novice to generate a crisp, visua
 
 The guiding philosophy of `slidify` is to completely separate writing of content from its rendering, so that content can be written once in `R Markdown`, and rendered as an `HTML5` presentation using any of the `HTML5` slide frameworks supported.
 
+## FIX
+- 修复在Windows平台下生成中文slide显示软码的问题
